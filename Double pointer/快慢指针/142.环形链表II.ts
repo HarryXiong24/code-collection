@@ -14,14 +14,23 @@
  * }
  */
 
-function detectCycle(head: ListNode | null): ListNode | null {
+class ListNode {
+  val: number;
+  next: ListNode | null;
+  constructor(val?: number, next?: ListNode | null) {
+    this.val = (val === undefined ? 0 : val);
+    this.next = (next === undefined ? null : next);
+  }
+}
+
+export function detectCycle(head: ListNode | null): ListNode | null {
   let fast: ListNode | null;
   let slow: ListNode | null;
   fast = slow = head;
   // 先判断是否有环，有环则 break
   while (fast !== null && fast.next !== null) {
     fast = fast.next.next;
-    slow = slow.next;
+    slow = slow!.next;
     if (slow === fast) {
       break;
     }
@@ -34,8 +43,8 @@ function detectCycle(head: ListNode | null): ListNode | null {
   // 然后先把一个指针重新指向 head
   fast = head;
   while (fast !== slow) {
-    fast = fast.next;
-    slow = slow.next;
+    fast = fast!.next;
+    slow = slow!.next;
   }
   return fast;
 }

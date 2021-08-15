@@ -33,14 +33,14 @@ class ListNode {
   }
 }
 
-function hasCycle(head: ListNode | null): boolean {
+export function hasCycle(head: ListNode | null): boolean {
   let fast: ListNode | null;
   let slow: ListNode | null;
   // 快慢指针初始化指向头结点
   fast = slow = head;
-  while (fast !== null || fast.next !== null) {
-    fast = fast.next.next;
-    slow = slow.next;
+  while (fast !== null || fast!.next !== null) {
+    fast = fast!.next!.next;
+    slow = slow!.next;
     if (fast === slow) {
       return true;
     }
