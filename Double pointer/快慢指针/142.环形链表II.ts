@@ -15,8 +15,8 @@
  */
 
 function detectCycle(head: ListNode | null): ListNode | null {
-  let fast: ListNode;
-  let slow: ListNode;
+  let fast: ListNode | null;
+  let slow: ListNode | null;
   fast = slow = head;
   // 先判断是否有环，有环则 break
   while (fast !== null && fast.next !== null) {
