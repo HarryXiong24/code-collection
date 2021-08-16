@@ -8,7 +8,7 @@
  * 解释: 9 出现在 nums 中并且下标为 4
  */
 
-function search(nums: number[], target: number): number {
+export function search(nums: number[], target: number): number {
   let left: number = 0;
   let right: number = nums.length - 1;
   while (left <= right) {
