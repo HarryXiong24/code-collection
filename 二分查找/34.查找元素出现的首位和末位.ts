@@ -9,31 +9,35 @@
  * 输出：[3,4]
  */
 
+// 本题可以拆解为寻找左侧、右侧边界的二分搜索
 function searchRange(nums: number[], target: number): number[] {
+  let left: number = searchBound(nums, target, true);
+  let right: number = searchBound(nums, target, false);
+  return [left, right];
+};
+
+function searchBound(nums: number[], target: number, isLeft: boolean): number {
   let left: number = 0;
   let right: number = nums.length - 1;
-  let res: number[] = [];
+  let result = -1;
   while (left <= right) {
-    let mid: number = Math.floor((left + right) / 2);
-    if(nums[mid] === target) {
-      res.push(mid);
+    let mid = Math.floor((left + right) / 2);
+    if (nums[mid] === target) {
+      result = mid;
+      if (isLeft) {
+        right = mid - 1;
+      } else {
+        left = mid + 1;
+      }
     } else if (nums[mid] > target) {
       right = mid - 1;
-    } else if(nums[mid] < target) {
+    } else if (nums[mid] < target) {
       left = mid + 1;
     }
   }
-  console.log(res);
-  if (res === []) {
-    return [-1, -1];
-  } else {
-    res = res.sort((a: number, b: number) => {
-      return a - b;
-    });
-    return [res[0], res[res.length-1]];
-  }
-};
+  return result;
+}
 
 // test
-let res = searchRange([5,7,7,8,8,10], 8);
+let res = searchRange([5, 7, 7, 8, 8, 10], 8);
 console.log(res);
