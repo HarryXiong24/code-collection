@@ -1,0 +1,26 @@
+// 冒泡排序
+
+/*
+ * 思路：通过对待排序序列从前向后（从下标较小的元素开始）,
+ * 依次比较相邻元素的值，若发现逆序则交换
+ * 使值较大的元素逐渐从前移向后部，就象水底下的气泡一样逐渐向上冒
+ */
+
+export function bubbling(nums: number[]): number[] {
+  // i 表示本次冒泡参与的轮次数
+  for (let i = nums.length; i > 0; i--) {
+    // j 表示交换每轮需要交换的次数
+    for (let j = 0; j < i; j++) {
+      if (nums[j] > nums[j+1]) {
+        let temp = nums[j];
+        nums[j] = nums[j+1];
+        nums[j+1] = temp;
+      }
+    }
+  }
+  return nums;
+}
+
+// test
+let res = bubbling([10, 1, 3, 2, 9, 1, 5, 6]);
+console.log(res);

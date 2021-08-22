@@ -1,7 +1,7 @@
 // 直接插入排序
 
 /*
- * 思想：在要排序的数组中，假设前面（n-1）位已经排好序了
+ * 思路：在要排序的数组中，假设前面（n-1）位已经排好序了
  * 然后把第 n 个数插入到前面的有序区中，也就实现了 n 个数排序
  * 如此反复循环，知道数组排序完毕
  * 平均时间复杂度 O(n^2)，空间复杂度 O(1)
@@ -30,5 +30,5 @@ export function directInsert(nums: number[]): number[] {
 }
 
 // test
-let res = directInsert([1, 3, 2, 9, 1, 5, 6]);
+let res = directInsert([10, 1, 3, 2, 9, 1, 5, 6]);
 console.log(res);
