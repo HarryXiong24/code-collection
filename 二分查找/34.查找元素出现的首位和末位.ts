@@ -10,13 +10,13 @@
  */
 
 // 本题可以拆解为寻找左侧、右侧边界的二分搜索
-function searchRange(nums: number[], target: number): number[] {
+export function searchRange(nums: number[], target: number): number[] {
   let left: number = searchBound(nums, target, true);
   let right: number = searchBound(nums, target, false);
   return [left, right];
 };
 
-function searchBound(nums: number[], target: number, isLeft: boolean): number {
+export function searchBound(nums: number[], target: number, isLeft: boolean): number {
   let left: number = 0;
   let right: number = nums.length - 1;
   let result = -1;
