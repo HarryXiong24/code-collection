@@ -1,0 +1,2 @@
+th; i++) {
+    minIndex = i;

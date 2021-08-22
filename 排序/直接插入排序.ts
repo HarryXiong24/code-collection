@@ -7,7 +7,7 @@
  * 平均时间复杂度 O(n^2)，空间复杂度 O(1)
  */
 
-function directInsert(nums: number[]): number[] {
+export function directInsert(nums: number[]): number[] {
   // point 用来保存当前正在比较的值
   let point: number;
   // 第一次把第一个数当成有序区
