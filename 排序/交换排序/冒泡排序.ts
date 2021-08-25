@@ -7,7 +7,7 @@
  * 平均时间复杂度 O(n^2)，空间复杂度 O(1)
  */
 
-export function bubbling(nums: number[]): number[] {
+export function bubblingSort(nums: number[]): number[] {
   // i 表示本次冒泡参与的轮次数
   for (let i = nums.length; i > 0; i--) {
     // j 表示交换每轮需要交换的次数

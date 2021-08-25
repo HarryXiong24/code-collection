@@ -7,7 +7,7 @@
  * 平均时间复杂度 O(n^2)，空间复杂度 O(1)
  */
 
-export function choose(nums: number[]): number[] {
+export function chooseSort(nums: number[]): number[] {
   let minIndex: number;
 
   for (let i = 0; i < nums.length; i++) {
