@@ -26,5 +26,5 @@ export function chooseSort(nums: number[]): number[] {
 }
 
 // test
-let res = choose([10, 1, 3, 2, 9, 1, 5, 6]);
+let res = chooseSort([10, 1, 3, 2, 9, 1, 5, 6]);
 console.log(res);

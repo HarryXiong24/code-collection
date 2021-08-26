@@ -31,5 +31,5 @@ export function directInsertSort(nums: number[]): number[] {
 }
 
 // test
-let res = directInsert([10, 1, 3, 2, 9, 1, 5, 6]);
+let res = directInsertSort([10, 1, 3, 2, 9, 1, 5, 6]);
 console.log(res);

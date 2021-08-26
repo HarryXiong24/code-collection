@@ -24,5 +24,5 @@ export function bubblingSort(nums: number[]): number[] {
 }
 
 // test
-let res = bubbling([10, 1, 3, 2, 9, 1, 5, 6]);
+let res = bubblingSort([10, 1, 3, 2, 9, 1, 5, 6]);
 console.log(res);
