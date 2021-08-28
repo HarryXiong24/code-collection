@@ -1,18 +1,16 @@
 # 数学计算
 
-
-
 ## 1. Fizz Buzz(E)
 
 ### 题目
 
-写一个程序，输出从 1 到 *n* 数字的字符串表示。
+写一个程序，输出从 1 到 _n_ 数字的字符串表示。
 
-1. 如果 *n* 是3的倍数，输出“Fizz”；
+1. 如果 _n_ 是 3 的倍数，输出“Fizz”；
 
-2. 如果 *n* 是5的倍数，输出“Buzz”；
+2. 如果 _n_ 是 5 的倍数，输出“Buzz”；
 
-3. 如果 *n* 同时是3和5的倍数，输出 “FizzBuzz”。
+3. 如果 _n_ 同时是 3 和 5 的倍数，输出 “FizzBuzz”。
 
 **示例：**
 
@@ -39,14 +37,10 @@ n = 15,
 ]
 ```
 
-
-
 ### 思路
 
-* 一个循环，里面加判断
-* 注意顺序，先判断同时被3，5整除的
-
-
+- 一个循环，里面加判断
+- 注意顺序，先判断同时被 3，5 整除的
 
 ### 解答
 
@@ -57,49 +51,47 @@ function fizzBuzz(n: number): string[] {
 
   for (let i = 1; i <= n; i++) {
     if (i % 3 === 0 && i % 5 === 0) {
-      res.push('FizzBuzz')
-      continue
+      res.push("FizzBuzz");
+      continue;
     }
     if (i % 3 === 0) {
-      res.push('Fizz')
-      continue
+      res.push("Fizz");
+      continue;
     }
     if (i % 5 === 0) {
-      res.push('Buzz')
-      continue
+      res.push("Buzz");
+      continue;
     }
-    res.push(`${i}`)
+    res.push(`${i}`);
   }
 
   return res;
-};
+}
 
 // Test
 let number = 15;
 let res = fizzBuzz(number);
 console.log(res);
 ```
-
-
 
 ```typescript
 // 优解，避免更多的讨论和if语句的顺序
 // MySolution
 function fizzBuzz(n: number): string[] {
   let res: string[] = [];
-    for (let i = 1; i <= n; i++) {
-      // 避免了更多的讨论
-      let str = '';
-      if (i % 3 === 0) {
-        str += 'Fizz';
-      }
-      if (i % 5 === 0) {
-        str += 'Buzz';
-      }
-      res.push(str || `${i}`);
+  for (let i = 1; i <= n; i++) {
+    // 避免了更多的讨论
+    let str = "";
+    if (i % 3 === 0) {
+      str += "Fizz";
     }
-    return res;
-  };
+    if (i % 5 === 0) {
+      str += "Buzz";
+    }
+    res.push(str || `${i}`);
+  }
+  return res;
+}
 
 // Test
 let number = 15;
@@ -107,13 +99,11 @@ let res = fizzBuzz(number);
 console.log(res);
 ```
 
-
-
 ## 2. 计数质数(H)
 
 ### 题目
 
-统计所有小于非负整数 *n* 的质数的数量。
+统计所有小于非负整数 _n_ 的质数的数量。
 
 **示例:**
 
@@ -123,13 +113,9 @@ console.log(res);
 解释: 小于 10 的质数一共有 4 个, 它们是 2, 3, 5, 7 。
 ```
 
-
-
 ### 思路
 
-* 常规做法
-
-
+- 常规做法
 
 ### 解答
 
@@ -139,7 +125,7 @@ console.log(res);
 function countPrimes(n: number): number {
   let res: number[] = [];
 
-  for (let i = 2; i <= n-1; i++) {
+  for (let i = 2; i <= n - 1; i++) {
     let flag = 0;
     let num = 2;
     while (num <= i) {
@@ -157,20 +143,18 @@ function countPrimes(n: number): number {
       }
     }
     if (flag === 1) {
-      res.push(i)
+      res.push(i);
     }
   }
-  console.log(res)
+  console.log(res);
   return res.length;
-};
+}
 
 // Test
 let number = 499979;
 let res = countPrimes(number);
 console.log(res);
 ```
-
-
 
 **埃拉托斯特尼筛法**
 
@@ -187,7 +171,7 @@ console.log(res);
 function countPrimes(n: number): number {
   let count = 0;
   // 优化，只开辟n+1个空间
-  let signs: any[] = new Array(n+1);
+  let signs: any[] = new Array(n + 1);
 
   // 注意：刚好等于2的时候不进入循环
   for (let i = 2; i < n; i++) {
@@ -195,13 +179,13 @@ function countPrimes(n: number): number {
       count++;
       // 通过筛选的过程，直接省略了素数的正常判断步骤
       for (let j = i * i; j <= n; j += i) {
-          signs[j - 1] = true;
+        signs[j - 1] = true;
       }
     }
   }
 
   return count;
-};
+}
 
 // Test
 let number = 3;
@@ -209,9 +193,7 @@ let res = countPrimes(number);
 console.log(res);
 ```
 
-
-
-## 3. 3的幂(E)
+## 3. 3 的幂(E)
 
 ### 题目
 
@@ -248,14 +230,10 @@ console.log(res);
 **进阶：**
 你能不使用循环或者递归来完成本题吗？
 
-
-
 ### 思路
 
-* 直接法即可
-* 注意特殊情况，比如3的0次方
-
-
+- 直接法即可
+- 注意特殊情况，比如 3 的 0 次方
 
 ### 解答
 
@@ -264,19 +242,19 @@ console.log(res);
 function isPowerOfThree(n: number): boolean {
   // 特殊情况，3的0次方
   if (n === 1) {
-    return true
+    return true;
   }
 
   let i = 3;
-  while (i <= n ) {
+  while (i <= n) {
     if (i === n) {
-      return true
+      return true;
     }
     i = i * 3;
   }
 
-  return false
-};
+  return false;
+}
 
 // Test
 let number = 28;
@@ -284,32 +262,28 @@ let res = isPowerOfThree(number);
 console.log(res);
 ```
 
-
-
 ```typescript
 function isPowerOfThree(n: number): boolean {
-    // 特殊情况，3的0次方
-    if(n === 0) {
-        return false;
-    }
-    // 如果是3的幂次方，可以一直整除3，直到剩1。
-    // 这种思路是上面解法的逆思路
-    while(n%3 === 0) {
-        n/=3;
-    }
-    // 特殊情况，3的0次方
-    if(n === 1) {
-        return true;
-    }
+  // 特殊情况，3的0次方
+  if (n === 0) {
     return false;
-};
+  }
+  // 如果是3的幂次方，可以一直整除3，直到剩1。
+  // 这种思路是上面解法的逆思路
+  while (n % 3 === 0) {
+    n /= 3;
+  }
+  // 特殊情况，3的0次方
+  if (n === 1) {
+    return true;
+  }
+  return false;
+}
 ```
-
-
 
 ## 4. 罗马数字转整数(H)
 
-###  题目
+### 题目
 
 罗马数字包含以下七种字符: `I`， `V`， `X`， `L`，`C`，`D` 和 `M`。
 
@@ -329,7 +303,7 @@ M             1000
 通常情况下，罗马数字中小的数字在大的数字的右边。但也存在特例，例如 4 不写做 `IIII`，而是 `IV`。数字 1 在数字 5 的左边，所表示的数等于大数 5 减小数 1 得到的数值 4 。同样地，数字 9 表示为 `IX`。这个特殊的规则只适用于以下六种情况：
 
 - `I` 可以放在 `V` (5) 和 `X` (10) 的左边，来表示 4 和 9。
-- `X` 可以放在 `L` (50) 和 `C` (100) 的左边，来表示 40 和 90。 
+- `X` 可以放在 `L` (50) 和 `C` (100) 的左边，来表示 40 和 90。
 - `C` 可以放在 `D` (500) 和 `M` (1000) 的左边，来表示 400 和 900。
 
 给定一个罗马数字，将其转换成整数。输入确保在 1 到 3999 的范围内。
@@ -370,8 +344,6 @@ M             1000
 输出: 1994
 解释: M = 1000, CM = 900, XC = 90, IV = 4.
 ```
-
-
 
 ### 解答
 
@@ -430,4 +402,3 @@ class Solution {
     }
 }
 ```
-

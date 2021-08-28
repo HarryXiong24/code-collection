@@ -1,7 +1,5 @@
 # 一维数组
 
-
-
 ## 1. 寻找数组的中心索引(N)
 
 ### 题目
@@ -11,8 +9,6 @@
 我们是这样定义数组 **中心索引** 的：数组中心索引的左侧所有元素相加的和等于右侧所有元素相加的和。
 
 如果数组不存在中心索引，那么我们应该返回 -1。如果数组有多个中心索引，那么我们应该返回最靠近左边的那一个。
-
- 
 
 **示例 1：**
 
@@ -35,21 +31,15 @@ nums = [1, 2, 3]
 数组中不存在满足此条件的中心索引。
 ```
 
- 
-
 **说明：**
 
 - `nums` 的长度范围为 `[0, 10000]`。
 - 任何一个 `nums[i]` 将会是一个范围在 `[-1000, 1000]`的整数。
 
-
-
 ### 思路
 
-* 寻找中心索引，可以发现规律：``left*2 + mid = sum` 根据此规律可以巧妙化解
-* 注意边界问题，比如`[-1,-1,-1,0,1,1]`时，中心索引为0
-
-
+- 寻找中心索引，可以发现规律：``left*2 + mid = sum` 根据此规律可以巧妙化解
+- 注意边界问题，比如`[-1,-1,-1,0,1,1]`时，中心索引为 0
 
 ### 解答
 
@@ -60,11 +50,11 @@ function pivotIndex(nums: number[]): number {
   let sum: number = 0;
   let left: number = 0;
 
-  for( i = 0; i < nums.length; i++) {
+  for (i = 0; i < nums.length; i++) {
     sum += nums[i];
   }
 
-  for( i = 0; i < nums.length; i++) {
+  for (i = 0; i < nums.length; i++) {
     if (sum - left - nums[i] === left) {
       return i;
     }
@@ -72,43 +62,39 @@ function pivotIndex(nums: number[]): number {
   }
 
   return -1;
-};
+}
 
 // Test
-let res: number = pivotIndex([-1,-1,-1,0,1,1]);
+let res: number = pivotIndex([-1, -1, -1, 0, 1, 1]);
 console.log(res);
 ```
-
-
 
 ```typescript
 // Better effect
 // 分析：比较来看，思路都是一样，可能是forEach求和的效率比for循环更高
 function pivotIndex(numbers: number[]): number {
-   let index = -1;
-    let sumLeft = 0;
-    let total = getTotal(numbers);
-    for(let i = 0;  i < numbers.length; i ++ ) {
-        if (sumLeft * 2 + numbers[i] == total) {
-            return i;
-        }
-        sumLeft += numbers[i];
+  let index = -1;
+  let sumLeft = 0;
+  let total = getTotal(numbers);
+  for (let i = 0; i < numbers.length; i++) {
+    if (sumLeft * 2 + numbers[i] == total) {
+      return i;
     }
-    return index;
-};
+    sumLeft += numbers[i];
+  }
+  return index;
+}
 
 function getTotal(arr: number[]) {
-    let total = 0;
-    arr.forEach((item) => {
-        total += item;
-    });
-    return total;
+  let total = 0;
+  arr.forEach((item) => {
+    total += item;
+  });
+  return total;
 }
-let nums = [1, 2, 3]
+let nums = [1, 2, 3];
 pivotIndex(nums);
 ```
-
-
 
 ## 2. 搜索插入位置(N)
 
@@ -146,15 +132,11 @@ pivotIndex(nums);
 输出: 0
 ```
 
-
-
 ### 思路
 
-* 简单的数组一一比较
-* 边界，最左边和最右边要考虑到
-* 遇到循环里的if判断可能会超出数组长度的情况下，优先考虑在数组头部解决这一问题，而不是在尾部解决
-
-
+- 简单的数组一一比较
+- 边界，最左边和最右边要考虑到
+- 遇到循环里的 if 判断可能会超出数组长度的情况下，优先考虑在数组头部解决这一问题，而不是在尾部解决
 
 ### 解法
 
@@ -174,45 +156,41 @@ function searchInsert(nums: number[], target: number): number {
       return i;
     }
 
-    if (target > nums[i-1] && target < nums[i]) {
+    if (target > nums[i - 1] && target < nums[i]) {
       return i;
     }
   }
 
   // 在最右边的情况
   return nums.length;
-};
+}
 
 // Test
-let res: number = searchInsert([1], 1)
-console.log(res)
+let res: number = searchInsert([1], 1);
+console.log(res);
 ```
-
-
 
 ```typescript
 // Better effect
 // 分析：我用的是顺序查找，优解用折半查找。今后一定要注意，遇到顺序数组的时候，优先想到折半查找！
 function searchInsert(nums: number[], target: number): number {
-    let left: number = 0;
-    let right: number = nums.length - 1;
+  let left: number = 0;
+  let right: number = nums.length - 1;
 
-    while (left <= right) {
-        let mid: number = Math.floor((left + right) / 2);
+  while (left <= right) {
+    let mid: number = Math.floor((left + right) / 2);
 
-        if (nums[mid] == target) {
-            return mid;
-        } else if (nums[mid] < target) {
-            left = mid + 1;
-        } else {
-            right = mid - 1;
-        }
+    if (nums[mid] == target) {
+      return mid;
+    } else if (nums[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
     }
-    return left;
-};
+  }
+  return left;
+}
 ```
-
-
 
 ## 3. 合并区间(H)
 
@@ -238,79 +216,74 @@ function searchInsert(nums: number[], target: number): number {
 解释: 区间 [1,4] 和 [4,5] 可被视为重叠区间。
 ```
 
-
-
 ### 解法
 
-* 先按`intervals[i][0]` 进行排序
+- 先按`intervals[i][0]` 进行排序
 
-* 循环判断` intervals >= intervals[i+1][0]`
+- 循环判断` intervals >= intervals[i+1][0]`
 
-* 符合条件删除`` intervals[i+1]``
-
-  
+- 符合条件删除` intervals[i+1]`
 
 **注**：
 
-* 边界`i < intervals.length-1`
-* 因为删除元素，数组变短了。此时： `i--`
-
-
+- 边界`i < intervals.length-1`
+- 因为删除元素，数组变短了。此时： `i--`
 
 ### 解答
 
 ```typescript
 // 比较好理解的方法
 function merge(intervals: number[][]): number[][] {
-  
   // 先按照区间起始位置排序
   // 这一步功能是按每个子数组首元素大小，对子数组进行排序
   // 目的就是处理[[2,6],[1,3],[8,10],[15,18]]这种情况
   // 让它们变成这种[[1,3],[2,6],[8,10],[15,18]]有序的排列
-  intervals = intervals.sort( (a: number[], b: number[]) => {
+  intervals = intervals.sort((a: number[], b: number[]) => {
     return a[0] - b[0];
-  })
+  });
 
   // 接下来就是不断的两两合并
   for (let i: number = 0; i < intervals.length - 1; i++) {
     let a2: number = intervals[i][1];
-    let b1: number = intervals[i+1][0];
-    let b2: number = intervals[i+1][1];
+    let b1: number = intervals[i + 1][0];
+    let b2: number = intervals[i + 1][1];
 
-    if  (a2 >= b1) { 
-      intervals[i][1] = a2 > b2 ? a2 : b2
-      intervals.splice(i+1,1)
-      i--    // 注意长度要减小
+    if (a2 >= b1) {
+      intervals[i][1] = a2 > b2 ? a2 : b2;
+      intervals.splice(i + 1, 1);
+      i--; // 注意长度要减小
     }
   }
 
-  return intervals
-};
+  return intervals;
+}
 
 // Test
-let res: number[][] = merge([[1,3],[2,6],[8,10],[15,18]])
-console.log(res)
+let res: number[][] = merge([
+  [1, 3],
+  [2, 6],
+  [8, 10],
+  [15, 18],
+]);
+console.log(res);
 ```
-
-
 
 ```typescript
 // 更快的解法
 // 分析：思路基本一致，可能是操作更快
 function merge(intervals: number[][]): number[][] {
-    
   // 开辟一个新的空二维数组
   const res: number[][] = [];
-    
+
   // 用来判别的标志
   let index: number = -1;
-    
+
   // 先按照区间起始位置排序
   // 这一步功能是按每个子数组首元素大小，对子数组进行排序
   // 目的就是处理[[2,6],[1,3],[8,10],[15,18]]这种情况
   // 让它们变成这种[[1,3],[2,6],[8,10],[15,18]]有序的排列
   intervals.sort((a, b) => a[0] - b[0]);
-    
+
   for (const el of intervals) {
     // 如果结果数组是空的，或者当前区间的起始位置 > 结果数组中最后区间的终止位置，
     // 则不合并，直接将当前区间加入结果数组。
@@ -321,26 +294,20 @@ function merge(intervals: number[][]): number[][] {
       res[index][1] = Math.max(res[index][1], el[1]);
     }
   }
-    
+
   return res;
-};
+}
 ```
-
-
-
-
 
 ## 4. 买卖股票的最佳时机 II(H)
 
 ### 题目
 
-给定一个数组，它的第 *i* 个元素是一支给定股票第 *i* 天的价格。
+给定一个数组，它的第 _i_ 个元素是一支给定股票第 _i_ 天的价格。
 
 设计一个算法来计算你所能获取的最大利润。你可以尽可能地完成更多的交易（多次买卖一支股票）。
 
 **注意：**你不能同时参与多笔交易（你必须在再次购买前出售掉之前的股票）。
-
- 
 
 **示例 1:**
 
@@ -369,14 +336,10 @@ function merge(intervals: number[][]): number[][] {
 解释: 在这种情况下, 没有交易完成, 所以最大利润为 0。
 ```
 
- 
-
 **提示：**
 
 - `1 <= prices.length <= 3 * 10 ^ 4`
 - `0 <= prices[i] <= 10 ^ 4`
-
-
 
 ### 解法
 
@@ -395,21 +358,22 @@ function merge(intervals: number[][]): number[][] {
 用数学语言描述为：
 
 $$
-TotalProfit= 
+TotalProfit=
 i
 ∑
-​	
- (height(peak 
+​
+ (height(peak
 i
-​	
- )−height(valley 
+​
+ )−height(valley
 i
-​	
+​
  ))
 $$
+
 关键是我们需要考虑到紧跟谷的每一个峰值以最大化利润。如果我们试图跳过其中一个峰值来获取更多利润，那么我们最终将失去其中一笔交易中获得的利润，从而导致总利润的降低。
 
-例如，在上述情况下，如果我们跳过`peaki`和`peakj` ，试图通过考虑差异较大的点以获取更多的利润，获得的净利润总是会小与包含它们而获得的净利润，因为C总是小于 A+B。
+例如，在上述情况下，如果我们跳过`peaki`和`peakj` ，试图通过考虑差异较大的点以获取更多的利润，获得的净利润总是会小与包含它们而获得的净利润，因为 C 总是小于 A+B。
 
 ```java
 class Solution {
@@ -437,8 +401,6 @@ class Solution {
 
 空间复杂度：O(1)。需要常量的空间。
 
-
-
 #### 考虑走势的峰谷法
 
 在这种情况下，我们可以简单地继续在斜坡上爬升并持续增加从连续交易中获得的利润，而不是在谷之后寻找每个峰值。最后，我们将有效地使用峰值和谷值，但我们不需要跟踪峰值和谷值对应的成本以及最大利润，但我们可以直接继续增加加数组的连续数字之间的差值，如果第二个数字大于第一个数字，我们获得的总和将是最大利润。这种方法将简化解决方案。
@@ -450,7 +412,7 @@ class Solution {
 
 ![](https://pic.leetcode-cn.com/6eaf01901108809ca5dfeaef75c9417d6b287c841065525083d1e2aac0ea1de4-file_1555699697692)
 
-从上图中，我们可以观察到 A+B+C的和等于差值 DD 所对应的连续峰和谷的高度之差。
+从上图中，我们可以观察到 A+B+C 的和等于差值 DD 所对应的连续峰和谷的高度之差。
 
 ```java
 class Solution {
@@ -471,8 +433,6 @@ class Solution {
 时间复杂度：O(n)，遍历一次。
 空间复杂度：O(1)，需要常量的空间。
 
-
-
 ### 解答
 
 ```typescript
@@ -482,28 +442,26 @@ function maxProfit(prices: number[]): number {
   let max: number = 0;
 
   for (let i: number = 0; i < prices.length - 1; i++) {
-    if (prices[i] < prices[i+1]) {
-      max += prices[i+1] - prices[i];
+    if (prices[i] < prices[i + 1]) {
+      max += prices[i + 1] - prices[i];
     }
   }
 
   return max;
-};
+}
 
 // Test
-let arr = [7,1,5,3,6,4];
+let arr = [7, 1, 5, 3, 6, 4];
 let res = maxProfit(arr);
 console.log(res);
 console.log(arr);
 ```
 
-
-
 ## 5. 旋转数组(N)
 
 ### 题目
 
-给定一个数组，将数组中的元素向右移动 *k* 个位置，其中 *k* 是非负数。
+给定一个数组，将数组中的元素向右移动 _k_ 个位置，其中 _k_ 是非负数。
 
 **示例 1:**
 
@@ -521,7 +479,7 @@ console.log(arr);
 ```
 输入: [-1,-100,3,99] 和 k = 2
 输出: [3,99,-1,-100]
-解释: 
+解释:
 向右旋转 1 步: [99,-1,-100,3]
 向右旋转 2 步: [3,99,-1,-100]
 ```
@@ -531,16 +489,12 @@ console.log(arr);
 - 尽可能想出更多的解决方案，至少有三种不同的方法可以解决这个问题。
 - 要求使用空间复杂度为 O(1) 的 **原地** 算法。
 
-
-
 ### 思路
 
-* k即为循环的次数
+- k 即为循环的次数
 
-* 循环里，数组头添加数组尾的元素，然后删除数组尾
-* 循环k次
-
-
+- 循环里，数组头添加数组尾的元素，然后删除数组尾
+- 循环 k 次
 
 ### 解答
 
@@ -548,33 +502,27 @@ console.log(arr);
 // My Solution
 function rotate(nums: number[], k: number): void {
   for (let i = 1; i <= k; i++) {
-    nums.unshift(nums[nums.length-1]);
+    nums.unshift(nums[nums.length - 1]);
     nums.pop();
   }
-};
+}
 
 // Test
-let arr = [-1,-100,3,99];
+let arr = [-1, -100, 3, 99];
 rotate(arr, 2);
 console.log(arr);
 ```
-
-
 
 ```typescript
 // 优解
 // 使用splice一次性删掉，不使用循环，效率更高
 function rotate(nums: number[], k: number): void {
-
-    //删除第k个元素开始之后的元素，删除长度为k
-    var del = nums.splice(nums.length - k, k);
-    //用unshift方法在数组开始添加删除的元素 es6三个点语法将数组转化为参数序列
-    nums.unshift(...del);
-
-};
+  //删除第k个元素开始之后的元素，删除长度为k
+  var del = nums.splice(nums.length - k, k);
+  //用unshift方法在数组开始添加删除的元素 es6三个点语法将数组转化为参数序列
+  nums.unshift(...del);
+}
 ```
-
-
 
 ## 6. 存在重复元素(E)
 
@@ -583,8 +531,6 @@ function rotate(nums: number[], k: number): void {
 给定一个整数数组，判断是否存在重复元素。
 
 如果任意一值在数组中出现至少两次，函数返回 `true` 。如果数组中每个元素都不相同，则返回 `false` 。
-
- 
 
 **示例 1:**
 
@@ -607,16 +553,12 @@ function rotate(nums: number[], k: number): void {
 输出: true
 ```
 
-
-
 ### 思路
 
-* 用set去重，之后再转为数组
-* 比较新旧数组长度，相同则没有重复，减小则有重复
+- 用 set 去重，之后再转为数组
+- 比较新旧数组长度，相同则没有重复，减小则有重复
 
-
-
-###  解答
+### 解答
 
 ```typescript
 // My Solution
@@ -631,16 +573,14 @@ function containsDuplicate(nums: number[]): boolean {
   } else {
     return false;
   }
-};
+}
 
 // Test
-let arr = [1,2,3,4];
+let arr = [1, 2, 3, 4];
 let res = containsDuplicate(arr);
 console.log(res);
 console.log(arr);
 ```
-
-
 
 ## 7. 只出现一次的数字(N)
 
@@ -666,59 +606,51 @@ console.log(arr);
 输出: 4
 ```
 
-
-
 ### 思路
 
-* 先对数组排序
-* 相邻元素比对，如果出现相同的元素，则两个都删掉，循环变量i减2
-* 最后剩下的那一个就是答案
-
-
+- 先对数组排序
+- 相邻元素比对，如果出现相同的元素，则两个都删掉，循环变量 i 减 2
+- 最后剩下的那一个就是答案
 
 ### 解答
 
 ```typescript
 // My Solution
 function singleNumber(nums: number[]): number {
-  nums = nums.sort( (a, b) => {
-    return a-b;
-  })
+  nums = nums.sort((a, b) => {
+    return a - b;
+  });
 
   let flag: number = 0;
 
-  for (let i: number = 0 ; i < nums.length-1; i++) {
-    if (nums[i] === nums[i+1]) {
+  for (let i: number = 0; i < nums.length - 1; i++) {
+    if (nums[i] === nums[i + 1]) {
       nums.splice(i, 2);
       i -= 2;
     }
   }
 
   return nums[0];
-};
+}
 
 // Test
-let arr = [2,2,1];
+let arr = [2, 2, 1];
 let res = singleNumber(arr);
 console.log(res);
 console.log(arr);
 ```
 
-
-
 ```typescript
 // 优解
 // 运用了异或的知识，是个好解法
 function singleNumber(nums: number[]): number {
-    let num = 0;
-    for (let i = 0; i < nums.length; i++) {
-        num = num ^ nums[i];
-    }
-    return num;
-};
+  let num = 0;
+  for (let i = 0; i < nums.length; i++) {
+    num = num ^ nums[i];
+  }
+  return num;
+}
 ```
-
-
 
 ## 8. 两个数组的交集 II(N)
 
@@ -748,19 +680,15 @@ function singleNumber(nums: number[]): number {
 **进阶:**
 
 - 如果给定的数组已经排好序呢？你将如何优化你的算法？
-- 如果 *nums1* 的大小比 *nums2* 小很多，哪种方法更优？
-- 如果 *nums2* 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
-
-
+- 如果 _nums1_ 的大小比 _nums2_ 小很多，哪种方法更优？
+- 如果 _nums2_ 的元素存储在磁盘上，磁盘内存是有限的，并且你不能一次加载所有的元素到内存中，你该怎么办？
 
 ### 思路
 
-* 首先排序
-* 之后分别用指针，进行比较
+- 首先排序
+- 之后分别用指针，进行比较
 
-
-
-###  解答
+### 解答
 
 ```typescript
 // My Solution
@@ -769,13 +697,13 @@ function intersect(nums1: number[], nums2: number[]): number[] {
   let p2: number = 0;
   let res: number[] = [];
 
-  nums1.sort( (a, b) => {
-    return a-b;
-  })
+  nums1.sort((a, b) => {
+    return a - b;
+  });
 
-  nums2.sort( (a, b) => {
-    return a-b;
-  })
+  nums2.sort((a, b) => {
+    return a - b;
+  });
 
   while (p1 < nums1.length && p2 < nums2.length) {
     if (nums1[p1] === nums2[p2]) {
@@ -794,39 +722,35 @@ function intersect(nums1: number[], nums2: number[]): number[] {
   }
 
   return res;
-};
+}
 
 // Test
 let arr1 = [1, 2, 2, 1];
-let arr2 = [2, 2]
+let arr2 = [2, 2];
 let res = intersect(arr1, arr2);
 console.log(res);
 ```
 
-
-
 ```typescript
 // 优解，但没有怎么看懂
 function intersect(nums1: number[], nums2: number[]): number[] {
-  const nums: number[] = []
+  const nums: number[] = [];
   // 实际上是定义数组，定义一个确定了[]的数组
-  const hash1: { [props: number]: number } = {}
+  const hash1: { [props: number]: number } = {};
 
   for (let i of nums1) {
-    hash1[i] = (hash1[i] === undefined) ? 1 : hash1[i] + 1
+    hash1[i] = hash1[i] === undefined ? 1 : hash1[i] + 1;
   }
   for (let i of nums2) {
     if (hash1[i]) {
-      nums.push(i)
-      hash1[i] = hash1[i] - 1
+      nums.push(i);
+      hash1[i] = hash1[i] - 1;
     }
   }
 
-  return nums
-};
+  return nums;
+}
 ```
-
-
 
 ## 9. 加一(N)
 
@@ -854,13 +778,9 @@ function intersect(nums1: number[], nums2: number[]): number[] {
 解释: 输入数组表示数字 4321。
 ```
 
-
-
 ### 思路
 
-* 转换成字符串，在变成number，之后+1，变回字符串，再变成number数组
-
-
+- 转换成字符串，在变成 number，之后+1，变回字符串，再变成 number 数组
 
 ### 解答
 
@@ -875,53 +795,47 @@ function plusOne(digits: number[]): number[] {
   let num: number = Number(str) + 1;
   console.log(num);
 
-  let newstr: string[] = String(num).split('');
+  let newstr: string[] = String(num).split("");
   console.log(newstr);
 
   let res: number[] = [];
 
-  newstr.forEach( (val) => {
+  newstr.forEach((val) => {
     res.push(Number(val));
-  })
+  });
 
   return res;
-};
+}
 
 // Test
-let arr1 = [6,1,4,5,3,9,0,1,9,5,1,8,6,7,0,5,5,4,3];
+let arr1 = [6, 1, 4, 5, 3, 9, 0, 1, 9, 5, 1, 8, 6, 7, 0, 5, 5, 4, 3];
 let res = plusOne(arr1);
 console.log(res);
 ```
 
-
-
 ```typescript
 // 优解
 function plusOne(digits: number[]): number[] {
-    const len = digits.length
-    if (digits[len-1] != 9) {
-        digits[len-1] = digits[len-1]+1
-        return digits
+  const len = digits.length;
+  if (digits[len - 1] != 9) {
+    digits[len - 1] = digits[len - 1] + 1;
+    return digits;
+  } else {
+    if (len == 1) {
+      return [1, 0];
     } else {
-        if (len == 1) {
-            return [1,0]
-        } else {
-            digits.splice(-1,1)   
-            return plusOne(digits).concat(0)
-        }
+      digits.splice(-1, 1);
+      return plusOne(digits).concat(0);
     }
-};
+  }
+}
 ```
-
-
 
 ## 10.缺失数字(H)
 
 ### 题目
 
-给定一个包含 `0, 1, 2, ..., n` 中 *n* 个数的序列，找出 0 .. *n* 中没有出现在序列中的那个数。
-
- 
+给定一个包含 `0, 1, 2, ..., n` 中 _n_ 个数的序列，找出 0 .. _n_ 中没有出现在序列中的那个数。
 
 **示例 1:**
 
@@ -937,20 +851,14 @@ function plusOne(digits: number[]): number[] {
 输出: 8
 ```
 
- 
-
 **说明:**
 你的算法应具有线性时间复杂度。你能否仅使用额外常数空间来实现?
 
-
-
 ### 解法
 
-* 找到其中的规律，先排序
-* 如果是连续的，则当前的值为前一个值加1
-* 以此为规律进行解答
-
-
+- 找到其中的规律，先排序
+- 如果是连续的，则当前的值为前一个值加 1
+- 以此为规律进行解答
 
 ### 解答
 
@@ -982,8 +890,6 @@ class Solution {
 }
 ```
 
-
-
 ```java
 // 优解
 // 这个解法利用了另一个规律，先假定是没有缺少的，先求出这个连续数列的和
@@ -1000,8 +906,6 @@ class Solution {
     }
 }
 ```
-
-
 
 ## 11. 删除排序数组中的重复项 II(H)
 
@@ -1050,30 +954,26 @@ for (int i = 0; i < len; i++) {
 }
 ```
 
-
-
 ### 解法
 
-* 双指针，两个指针的距离隔着一个元素
-
-
+- 双指针，两个指针的距离隔着一个元素
 
 ### 解答
 
 ```typescript
 // My Solution
 function removeDuplicates(nums: number[]): number {
-  let n = nums.length
+  let n = nums.length;
   // 长度小于3直接返回
   if (n < 3) {
-    return n
+    return n;
   }
   // 定义count
-  let count = 1
+  let count = 1;
   for (let i = 2; i < n; i++) {
     if (nums[i] !== nums[count - 1]) {
-      count++
-      nums[count] = nums[i]
+      count++;
+      nums[count] = nums[i];
     }
   }
   return count + 1;
@@ -1085,17 +985,13 @@ let res = removeDuplicates(arr);
 console.log(res);
 ```
 
-
-
 # 二维数组
-
-
 
 ## 1. 旋转图像(N)
 
 ### 题目
 
-给定一个 *n* × *n* 的二维矩阵表示一个图像。
+给定一个 _n_ × _n_ 的二维矩阵表示一个图像。
 
 将图像顺时针旋转 90 度。
 
@@ -1106,7 +1002,7 @@ console.log(res);
 **示例 1:**
 
 ```
-给定 matrix = 
+给定 matrix =
 [
   [1,2,3],
   [4,5,6],
@@ -1130,7 +1026,7 @@ console.log(res);
   [ 2, 4, 8,10],
   [13, 3, 6, 7],
   [15,14,12,16]
-], 
+],
 
 原地旋转输入矩阵，使其变为:
 [
@@ -1141,11 +1037,9 @@ console.log(res);
 ]
 ```
 
-
-
 ### 思路
 
-* 观察规律
+- 观察规律
 
 ```
 [
@@ -1155,17 +1049,17 @@ console.log(res);
 ],
 ```
 
-* 先变成转置矩阵
+- 先变成转置矩阵
 
 ```
-[ 
-  [1,4,7], 
-  [2,5,8], 
-  [3,6,9] 
+[
+  [1,4,7],
+  [2,5,8],
+  [3,6,9]
 ]
 ```
 
-* 之后每行前半部分的纵坐标交换
+- 之后每行前半部分的纵坐标交换
 
 ```
 [
@@ -1174,8 +1068,6 @@ console.log(res);
   [9,6,3]
 ]
 ```
-
-
 
 ### 解答
 
@@ -1192,58 +1084,49 @@ function rotate(matrix: number[][]): void {
   }
 
   for (let i: number = 0; i < matrix.length; i++) {
-    for (let j: number = 0; j < Math.floor(matrix[i].length/2); j++) {
+    for (let j: number = 0; j < Math.floor(matrix[i].length / 2); j++) {
       let temp = matrix[i][j];
-      matrix[i][j] = matrix[i][matrix[i].length-1-j];
-      matrix[i][matrix[i].length-1-j] = temp;
+      matrix[i][j] = matrix[i][matrix[i].length - 1 - j];
+      matrix[i][matrix[i].length - 1 - j] = temp;
     }
   }
-};
+}
 
 // Test
 let arr1 = [
-  [1,2,3],
-  [4,5,6],
-  [7,8,9]
+  [1, 2, 3],
+  [4, 5, 6],
+  [7, 8, 9],
 ];
 
 rotate(arr1);
-console.log(arr1)
+console.log(arr1);
 ```
-
-
 
 ```typescript
 // 优解
 // 它时间复杂度为n^2，比我的方法快了一倍，但不好理解
 function rotate(matrix: number[][]): void {
-
-	let len = matrix.length-1;
-	let count = Math.floor(len / 2);
-	for (let i = 0; i <= count; i++)
-	{ 
-        let size = len - i;
-		for (let n = i; n < size; n++)
-		{ 
-			let temp = matrix[i][n];
-			matrix[i][n] = matrix[len - n][i];
-			matrix[len - n][i] = matrix[len - i][len - n];
-			matrix[len - i][len - n] = matrix[n][len - i];
-			matrix[n][len - i] = temp;
-		}	
-	}	
-};
+  let len = matrix.length - 1;
+  let count = Math.floor(len / 2);
+  for (let i = 0; i <= count; i++) {
+    let size = len - i;
+    for (let n = i; n < size; n++) {
+      let temp = matrix[i][n];
+      matrix[i][n] = matrix[len - n][i];
+      matrix[len - n][i] = matrix[len - i][len - n];
+      matrix[len - i][len - n] = matrix[n][len - i];
+      matrix[n][len - i] = temp;
+    }
+  }
+}
 ```
-
-
 
 ## 2. 零矩阵(H)
 
 ### 题目
 
-编写一种算法，若M × N矩阵中某个元素为0，则将其所在的行与列清零。
-
- 
+编写一种算法，若 M × N 矩阵中某个元素为 0，则将其所在的行与列清零。
 
 **示例 1：**
 
@@ -1279,14 +1162,10 @@ function rotate(matrix: number[][]): void {
 ]
 ```
 
-
-
 ### 解法
 
-* 循环里实时清除行
-* 保存列下标，最后统一清除列
-
-
+- 循环里实时清除行
+- 保存列下标，最后统一清除列
 
 ### 解答
 
@@ -1294,7 +1173,7 @@ function rotate(matrix: number[][]): void {
 // 好理解
 function setZeroes(matrix: number[][]): void {
   // 定义清除列
-  let column = []; 
+  let column = [];
   for (let i = 0; i < matrix.length; i++) {
     // 定义清除行
     let row = null;
@@ -1331,8 +1210,6 @@ let arr = [
 let res = setZeroes(arr);
 console.log(arr);
 ```
-
-
 
 ```typescript
 // 更高的效率解法
@@ -1376,15 +1253,11 @@ let res = setZeroes(arr);
 console.log(arr);
 ```
 
-
-
 ## 3. 对角线遍历(H)
 
 ### 题目
 
 给定一个含有 M x N 个元素的矩阵（M 行，N 列），请以对角线遍历的顺序返回这个矩阵中的所有元素，对角线遍历如下图所示。
-
- 
 
 **示例:**
 
@@ -1401,13 +1274,9 @@ console.log(arr);
 解释:
 ```
 
- 
-
 **说明:**
 
 1. 给定矩阵中的元素总数不会超过 100000 。
-
-
 
 ### 解法
 
@@ -1429,31 +1298,29 @@ console.log(arr);
 (2, 2)  m+n=4  正序
 ```
 
-
-
 ### 解答
 
 ```typescript
 // MySolution
 function findDiagonalOrder(matrix: number[][]): number[] {
   if (matrix.length === 0) {
-    return []
+    return [];
   }
-  
-  const newArr = []
-  let xlength = matrix[0].length, ylength = matrix.length
+
+  const newArr = [];
+  let xlength = matrix[0].length,
+    ylength = matrix.length;
   for (let i = 1; i < xlength + ylength; i++) {
-    let xMax = i % 2 === 0 ? ylength : xlength
-    let yMax = i % 2 === 0 ? xlength : ylength
+    let xMax = i % 2 === 0 ? ylength : xlength;
+    let yMax = i % 2 === 0 ? xlength : ylength;
     for (let x = 0; x < i; x++) {
-      let y = i - x - 1
-      if (x >= xMax || y >= yMax) continue
-      newArr.push(i % 2 === 0 ? matrix[x][y] : matrix[y][x])
+      let y = i - x - 1;
+      if (x >= xMax || y >= yMax) continue;
+      newArr.push(i % 2 === 0 ? matrix[x][y] : matrix[y][x]);
     }
   }
-  return newArr
-
-};
+  return newArr;
+}
 
 // Test
 let arr = [
@@ -1465,13 +1332,11 @@ let res = findDiagonalOrder(arr);
 console.log(res);
 ```
 
-
-
 ## 4. 杨辉三角(N)
 
 ### 题目
 
-给定一个非负整数 *numRows，*生成杨辉三角的前 *numRows* 行。
+给定一个非负整数 *numRows，*生成杨辉三角的前 _numRows_ 行。
 
 ![img](https://upload.wikimedia.org/wikipedia/commons/0/0d/PascalTriangleAnimated2.gif)
 
@@ -1491,14 +1356,10 @@ console.log(res);
 ]
 ```
 
+### 思路
 
-
-### 思路 
-
-* 找规律，从第三行开始，除了一头一尾是1，其他值(下标记为`i`)均是上一个数组的`i`和`i-1`的值之和
-* 注意临界情况，长度为0，1，2的时候
-
-
+- 找规律，从第三行开始，除了一头一尾是 1，其他值(下标记为`i`)均是上一个数组的`i`和`i-1`的值之和
+- 注意临界情况，长度为 0，1，2 的时候
 
 ### 解答
 
@@ -1506,7 +1367,7 @@ console.log(res);
 // MySolution
 function generate(numRows: number): number[][] {
   let arr1 = [1];
-  let arr2 = [1,1];
+  let arr2 = [1, 1];
   let res: number[][] = [];
 
   if (numRows === 0) {
@@ -1518,7 +1379,7 @@ function generate(numRows: number): number[][] {
   }
 
   if (numRows === 2) {
-    return [[1],[1,1]];
+    return [[1], [1, 1]];
   }
 
   res.push(arr1);
@@ -1528,20 +1389,20 @@ function generate(numRows: number): number[][] {
   for (let i = 2; i < numRows; i++) {
     // 开辟一个新数组，长度为当前行数
     let newArr = [];
-    newArr.length = i+1;
+    newArr.length = i + 1;
 
     // 一头一尾值为1
-    newArr[0] = newArr[newArr.length-1] = 1;
+    newArr[0] = newArr[newArr.length - 1] = 1;
 
     // 找上一行的对应下标，求值
-    for (let j = 1; j < newArr.length-1; j++) {
-      newArr[j] = res[res.length-1][j] + res[res.length-1][j-1];
+    for (let j = 1; j < newArr.length - 1; j++) {
+      newArr[j] = res[res.length - 1][j] + res[res.length - 1][j - 1];
     }
     res.push(newArr);
   }
 
   return res;
-};
+}
 
 // Test
 let number = 3;
@@ -1549,13 +1410,11 @@ let res = generate(number);
 console.log(res);
 ```
 
-
-
-## 5.  杨辉三角 II(N)
+## 5. 杨辉三角 II(N)
 
 ### 题目
 
-给定一个非负索引 *k*，其中 *k* ≤ 33，返回杨辉三角的第 *k* 行。
+给定一个非负索引 _k_，其中 _k_ ≤ 33，返回杨辉三角的第 _k_ 行。
 
 ![img](https://upload.wikimedia.org/wikipedia/commons/0/0d/PascalTriangleAnimated2.gif)
 
@@ -1570,16 +1429,12 @@ console.log(res);
 
 **进阶：**
 
-你可以优化你的算法到 *O*(*k*) 空间复杂度吗？
-
-
+你可以优化你的算法到 _O_(_k_) 空间复杂度吗？
 
 ### 思路
 
-* 和上一题一样，改变返回值即可
-* 特别注意，本题的下标从0开始，忽略了[]的情况
-
-
+- 和上一题一样，改变返回值即可
+- 特别注意，本题的下标从 0 开始，忽略了[]的情况
 
 ### 解答
 
@@ -1587,7 +1442,7 @@ console.log(res);
 // MySolution
 function getRow(rowIndex: number): number[] {
   let arr0 = [1];
-  let arr1 = [1,1];
+  let arr1 = [1, 1];
   let res: number[][] = [];
 
   if (rowIndex === 0) {
@@ -1605,20 +1460,20 @@ function getRow(rowIndex: number): number[] {
   for (let i = 2; i <= rowIndex; i++) {
     // 开辟一个新数组，长度为当前行数
     let newArr = [];
-    newArr.length = i+1;
+    newArr.length = i + 1;
 
     // 一头一尾值为1
-    newArr[0] = newArr[newArr.length-1] = 1;
+    newArr[0] = newArr[newArr.length - 1] = 1;
 
     // 找上一行的对应下标，求值
-    for (let j = 1; j < newArr.length-1; j++) {
-      newArr[j] = res[res.length-1][j] + res[res.length-1][j-1];
+    for (let j = 1; j < newArr.length - 1; j++) {
+      newArr[j] = res[res.length - 1][j] + res[res.length - 1][j - 1];
     }
     res.push(newArr);
   }
 
-  return res[res.length-1];
-};
+  return res[res.length - 1];
+}
 
 // Test
 let number = 3;
@@ -1626,34 +1481,31 @@ let res = getRow(number);
 console.log(res);
 ```
 
-
-
 ```typescript
 // 优解，时间复杂度为线性
 // 使用了递归，好方法
 function getRow(rowIndex: number): number[] {
-    let result: number[] = [];
-    // 讨论特殊情况
-    if (rowIndex === 0) {
-        return [1];
+  let result: number[] = [];
+  // 讨论特殊情况
+  if (rowIndex === 0) {
+    return [1];
+  }
+  if (rowIndex === 1) {
+    return [1, 1];
+  }
+  if (rowIndex === 2) {
+    return [1, 2, 1];
+  }
+  // 递归调用，得到上一行的值
+  const lastRow = getRow(rowIndex - 1);
+  // 求出这一行
+  for (let i = 0; i <= rowIndex; ++i) {
+    if (i === 0 || i === rowIndex) {
+      result.push(1);
+    } else {
+      result.push(lastRow[i - 1] + lastRow[i]);
     }
-    if (rowIndex === 1) {
-        return [1, 1];
-    }
-    if (rowIndex === 2) {
-        return [1, 2, 1];
-    }
-    // 递归调用，得到上一行的值
-    const lastRow = getRow(rowIndex - 1);
-    // 求出这一行
-    for (let i = 0; i <= rowIndex; ++i) {
-        if (i === 0 || i === rowIndex) {
-            result.push(1);
-        } else {
-            result.push(lastRow[i - 1] + lastRow[i]);
-        }
-    }
-    return result;
-};
+  }
+  return result;
+}
 ```
-

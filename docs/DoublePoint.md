@@ -1,14 +1,10 @@
 # 双指针解决问题
 
-
-
-## 1. 双指针技巧1
+## 1. 双指针技巧 1
 
 有时我们会使用两个指针进行迭代。
 
 ![1.png](https://pic.leetcode-cn.com/bfdf27723d1b26ee06a56adbf6206fb9d1f7446e297ce05e74e0275b268cd945-1.png)
-
- 
 
 ### 示例
 
@@ -20,11 +16,9 @@
 
 ![2.gif](https://pic.leetcode-cn.com/84f9f1fce23655fcc653179b26d9800edf54858f790be1bc7573eb228f2aac00-2.gif)
 
-
-
 ### 小结
 
-------
+---
 
 我们来总结一下，使用双指针的典型场景之一是你想要
 
@@ -36,13 +30,9 @@
 
 这种技巧经常再排序数组中使用。
 
+## 2. 双指针技巧 2
 
-
-## 2. 双指针技巧2
-
-有时，我们可以使用两个不同步的指针来解决问题，即快慢指针。与方法1不同的是，两个指针的运动方向是相同的，而非相反。
-
- 
+有时，我们可以使用两个不同步的指针来解决问题，即快慢指针。与方法 1 不同的是，两个指针的运动方向是相同的，而非相反。
 
 ### 示例
 
@@ -76,8 +66,6 @@
 
 与前一个场景类似，你有时可能需要在使用双指针技巧之前对数组进行排序，也可能需要运用贪心法则来决定你的运动策略。
 
-
-
 ## 3. 反转字符串(N)
 
 ### 题目
@@ -87,8 +75,6 @@
 不要给另外的数组分配额外的空间，你必须**[原地](https://baike.baidu.com/item/原地算法)修改输入数组**、使用 O(1) 的额外空间解决这一问题。
 
 你可以假设数组中的所有字符都是 [ASCII](https://baike.baidu.com/item/ASCII) 码表中的可打印字符。
-
- 
 
 **示例 1：**
 
@@ -104,14 +90,10 @@
 输出：["h","a","n","n","a","H"]
 ```
 
-
-
 ### 思路
 
-* 一头一尾指针，用while循环
-* 也可以一个指针，利用数组长度关系构造另一个指针， 用while循环
-
-
+- 一头一尾指针，用 while 循环
+- 也可以一个指针，利用数组长度关系构造另一个指针， 用 while 循环
 
 ### 解答
 
@@ -119,56 +101,49 @@
 // My Solution
 function reverseString(s: string[]): void {
   let left: number = 0;
-  let right: number = s.length-1;
+  let right: number = s.length - 1;
   let temp: string = "";
 
   while (left < right) {
     temp = s[left];
     s[left] = s[right];
-    s[right] = temp
+    s[right] = temp;
     left++;
     right--;
   }
-};
+}
 
 // Test
-let s: string[] = ["h","e","l","l","o"];
+let s: string[] = ["h", "e", "l", "l", "o"];
 reverseString(s);
 console.log(s);
 ```
 
-
-
 ```typescript
 // 一个指针，思路一样，速度更快些
 function reverseString(s: string[]): void {
-	let len = s.length - 1;
-	let count = Math.floor(len / 2);
-	for (let i = 0; i <= count; i++)
-	{ 
-		let temp = s[i];
-		s[i] = s[len - i];
-		s[len - i] = temp;
-	}	
-};
+  let len = s.length - 1;
+  let count = Math.floor(len / 2);
+  for (let i = 0; i <= count; i++) {
+    let temp = s[i];
+    s[i] = s[len - i];
+    s[len - i] = temp;
+  }
+}
 ```
-
-
 
 ```typescript
 // 超简单算法
 function reverseString(s: string[]): void {
-  s.reverse()
-};
+  s.reverse();
+}
 ```
-
-
 
 ## 4. 数组拆分 I(N)
 
 ### 题目
 
-给定长度为 **2n** 的数组, 你的任务是将这些数分成 **n** 对, 例如 `(a1, b1), (a2, b2), ..., (an, bn) `，使得从1 到 n 的`min(ai, bi)` 总和最大。
+给定长度为 **2n** 的数组, 你的任务是将这些数分成 **n** 对, 例如 `(a1, b1), (a2, b2), ..., (an, bn) `，使得从 1 到 n 的`min(ai, bi)` 总和最大。
 
 **示例 1:**
 
@@ -184,38 +159,32 @@ function reverseString(s: string[]): void {
 1. **n** 是正整数,范围在 [1, 10000].
 2. 数组中的元素范围在 [-10000, 10000].
 
-
-
 ### 思路
 
-* 观察分析，就是对数组排序后，取相邻的两项求最小
-
-
+- 观察分析，就是对数组排序后，取相邻的两项求最小
 
 ### 解答
 
 ```typescript
 // My Solution
 function arrayPairSum(nums: number[]): number {
-  nums = nums.sort( (a, b) => {
-    return a-b;
-  })
+  nums = nums.sort((a, b) => {
+    return a - b;
+  });
 
   let sum: number = 0;
 
-  for (let i: number = 0; i < nums.length; i+=2) {
+  for (let i: number = 0; i < nums.length; i += 2) {
     sum += nums[i];
   }
 
   return sum;
-};
+}
 
 // Test
-let res = arrayPairSum([1,4,3,2]);
+let res = arrayPairSum([1, 4, 3, 2]);
 console.log(res);
 ```
-
-
 
 ## 5. 两数之和 II - 输入有序数组(H)
 
@@ -238,26 +207,21 @@ console.log(res);
 解释: 2 与 7 之和等于目标数 9 。因此 index1 = 1, index2 = 2 。
 ```
 
-
-
 ### 思路
 
-* 使用快慢指针法，建立两个循环，时间复杂度为`O(n^2)`
-* 注意边界，数组长度小于等于1的情况直接返回
-
-
+- 使用快慢指针法，建立两个循环，时间复杂度为`O(n^2)`
+- 注意边界，数组长度小于等于 1 的情况直接返回
 
 ### 解答
 
 ```typescript
 // My Solution
 function twoSum(numbers: number[], target: number): number[] {
-  
   // 考虑边界情况
-  if (numbers.length <=1 ) {
+  if (numbers.length <= 1) {
     return [];
   }
-  
+
   // 定义快慢指针
   let head: number = 0;
   let tail: number = head + 1;
@@ -266,7 +230,7 @@ function twoSum(numbers: number[], target: number): number[] {
     while (tail !== numbers.length) {
       if (numbers[head] + numbers[tail] === target) {
         // 特别注意它返回的答案下标从1开始
-        return [head+1, tail+1];
+        return [head + 1, tail + 1];
       }
       tail++;
     }
@@ -275,14 +239,12 @@ function twoSum(numbers: number[], target: number): number[] {
   }
 
   return [];
-};
+}
 
 // Test
 let res = twoSum([2, 7, 11, 15], 9);
 console.log(res);
 ```
-
-
 
 ```typescript
 // 优解
@@ -311,19 +273,15 @@ let res = twoSum([2, 7, 11, 15], 9);
 console.log(res);
 ```
 
-
-
 ## 6. 移除元素(N)
 
 ### 题目
 
-给你一个数组 *nums* 和一个值 *val*，你需要 **[原地](https://baike.baidu.com/item/原地算法)** 移除所有数值等于 *val* 的元素，并返回移除后数组的新长度。
+给你一个数组 _nums_ 和一个值 _val_，你需要 **[原地](https://baike.baidu.com/item/原地算法)** 移除所有数值等于 _val_ 的元素，并返回移除后数组的新长度。
 
 不要使用额外的数组空间，你必须仅使用 O(1) 额外空间并 **[原地 ](https://baike.baidu.com/item/原地算法)修改输入数组**。
 
 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素。
-
- 
 
 **示例 1:**
 
@@ -347,8 +305,6 @@ console.log(res);
 你不需要考虑数组中超出新长度后面的元素。
 ```
 
- 
-
 **说明:**
 
 为什么返回数值是整数，但输出的答案是数组呢?
@@ -368,13 +324,9 @@ for (int i = 0; i < len; i++) {
 }
 ```
 
-
-
 ### 思路
 
-* 定义一个指针，如果其数组值与val匹配，则所有后面元素前移，然后长度减一，指针自身减一
-
-
+- 定义一个指针，如果其数组值与 val 匹配，则所有后面元素前移，然后长度减一，指针自身减一
 
 ### 解答
 
@@ -388,10 +340,10 @@ function removeElement(nums: number[], val: number): number {
   for (fast = 0; fast < nums.length; fast++) {
     if (nums[fast] === val) {
       for (let i: number = fast; i < nums.length - 1; i++) {
-        nums[i] = nums[i+1];
+        nums[i] = nums[i + 1];
       }
       nums.length--;
-    // slow--;
+      // slow--;
       fast--;
     }
     // if (nums[fast] !== val) {
@@ -399,17 +351,15 @@ function removeElement(nums: number[], val: number): number {
     // }
   }
 
-  return nums.length
-};
+  return nums.length;
+}
 
 // Test
-let arr = [0,1,2,2,3,0,4,2];
+let arr = [0, 1, 2, 2, 3, 0, 4, 2];
 let res = removeElement(arr, 2);
 console.log(res);
 console.log(arr);
 ```
-
-
 
 ```typescript
 // 优解
@@ -425,13 +375,11 @@ function removeElement(nums: number[], val: number): number {
 }
 ```
 
-
-
-## 7. 最大连续1的个数(N)
+## 7. 最大连续 1 的个数(N)
 
 ### 题目
 
-给定一个二进制数组， 计算其中最大连续1的个数。
+给定一个二进制数组， 计算其中最大连续 1 的个数。
 
 **示例 1:**
 
@@ -446,14 +394,10 @@ function removeElement(nums: number[], val: number): number {
 - 输入的数组只包含 `0` 和`1`。
 - 输入数组的长度是正整数，且不超过 10,000。
 
-
-
 ### 思路
 
-* 设计一个计数器，统计连续1的个数
-* 设计一个结果值，记录最大的计数
-
-
+- 设计一个计数器，统计连续 1 的个数
+- 设计一个结果值，记录最大的计数
 
 ### 解答
 
@@ -463,39 +407,33 @@ function findMaxConsecutiveOnes(nums: number[]): number {
   let result: number = 0;
   let count: number = 0;
 
-  for (let i: number = 0; i < nums.length; i++)
-  {
+  for (let i: number = 0; i < nums.length; i++) {
     if (nums[i] === 1) {
       count++;
     } else {
-      if(count > result)
-      {
-          result = count;
+      if (count > result) {
+        result = count;
       }
-      count=0;
+      count = 0;
     }
   }
 
   // 关键之处，如果一直到末尾一直是连1的话，会导致result没有更新
-  return result>count ? result:count;
-};
+  return result > count ? result : count;
+}
 
 // Test
-let arr = [1,1,0,1,1,1];
+let arr = [1, 1, 0, 1, 1, 1];
 let res = findMaxConsecutiveOnes(arr);
 console.log(res);
 console.log(arr);
 ```
-
-
 
 ## 8. 长度最小的子数组(H)
 
 ### 题目
 
 给定一个含有 **n** 个正整数的数组和一个正整数 **s ，**找出该数组中满足其和 **≥ s** 的长度最小的子数组，并返回其长度**。**如果不存在符合条件的子数组，返回 0。
-
- 
 
 **示例：**
 
@@ -505,19 +443,13 @@ console.log(arr);
 解释：子数组 [4,3] 是该条件下的长度最小的子数组。
 ```
 
- 
-
 **进阶：**
 
-- 如果你已经完成了 *O*(*n*) 时间复杂度的解法, 请尝试 *O*(*n* log *n*) 时间复杂度的解法。
-
-
+- 如果你已经完成了 _O_(_n_) 时间复杂度的解法, 请尝试 _O_(_n_ log _n_) 时间复杂度的解法。
 
 ### 思路
 
-* 建立两个循环，逐一比较
-
-
+- 建立两个循环，逐一比较
 
 ### 解答
 
@@ -540,22 +472,20 @@ function minSubArrayLen(s: number, nums: number[]): number {
       }
     }
   }
-  
+
   // 边界情况，如果和小于目标值时
   if (len === nums.length + 1) {
     return 0;
   }
 
   return len;
-};
+}
 
 // Test
-let arr = [ 2 ];
+let arr = [2];
 let res = minSubArrayLen(7, arr);
 console.log(res);
 ```
-
-
 
 ```typescript
 // 优解
@@ -582,7 +512,7 @@ function minSubArrayLen(s: number, nums: number[]): number {
         length === nums.length + 1 ? 0 : length;
       }
       sum += nums[rightBound];
-      rightBound++;  // 后指针右移一位
+      rightBound++; // 后指针右移一位
     } else {
       length = Math.min(length, rightBound - leftBound);
       // 回退左指针的值
@@ -599,8 +529,6 @@ let res = minSubArrayLen(7, arr);
 console.log(res);
 ```
 
-
-
 ## 9. 删除排序数组中的重复项(H)
 
 ### 题目
@@ -609,14 +537,12 @@ console.log(res);
 
 不要使用额外的数组空间，你必须在 **[原地 ](https://baike.baidu.com/item/原地算法)修改输入数组** 并在使用 O(1) 额外空间的条件下完成。
 
- 
-
 **示例 1:**
 
 ```
-给定数组 nums = [1,1,2], 
+给定数组 nums = [1,1,2],
 
-函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。 
+函数应该返回新的长度 2, 并且原数组 nums 的前两个元素被修改为 1, 2。
 
 你不需要考虑数组中超出新长度后面的元素。
 ```
@@ -630,8 +556,6 @@ console.log(res);
 
 你不需要考虑数组中超出新长度后面的元素。
 ```
-
- 
 
 **说明:**
 
@@ -652,14 +576,10 @@ for (int i = 0; i < len; i++) {
 }
 ```
 
-
-
 ### 思路
 
-* 快慢指针法
-* 边界，当数组长度为1时，应该直接返回1。特别注意当数组为空时，应该`nums.length === 0`进行判断，直接返回0
-
-
+- 快慢指针法
+- 边界，当数组长度为 1 时，应该直接返回 1。特别注意当数组为空时，应该`nums.length === 0`进行判断，直接返回 0
 
 ### 解答
 
@@ -681,20 +601,17 @@ function removeDuplicates(nums: number[]): number {
   while (fast !== nums.length) {
     if (nums[fast] === nums[slow]) {
       fast++;
-    }
-
-    else if (nums[fast] !== nums[slow]) {
-      nums[slow+1] = nums[fast];
+    } else if (nums[fast] !== nums[slow]) {
+      nums[slow + 1] = nums[fast];
       slow++;
       fast++;
     }
   }
-	
+
   // slow+1 是因为nums.length的计算值本来就是以1开始
   nums.length = slow + 1;
   return nums.length;
-  
-};
+}
 
 // Test
 let arr = <Array<number>>[];
@@ -703,26 +620,22 @@ console.log(res);
 console.log(arr);
 ```
 
-
-
 ```typescript
 // 优解
 // 也是快慢指针的原理，但是写法更简洁，执行速度快一点
 // 避免讨论了边界条件
 function removeDuplicates(nums: number[]): number {
-    // i为慢指针
-    let i: number = 0;
-    // j为快指针
-    for (let j = 1; j < nums.length; j++) {
-        if (nums[i] !== nums[j]) {
-            nums[++i] = nums[j];
-        }
+  // i为慢指针
+  let i: number = 0;
+  // j为快指针
+  for (let j = 1; j < nums.length; j++) {
+    if (nums[i] !== nums[j]) {
+      nums[++i] = nums[j];
     }
-    return i + 1;
-};
+  }
+  return i + 1;
+}
 ```
-
-
 
 ## 10. 移动零(N)
 
@@ -742,15 +655,11 @@ function removeDuplicates(nums: number[]): number {
 1. 必须在原数组上操作，不能拷贝额外的数组。
 2. 尽量减少操作次数。
 
-
-
 ### 解法
 
-* 双指针
-* 就是将非零的元素往前移动
-* 剩下的位置全部置零
-
-
+- 双指针
+- 就是将非零的元素往前移动
+- 剩下的位置全部置零
 
 ### 解答
 
@@ -769,15 +678,13 @@ function moveZeroes(nums: number[]): void {
   for (let i = j; i < nums.length; i++) {
     nums[i] = 0;
   }
-};
+}
 
 // Test
-let arr1 = [0,1,0,0,1];
+let arr1 = [0, 1, 0, 0, 1];
 moveZeroes(arr1);
 console.log(arr1);
 ```
-
-
 
 ## 11. 两数之和(N)
 
@@ -786,8 +693,6 @@ console.log(arr1);
 给定一个整数数组 `nums` 和一个目标值 `target`，请你在该数组中找出和为目标值的那 **两个** 整数，并返回他们的数组下标。
 
 你可以假设每种输入只会对应一个答案。但是，数组中同一个元素不能使用两遍。
-
- 
 
 **示例:**
 
@@ -798,14 +703,10 @@ console.log(arr1);
 所以返回 [0, 1]
 ```
 
-
-
 ### 思路
 
-* 此题不同于T5，T5是有序，这一题不能先排序再操作，会乱了元素顺序
-* 只能用快慢指针法
-
-
+- 此题不同于 T5，T5 是有序，这一题不能先排序再操作，会乱了元素顺序
+- 只能用快慢指针法
 
 ### 解答
 
@@ -813,10 +714,10 @@ console.log(arr1);
 // My Solution
 function twoSum(nums: number[], target: number): number[] {
   // 考虑边界情况
-  if (nums.length <=1 ) {
+  if (nums.length <= 1) {
     return [];
   }
-  
+
   // 定义快慢指针
   let head: number = 0;
   let tail: number = head + 1;
@@ -834,34 +735,31 @@ function twoSum(nums: number[], target: number): number[] {
   }
 
   return [];
-};
+}
 
 // Test
-let arr1 = [3,2,4];
+let arr1 = [3, 2, 4];
 let res = twoSum(arr1, 6);
-console.log(arr1)
+console.log(arr1);
 console.log(res);
 ```
-
-
 
 ```typescript
 // 优解
 function twoSum(nums: number[], target: number): number[] {
-    // 单次循环，map缓存已遍历过元素的值和下标
-    let map = new Map();
-    for (let i: number = 0; i < nums.length; i++) {
-        // 计算 target 和 当前遍历元素的差值
-        // 如果有其他元素等于diff，那么那个元素就是答案
-        // 如果没有，则存到map中
-        const diff = target - nums[i];
-        if (map.has(diff)) {
-            return [map.get(diff), i];
-        } else {
-            map.set(nums[i], i);
-        }
+  // 单次循环，map缓存已遍历过元素的值和下标
+  let map = new Map();
+  for (let i: number = 0; i < nums.length; i++) {
+    // 计算 target 和 当前遍历元素的差值
+    // 如果有其他元素等于diff，那么那个元素就是答案
+    // 如果没有，则存到map中
+    const diff = target - nums[i];
+    if (map.has(diff)) {
+      return [map.get(diff), i];
+    } else {
+      map.set(nums[i], i);
     }
-    return [];
-};
+  }
+  return [];
+}
 ```
-

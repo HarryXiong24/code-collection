@@ -6,8 +6,6 @@
 
 打乱一个没有重复元素的数组。
 
- 
-
 **示例:**
 
 ```
@@ -25,23 +23,19 @@ solution.reset();
 solution.shuffle();
 ```
 
-
-
 ### 解法
 
 洗牌算法能保证，对于生成的排列，每一个元素都能等概率的出现在每一个位置。
 
-数组长度为n， 先从n个数据中，随机选取一个元素，与最后一个元素交换
+数组长度为 n， 先从 n 个数据中，随机选取一个元素，与最后一个元素交换
 
 每个元素被选中的概率是 1/n
 
 从剩下长度的 n-1 元素中随便取一个，与倒数第二个元素交换，第一次没有被选中的概率为 n-1/n
 
-第二次被选中的概率为 1/n-1 , 所以概率仍然是 (n-1)/n * 1/(n-1) = 1/n
+第二次被选中的概率为 1/n-1 , 所以概率仍然是 (n-1)/n \* 1/(n-1) = 1/n
 
 所以每一个元素出现在每一个位置的概率，都是 1/n
-
-
 
 ### 解答
 
@@ -62,7 +56,7 @@ class Solution {
     let nums = [...this.arr];
     let n = nums.length - 1;
     while (n >= 0) {
-      let index = parseInt( String(Math.random() * (n + 1) ));
+      let index = parseInt(String(Math.random() * (n + 1)));
       [nums[index], nums[n]] = [nums[n], nums[index]];
       n--;
     }
@@ -70,4 +64,3 @@ class Solution {
   }
 }
 ```
-

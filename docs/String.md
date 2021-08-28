@@ -1,7 +1,5 @@
 # 字符串
 
-
-
 ## 1. 最长公共前缀(H)
 
 ### 题目
@@ -29,23 +27,18 @@
 
 所有输入只包含小写字母 `a-z` 。
 
-
-
 ### 解法
 
-* 先假设最长子串是数组里第一个字符串
-* 建立循环，数组里每个字符串进行比对
-* 如果当前字符串与maxStr匹配不成功，maxStr从末位进行缩短，maxStr缩短到0时，没有匹配字符串，则返回""
-* 边界条件：注意一开始就是空的状态
-
-
+- 先假设最长子串是数组里第一个字符串
+- 建立循环，数组里每个字符串进行比对
+- 如果当前字符串与 maxStr 匹配不成功，maxStr 从末位进行缩短，maxStr 缩短到 0 时，没有匹配字符串，则返回""
+- 边界条件：注意一开始就是空的状态
 
 ### 解答
 
 ```typescript
 // 较好理解的方法
 function longestCommonPrefix(strs: string[]): string {
-
   // 如果数组里长度为空，说明没有字符串，直接返回""
   if (strs.length === 0) {
     return "";
@@ -68,14 +61,12 @@ function longestCommonPrefix(strs: string[]): string {
   }
 
   return maxStr;
-};
+}
 
 // Test
-let res: string = longestCommonPrefix(["flower","flow","flight"])
-console.log(res)
+let res: string = longestCommonPrefix(["flower", "flow", "flight"]);
+console.log(res);
 ```
-
-
 
 ## 2. 最长回文子串(H)
 
@@ -98,20 +89,16 @@ console.log(res)
 输出: "bb"
 ```
 
-  
-
 ### 解法
 
 **中心扩展法**
 
-* 每一个位置的字母都有可能是回文串的中心轴， 有三种可能：单轴/双轴左部/双轴右部
-* 例如：
-* aba 此时的 b 就是作为单轴
-* cbbc 此时的 bb 就是作为双轴, 对每一个 b 细分， 就是第一个 b 就是双轴左部，第二个 b 就是双轴右部了
-* 综合考虑一下, 发现双轴左/右只需要考虑到一个就可以
-* 所以这里只考虑了作为单轴和作为双轴右部 
-
-
+- 每一个位置的字母都有可能是回文串的中心轴， 有三种可能：单轴/双轴左部/双轴右部
+- 例如：
+- aba 此时的 b 就是作为单轴
+- cbbc 此时的 bb 就是作为双轴, 对每一个 b 细分， 就是第一个 b 就是双轴左部，第二个 b 就是双轴右部了
+- 综合考虑一下, 发现双轴左/右只需要考虑到一个就可以
+- 所以这里只考虑了作为单轴和作为双轴右部
 
 ### 解答
 
@@ -122,10 +109,10 @@ class Solution {
         if (s == null || s.length() < 1) {
             return "";
         }
-        
+
         // 定义当前最长子串的起始结束值
         int start = 0, end = 0;
-        
+
         // 建立循环，把数组中每一个元素当成中心位进行比对
         for (int i = 0; i < s.length(); i++) {
             // 单中心位的情况
@@ -142,7 +129,7 @@ class Solution {
         }
         return s.substring(start, end + 1);
     }
-	
+
     // 中心扩展方法
     private int expandAroundCenter(String s, int left, int right) {
         int L = left, R = right;
@@ -163,8 +150,6 @@ class Solution {
 // 空间复杂度：O(1))。
 ```
 
-
-
 ```typescript
 // Typescript版本
 function longestPalindrome(s: string): string {
@@ -175,12 +160,12 @@ function longestPalindrome(s: string): string {
 
   let start: number = 0;
   let end: number = 0;
-  
+
   for (let i: number = 0; i < s.length; i++) {
     let len1: number = expandAroundCenter(s, i, i);
-    let len2: number = expandAroundCenter(s, i, i+1);
+    let len2: number = expandAroundCenter(s, i, i + 1);
     let len: number = Math.max(len1, len2);
-	
+
     // 特别注意这里，js不同于java，这里需要使用Math.floor进行向下取整，不然会有小数，影响结果
     if (len > end - start) {
       start = i - Math.floor((len - 1) / 2);
@@ -188,15 +173,14 @@ function longestPalindrome(s: string): string {
     }
   }
 
-  return s.substring(start, end+1);
-};
-
+  return s.substring(start, end + 1);
+}
 
 function expandAroundCenter(s: string, left: number, right: number): number {
   let L: number = left;
   let R: number = right;
 
-  while (L >= 0 && R < s.length && (s.charAt(L) === s.charAt(R))) {
+  while (L >= 0 && R < s.length && s.charAt(L) === s.charAt(R)) {
     L--;
     R++;
   }
@@ -204,21 +188,16 @@ function expandAroundCenter(s: string, left: number, right: number): number {
   return R - L - 1;
 }
 
-
 // Test
-let res: string = longestPalindrome("cbbd")
-console.log(res)
+let res: string = longestPalindrome("cbbd");
+console.log(res);
 ```
-
-
 
 ## 3. 翻转字符串里的单词(N)
 
 ### 题目
 
 给定一个字符串，逐个翻转字符串中的每个单词。
-
- 
 
 **示例 1：**
 
@@ -243,23 +222,17 @@ console.log(res)
 解释: 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
 ```
 
- 
-
 **说明：**
 
 - 无空格字符构成一个单词。
 - 输入字符串可以在前面或者后面包含多余的空格，但是反转后的字符不能包括。
 - 如果两个单词间有多余的空格，将反转后单词间的空格减少到只含一个。
 
-
-
 ### 思路
 
-* 拆分
-* 用正则表达式把多个空格变成一个
-* 去一头一尾空格
-
-
+- 拆分
+- 用正则表达式把多个空格变成一个
+- 去一头一尾空格
 
 ### 解法
 
@@ -267,27 +240,22 @@ console.log(res)
 // My Solution
 function reverseWords(s: string): string {
   let arr: string[] = s.split(" ");
-  arr.reverse()
+  arr.reverse();
 
-  return arr.join(" ").replace(/\s+/g, ' ').trim();
-};
-
+  return arr.join(" ").replace(/\s+/g, " ").trim();
+}
 
 // Test
-let res: string = reverseWords("a good   example")
-console.log(res)
+let res: string = reverseWords("a good   example");
+console.log(res);
 ```
-
-
 
 ```typescript
 // 一句话写法(思路一样)
 function reverseWords(s: string): string {
-    return s.trim().split(/\s+/).reverse().join(' ')
-};
+  return s.trim().split(/\s+/).reverse().join(" ");
+}
 ```
-
-
 
 ## 4.反转字符串中的单词 III(N)
 
@@ -299,20 +267,16 @@ function reverseWords(s: string): string {
 
 ```
 输入: "Let's take LeetCode contest"
-输出: "s'teL ekat edoCteeL tsetnoc" 
+输出: "s'teL ekat edoCteeL tsetnoc"
 ```
 
 **注意**：在字符串中，每个单词由单个空格分隔，并且字符串中不会有任何额外的空格。
 
-
-
 ### 思路
 
-* 拆分每个单词
-* 单词在拆分，然后反序，之后又合并
-* 最后join连接
-
-
+- 拆分每个单词
+- 单词在拆分，然后反序，之后又合并
+- 最后 join 连接
 
 ### 解法
 
@@ -321,20 +285,18 @@ function reverseWords(s: string): string {
 function reverseWords(s: string): string {
   let word: string[] = s.split(" ");
   let reverseWord: string[] = [];
-  word.forEach( (value: string) => {
-    value = value.split("").reverse().join("")
+  word.forEach((value: string) => {
+    value = value.split("").reverse().join("");
     reverseWord.push(value);
-  }) 
+  });
 
   return reverseWord.join(" ");
-};
+}
 
 // Test
-let res: string = reverseWords("a good example")
-console.log(res)
+let res: string = reverseWords("a good example");
+console.log(res);
 ```
-
-
 
 ```typescript
 // 一句话写法
@@ -342,10 +304,8 @@ console.log(res)
 // 先全部拆开，变成一个个字母，然后全部反序，之后连接，之后按单词又拆开并且反序，最后按单词连接
 function reverseWords(s: string): string {
   return s.split("").reverse().join("").split(" ").reverse().join(" ");
-};
+}
 ```
-
-
 
 ## 5. 整数反转(N)
 
@@ -360,7 +320,7 @@ function reverseWords(s: string): string {
 输出: 321
 ```
 
- **示例 2:**
+**示例 2:**
 
 ```
 输入: -123
@@ -378,14 +338,10 @@ function reverseWords(s: string): string {
 
 假设我们的环境只能存储得下 32 位的有符号整数，则其数值范围为 [−231, 231 − 1]。请根据这个假设，如果反转后整数溢出那么就返回 0。
 
-
-
 ### 解法
 
-* 变成字符串反序，再变回Number
-* 之后判断是否溢出
-
-
+- 变成字符串反序，再变回 Number
+- 之后判断是否溢出
 
 ### 解答
 
@@ -396,13 +352,13 @@ function reverse(x: number): number {
   if (x >= 0 && x < 9) {
     return x;
   }
-  
+
   // 变成字符串处理
   let str: string = Math.abs(x).toString().split("").reverse().join("");
   // 变回number
   let res: number = Number(str);
-	
-  判断范围
+
+  判断范围;
   if (+res > 2 ** 31 - 1) {
     return 0;
   }
@@ -419,15 +375,11 @@ let res = reverse(num);
 console.log(res);
 ```
 
-
-
 ## 6. 字符串中的第一个唯一字符(H)
 
 ### 题目
 
 给定一个字符串，找到它的第一个不重复的字符，并返回它的索引。如果不存在，则返回 -1。
-
- 
 
 **示例：**
 
@@ -439,44 +391,37 @@ s = "loveleetcode"
 返回 2
 ```
 
- 
-
 **提示：**你可以假定该字符串只包含小写字母。
-
-
 
 ### 解法
 
-* 对字符串的字母进行频率统计，找到出现频率为1 的字母索引。
+- 对字符串的字母进行频率统计，找到出现频率为 1 的字母索引。
 
-* 借助哈希映射两次遍历完成。第一次遍历进行字母频率统计，Hash Map 的Key 为字母，Value 为出现频率。第二次遍历找到频率为 1 的字母索引返回即可。
-
-
+- 借助哈希映射两次遍历完成。第一次遍历进行字母频率统计，Hash Map 的 Key 为字母，Value 为出现频率。第二次遍历找到频率为 1 的字母索引返回即可。
 
 ### 解答
 
 ```typescript
 // 频率统计法
 function firstUniqChar(s: string): number {
-  let map = new Map()
+  let map = new Map();
 
   for (let i = 0; i < s.length; i++) {
     if (!map.has(s[i])) {
-      map.set(s[i], 1)
-    }
-    else if (map.has(s[i])) {
-      map.set(s[i], (map.get(s[i]) + 1))
+      map.set(s[i], 1);
+    } else if (map.has(s[i])) {
+      map.set(s[i], map.get(s[i]) + 1);
     }
   }
 
   for (let i = 0; i < s.length; i++) {
-    if(map.get(s[i]) === 1) {
+    if (map.get(s[i]) === 1) {
       return i; // 找到词频为1的字母(只出现一次)返回其索引
     }
   }
 
   return -1;
-};
+}
 
 // Test
 let s = "aadadaade";
@@ -484,19 +429,17 @@ let res = firstUniqChar(s);
 console.log(res);
 ```
 
-
-
 ```typescript
 // 巧妙利用indexOf和lastIndexOf
 // 又快又方便
 function firstUniqChar(s: string): number {
-  let set = 'abcdefjhijklmnopqrstuvwxyz';
+  let set = "abcdefjhijklmnopqrstuvwxyz";
   let res = s.length;
   for (let i = 0; i < set.length; i++) {
     let firstIndex = s.indexOf(set[i]);
     if (firstIndex == -1) {
       continue;
-    };
+    }
     let lastIndex = s.lastIndexOf(set[i]);
     // 两次索引值相同则证明该字母只出现一次
     if (firstIndex == lastIndex) {
@@ -505,7 +448,7 @@ function firstUniqChar(s: string): number {
     }
   }
   return res == s.length ? -1 : res;
-};
+}
 
 // Test
 let s = "aadadaade";
@@ -513,13 +456,11 @@ let res = firstUniqChar(s);
 console.log(res);
 ```
 
-
-
 ## 7. 有效的字母异位词(H)
 
 ### 题目
 
-给定两个字符串 *s* 和 *t* ，编写一个函数来判断 *t* 是否是 *s* 的字母异位词。
+给定两个字符串 _s_ 和 _t_ ，编写一个函数来判断 _t_ 是否是 _s_ 的字母异位词。
 
 **示例 1:**
 
@@ -541,58 +482,49 @@ console.log(res);
 **进阶:**
 如果输入字符串包含 unicode 字符怎么办？你能否调整你的解法来应对这种情况？
 
-
-
 ### 思路
 
-* 建立两个map
-* 分别统计字母出现的次数
-* 之后对比次数是否一致
-* 注意长度，长度不相等的直接返回false
-
-
+- 建立两个 map
+- 分别统计字母出现的次数
+- 之后对比次数是否一致
+- 注意长度，长度不相等的直接返回 false
 
 ### 解答
 
 ```typescript
 // My Solution
 function isAnagram(s: string, t: string): boolean {
-
   if (s.length !== t.length) {
     return false;
   }
 
-  let map1 = new Map()
-  let map2 = new Map()
+  let map1 = new Map();
+  let map2 = new Map();
 
   for (let i = 0; i < s.length; i++) {
     if (!map1.has(s[i])) {
-      map1.set(s[i], 1)
-    }
-
-    else if (map1.has(s[i])) {
-      map1.set(s[i], map1.get(s[i]) + 1)
+      map1.set(s[i], 1);
+    } else if (map1.has(s[i])) {
+      map1.set(s[i], map1.get(s[i]) + 1);
     }
   }
 
   for (let i = 0; i < t.length; i++) {
     if (!map2.has(t[i])) {
-      map2.set(t[i], 1)
-    }
-
-    else if (map2.has(t[i])) {
-      map2.set(t[i], map2.get(t[i]) + 1)
+      map2.set(t[i], 1);
+    } else if (map2.has(t[i])) {
+      map2.set(t[i], map2.get(t[i]) + 1);
     }
   }
 
   for (let i = 0; i < t.length; i++) {
     if (map1.get(s[i]) !== map2.get(s[i])) {
-      return false
+      return false;
     }
   }
 
   return true;
-};
+}
 
 // Test
 let s = "anfgram";
@@ -600,8 +532,6 @@ let t = "nagaram";
 let res = isAnagram(s, t);
 console.log(res);
 ```
-
-
 
 ```typescript
 // 另一种思路
@@ -613,9 +543,7 @@ function isAnagram(s: string, t: string): boolean {
 }
 ```
 
-
-
-##  8. 验证回文字符串(H)
+## 8. 验证回文字符串(H)
 
 ### 题目
 
@@ -637,32 +565,29 @@ function isAnagram(s: string, t: string): boolean {
 输出: false
 ```
 
-
-
 ### 解法
 
-* 本题的难点在于去掉符号
-* 其实对于JS,TS就是使用正则表达式
-* 至于比较回文，就是使用前后指针
-
-
+- 本题的难点在于去掉符号
+- 其实对于 JS,TS 就是使用正则表达式
+- 至于比较回文，就是使用前后指针
 
 ### 解答
 
 ```typescript
 // 优解
 function isPalindrome(s: string): boolean {
-  s = s.replace(/[^0-9a-zA-Z]/g, '').toLowerCase()
-  let l = 0, r = s.length - 1
+  s = s.replace(/[^0-9a-zA-Z]/g, "").toLowerCase();
+  let l = 0,
+    r = s.length - 1;
   while (l < r) {
     if (s[l] !== s[r]) {
-      return false
+      return false;
     }
-    l++
-    r--
+    l++;
+    r--;
   }
-  return true
-};
+  return true;
+}
 
 // Test
 let s = "A man, a plan, a canal: Panama";
@@ -670,13 +595,11 @@ let res = isPalindrome(s);
 console.log(res);
 ```
 
-
-
 ## 9. 外观数列(H)
 
 ### 题目
 
-给定一个正整数 *n*（1 ≤ *n* ≤ 30），输出外观数列的第 *n* 项。
+给定一个正整数 _n_（1 ≤ _n_ ≤ 30），输出外观数列的第 _n_ 项。
 
 注意：整数序列中的每一项将表示为一个字符串。
 
@@ -700,8 +623,6 @@ console.log(res);
 
 描述前一项，这个数是 `1211` 即 “一个 1 一个 2 两个 1 ” ，记作 `111221`
 
- 
-
 **示例 1:**
 
 ```
@@ -718,8 +639,6 @@ console.log(res);
 解释：当 n = 3 时，序列是 "21"，其中我们有 "2" 和 "1" 两组，"2" 可以读作 "12"，也就是出现频次 = 1 而 值 = 2；类似 "1" 可以读作 "11"。所以答
 ```
 
-
-
 ### 解答
 
 ```typescript
@@ -727,21 +646,21 @@ console.log(res);
 function countAndSay(n: number): string {
   // 只有1个的情况
   if (n === 1) {
-    return '1'
+    return "1";
   }
 
   // 定义初始为1
   let ans = "1";
   // 从2开始循环
   for (let i = 2; i <= n; i++) {
-    let temp = '';
-    let cur = '';
+    let temp = "";
+    let cur = "";
     let cnt = 0;
     // 遍历ans
     for (let char of ans) {
       if (char !== cur) {
         if (cnt > 0) {
-          temp += `${cnt}${cur}`
+          temp += `${cnt}${cur}`;
         }
         cur = char;
         cnt = 1;
@@ -753,10 +672,8 @@ function countAndSay(n: number): string {
     ans = temp;
   }
   return ans;
-};
+}
 ```
-
-
 
 ## 10. 字符串转换整数 (atoi)(H)
 
@@ -777,9 +694,7 @@ function countAndSay(n: number): string {
 **提示：**
 
 - 本题中的空白字符只包括空格字符 `' '` 。
-- 假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−231, 231 − 1]。如果数值超过这个范围，请返回  INT_MAX (231 − 1) 或 INT_MIN (−231) 。
-
- 
+- 假设我们的环境只能存储 32 位大小的有符号整数，那么其数值范围为 [−231, 231 − 1]。如果数值超过这个范围，请返回 INT_MAX (231 − 1) 或 INT_MIN (−231) 。
 
 **示例 1:**
 
@@ -819,59 +734,52 @@ function countAndSay(n: number): string {
 ```
 输入: "-91283472332"
 输出: -2147483648
-解释: 数字 "-91283472332" 超过 32 位有符号整数范围。 
+解释: 数字 "-91283472332" 超过 32 位有符号整数范围。
      因此返回 INT_MIN (−231) 。
 ```
 
+### 思路
 
+- 排除开头不是数字或+，-的情况
+- 使用正则截取`符号+数字`或`数字`的部分
 
-### 思路 
-
-* 排除开头不是数字或+，-的情况
-* 使用正则截取`符号+数字`或`数字`的部分
-
-* 注意特殊情况，比如`"+-2"`,`+`,`-`这样的特殊情况
-
-
+- 注意特殊情况，比如`"+-2"`,`+`,`-`这样的特殊情况
 
 ### 解答
 
 ```typescript
 // MySolution
 function myAtoi(str: string): number {
-  str = str.trim()
+  str = str.trim();
 
   // 排除开头不是数字或+，-的情况
   if (str.search(/^\-|\+|[0-9]/) !== 0) {
     return 0;
   } else {
     // 正则匹配，特别注意有两种情况
-    let res = str.match(/^((\-|\+)([0-9]+))|^([0-9]+)/)
+    let res = str.match(/^((\-|\+)([0-9]+))|^([0-9]+)/);
 
     if (res === null) {
       return 0;
     }
 
-    let newStr = res[0]
-    let number = Number(newStr)
-	
+    let newStr = res[0];
+    let number = Number(newStr);
+
     // 判断是否溢出
     if (number < Math.pow(-2, 31) || number > Math.pow(2, 31) - 1) {
       return number < Math.pow(-2, 31) ? Math.pow(-2, 31) : Math.pow(2, 31) - 1;
     } else {
       return number;
     }
-  
   }
-};
+}
 
 // Test
 let s = "+-2";
 let res = myAtoi(s);
 console.log(res);
 ```
-
-
 
 ```typescript
 // 偷懒的解法
@@ -880,7 +788,7 @@ console.log(res);
  * string：要被解析的值。如果参数不是一个字符串，则将其转换为字符串。字符串开头的空白符将会被忽略。
  * radix（可选）：需要转换的进制，介于 2 到 36。
  * 返回值： 如果被解析参数的第一个字符无法被转化成数值类型，则返回NaN。
- * 
+ *
  * 对比下题意，发现:
  * 无视开头空格（满足）
  * 返回有符号整数（满足）
@@ -892,22 +800,20 @@ console.log(res);
 function myAtoi(str: string): number {
   const number = parseInt(str, 10);
 
-  if(isNaN(number)) {
-      return 0;
+  if (isNaN(number)) {
+    return 0;
   } else if (number < Math.pow(-2, 31) || number > Math.pow(2, 31) - 1) {
-      return number < Math.pow(-2, 31) ? Math.pow(-2, 31) : Math.pow(2, 31) - 1;
+    return number < Math.pow(-2, 31) ? Math.pow(-2, 31) : Math.pow(2, 31) - 1;
   } else {
-      return number;
+    return number;
   }
-};
+}
 
 // Test
 let s = "+-2";
 let res = myAtoi(s);
 console.log(res);
 ```
-
-
 
 ## 11. 判断子序列(N)
 
@@ -935,13 +841,9 @@ s = "axc", t = "ahbgdc"
 返回 false.
 ```
 
-
-
 ### 解答
 
-* 此题采用双指针
-
-
+- 此题采用双指针
 
 ### 解答
 
@@ -952,16 +854,14 @@ function isSubsequence(s: string, t: string): boolean {
 
   while (i < s.length && j < t.length) {
     if (s.charAt(i) === t.charAt(j)) {
-      i++
+      i++;
     }
-    j++
+    j++;
   }
 
-  return i === s.length
-};
+  return i === s.length;
+}
 ```
-
-
 
 ```java
 class Solution {
@@ -978,8 +878,6 @@ class Solution {
     }
 }
 ```
-
-
 
 ## 12. 有效的括号(H)
 
@@ -1029,16 +927,12 @@ class Solution {
 输出: true
 ```
 
-
-
 ### 解法
 
-* 遍历字符串
-* 匹配到左括号时是将其相应的右括号进行了压栈
-* 遇到右括时判断和栈顶元素是否相等即可
-* 最后判断栈是否为空
-
-
+- 遍历字符串
+- 匹配到左括号时是将其相应的右括号进行了压栈
+- 遇到右括时判断和栈顶元素是否相等即可
+- 最后判断栈是否为空
 
 ### 解答
 
@@ -1055,7 +949,7 @@ function isValid(s: string): boolean {
     let stack: string[] = [];
     // 设置栈顶
     let top: string | undefined;
-	
+
     // 遍历字符串的每个元素
     for(let char of s){
         let value;
@@ -1069,9 +963,8 @@ function isValid(s: string): boolean {
             }
         }
     }
-	
+
     // 栈元素为空则说明匹配完毕
     return !stack.length;
 }
 ```
-
