@@ -9,19 +9,21 @@
  */
 
 export function directInsertSort(nums: number[]): number[] {
-  // point 用来保存当前正在比较的值
   let point: number;
-  // 第一次把第一个数当成有序区
+  // 第一次把第一个数当成有序区，这个循环表示轮次数
   for (let i = 1; i < nums.length; i++) {
+		// point 用来保存这一轮正在比较的值
     point = nums[i];
     for (let j = i - 1; j >= 0; j--) {
 			if (nums[j] > point){
 				// nums[j] 比 point 大的，就把 nums[j] 后移一位
 				nums[j+1] = nums[j];
+				// j === 0 表示这一轮全部比完了
 				if (j === 0) {
 					nums[j] = point;
 				}
 			} else {
+				// point 比前面都大，所以直接放在原位置，原位置就是当前的 i，也就是 j+1
         nums[j+1] = point;
 				break;
 			}
