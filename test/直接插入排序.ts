@@ -8,7 +8,7 @@
  * 平均时间复杂度 O(n^2)，空间复杂度 O(1)
  */
 
-function insertSort(nums: number[]): number[] {
+export function insertSort(nums: number[]): number[] {
   let point: number;
   // 第一个不需要排序，表示轮次数
   for (let i = 1; i < nums.length; i++) {
