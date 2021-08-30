@@ -8,7 +8,7 @@
  * 平均时间复杂度 O(n^2)，空间复杂度 O(1)
  */
 
-function bubblingSort(nums: number[]): number[] {
+export function bubblingSort(nums: number[]): number[] {
   for (let i = nums.length; i > 0; i--) {
     for (let j = 0; j < i; j++) {
       if (nums[j] > nums[j + 1]) {
