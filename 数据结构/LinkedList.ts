@@ -1,5 +1,17 @@
 // 单链表
 
+/*
+ * 功能
+ * 1.根据索引获取对应值
+ * 2.头部添加
+ * 3.尾部添加 
+ * 4.根据索引位置添加
+ * 5.根据索引删除
+ * 6.打印链表
+ * 7.获取链表长度
+ * 8.清空链表
+ */
+
 // 节点接口
 interface INode<T> {
   element: T;
@@ -17,16 +29,10 @@ class Node<T> implements INode<T> {
   }
 }
 
-// 定义不同类型的错误码
-enum Error {
-  number = -1,
-  string = 'Not Found'
-} 
-
 // 链表类
 export class LinkedList<T> {
   // 头指针
-  public head: INode<T>;
+  public head?: INode<T>;
   // 链表长度
   public length: number;
   // 初始化值
@@ -43,12 +49,12 @@ export class LinkedList<T> {
   // 根据索引获取对应值
   get(index: number): T | null {
     // 链表为空
-    if (this.head.next === null) {
+    if (this.head!.next === null) {
       return null;
     } 
 
     let count = 0;
-    let temp = this.head.next;
+    let temp = this.head!.next;
 
     while (temp.next !== null && count !== index) {
       count++;
@@ -62,8 +68,8 @@ export class LinkedList<T> {
   addAtHead(val: T): void {
     let newNode = new Node<T>(val, null);
 
-    newNode.next = this.head.next;
-    this.head.next = newNode;
+    newNode.next = this.head!.next;
+    this.head!.next = newNode;
 
     this.length++;
   }
@@ -74,11 +80,11 @@ export class LinkedList<T> {
 
     let temp = this.head;
 
-    while (temp.next !== null) {
-      temp = temp.next;
+    while (temp!.next !== null) {
+      temp = temp!.next;
     }
 
-    temp.next = newNode;
+    temp!.next = newNode;
     this.length++;
   }
 
@@ -106,13 +112,13 @@ export class LinkedList<T> {
     let temp = this.head;
     let count = 0;
 
-    while (temp.next !== null && count !== index) {
+    while (temp!.next !== null && count !== index) {
       count++;
-      temp = temp.next;
+      temp = temp!.next;
     }
 
-    newNode.next = temp.next;
-    temp.next = newNode;
+    newNode.next = temp!.next;
+    temp!.next = newNode;
     this.length++;
   }
 
@@ -125,12 +131,12 @@ export class LinkedList<T> {
     let temp = this.head;
     let count = 0;
 
-    while (temp.next !== null && count !== index) {
+    while (temp!.next !== null && count !== index) {
       count++;
-      temp = temp.next;
+      temp = temp!.next;
     }
 
-    temp.next = temp.next!.next;
+    temp!.next = temp!.next!.next;
     this.length--;
   }
 
@@ -139,11 +145,11 @@ export class LinkedList<T> {
     let temp = new Node<T>(this.initHeadValue, null);
     let res: Array<T> = [];
 
-    if (this.head.next === null) {
+    if (this.head!.next === null) {
       return res;
     }
 
-    temp = this.head.next;
+    temp = this.head!.next;
 
     while (temp !== null) {
       res.push(temp.element);
@@ -156,6 +162,12 @@ export class LinkedList<T> {
   // 获取链表长度
   printLength(): number {
     return this.length;
+  }
+
+  // 清空链表
+  clear(): void {
+    this.head = undefined;
+    this.length = 0;
   }
 }
 
