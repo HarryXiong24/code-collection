@@ -9,7 +9,7 @@ interface INode<T> {
 // 链表节点类
 class Node<T> implements INode<T> {
   public element: T;
-  public next: INode<T> | null = null;
+  public next: INode<T> | null;
 
   constructor(element: T, next: INode<T> | null = null) {
     this.element = element;
@@ -17,25 +17,35 @@ class Node<T> implements INode<T> {
   }
 }
 
+// 定义不同类型的错误码
+enum Error {
+  number = -1,
+  string = 'Not Found'
+} 
+
 // 链表类
-export class MyLinkedList {
+export class LinkedList<T> {
   // 头指针
-  public head: INode<number>;
+  public head: INode<T>;
   // 链表长度
   public length: number;
+  // 初始化值
+  public initHeadValue: T;
 
-  constructor() {
-    this.head = new Node<number>(-1, null);
+  // 给链表初始化一个头指针    
+  constructor(initHeadValue: T) {
+    this.head = new Node<T>(initHeadValue, null);
     // length属性做边界判断
     this.length = 0;
+    this.initHeadValue = initHeadValue;
   }
 
   // 根据索引获取对应值
-  get(index: number): number {
+  get(index: number): T | null {
     // 链表为空
     if (this.head.next === null) {
-      return -1;
-    }
+      return null;
+    } 
 
     let count = 0;
     let temp = this.head.next;
@@ -49,8 +59,8 @@ export class MyLinkedList {
   }
 
   // 头部添加
-  addAtHead(val: number): void {
-    let newNode = new Node<number>(val, null);
+  addAtHead(val: T): void {
+    let newNode = new Node<T>(val, null);
 
     newNode.next = this.head.next;
     this.head.next = newNode;
@@ -59,8 +69,8 @@ export class MyLinkedList {
   }
 
   // 尾部添加
-  addAtTail(val: number): void {
-    let newNode = new Node<number>(val, null);
+  addAtTail(val: T): void {
+    let newNode = new Node<T>(val, null);
 
     let temp = this.head;
 
@@ -73,8 +83,8 @@ export class MyLinkedList {
   }
 
   // 根据索引位置添加
-  addAtIndex(index: number, val: number): void {
-    let newNode = new Node<number>(val, null);
+  addAtIndex(index: number, val: T): void {
+    let newNode = new Node<T>(val, null);
 
     // 大于则不操作
     if (index > this.length) {
@@ -125,9 +135,9 @@ export class MyLinkedList {
   }
 
   // 打印链表
-  printLinkList(): Array<number> {
-    let temp = new Node<number>(-1, null);
-    let res: Array<number> = [];
+  printLinkList(): Array<T> {
+    let temp = new Node<T>(this.initHeadValue, null);
+    let res: Array<T> = [];
 
     if (this.head.next === null) {
       return res;
@@ -150,7 +160,7 @@ export class MyLinkedList {
 }
 
 // test
-let linkedList = new MyLinkedList();
+let linkedList = new LinkedList<number>(-1);
 console.log(linkedList.addAtHead(1));
 console.log(linkedList.addAtTail(3));
 console.log(linkedList.addAtIndex(1, 2)); //链表变为1-> 2-> 3
