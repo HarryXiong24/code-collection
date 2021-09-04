@@ -10,7 +10,7 @@
  * 6.清空队列
  */
 
-class Queue<T> {
+export class Queue<T> {
   public head: number;
   public tail: number;
   public items: Map<number, T>;
