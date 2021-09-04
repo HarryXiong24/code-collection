@@ -17,7 +17,7 @@
  * 13.将 AdvancedSet 转换成 Set
  */
 
-class AdvancedSet<T> {
+export class AdvancedSet<T> {
   public items: Set<T>;
 
   constructor(arr?: T[]) {
