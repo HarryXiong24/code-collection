@@ -10,7 +10,7 @@
  * 6.清空栈
  */
 
-class Stack<T> {
+export class Stack<T> {
   public items: T[];
 
   constructor() {
