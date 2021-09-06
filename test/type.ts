@@ -40,7 +40,7 @@ const tPayload: TFoo = {
 类型“IFoo”的参数不能赋给类型“Record<string, string>”的参数。
 类型“IFoo”中缺少索引签名。
 */
-foo(iPayload)
+// foo(iPayload)
 // 正常执行
 foo(iPayload2)
 // 正常执行

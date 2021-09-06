@@ -22,7 +22,7 @@ class Node<T> {
   public left: Node<T> | null;
   public right: Node<T> | null;
 
-  constructor(key: T, left: Node<T> | null = null, right?: Node<T> | null = null) {
+  constructor(key: T, left: Node<T> | null = null, right: Node<T> | null = null) {
     this.key = key;
     this.left = left;
     this.right = right;
@@ -41,12 +41,12 @@ enum Compare {
 }
 
 // 二叉搜索树
-export default class BinarySearchTree<T> {
+export class BinarySearchTree<T> {
 
   protected root: Node<T>;
 
-  constructor(root: Node<T>) {
-    this.root = root;
+  constructor(key: T) {
+    this.root = new Node<T>(key);
   }
 
   // 默认的比较函数，因为二叉搜索树是有序排列的树，所以需要有个比较大小的方法
@@ -218,12 +218,17 @@ export default class BinarySearchTree<T> {
         return node;
       } else {
         // 当要删除的节点有两个子节点
-        const aux = this.minNode(node.right);
-        node.key = aux.key;
-        node.right = this.removeNode(node.right, aux.key);
+        const min = this.minNode(node.right);
+        node.key = min.key;
+        node.right = this.removeNode(node.right, min.key);
         return node;
       }
     }
   }
-
 }
+
+// test
+let binarySearch = new BinarySearchTree<number>(0);
+binarySearch.inOrderTraverse((value: number) => {
+  console.log(value);
+})
