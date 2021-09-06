@@ -1,4 +1,7 @@
-// 二叉搜索树
+// 二叉搜索树（Binary Search Tree）
+// 1.首先它是一个树
+// 2.每个节点最多有两个子节点
+// 3.左侧子节点 < 本节点 < 右侧子节点有序排列，便于搜索
 
 /*
  * 功能
@@ -89,6 +92,138 @@ export default class BinarySearchTree<T> {
   // 返回树中的最大元素
   max(): Node<T> {
     return this.maxNode(this.root);
+  }
+
+  // 前序遍历，回调 -> 左 -> 右
+  // 指定节点的前序遍历
+  protected preOrderTraverseNode(node: Node<T> | null, callback: Function): void {
+    if (node !== null) {
+      callback(node.key);
+      this.preOrderTraverseNode(node.left, callback);
+      this.preOrderTraverseNode(node.right, callback);
+    }
+  }
+
+  // 前序遍历
+  preOrderTraverse(callback: Function) {
+    // 调用前序遍历迭代方法
+    this.preOrderTraverseNode(this.root, callback);
+  }
+
+  // 中序遍历，左 -> 回调 -> 右
+  // 指定节点的中序遍历
+  protected inOrderTraverseNode(node: Node<T> | null, callback: Function): void {
+    if (node !== null) {
+      this.inOrderTraverseNode(node.left, callback);
+      callback(node.key);
+      this.inOrderTraverseNode(node.right, callback);
+    }
+  }
+
+  // 中序遍历
+  inOrderTraverse(callback: Function) {
+    // 调用中序遍历迭代方法
+    this.inOrderTraverseNode(this.root, callback);
+  }
+
+  // 后序遍历，左 -> 右 -> 回调
+  // 指定节点的后序遍历
+  protected postOrderTraverseNode(node: Node<T> | null, callback: Function): void {
+    if (node !== null) {
+      this.postOrderTraverseNode(node.left, callback);
+      this.postOrderTraverseNode(node.right, callback);
+      callback(node.key);
+    }
+  }
+
+  // 后序遍历
+  postOrderTraverse(callback: Function) {
+    // 调用后序遍历迭代方法
+    this.postOrderTraverseNode(this.root, callback);
+  }
+
+  // 查找值
+  protected searchNode(node: Node<T> | null, key: T): boolean {
+    if (node === null) {
+      return false;
+    }
+
+    if (this.compare(key, node.key) === Compare.LESS_THAN) {
+      // key 比 node.key 小，向左查
+      return this.searchNode(node.left, key);
+    } else if (this.compare(key, node.key) === Compare.MORE_THAN) {
+      // key 比 node.key 大，向右查
+      return this.searchNode(node.right, key);
+    } else {
+      // 找到了
+      return true;
+    }
+  }
+
+  search(key: T): boolean {
+    return this.searchNode(this.root, key);
+  }
+
+  // 增加
+  protected insertNode(node: Node<T>, key: T) {
+    if (this.compare(key, node.key) === Compare.LESS_THAN) {
+      if (node.left === null) {
+        node.left = new Node<T>(key);
+      } else {
+        this.insertNode(node.left, key);
+      }
+    } else {
+      if (node.right === null) {
+        node.right = new Node<T>(key);
+      } else {
+        this.insertNode(node.right, key);
+      }
+    }
+  }
+
+  insert(key: T) {
+    if (this.root === null) {
+      // 边界情况：插入到根节点
+      this.root = new Node<T>(key);
+    } else {
+      // 递归找到插入位置
+      this.insertNode(this.root, key);
+    }
+  }
+
+  // 删除节点
+  protected removeNode(node: Node<T> | null, key: T): Node<T> | null {
+    if (node === null) {
+      return null;
+    }
+
+    if (this.compare(key, node.key) === Compare.LESS_THAN) {
+      node.left = this.removeNode(node.left!, key);
+      return node;
+    } else if (this.compare(key, node.key) === Compare.MORE_THAN) {
+      node.right = this.removeNode(node.right!, key);
+      return node;
+    } else {
+      // 此时已经查到了要删除的节点
+      if (node.left === null && node.right === null) {
+        node = null;
+        return node;
+      } else if (node.left === null) {
+        // 当要删除的节点只有一个子节点
+        node = node.right;
+        return node;
+      } else if (node.right === null) {
+        // 同样删除的节点只有一个子节点
+        node = node.left;
+        return node;
+      } else {
+        // 当要删除的节点有两个子节点
+        const aux = this.minNode(node.right);
+        node.key = aux.key;
+        node.right = this.removeNode(node.right, aux.key);
+        return node;
+      }
+    }
   }
 
 }
