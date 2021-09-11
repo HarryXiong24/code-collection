@@ -14,6 +14,7 @@ interface Function {
 }
 
 Function.prototype.myCall = function(context: any, ...args: any) {
+  context = Object(context) || window;
   context.fn = this;
   const result = context.fn(...args);
   Reflect.deleteProperty(context, 'fn');
@@ -22,12 +23,12 @@ Function.prototype.myCall = function(context: any, ...args: any) {
 
 // test
 var n = 0;
-let fun = function(this: any, arg1: number, arg2: number) {
+let myCall = function(this: any, arg1: number, arg2: number) {
   console.log(this.n, arg1, arg2);
 }
-let obj = {
+let myCallObj = {
   n: 1
 };
 
-fun(5, 4);
-fun.myCall(obj, 5, 4); 
+// myCall(5, 4);
+myCall.myCall(myCallObj, 5, 4); 
