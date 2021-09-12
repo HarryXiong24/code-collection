@@ -10,12 +10,12 @@
 
 // 规律，2 * leftSum + result = sum
 export function pivotIndex(nums: number[]): number {
-  let sum: number = 0
-  for(let item of nums) {
+  let sum: number = 0;
+  for (let item of nums) {
     sum += item;
   }
-  let leftSum: number = 0
-  for(let i = 0; i < nums.length; i++) {
+  let leftSum: number = 0;
+  for (let i = 0; i < nums.length; i++) {
     // 第一轮可以解决类似 [2, 1, -1] 的情况
     if (2 * leftSum + nums[i] === sum) {
       return i;
@@ -26,5 +26,5 @@ export function pivotIndex(nums: number[]): number {
 };
 
 // test
-let res = pivotIndex([1,7,3,6,5,6]);
+let res = pivotIndex([1, 7, 3, 6, 5, 6]);
 console.log(res);

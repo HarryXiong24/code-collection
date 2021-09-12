@@ -7,7 +7,6 @@
  */
 
 export function searchInsert(nums: number[], target: number): number {
-
   // 开始位置
   if (target < nums[0]) {
     return 0;
@@ -19,30 +18,29 @@ export function searchInsert(nums: number[], target: number): number {
   }
 
   // 中间情况
-  for(let i = 0; i < nums.length; i++) {
+  for (let i = 0; i < nums.length; i++) {
     if (nums[i] === target) {
       return i;
-    } 
-    
-    if (nums[i+1] === target) {
-      return i+1;
     }
 
-    if (target > nums[i] && target < nums[i+1]) {
-      return i+1;
+    if (nums[i + 1] === target) {
+      return i + 1;
+    }
+
+    if (target > nums[i] && target < nums[i + 1]) {
+      return i + 1;
     }
   }
 
   return -1;
-};
+}
 
 // test
-let res1 = searchInsert([1,3,5,6], 2);
-let res2 = searchInsert([1,3,5,6], 7);
-let res3 = searchInsert([1,3,5,6], 0);
+let res1 = searchInsert([1, 3, 5, 6], 2);
+let res2 = searchInsert([1, 3, 5, 6], 7);
+let res3 = searchInsert([1, 3, 5, 6], 0);
 let res4 = searchInsert([1], 0);
 console.log(res1);
 console.log(res2);
 console.log(res3);
 console.log(res4);
-

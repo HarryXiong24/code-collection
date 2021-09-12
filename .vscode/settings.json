@@ -1,0 +1,143 @@
+{
+  // "editor.fontSize": 16,
+  "files.associations": {
+    "*.cjson": "jsonc",
+    "*.wxss": "css",
+    "*.wxs": "javascript",
+    "*.vue": "vue",
+    "*.mpx": "vue",
+    "*.jsx": "javascriptreact"
+  },
+  "emmet.includeLanguages": {
+    "wxml": "html"
+  },
+  // "minapp-vscode.disableAutoConfig": true,
+  "search.followSymlinks": false,
+  "prettier.semi": true,
+  "prettier.singleQuote": true,
+  // 添加 vue 支持
+  "eslint.validate": ["javascript", "javascriptreact", "vue"],
+  "beautify.language": {
+    "js": {
+      "type": ["javascript", "json", "jsonc"],
+      "filename": [".eslintrc", ".jsbeautify"]
+    },
+    "css": ["css", "scss", "less"],
+    "html": ["htm", "html", "vue"]
+  },
+  "projectManager.groupList": true,
+  "editor.minimap.enabled": true,
+  "editor.wordWrap": "on",
+  // "colorize.ignore_search_variables_info": true,
+  "workbench.sideBar.location": "left",
+  "eslint.alwaysShowStatus": true,
+  // "eslint._legacyModuleResolve": true,
+  "vetur.format.scriptInitialIndent": true,
+  "vetur.format.styleInitialIndent": true,
+  "vetur.format.defaultFormatterOptions": {
+    "prettyhtml": {
+      "printWidth": 100, // No line exceeds 100 characters
+      "singleQuote": false, // Prefer double quotes over single quotes
+      "wrapAttributes": false,
+      "sortAttributes": true
+    },
+    "prettier": {
+      // Prettier option here
+      "semi": true,
+      "singleQuote": true
+    }
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "michelemelluso.code-beautifier"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "michelemelluso.code-beautifier"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "HookyQR.beautify"
+  },
+  "wxmlConfig.onSaveFormat": true,
+  "workbench.iconTheme": "material-icon-theme",
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "prettier.requireConfig": true,
+  "editor.wordWrapColumn": 200,
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "editor.formatOnPaste": true,
+  // 保存自动化
+  "editor.formatOnSave": true,
+  // 使用插件格式化 html
+  "vetur.format.defaultFormatter.html": "js-beautify-html",
+  // 屏蔽vetur的js格式化
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "vetur.format.options.useTabs": true,
+  "editor.renderIndentGuides": true,
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "typescript.validate.enable": false,
+  "javascript.validate.enable": false,
+  "scf.python3.path": "",
+  "scf.python2.path": "",
+  "editor.codeActionsOnSave": {
+    "source.fixAll": true,
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "[xml]": {
+    "editor.defaultFormatter": "redhat.vscode-xml"
+  },
+  "vsicons.dontShowNewVersionMessage": true,
+  "editor.suggestSelection": "first",
+  "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+  "java.semanticHighlighting.enabled": true,
+  "workbench.editorAssociations": {
+    "*.html": "default"
+  },
+  "java.requirements.JDK11Warning": false,
+  "java.configuration.checkProjectSettingsExclusions": false,
+  "workbench.startupEditor": "newUntitledFile",
+  "[sql]": {
+    "editor.defaultFormatter": "ms-mssql.mssql"
+  },
+  "python.languageServer": "Microsoft",
+  "gitlens.advanced.blame.customArguments": [],
+  "path-intellisense.mappings": {
+    "~": "${workspaceRoot}"
+  },
+  "go.useLanguageServer": true,
+  "iceworks.materialSources": [],
+  "mssql.connections": [
+    {
+      "server": "{{put-server-name-here}}",
+      "database": "{{put-database-name-here}}",
+      "user": "{{put-username-here}}",
+      "password": "{{put-password-here}}"
+    }
+  ],
+  "go.toolsManagement.autoUpdate": true,
+  "appworks.materialSources": [],
+  // "window.zoomLevel": 1,
+  "redhat.telemetry.enabled": true,
+  "cSpell.userWords": ["tempstats"],
+  "security.workspace.trust.untrustedFiles": "newWindow",
+  "git.ignoreLegacyWarning": true,
+  "git.autofetch": true,
+  // "devops.accessToken": "",
+  // "devops.accountId": "harryxiong",
+  // "devops.agentPath": "Users/brooklin/agent"
+}
