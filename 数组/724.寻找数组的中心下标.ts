@@ -9,7 +9,7 @@
  */
 
 // 规律，2 * leftSum + result = sum
-function pivotIndex(nums: number[]): number {
+export function pivotIndex(nums: number[]): number {
   let sum: number = 0
   for(let item of nums) {
     sum += item;
@@ -28,4 +28,3 @@ function pivotIndex(nums: number[]): number {
 // test
 let res = pivotIndex([1,7,3,6,5,6]);
 console.log(res);
-
