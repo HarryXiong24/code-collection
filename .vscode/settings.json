@@ -50,29 +50,38 @@
   "[vue]": {
     "editor.defaultFormatter": "octref.vetur"
   },
-  "[html]": {
-    "editor.defaultFormatter": "HookyQR.beautify"
-  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "[less]": {
-    "editor.defaultFormatter": "michelemelluso.code-beautifier"
-  },
-  "[css]": {
-    "editor.defaultFormatter": "michelemelluso.code-beautifier"
-  },
-  "[json]": {
-    "editor.defaultFormatter": "HookyQR.beautify"
-  },
-  "[jsonc]": {
-    "editor.defaultFormatter": "HookyQR.beautify"
-  },
-  "wxmlConfig.onSaveFormat": true,
-  "workbench.iconTheme": "material-icon-theme",
+  // "[html]": {
+  //   "editor.defaultFormatter": "HookyQR.beautify"
+  // },
+  // "[less]": {
+  //   "editor.defaultFormatter": "michelemelluso.code-beautifier"
+  // },
+  // "[css]": {
+  //   "editor.defaultFormatter": "michelemelluso.code-beautifier"
+  // },
+  // "[json]": {
+  //   "editor.defaultFormatter": "HookyQR.beautify"
+  // },
+  // "[jsonc]": {
+  //   "editor.defaultFormatter": "HookyQR.beautify"
+  // },
+  // "[sql]": {
+  //   "editor.defaultFormatter": "ms-mssql.mssql"
+  // },
+  // "[xml]": {
+  //   "editor.defaultFormatter": "redhat.vscode-xml"
+  // },
   "[javascriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "wxmlConfig.onSaveFormat": true,
+  "workbench.iconTheme": "material-icon-theme",
   "prettier.requireConfig": true,
   "editor.wordWrapColumn": 200,
   "javascript.updateImportsOnFileMove.enabled": "always",
@@ -86,9 +95,6 @@
   "vetur.format.options.useTabs": true,
   "editor.renderIndentGuides": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   // "typescript.validate.enable": false,
   // "javascript.validate.enable": false,
   "scf.python3.path": "",
@@ -97,9 +103,6 @@
     "source.fixAll": true,
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
-  },
-  "[xml]": {
-    "editor.defaultFormatter": "redhat.vscode-xml"
   },
   "vsicons.dontShowNewVersionMessage": true,
   "editor.suggestSelection": "first",
@@ -111,9 +114,6 @@
   "java.requirements.JDK11Warning": false,
   "java.configuration.checkProjectSettingsExclusions": false,
   "workbench.startupEditor": "newUntitledFile",
-  "[sql]": {
-    "editor.defaultFormatter": "ms-mssql.mssql"
-  },
   "python.languageServer": "Microsoft",
   "gitlens.advanced.blame.customArguments": [],
   "path-intellisense.mappings": {
@@ -136,7 +136,7 @@
   "cSpell.userWords": ["tempstats"],
   "security.workspace.trust.untrustedFiles": "newWindow",
   "git.ignoreLegacyWarning": true,
-  "git.autofetch": true,
+  "git.autofetch": true
   // "devops.accessToken": "",
   // "devops.accountId": "harryxiong",
   // "devops.agentPath": "Users/brooklin/agent"
