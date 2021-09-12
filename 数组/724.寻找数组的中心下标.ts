@@ -23,7 +23,7 @@ export function pivotIndex(nums: number[]): number {
     leftSum += nums[i];
   }
   return -1;
-};
+}
 
 // test
 let res = pivotIndex([1, 7, 3, 6, 5, 6]);

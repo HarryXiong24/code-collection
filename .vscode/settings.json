@@ -89,8 +89,8 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "typescript.validate.enable": false,
-  "javascript.validate.enable": false,
+  // "typescript.validate.enable": false,
+  // "javascript.validate.enable": false,
   "scf.python3.path": "",
   "scf.python2.path": "",
   "editor.codeActionsOnSave": {
