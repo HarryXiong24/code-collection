@@ -5,7 +5,7 @@
  * 如果不存在公共前缀，返回空字符串 ""
  */
 
-function longestCommonPrefix(strs: string[]): string {
+export function longestCommonPrefix(strs: string[]): string {
   // 先找出最短的字符串
   let min: string = strs[0];
   for (let i = 1; i < strs.length; i++) {
