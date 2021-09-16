@@ -1,5 +1,10 @@
 {
   // "editor.fontSize": 16,
+  // 配置 ESLint 检查的文件类型
+  "eslint.options": {
+    //指定vscode的eslint所处理的文件的后缀
+    "extensions": [".js", ".vue", ".ts", ".tsx"]
+  },
   "files.associations": {
     "*.cjson": "jsonc",
     "*.wxss": "css",
@@ -53,6 +58,12 @@
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[javascriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
   // "[html]": {
   //   "editor.defaultFormatter": "HookyQR.beautify"
   // },
@@ -74,12 +85,6 @@
   // "[xml]": {
   //   "editor.defaultFormatter": "redhat.vscode-xml"
   // },
-  "[javascriptreact]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
-  "[typescript]": {
-    "editor.defaultFormatter": "esbenp.prettier-vscode"
-  },
   "wxmlConfig.onSaveFormat": true,
   "workbench.iconTheme": "material-icon-theme",
   "prettier.requireConfig": true,
