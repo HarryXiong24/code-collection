@@ -9,3 +9,18 @@
  * 2.翻转后单词间应当仅用一个空格分隔。
  * 3.翻转后的字符串中不应包含额外的空格
  */
+
+export function reverseWords(s: string): string {
+  let arr = s.split(' ');
+
+  // 需要过滤掉空字符串
+  arr = arr.filter((value) => {
+    return value !== '';
+  });
+
+  return arr.reverse().join(' ');
+}
+
+// test
+let res = reverseWords('  Bob    Loves  Alice   ');
+console.log(res);
