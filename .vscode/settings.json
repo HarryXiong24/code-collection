@@ -88,7 +88,7 @@
   "wxmlConfig.onSaveFormat": true,
   "workbench.iconTheme": "material-icon-theme",
   "prettier.requireConfig": true,
-  "editor.wordWrapColumn": 200,
+  "editor.wordWrapColumn": 240,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "editor.formatOnPaste": true,
   // 保存自动化
