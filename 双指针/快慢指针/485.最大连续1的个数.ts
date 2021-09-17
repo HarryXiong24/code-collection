@@ -9,7 +9,7 @@
  */
 
 // 双指针解法
-function findMaxConsecutiveOnes(nums: number[]): number {
+export function findMaxConsecutiveOnes(nums: number[]): number {
   let slow: number = 0;
   let fast: number = 0;
   let count: number = 0;
@@ -42,7 +42,7 @@ function findMaxConsecutiveOnes(nums: number[]): number {
 }
 
 // 一次遍历
-function findMaxConsecutiveOnes2(nums: number[]): number {
+export function findMaxConsecutiveOnes2(nums: number[]): number {
   let count: number = 0;
   let max: number = 0;
 
