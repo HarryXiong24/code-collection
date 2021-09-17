@@ -15,14 +15,14 @@ export function minSubArrayLen(target: number, nums: number[]): number {
 
   while (right < nums.length) {
     // 扩大窗口
-    const c: number = nums[right++];
-    total += c; // 更新窗口内数据
+    const leftToRightSum: number = nums[right++];
+    total += leftToRightSum; // 更新窗口内数据
     // console.log(left, right);
     while (total >= target) {
       // 如果满足条件 大于等于 target 则开始缩小窗口
       result = Math.min(result, right - left); // 同时记录当前最短子序的长度
-      const d: number = nums[left++];
-      total -= d;
+      const rightToLeftSum: number = nums[left++];
+      total -= rightToLeftSum;
     }
   }
 
