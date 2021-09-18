@@ -6,7 +6,8 @@
  * 元素的顺序可以改变。你不需要考虑数组中超出新长度后面的元素
  */
 
-// 这题其实用内置函数更好写，但是特意没有使用。
+// 这题其实用内置函数更好写，但是特意没有使用
+// 此解法过于繁琐，看参看 双指针->快慢指针 里本题的解法
 export function removeElement(nums: number[], val: number): number {
   let count: number = 0;
   let left: number = 0;
