@@ -5,7 +5,7 @@
  * 在「杨辉三角」中，每个数是它左上方和右上方的数的和
  */
 
-function generate(numRows: number): number[][] {
+export function generate(numRows: number): number[][] {
   let result: number[][] = [];
 
   for (let i = 0; i < numRows; i++) {
