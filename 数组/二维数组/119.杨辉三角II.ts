@@ -7,7 +7,7 @@
  * 输出: [1,3,3,1]
  */
 
-function getRow(rowIndex: number): number[] {
+export function getRow(rowIndex: number): number[] {
   let result: number[][] = [];
 
   for (let i = 0; i < rowIndex + 1; i++) {
