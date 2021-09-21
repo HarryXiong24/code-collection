@@ -20,7 +20,7 @@ class ListNode {
 }
 
 // 奇数一串，偶数一串，最后合并
-function oddEvenList(head: ListNode | null): ListNode | null {
+export function oddEvenList(head: ListNode | null): ListNode | null {
   if (head === null) {
     return null;
   }
