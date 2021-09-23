@@ -7,7 +7,7 @@
  * 2. 左括号必须以正确的顺序闭合
  */
 
-function isValid(s: string): boolean {
+export function isValid(s: string): boolean {
   const len = s.length;
 
   // 如果逢单则说明一定不配对，直接返回
