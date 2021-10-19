@@ -24,3 +24,7 @@ export function twoSum(nums: number[], target: number): number[] {
   }
   return [];
 }
+
+// test
+let res: number[] = twoSum([2, 7, 11, 15], 9);
+console.log(res);
