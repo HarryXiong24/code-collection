@@ -9,11 +9,11 @@
  */
 
 /*
+ * 使用哈希表存储频数
  * 我们可以对字符串进行两次遍历。
  * 在第一次遍历时，我们使用哈希映射统计出字符串中每个字符出现的次数。
  * 在第二次遍历时，我们只要遍历到了一个只出现一次的字符，那么就返回它的索引，否则在遍历结束后返回 -1。
  */
-
 export function firstUniqChar(s: string): number {
   const map: Map<string, number> = new Map<string, number>();
   for (let i of s) {
