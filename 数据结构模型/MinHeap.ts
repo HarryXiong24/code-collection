@@ -1,6 +1,6 @@
 // 最小二叉堆
 
-/* 
+/**
  * 二叉堆是一种特殊的二叉树，能高效、快速地找出最大值和最小值
  * 常被应用于优先队列，也被用于著名的堆排序算法中，它有两个特性：
  * 1.结构特性：它是一棵完全二叉树，表示树的每一层都有左侧和右侧子节点（除了最后一层的叶节点）
@@ -10,6 +10,6 @@
  */
 
 // 交换数组中的两个位置处的值
- export function swap(array: any[], a: number, b: number) {
+export function swap(array: any[], a: number, b: number) {
   [array[a], array[b]] = [array[b], array[a]];
 }

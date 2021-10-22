@@ -20,12 +20,12 @@ Function.prototype.myApply = function(context: any, arr: any[]) {
 
 
 // test
-var n = 0;
-let myApply = function(this: any, arg1: number, arg2: number) {
+let n = 0;
+let myApply = function (this: any, arg1: number, arg2: number) {
   console.log(this.n, arg1, arg2);
-}
+};
 let myApplyObj = {
-  n: 1
+  n: 1,
 };
 
 // myApply(5, 4);

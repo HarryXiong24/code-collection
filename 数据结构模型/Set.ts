@@ -1,6 +1,6 @@
 // 集合
 
-/*
+/**
  * 功能
  * 1.向集合添加一个新元素
  * 2.从集合移除一个元素
@@ -57,12 +57,12 @@ export class AdvancedSet<T> {
   isEmpty(): boolean {
     return this.size() === 0;
   }
-  
+
   // 返回集合所包含元素的数量
   size(): number {
     return this.items.size;
   }
-  
+
   // 返回一个包含集合中所有值（元素）的数组
   toArray(): T[] {
     return [...this.items];
@@ -89,37 +89,41 @@ export class AdvancedSet<T> {
     });
     paramSet.toArray().forEach((value) => {
       unionSet.add(value);
-    })
+    });
 
     return unionSet;
   }
-  
+
   // 返回与其他集合的交集
   intersection(paramSet: AdvancedSet<T>): AdvancedSet<T> {
     const intersectionSet: AdvancedSet<T> = new AdvancedSet<T>();
 
-    this.toArray().filter((value) => {
-      return paramSet.has(value);
-    }).forEach((value) => {
-      intersectionSet.add(value);
-    })
-    
+    this.toArray()
+      .filter((value) => {
+        return paramSet.has(value);
+      })
+      .forEach((value) => {
+        intersectionSet.add(value);
+      });
+
     return intersectionSet;
   }
-  
+
   // 返回与其他集合的差集
   difference(paramSet: AdvancedSet<T>): AdvancedSet<T> {
     const differenceSet: AdvancedSet<T> = new AdvancedSet<T>();
-    
-    this.toArray().filter((value) => {
-      return !paramSet.has(value);
-    }).forEach((value) => {
-      differenceSet.add(value);
-    })
-  
+
+    this.toArray()
+      .filter((value) => {
+        return !paramSet.has(value);
+      })
+      .forEach((value) => {
+        differenceSet.add(value);
+      });
+
     return differenceSet;
   }
-  
+
   // 返回是否为其他集合的子集
   isSubsetOf(paramSet: AdvancedSet<T>): boolean {
     let result = true;
@@ -127,13 +131,13 @@ export class AdvancedSet<T> {
       if (paramSet.has(value) === false) {
         result = false;
       }
-    })
+    });
     return result;
   }
 }
 
 // test
-let advancedSet = new AdvancedSet<number>([1, 2, 8, 9]);
+const advancedSet = new AdvancedSet<number>([1, 2, 8, 9]);
 console.log(advancedSet.toArray());
 console.log(advancedSet.difference(new AdvancedSet<number>([1])).toArray());
 console.log(advancedSet.intersection(new AdvancedSet<number>([1])).toArray());

@@ -1,6 +1,6 @@
 // 单链表
 
-/*
+/**
  * 功能
  * 1.根据索引获取对应值
  * 2.头部添加
@@ -172,7 +172,7 @@ export class LinkedList<T> {
 }
 
 // test
-let linkedList = new LinkedList<number>(-1);
+const linkedList = new LinkedList<number>(-1);
 console.log(linkedList.addAtHead(1));
 console.log(linkedList.addAtTail(3));
 console.log(linkedList.addAtIndex(1, 2)); //链表变为1-> 2-> 3

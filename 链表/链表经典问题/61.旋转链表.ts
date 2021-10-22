@@ -1,6 +1,6 @@
 // 61 旋转链表
 
-/*
+/**
  * 给你一个链表的头节点 head ，旋转链表，将链表每个节点向右移动 k 个位置
  * 输入：head = [1,2,3,4,5], k = 2
  * 输出：[4,5,1,2,3]
@@ -16,7 +16,7 @@ class ListNode {
   }
 }
 
-function rotateRight(head: ListNode | null, k: number): ListNode | null {
+export function rotateRight(head: ListNode | null, k: number): ListNode | null {
   // 没有元素直接返回
   if (head === null) {
     return null;

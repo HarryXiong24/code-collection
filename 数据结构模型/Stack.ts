@@ -1,6 +1,6 @@
 // 栈
 
-/*
+/**
  * 功能
  * 1.入栈
  * 2.出栈
@@ -54,14 +54,10 @@ export class Stack<T> {
 }
 
 // test
-let stack = new Stack();
+const stack = new Stack();
 console.log(stack.isEmpty());
 console.log(stack.peek());
 stack.push('1');
 stack.push('5');
 console.log(stack.peek());
 console.log(stack.size());
-
-
-
-

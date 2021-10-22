@@ -1,13 +1,13 @@
 // 二叉搜索树（Binary Search Tree）
 
-/* 
+/** 
  * 特征
  * 1.首先它是一个树
  * 2.每个节点最多有两个子节点
  * 3.左侧子节点 < 本节点 < 右侧子节点有序排列，便于搜索
  */
 
-/*
+/**
  * 功能
  * 1.向树中插入一个新的节点
  * 2.在树中查找一个键，存在返回 true；不存在返回 false
@@ -232,7 +232,7 @@ export class BinarySearchTree<T> {
 }
 
 // test
-let binarySearch = new BinarySearchTree<number>(0);
+const binarySearch = new BinarySearchTree<number>(0);
 binarySearch.inOrderTraverse((value: number) => {
   console.log(value);
 })

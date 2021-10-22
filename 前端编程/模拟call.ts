@@ -13,22 +13,22 @@ interface Function {
   myCall: Function;
 }
 
-Function.prototype.myCall = function(context: any, ...args: any) {
+Function.prototype.myCall = function (context: any, ...args: any) {
   context = Object(context) || window;
   context.fn = this;
   const result = context.fn(...args);
   Reflect.deleteProperty(context, 'fn');
   return result;
-}
+};
 
 // test
-var n = 0;
-let myCall = function(this: any, arg1: number, arg2: number) {
-  console.log(this.n, arg1, arg2);
-}
+let m = 0;
+let myCall = function (this: any, arg1: number, arg2: number) {
+  console.log(this.m, arg1, arg2);
+};
 let myCallObj = {
-  n: 1
+  n: 1,
 };
 
 // myCall(5, 4);
-myCall.myCall(myCallObj, 5, 4); 
+myCall.myCall(myCallObj, 5, 4);

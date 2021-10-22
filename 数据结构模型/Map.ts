@@ -1,6 +1,6 @@
 // 集合
 
-/*
+/**
  * 功能
  * 1.向字典中添加键值对
  * 2.从字典中删除键值对
@@ -38,7 +38,7 @@ export class AdvancedMap<K, V> {
   }
 
   // 从字典中删除键值对
-  delete(key: K): boolean  {
+  delete(key: K): boolean {
     return this.items.delete(key);
   }
 
@@ -95,9 +95,8 @@ export class AdvancedMap<K, V> {
 }
 
 // test
-let map = new AdvancedMap<number, number>([
+const map = new AdvancedMap<number, number>([
   [0, 4],
   [1, 10],
 ]);
 console.log(map.entries());
-

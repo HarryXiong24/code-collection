@@ -1,6 +1,6 @@
 // 队列
 
-/*
+/**
  * 功能
  * 1.入队
  * 2.出队并返回出队元素
@@ -45,7 +45,7 @@ export class Queue<T> {
     if (this.isEmpty() === false) {
       return this.items.get(this.head)!;
     } else {
-      return null
+      return null;
     }
   }
 
@@ -70,7 +70,7 @@ export class Queue<T> {
 }
 
 // test
-let queue = new Queue<number>();
+const queue = new Queue<number>();
 console.log(queue.isEmpty());
 queue.in(2);
 console.log(queue.isEmpty());

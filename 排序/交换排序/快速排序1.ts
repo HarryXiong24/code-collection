@@ -1,6 +1,6 @@
 // 快速排序
 
-/*
+/**
  * 思路：
  * 选择数组中间数作为基数，并从数组中取出此基数
  * 准备两个数组容器，遍历数组，逐个与基数比对，较小的放左边容器，较大的放右边容器
@@ -24,4 +24,4 @@ export function quickSort(nums: number[]): number[] {
     }
   }
   return quickSort(left).concat([pivot], quickSort(right));
-};
+}

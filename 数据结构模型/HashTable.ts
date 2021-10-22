@@ -2,7 +2,7 @@
 // 在 JS 引擎内部已经将 Map 和 Object 优化为了散列表
 // 所以下面只是实现类似的优化过程，并没有实际的优化效果
 
-/*
+/**
  * 功能
  * 1.把键映射为统一的 String 数据类型
  * 2.哈希函数
@@ -14,7 +14,7 @@
  * 8.散列表的大小
  * 9.清空散列表
  * 10.返回内部的 Hash Table
- */ 
+ */
 
 export class HashTable<K, V> {
   public table: Map<number, V>;
@@ -48,7 +48,7 @@ export class HashTable<K, V> {
       hash = hash * 33 + tableKey.charCodeAt(i);
     }
     return hash % 1013;
-  };
+  }
 
   // 计算键的哈希值
   hashCode(key: K): number {
@@ -137,7 +137,7 @@ export function loseloseHashCode<T>(key: T): number {
     hash += tableKey.charCodeAt(i);
   }
   return hash % 37;
-};
+}
 
 // djb2 函数
 // 可以发现，上述的 loselose 哈希算法有一个很重大缺点
@@ -155,4 +155,4 @@ export function djb2HashCode<T>(key: T): number {
     hash = hash * 33 + tableKey.charCodeAt(i);
   }
   return hash % 1013;
-};
+}

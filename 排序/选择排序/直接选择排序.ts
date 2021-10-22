@@ -1,6 +1,6 @@
 // 直接选择排序
 
-/*
+/**
  * 思路：
  * 在要排序的数组中，选择最小的数与第一位交换
  * 然后在剩下的数中找出最小的数与第二位交换
@@ -26,5 +26,5 @@ export function chooseSort(nums: number[]): number[] {
 }
 
 // test
-let res = chooseSort([10, 1, 3, 2, 9, 1, 5, 6]);
+const res = chooseSort([10, 1, 3, 2, 9, 1, 5, 6]);
 console.log(res);
