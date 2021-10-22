@@ -1,6 +1,7 @@
 // 349 两个数组的交集
 
-/* 给定两个数组，编写一个函数来计算它们的交集。
+/**
+ * 给定两个数组，编写一个函数来计算它们的交集。
  * 示例 1：
  * 输入：nums1 = [1,2,2,1], nums2 = [2,2]
  * 输出：[2]
@@ -20,5 +21,5 @@ export function intersection(nums1: number[], nums2: number[]): number[] {
 }
 
 // test
-let res = intersection([1, 2, 2, 1], [2, 2]);
+const res = intersection([1, 2, 2, 1], [2, 2]);
 console.log(res);

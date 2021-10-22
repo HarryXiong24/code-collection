@@ -1,6 +1,6 @@
 // 34 在排序数组中查找元素的第一个和最后一个位置
 
-/*
+/**
  * 给定一个按照升序排列的整数数组 nums，和一个目标值 target。
  * 找出给定目标值在数组中的开始位置和结束位置。
  * 如果数组中不存在目标值 target，返回 [-1, -1]。
@@ -14,9 +14,13 @@ export function searchRange(nums: number[], target: number): number[] {
   let left: number = searchBound(nums, target, true);
   let right: number = searchBound(nums, target, false);
   return [left, right];
-};
+}
 
-export function searchBound(nums: number[], target: number, isLeft: boolean): number {
+export function searchBound(
+  nums: number[],
+  target: number,
+  isLeft: boolean
+): number {
   let left: number = 0;
   let right: number = nums.length - 1;
   let result = -1;
@@ -39,5 +43,5 @@ export function searchBound(nums: number[], target: number, isLeft: boolean): nu
 }
 
 // test
-let res = searchRange([5, 7, 7, 8, 8, 10], 8);
+const res = searchRange([5, 7, 7, 8, 8, 10], 8);
 console.log(res);
