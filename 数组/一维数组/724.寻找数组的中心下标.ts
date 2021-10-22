@@ -1,6 +1,6 @@
 // 724 寻找数组的中心下标
 
-/*
+/**
  * 给你一个整数数组 nums ，请计算数组的中心下标
  * 数组 中心下标 是数组的一个下标，其左侧所有元素相加的和等于右侧所有元素相加的和。
  * 如果中心下标位于数组最左端，那么左侧数之和视为 0 ，因为在下标的左侧不存在元素
@@ -26,5 +26,5 @@ export function pivotIndex(nums: number[]): number {
 }
 
 // test
-let res = pivotIndex([1, 7, 3, 6, 5, 6]);
+const res = pivotIndex([1, 7, 3, 6, 5, 6]);
 console.log(res);

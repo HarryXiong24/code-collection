@@ -1,6 +1,6 @@
 // 01.08 零矩阵
 
-/*
+/**
  * 编写一种算法，若M × N矩阵中某个元素为0，则将其所在的行与列清零
  * 输入：
  * [
@@ -44,7 +44,7 @@ export function setZeroes(matrix: number[][]): void {
 }
 
 // test
-let arr: number[][] = [
+const arr: number[][] = [
   [0, 1, 2, 0],
   [3, 4, 5, 2],
   [1, 3, 1, 5],

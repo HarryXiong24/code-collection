@@ -1,6 +1,6 @@
 // 07 旋转矩阵
 
-/*
+/**
  * 给你一幅由 N × N 矩阵表示的图像，其中每个像素的大小为 4 字节
  * 请你设计一种算法，将图像旋转 90 度
  * 给定 matrix =
@@ -39,7 +39,7 @@ export function rotate(matrix: number[][]): void {
 }
 
 // test
-let arr: number[][] = [
+const arr: number[][] = [
   [5, 1, 9, 11],
   [2, 4, 8, 10],
   [13, 3, 6, 7],

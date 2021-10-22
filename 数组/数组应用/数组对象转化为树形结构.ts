@@ -51,7 +51,7 @@ export function arrayToTree(arr: Item[]): Item[] {
 }
 
 // test
-let res = arrayToTree([
+const res = arrayToTree([
   {
     id: 1,
     pid: 0,
