@@ -18,7 +18,7 @@
  * J 中的字符不重复。
  */
 
-function numJewelsInStones(jewels: string, stones: string): number {
+export function numJewelsInStones(jewels: string, stones: string): number {
   const set: Set<String> = new Set(jewels);
   let count: number = 0;
   for (let i of stones) {
@@ -29,6 +29,4 @@ function numJewelsInStones(jewels: string, stones: string): number {
   return count;
 }
 
-// test
-const res = numJewelsInStones('aA', 'aAAbbbb');
 console.log(res);
