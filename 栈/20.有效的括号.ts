@@ -1,6 +1,6 @@
 // 20 有效的括号
 
-/*
+/**
  * 给定一个只包括 '('，')'，'{'，'}'，'['，']' 的字符串 s ，判断字符串是否有效
  * 有效字符串需满足：
  * 1. 左括号必须用相同类型的右括号闭合
@@ -41,5 +41,5 @@ export function isValid(s: string): boolean {
 }
 
 // test
-let res = isValid('({[]})');
+const res = isValid('({[]})');
 console.log(res);

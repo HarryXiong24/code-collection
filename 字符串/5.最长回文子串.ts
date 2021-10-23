@@ -1,14 +1,14 @@
 // 5 最长回文子串
 
-// 给你一个字符串 s，找到 s 中最长的回文子串。
-
-// 分析例子，得出三种情况：
-// 1.非正常情况，长度小于2，直接返回
-// 2.得出结果长度为奇数
-// 3.得出结果长度为偶数
-
-// 当为奇数时，需要找到这个中心点，中心点向两边扩散都是一一对应相等的，如：aba，cabac
-// 当为偶数时，需要找到这两个中心点，两个中心点向两边扩散也都是一一对应相等的，如：abba，cabbac
+/**
+ * 给你一个字符串 s，找到 s 中最长的回文子串。
+ * 分析例子，得出三种情况：
+ * 1.非正常情况，长度小于2，直接返回
+ * 2.得出结果长度为奇数
+ * 3.得出结果长度为偶数
+ * 当为奇数时，需要找到这个中心点，中心点向两边扩散都是一一对应相等的，如：aba，cabac
+ * 当为偶数时，需要找到这两个中心点，两个中心点向两边扩散也都是一一对应相等的，如：abba，cabbac
+ */
 
 export function longestPalindrome(s: string): string {
   // 长度小于2，直接是回文，返回
@@ -39,5 +39,5 @@ export function longestPalindrome(s: string): string {
 }
 
 // test
-let res = longestPalindrome('cabad');
+const res = longestPalindrome('cabad');
 console.log(res);

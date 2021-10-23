@@ -1,6 +1,6 @@
 // 225 用队列实现栈
 
-/*
+/**
  * 请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（push、top、pop 和 empty）。
  * 实现 MyStack 类：
  * void push(int x) 将元素 x 压入栈顶。
@@ -9,8 +9,8 @@
  * boolean empty() 如果栈是空的，返回 true ；否则，返回 false 。
  */
 
-// 思路
-/*
+/**
+ * 思路:
  * 设置两个队列queue1、queue2, 把每次push的元素放入queue2中
  * 然后再将queue1队列出队，依次放入queue2中
  * 这样新入队元素就排在了queue2的队首，最后我们将queue1和queue2交换

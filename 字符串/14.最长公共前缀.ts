@@ -1,6 +1,6 @@
 // 14 最长公共前缀
 
-/*
+/**
  * 编写一个函数来查找字符串数组中的最长公共前缀
  * 如果不存在公共前缀，返回空字符串 ""
  */
@@ -36,9 +36,9 @@ export function longestCommonPrefix(strs: string[]): string {
 }
 
 // test
-let res1 = longestCommonPrefix(['flower', 'flow', 'flight']);
-let res2 = longestCommonPrefix(['dog', 'racecar', 'car']);
-let res3 = longestCommonPrefix(['reflower', 'flow', 'flight']);
+const res1 = longestCommonPrefix(['flower', 'flow', 'flight']);
+const res2 = longestCommonPrefix(['dog', 'racecar', 'car']);
+const res3 = longestCommonPrefix(['reflower', 'flow', 'flight']);
 console.log(res1);
 console.log(res2);
 console.log(res3);

@@ -1,6 +1,6 @@
 // 151.翻转字符串里的单词
 
-/*
+/**
  * 给你一个字符串 s , 逐个翻转字符串中的所有单词
  * 单词是由非空格字符组成的字符串。s 中使用至少一个空格将字符串中的 单词 分隔开
  * 请你返回一个翻转 s 中单词顺序并用单个空格相连的字符串。
@@ -22,5 +22,5 @@ export function reverseWords(s: string): string {
 }
 
 // test
-let res = reverseWords('  Bob    Loves  Alice   ');
+const res = reverseWords('  Bob    Loves  Alice   ');
 console.log(res);

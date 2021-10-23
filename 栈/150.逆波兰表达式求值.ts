@@ -1,6 +1,6 @@
 // 150 逆波兰表达式求值
 
-/*
+/**
  * 根据 逆波兰表示法，求表达式的值
  * 有效的算符包括 +、-、*、/ 。每个运算对象可以是整数，也可以是另一个逆波兰表达式
  * 说明：
@@ -61,9 +61,9 @@ function calculate(
 }
 
 // test
-let res = evalRPN(['4', '13', '5', '/', '+']);
-let res2 = evalRPN(['2', '1', '+', '3', '*']);
-let res3 = evalRPN([
+const res = evalRPN(['4', '13', '5', '/', '+']);
+const res2 = evalRPN(['2', '1', '+', '3', '*']);
+const res3 = evalRPN([
   '10',
   '6',
   '9',
