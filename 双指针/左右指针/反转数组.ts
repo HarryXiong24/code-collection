@@ -13,6 +13,6 @@ export function reverse(numbers: number[]): number[] {
   return numbers;
 }
 
-let res = reverse([1, 2, 4, 3]);
+const res = reverse([1, 2, 4, 3]);
 console.log(res);
 

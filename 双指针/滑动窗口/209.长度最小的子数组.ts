@@ -1,6 +1,6 @@
 // 209 长度最小的子数组
 
-/*
+/**
  * 给定一个含有 n 个正整数的数组和一个正整数 target
  * 找出该数组中满足其和 ≥ target 的长度最小的连续子数组 [numsl, numsl+1, ..., numsr-1, numsr]
  * 并返回其长度
@@ -34,7 +34,7 @@ export function minSubArrayLen(target: number, nums: number[]): number {
 }
 
 // test
-let res = minSubArrayLen(7, [2, 3, 1, 2, 4, 3]);
-let res2 = minSubArrayLen(11, [1, 1, 1, 1, 1, 1, 1, 1]);
+const res = minSubArrayLen(7, [2, 3, 1, 2, 4, 3]);
+const res2 = minSubArrayLen(11, [1, 1, 1, 1, 1, 1, 1, 1]);
 console.log(res);
 console.log(res2);

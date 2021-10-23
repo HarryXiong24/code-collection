@@ -1,6 +1,6 @@
 // 485 最大连续 1 的个数
 
-/*
+/**
  * 给定一个二进制数组, 计算其中最大连续 1 的个数
  * 示例
  * 输入：[1,1,0,1,1,1]
@@ -61,7 +61,7 @@ export function findMaxConsecutiveOnes2(nums: number[]): number {
 }
 
 // test
-let res = findMaxConsecutiveOnes([1, 1, 0, 1, 1, 1]);
-let res2 = findMaxConsecutiveOnes2([1, 1, 0, 1, 1, 1]);
+const res = findMaxConsecutiveOnes([1, 1, 0, 1, 1, 1]);
+const res2 = findMaxConsecutiveOnes2([1, 1, 0, 1, 1, 1]);
 console.log(res);
 console.log(res2);
