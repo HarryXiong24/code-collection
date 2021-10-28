@@ -9,4 +9,4 @@
  */
 
 // solution
-type HelloWorld = string;
+export type HelloWorld = string;
