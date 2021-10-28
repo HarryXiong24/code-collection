@@ -1,4 +1,4 @@
-// 2 实现 Pick
+// 2 Pick
 
 /**
  * Implement the built-in Pick<T, K> generic without using it.

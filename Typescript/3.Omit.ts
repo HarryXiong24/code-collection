@@ -1,4 +1,4 @@
-// 3 实现 Omit
+// 3 Omit
 
 /**
  * Implement the built-in Omit<T, K> generic without using it.
