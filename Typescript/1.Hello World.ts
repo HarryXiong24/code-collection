@@ -1,10 +1,12 @@
 // 1 Hello World
 
 /**
- * 在这个挑战中，你需要修改下方的代码使得测试通过（使其没有类型错误）
- * 期望是一个 string 类型
+ * Hello, World!
+ * In Type Challenges, we use the type system itself to do the assertion.
+ * For this challenge, you will need to change the following code to make the tests pass.
+ * expected to be string:
  * type HelloWorld = any
- * 你需要使得如下这行不会抛出异常
+ * you should make this work:
  * type test = Expect<Equal<HelloWorld, string>>
  */
 
