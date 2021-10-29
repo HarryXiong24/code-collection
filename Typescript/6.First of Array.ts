@@ -4,6 +4,7 @@
  * Implement a generic First<T> that takes an Array T and returns it's first element's type.
  */
 
+// solution
 export type First<T extends any[]> = T['length'] extends 0 ? never : T[0];
 
 // test
