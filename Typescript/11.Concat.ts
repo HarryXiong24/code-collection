@@ -10,6 +10,6 @@
 
 export type MyConcat<T extends any[], K extends any[]> = [...T, ...K];
 
-// For example
+// test
 
 type Result = MyConcat<[1], [2]>; // expected to be [1, 2]
