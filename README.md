@@ -6,6 +6,7 @@
 
 1. docs：存放一些关于数据结构和算法的文档
 2. test：存放一些用于复习测试的文件
+3. Typescript: 存放一些 Typescript 的练习题目
 
 注：
 
