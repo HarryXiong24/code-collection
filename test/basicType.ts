@@ -33,3 +33,6 @@ export type MyReturnType<T extends (...args: any) => any> = T extends (
 ) => infer K
   ? K
   : never;
+
+// Includes
+export type MyIncludes<T extends any[], K> = K extends T[number] ? true : false;
