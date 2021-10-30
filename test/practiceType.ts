@@ -28,3 +28,21 @@ export type MyPush<T extends any[], K> = [...T, K];
 
 // Unshift
 export type MyUnshift<T extends any[], K> = [K, ...T];
+
+// Awaited
+export type Awaited<T extends Promise<any>> = T extends Promise<infer K>
+  ? K
+  : never;
+
+// Readonly 2
+type MyExclude<T, K> = T extends K ? never : T;
+export type Readonly2<T, K extends keyof T> = {
+  readonly [P in K]: T[P];
+} & {
+  [P in MyExclude<keyof T, K>]: T[P];
+};
+
+// Deep Readonly
+export type DeepReadonly<T extends {} = {}> = {
+  readonly [P in keyof T]: DeepReadonly<T[P]>;
+};
