@@ -46,3 +46,15 @@ export type Readonly2<T, K extends keyof T> = {
 export type DeepReadonly<T extends {} = {}> = {
   readonly [P in keyof T]: DeepReadonly<T[P]>;
 };
+
+// Tuple to Union
+export type TupleToUnion<T extends any[]> = T[number];
+
+// Chainable Options
+export type Chainable<T extends {} = {}> = {
+  option<K extends string = string, V = any>(
+    key: K,
+    value: V
+  ): Chainable<T & { [P in K]: V }>;
+  get(): T;
+};
