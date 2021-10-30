@@ -1,4 +1,4 @@
-// 4 Chainable Options
+// Chainable Options
 
 /**
  * Chainable options are commonly used in Javascript. But when we switch to TypeScript, can you properly type it?
