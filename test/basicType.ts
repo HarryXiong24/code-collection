@@ -1,3 +1,7 @@
+/**
+ * 2021.10.30
+ */
+
 // Pick
 export type MyPick<T, K extends keyof T> = {
   [P in K]: T[P];
