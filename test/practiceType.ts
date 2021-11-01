@@ -76,3 +76,30 @@ export type TrimLeft<T extends string> = T extends `${ignore}${infer R}`
 export type Trim<T extends string> = T extends `${ignore}${infer R}${ignore}`
   ? Trim<R>
   : T;
+
+// Capitalize
+export type Capitalize<S extends string> = S extends `${infer T}${infer U}`
+  ? `${Uppercase<T>}${U}`
+  : S;
+
+// Replace
+export type Replace<
+  T extends string,
+  From extends string,
+  To extends string
+> = From extends ''
+  ? T
+  : T extends `${infer A}${From}${infer B}`
+  ? `${A}${To}${B}`
+  : T;
+
+// ReplaceAll
+export type ReplaceAll<
+  S extends string,
+  From extends string,
+  To extends string
+> = From extends ''
+  ? S
+  : S extends `${infer A}${From}${infer Rest}`
+  ? `${A}${To}${ReplaceAll<Rest, From, To>}`
+  : S;
