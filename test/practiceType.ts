@@ -58,3 +58,21 @@ export type Chainable<T extends {} = {}> = {
   ): Chainable<T & { [P in K]: V }>;
   get(): T;
 };
+
+// Type LookUp
+export type LookUp<T extends { type: any }, K extends T['type']> = T extends {
+  type: K;
+}
+  ? T
+  : never;
+
+// Trim Left
+type ignore = ' ' | '\n' | '\t';
+export type TrimLeft<T extends string> = T extends `${ignore}${infer R}`
+  ? TrimLeft<R>
+  : T;
+
+// Trim
+export type Trim<T extends string> = T extends `${ignore}${infer R}${ignore}`
+  ? Trim<R>
+  : T;
