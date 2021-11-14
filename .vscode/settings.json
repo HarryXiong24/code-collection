@@ -20,16 +20,14 @@
   "search.followSymlinks": false,
   "prettier.semi": true,
   "prettier.singleQuote": true,
-  // 添加 vue 支持
-  "eslint.validate": ["javascript", "javascriptreact", "vue"],
-  "beautify.language": {
-    "js": {
-      "type": ["javascript", "json", "jsonc"],
-      "filename": [".eslintrc", ".jsbeautify"]
-    },
-    "css": ["css", "scss", "less"],
-    "html": ["htm", "html", "vue"]
-  },
+  // "beautify.language": {
+  //   "js": {
+  //     "type": ["javascript", "json", "jsonc"],
+  //     "filename": [".eslintrc", ".jsbeautify"]
+  //   },
+  //   "css": ["css", "scss", "less"],
+  //   "html": ["htm", "html", "vue"]
+  // },
   "projectManager.groupList": true,
   "editor.minimap.enabled": true,
   "editor.wordWrap": "on",
@@ -64,6 +62,28 @@
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[markdown]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[less]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   // "[html]": {
   //   "editor.defaultFormatter": "HookyQR.beautify"
   // },
@@ -138,7 +158,7 @@
   "appworks.materialSources": [],
   // "window.zoomLevel": 1,
   "redhat.telemetry.enabled": true,
-  "cSpell.userWords": ["tempstats"],
+  // "cSpell.userWords": ["tempstats"],
   "security.workspace.trust.untrustedFiles": "newWindow",
   "git.ignoreLegacyWarning": true,
   "git.autofetch": true

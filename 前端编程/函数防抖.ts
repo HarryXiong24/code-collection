@@ -2,11 +2,7 @@
 
 // 在规定时间内，只让最后一次的处理事件的效果生效，而让前面的处理事件不生效
 
-export function debounce(
-  callback: Function,
-  delay: number,
-  immediate: boolean = false
-): Function {
+export function debounce(callback: Function, delay: number, immediate: boolean = false): Function {
   let timer: number | undefined = undefined;
   return function (this: unknown, ...args: any) {
     if (immediate) {
