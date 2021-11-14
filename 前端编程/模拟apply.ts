@@ -5,7 +5,7 @@ interface Function {
   myApply: Function;
 }
 
-Function.prototype.myApply = function(context: any, arr: any[]) {
+Function.prototype.myApply = function (context: any, arr: any[]) {
   context = Object(context) || window;
   context.fn = this;
   let result;
@@ -18,7 +18,6 @@ Function.prototype.myApply = function(context: any, arr: any[]) {
   return result;
 };
 
-
 // test
 let n = 0;
 let myApply = function (this: any, arg1: number, arg2: number) {
@@ -29,4 +28,4 @@ let myApplyObj = {
 };
 
 // myApply(5, 4);
-myApply.myApply(myApplyObj, [5, 4]); 
+myApply.myApply(myApplyObj, [5, 4]);

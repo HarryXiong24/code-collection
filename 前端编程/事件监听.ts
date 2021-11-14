@@ -38,7 +38,7 @@ export class EventEmitter {
       console.log('This event has been already added!');
       return false;
     }
-  };
+  }
 
   // 移除名为 name 的事件
   removeListener(name: string, callback: Function | undefined = undefined): boolean {
@@ -52,7 +52,7 @@ export class EventEmitter {
       console.log('There is no this event!');
       return false;
     }
-  };
+  }
 }
 
 // test
@@ -60,12 +60,12 @@ let myEvent = new EventEmitter();
 
 myEvent.addListener('logA', () => {
   console.log('A');
-})
+});
 myEvent.emit('logA');
 
 myEvent.addListener('logB', () => {
   console.log('B');
-})
+});
 myEvent.emit('logB');
 
 console.log(myEvent._events);

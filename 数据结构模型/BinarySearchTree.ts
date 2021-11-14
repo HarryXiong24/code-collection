@@ -1,6 +1,6 @@
 // 二叉搜索树（Binary Search Tree）
 
-/** 
+/**
  * 特征
  * 1.首先它是一个树
  * 2.每个节点最多有两个子节点
@@ -21,7 +21,6 @@
 
 // 定义节点
 class Node<T> {
-
   public key: T;
   public left: Node<T> | null;
   public right: Node<T> | null;
@@ -46,7 +45,6 @@ enum Compare {
 
 // 二叉搜索树
 export class BinarySearchTree<T> {
-
   protected root: Node<T>;
 
   constructor(key: T) {
@@ -235,4 +233,4 @@ export class BinarySearchTree<T> {
 const binarySearch = new BinarySearchTree<number>(0);
 binarySearch.inOrderTraverse((value: number) => {
   console.log(value);
-})
+});

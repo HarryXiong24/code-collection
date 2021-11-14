@@ -4,13 +4,13 @@
 
 export function throttle(callback: Function, delay: number, immediate: boolean) {
   let flag: boolean = true;
-  return function(this: unknown, ...args: any) {
+  return function (this: unknown, ...args: any) {
     if (immediate) {
       callback.apply(this, arguments);
       immediate = false;
       return;
     }
-    if (!flag) { 
+    if (!flag) {
       return;
     }
     flag = false;
