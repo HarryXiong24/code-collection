@@ -1,0 +1,56 @@
+[
+  {
+    "field": "logo",
+    "type": "string",
+    "children": null
+  },
+  {
+    "field": "name",
+    "type": "string",
+    "children": null
+  },
+  {
+    "field": "menus",
+    "type": "array",
+    "children": [
+      {
+        "field": "type",
+        "type": "number"
+      },
+      {
+        "field": "ext_data",
+        "type": "object",
+        "children": [
+          {
+            "field": "url",
+            "type": "string"
+          }
+        ]
+      },
+      {
+        "field": "menu_name",
+        "type": "string"
+      },
+      {
+        "field": "sub_menu_list",
+        "type": "array",
+        "children": [
+          {
+            "field": "type",
+            "type": "number"
+          },
+          {
+            "field": "ext_data",
+            "type": "object",
+            "children": [
+              {
+                "field": "url",
+                "type": "string"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]
