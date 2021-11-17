@@ -1,15 +1,9 @@
-// function transform(input) {
-//   const json = JSON.parse(String(input));
-//   console.log(json);
-//   // return transform_JSONSchema(json);
-// }
-
-function transform_JSONSchema(input) {
+function transform_Array(input) {
   let res = [];
   for (let key in input) {
-    console.log(input[key]);
+    // console.log(input[key]);
     const element = input[key];
-    console.log(element['type']);
+    // console.log(element['type']);
     if (element['type'] === 'string' || element['type'] === 'number' || element['type'] === 'boolean') {
       const item = {
         field: key,
@@ -17,23 +11,49 @@ function transform_JSONSchema(input) {
         children: null,
       };
       res.push(item);
-    } else if (element['type'] === 'object') {
-      transform_JSONSchema(element['properties']);
     } else if (element['type'] === 'array') {
-      console.log(`element['items']`, element['items']);
+      // console.log(`element['items']`, element['items']);
       const item = {
         field: key,
         type: 'array',
-        children: transform_JSONSchema(element['items']),
+        children: transform_Object(element['items']),
+      };
+      res.push(item);
+    } else if (element['type'] === 'object') {
+      // console.log(`element['items']`, element['items']);
+      const item = {
+        field: key,
+        type: 'object',
+        children: transform_Object(element['properties']),
       };
       res.push(item);
     }
-    console.log(res);
+    // console.log(res);
   }
-  // return res;
+  return res;
+}
+
+function transform_Object(input) {
+  let res = [];
+  for (let key in input) {
+    const element = input[key];
+    if (input[key] === 'object') {
+      // console.log(input['properties']);
+      res.push(transform_Array(input['properties']));
+    } else if (element['type'] === 'string' || element['type'] === 'number' || element['type'] === 'boolean') {
+      const item = {
+        field: key,
+        type: element['type'],
+        children: null,
+      };
+      res.push(item);
+    }
+  }
+  return res;
 }
 
 let test = {
+  $schema: 'http://json-schema.org/draft-04/schema#',
   type: 'object',
   properties: {
     logo: {
@@ -87,5 +107,6 @@ let test = {
   },
 };
 
-const res = transform_JSONSchema(test);
+const res = transform_Object(test);
 console.log(res);
+console.log(JSON.stringify(res));
