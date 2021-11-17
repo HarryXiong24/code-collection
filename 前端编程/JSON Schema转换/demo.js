@@ -1,3 +1,4 @@
+// 法一
 function transform_Array(input) {
   let res = [];
   for (let key in input) {
@@ -110,3 +111,22 @@ let test = {
 const res = transform_Object(test);
 console.log(res);
 console.log(JSON.stringify(res));
+
+// 法二
+function changeData(data, list) {
+  let obj = data.properties;
+  for (let i in obj) {
+    if (['string', 'number', 'boolean'].includes(obj[i].type)) {
+      list.push({ field: i, type: obj[i].type, children: null });
+    } else if (obj[i].type === 'array') {
+      list.push({ field: i, type: obj[i].type, children: changeData(obj[i].items, []) });
+    } else {
+      list.push({ field: i, type: obj[i].type, children: changeData(obj[i], []) });
+    }
+  }
+  return list;
+}
+
+const res1 = changeData(test, []);
+console.log(res1);
+console.log(JSON.stringify(res1));
