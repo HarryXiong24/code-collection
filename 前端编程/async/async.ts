@@ -82,6 +82,7 @@ export function asyncToGenerator(generatorFunc: any) {
           );
         }
       }
+      // 首次执行，进入递归
       step('next');
     });
   };
