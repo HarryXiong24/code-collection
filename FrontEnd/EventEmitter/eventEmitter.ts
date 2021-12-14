@@ -165,9 +165,18 @@ class EventEmitter {
       }
     }
   }
+
+  /**
+   * 清空所有事件，重新初始化
+   * @return {Object} 可链式调用
+   */
+  clear() {
+    this._events = {};
+    return this;
+  }
 }
 
-//tests
+// test
 const emitter = new EventEmitter();
 
 const func1 = () => {};
@@ -188,4 +197,7 @@ emitter.offItem('num1', func1)?.off('num4')?.off('num3');
 
 emitter.emit('num2', 1, 2, 3);
 
+console.log(emitter._events);
+
+emitter.clear();
 console.log(emitter._events);
