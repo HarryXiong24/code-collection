@@ -1,4 +1,4 @@
-type ListenerFunc = () => any;
+type ListenerFunc = (...args: any) => any;
 
 interface Listener {
   listener: ListenerFunc;
@@ -142,22 +142,50 @@ class EventEmitter {
 
     return this;
   }
+
+  /**
+   * 触发事件
+   * @param  {String} eventName 事件名称
+   * @param  {Array} args 传入监听器函数的参数，使用逗号分隔形式依次传入
+   * @return {Object} 可链式调用
+   */
+  emit(eventName: string, ...args: any) {
+    const listeners = this._events[eventName];
+    if (!listeners) {
+      return this;
+    }
+
+    for (let i = 0; i < listeners.length; i++) {
+      const listener = listeners[i];
+      if (listener) {
+        listener.listener.apply(this, args);
+        if (listener.once) {
+          this.offItem(eventName, listener.listener);
+        }
+      }
+    }
+  }
 }
 
 //tests
 const emitter = new EventEmitter();
 
 const func1 = () => {};
+const func2 = (a: number, b: number, c: number) => {
+  console.log('func2', a, b, c);
+};
 
 emitter.on('num1', func1);
 
 emitter.on('num2', () => {});
 emitter
-  .once('num2', () => {})
+  .once('num2', func2)
   ?.on('num2', () => {})
   ?.once('num2', () => {})
   ?.on('num3', () => {});
 
 emitter.offItem('num1', func1)?.off('num4')?.off('num3');
+
+emitter.emit('num2', 1, 2, 3);
 
 console.log(emitter._events);
