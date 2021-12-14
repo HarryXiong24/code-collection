@@ -5,7 +5,7 @@ export interface Listener {
   once: boolean;
 }
 
-export interface ListenersContainer {
+export interface Event {
   [propName: string]: Listener[];
 }
 
@@ -38,7 +38,7 @@ function indexOfListener(listener_list: Listener[], listener: ListenerFunc): num
 
 export default class EventEmitter {
   // 存放所有的监听时间
-  private _events: ListenersContainer = {};
+  private _events: Event = {};
 
   constructor() {}
 
