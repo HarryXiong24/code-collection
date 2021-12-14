@@ -1,11 +1,11 @@
-type ListenerFunc = (...args: any) => any;
+export type ListenerFunc = (...args: any) => any;
 
-interface Listener {
+export interface Listener {
   listener: ListenerFunc;
   once: boolean;
 }
 
-interface ListenersContainer {
+export interface ListenersContainer {
   [propName: string]: Listener[];
 }
 
@@ -36,11 +36,19 @@ function indexOfListener(listener_list: Listener[], listener: ListenerFunc): num
   return result;
 }
 
-class EventEmitter {
+export default class EventEmitter {
   // 存放所有的监听时间
-  public _events: ListenersContainer = {};
+  private _events: ListenersContainer = {};
 
   constructor() {}
+
+  /**
+   * 查看所有事件
+   * @return {Object} 返回所有的事件
+   */
+  get getEvents() {
+    return this._events;
+  }
 
   /**
    * 添加事件
@@ -197,7 +205,7 @@ emitter.offItem('num1', func1)?.off('num4')?.off('num3');
 
 emitter.emit('num2', 1, 2, 3);
 
-console.log(emitter._events);
+console.log(emitter.getEvents);
 
 emitter.clear();
-console.log(emitter._events);
+console.log(emitter.getEvents);
