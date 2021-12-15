@@ -1,5 +1,5 @@
 // 观察者类
-class Observer {
+export class Observer {
   public id: number;
 
   constructor(id: number) {
@@ -13,7 +13,7 @@ class Observer {
 }
 
 // 被观察者列
-class Observed {
+export class Observed {
   private observers: Observer[];
   public id: number;
 
