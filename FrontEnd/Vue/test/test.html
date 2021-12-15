@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body></body>
+
+  <script>
+    class Dep {
+      constructor() {
+        this.subs = [];
+      }
+
+      addSub(sub) {
+        this.subs.push(sub);
+      }
+
+      removeSub(sub) {
+        if (this.subs.length) {
+          const index = this.subs.indexOf(sub);
+          if (index > -1) {
+            this.subs.splice(index, 1);
+          }
+        }
+      }
+
+      // window.target 实际上就是一个 watcher 对
+      // 我们在 dep 实例中收集 watche r对象的目的就是在数据发生更新时，能够调用已经收集到的 watcher 对象的 update 方法来更新视图
+      depend() {
+        console.log(window.target);
+        if (window.target) {
+          this.subs.push(window.target);
+        }
+      }
+
+      notify() {
+        // 拷贝一份，避免直接操作数据
+        const subs = this.subs;
+        for (let i = 0; i < subs.length; i++) {
+          subs[i].update();
+        }
+      }
+    }
+
+    function parsePath(path) {
+      const bailRE = /[^\w.$]/;
+      if (bailRE.test(path)) {
+        return;
+      }
+      const segments = path.split('.');
+      return function (obj) {
+        for (let i = 0; i < segments.length; i++) {
+          if (!obj) {
+            return;
+          }
+          obj = obj[segments[i]];
+        }
+        return obj;
+      };
+    }
+
+    class Watcher {
+      constructor(vm, expOrFn, callback) {
+        this.vm = vm;
+        this.getter = parsePath(expOrFn);
+        this.callback = callback;
+        this.value = this.get();
+      }
+
+      // 读取 data.b.c 的值
+      get() {
+        window.target = this;
+        const value = this.getter.call(this.vm, this.vm);
+        window.target = undefined;
+        return value;
+      }
+
+      // 更新
+      update() {
+        const oldValue = this.value;
+        this.value = this.get();
+        this.callback.call(this.vm, this.value, oldValue);
+      }
+    }
+
+    class Observer {
+      constructor(value) {
+        this.value = value;
+        // value 只可能是数组和对象
+        if (!Array.isArray(value)) {
+          this.walk(value);
+        }
+      }
+
+      defineReactive(data, key, value) {
+        // 如果 value 是对象，就需要递归，让对象里每一个属性都转换成 getter/setter 的形式来侦测变化
+        if (typeof value === 'object') {
+          this.walk(value);
+        }
+        let dep = new Dep();
+        Object.defineProperty(data, key, {
+          enumerable: true,
+          configurable: true,
+          get() {
+            dep.depend();
+            console.log('get', value);
+            return value;
+          },
+          set(newValue) {
+            if ((value = newValue)) {
+              return;
+            }
+            console.log('set', value);
+            value = newValue;
+            dep.notify();
+          },
+        });
+      }
+
+      /**
+       * walk 会将每一个属性都转换成 getter/setter 的形式来侦测变化
+       * 这个方式只有在数据类型为 Object 的时候才会被调用
+       */
+      walk(obj) {
+        const keys = Object.keys(obj);
+        // 递归
+        for (let i = 0; i < keys.length; i++) {
+          this.defineReactive(obj, keys[i], obj[keys[i]]);
+        }
+      }
+    }
+
+    /* compiler.js */
+    class Compiler {
+      // vm 指 Vue 实例
+      constructor(vm) {
+        // 拿到 vm
+        this.vm = vm;
+        // 拿到 el
+        this.el = vm.$el;
+        // 编译模板
+        this.compile(this.el);
+      }
+
+      // 编译模板
+      compile(el) {
+        let childNodes = [...el.childNodes];
+        childNodes.forEach((node) => {
+          if (this.isTextNode(node)) {
+            // 编译文本节点
+            this.compileText(node);
+          }
+        });
+      }
+
+      // 编译文本节点(简单的实现)
+      compileText(node) {
+        let reg = /\{\{(.+)\}\}/;
+        let val = node.textContent;
+        if (reg.test(val)) {
+          let key = RegExp.$1.trim();
+          node.textContent = val.replace(reg, this.vm[key]);
+          // 创建观察者
+          new Watcher(this.vm, key, (newValue) => {
+            node.textContent = newValue;
+          });
+        }
+      }
+
+      // v-text
+      textUpdater(node, key, value) {
+        node.textContent = value;
+        // 创建观察者2
+        new Watcher(this.vm, key, (newValue) => {
+          node.textContent = newValue;
+        });
+      }
+
+      // v-model
+      modelUpdater(node, key, value) {
+        node.value = value;
+        // 创建观察者
+        new Watcher(this.vm, key, (newValue) => {
+          node.value = newValue;
+        });
+        // 这里实现双向绑定 监听input 事件修改 data中的属性
+        node.addEventListener('input', () => {
+          this.vm[key] = node.value;
+        });
+      }
+    }
+
+    class Vue {
+      constructor(options = {}) {
+        // this.el = options.el;
+        this.$exp = options.exp;
+        this.$data = options.data;
+        // 初始化页面的数据
+        // this.el.innerHTML = this.data[this.exp];
+        // 监听 data 里面的所有属性
+        new Observer(this.$data);
+        // 为 this.$data 下的 a.b.c 的值创建 watcher
+        new Watcher(this.$data, this.$exp, (val) => {
+          // 创建 watcher 实例，调用构造函数。
+          // this.el.innerHTML = val;
+          console.log('UI', val);
+        });
+        return this;
+      }
+    }
+
+    let vue = new Vue({
+      exp: 'a.b.c',
+      data: {
+        a: {
+          b: {
+            c: 1,
+          },
+        },
+      },
+    });
+
+    console.log(vue);
+    // vue.data.a.b.c = 2;
+  </script>
+</html>

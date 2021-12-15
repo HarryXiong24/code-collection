@@ -17,10 +17,10 @@ export default class Vue {
     this.el = options.el;
     this.exp = options.exp;
     this.data = options.data;
-    // 初始化页面内容
+    // 初始化页面的数据
     this.el.innerHTML = this.data[this.exp];
     // 监听 data 里面的所有属性
-    const observer = new Observer(this.data);
+    new Observer(this.data);
     new Watcher(this, this.exp, (val) => {
       // 创建 watcher 实例，调用构造函数。
       this.el.innerHTML = val;

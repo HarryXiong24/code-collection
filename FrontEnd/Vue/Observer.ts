@@ -1,4 +1,4 @@
-import { defineReactive } from './DefineReactive';
+import Dep from './Dep';
 
 /**
  * Observer 类会附加到每一个被侦测的 object 上
@@ -7,12 +7,39 @@ import { defineReactive } from './DefineReactive';
  */
 export default class Observer {
   private value: any;
+
   constructor(value: any) {
     this.value = value;
     // value 只可能是数组和对象
     if (!Array.isArray(value)) {
       this.walk(value);
     }
+  }
+
+  /**
+   * 数据代理
+   */
+  defineReactive(data: Record<string, any>, key: PropertyKey, value: any) {
+    // 如果 value 是对象，就需要递归，让对象里每一个属性都转换成 getter/setter 的形式来侦测变化
+    if (typeof value === 'object') {
+      this.walk(value);
+    }
+    let dep = new Dep();
+    Object.defineProperty(data, key, {
+      enumerable: true,
+      configurable: true,
+      get() {
+        dep.depend();
+        return value;
+      },
+      set(newValue) {
+        if ((value = newValue)) {
+          return;
+        }
+        value = newValue;
+        dep.notify();
+      },
+    });
   }
 
   /**
@@ -23,7 +50,7 @@ export default class Observer {
     const keys = Object.keys(obj);
     // 递归
     for (let i = 0; i < keys.length; i++) {
-      defineReactive(obj, keys[i], obj[keys[i]]);
+      this.defineReactive(obj, keys[i], obj[keys[i]]);
     }
   }
 }
