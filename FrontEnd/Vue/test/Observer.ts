@@ -20,6 +20,7 @@ export default class Observer {
    * 数据代理
    */
   defineReactive(data: Record<string, any>, key: PropertyKey, value: any) {
+    const that = this;
     // 如果 value 是对象，就需要递归，让对象里每一个属性都转换成 getter/setter 的形式来侦测变化
     if (typeof value === 'object') {
       this.walk(value);
@@ -33,10 +34,11 @@ export default class Observer {
         return value;
       },
       set(newValue) {
-        if ((value = newValue)) {
+        if (value === newValue) {
           return;
         }
         value = newValue;
+        that.walk(newValue);
         dep.notify();
       },
     });
