@@ -7,24 +7,34 @@
 
 import Dep from './Dep';
 
-// 负责数据劫持,把 $data 中的成员转换成 getter/setter
+/**
+ * Observer 类会附加到一个被侦测的 object 上
+ * 一旦被附加上，Observer 会将 object 的所有属性转换为 getter/setter 的形式
+ * 从而来收集依赖，并且当属性发生变化的时候，会通知这些依赖
+ */
 class Observer {
   constructor(data: Record<string, any>) {
     this.walk(data);
   }
 
-  // 1.判断数据是否是对象，如果不是对象返回
-  // 2.如果是对象，遍历对象的所有属性，设置为 getter/setter
+  /**
+   * walk 会将每一个属性都转换成 getter/setter 的形式来侦测变化
+   * 这个方式只有在数据类型为 Object 的时候才会被调用
+   */
   walk(data: Record<string, any>): void {
+    // 判断数据是否是对象，如果不是对象返回
     if (!data || typeof data !== 'object') {
       return;
     }
+    // 如果是对象，遍历对象的所有属性，设置为 getter/setter
     Object.keys(data).forEach((key) => {
       this.defineReactive(data, key, data[key]);
     });
   }
 
-  // 定义响应式成员
+  /**
+   * 数据代理
+   */
   defineReactive(obj: Record<string, any>, key: string, value: any) {
     const that = this;
     // 收集依赖，发送通知

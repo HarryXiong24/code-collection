@@ -36,8 +36,6 @@ export class Vue implements VueType {
     // 负责把 data 注入到 Vue 实例的 this 中
     // 因为目前的数据全部在 this.$data 上，而我们需要把数据放在 this 上，以供 Compiler 解析
     this._proxyData(this.$data);
-    // 由于使用了Proxy，因此需要使用Object.assign()拷贝至this对象
-    // Object.assign(this, this._proxyData(this.$data))
     // 负责调用 Compiler 解析指令/插值表达式等
     new Compiler(this);
   }

@@ -1,4 +1,6 @@
-import { VueType } from './vue';
+import _get from './utils/_get';
+import _set from './utils/_set';
+import { VueType } from './Vue';
 import Watcher from './Watcher';
 /**
  * 功能
@@ -71,11 +73,11 @@ class Compiler {
       // RegExp.$1获取第一个匹配的内容
       const key = RegExp.$1.trim();
       // 把插值表达式替换成具体的值
-      node.textContent = value.replace(reg, this.vm[key]);
+      node.textContent = value.replace(reg, _get(this.vm, key) as unknown as string);
 
       // 创建Watcher对象
       new Watcher(this.vm, key, (newValue: any) => {
-        node.textContent = newValue;
+        node.textContent = value.replace(reg, newValue);
       });
     }
   }
@@ -100,7 +102,7 @@ class Compiler {
   // node 节点，key 数据的属性名称，dir 指令的后半部分
   update(node: Node, key: string, dir: string) {
     const updaterFn = (this as any)[`${dir}Updater`];
-    updaterFn && updaterFn.call(this, node, key, this.vm[key]);
+    updaterFn && updaterFn.call(this, node, key, _get(this.vm, key));
   }
 
   // v-text 指令的更新方法
@@ -121,7 +123,7 @@ class Compiler {
     });
     // 双向绑定
     node.addEventListener('input', () => {
-      this.vm[key] = node.value;
+      _set(this.vm, key, node.value);
     });
   }
 }
