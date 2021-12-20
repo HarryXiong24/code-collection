@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>圣杯布局</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        min-width: 600px;
+      }
+
+      #header {
+        height: 20%;
+        background: gray;
+        text-align: center;
+      }
+
+      #footer {
+        height: 20%;
+        background: gray;
+        text-align: center;
+      }
+
+      #content {
+        padding: 0 200px;
+        height: 600px;
+      }
+
+      #content #middle {
+        width: 100%;
+        height: 600px;
+        float: left;
+        background: pink;
+        text-align: center;
+      }
+
+      #content #left {
+        position: relative;
+        left: -200px;
+        width: 200px;
+        height: 600px;
+        background: rgb(251, 255, 0);
+        float: left;
+        margin-left: -100%;
+        text-align: center;
+      }
+
+      #content #right {
+        position: relative;
+        right: -200px;
+        width: 200px;
+        height: 600px;
+        background: rgb(251, 255, 0);
+        float: left;
+        margin-left: -200px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 
+      1. 两边固定，中间自适应
+      2. 中间列要完整显示
+      3. 中间列要优先加载 -->
+    <div id="header">Header</div>
+    <div id="content">
+      <div id="middle">Middle</div>
+      <div id="left">left</div>
+      <div id="right">Right</div>
+    </div>
+    <div id="footer">Footer</div>
+  </body>
+</html>
