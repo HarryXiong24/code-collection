@@ -6,11 +6,11 @@ function start(route, handle) {
   const server = http.createServer((req, res) => {
     const pathname = req.url;
     console.log('Request for ' + pathname + ' received.');
-    route(handle, pathname);
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
     res.writeHead(200, { 'Content-Type': 'text/plain' });
-    res.write('Hello World');
+    const content = route(handle, pathname);
+    res.write(content);
     res.end();
   });
 
