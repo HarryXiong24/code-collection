@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>水平垂直居中</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .wrap {
+        width: 400px;
+        height: 400px;
+        position: relative;
+        background-color: yellow;
+        margin: 10px auto;
+      }
+
+      /* 已知高度 */
+      #inner1 {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        text-align: center;
+        line-height: 100px;
+        position: absolute;
+        margin: auto;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+      }
+
+      /* 未知高度 */
+      #inner2 {
+        background-color: pink;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div id="inner1">Test</div>
+    </div>
+    <div class="wrap">
+      <div id="inner2">Test</div>
+    </div>
+  </body>
+</html>
