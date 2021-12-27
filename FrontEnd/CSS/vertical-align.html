@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vertical-align</title>
+    <style>
+      #wrap {
+        width: 300px;
+        height: 300px;
+        border: 1px solid black;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      #wrap::after {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+
+      img {
+        vertical-align: middle;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="wrap">
+      <img
+        src="https://camo.githubusercontent.com/fc9e31e8c63d0b2c95a617da59542a96bc91bdfecae0b3427ab16abbd3c1a4cd/68747470733a2f2f6769746875622d726561646d652d73746174732e616e7572616768617a7261312e76657263656c2e6170702f6170692f746f702d6c616e67732f3f757365726e616d653d686172727978696f6e67323426686964653d6373732c68746d6c2c736373732c6c6573732c7374796c7573266c616e67735f636f756e743d3130266c61796f75743d636f6d70616374267468656d653d67727576626f78"
+        width="150"
+      />
+    </div>
+  </body>
+</html>
