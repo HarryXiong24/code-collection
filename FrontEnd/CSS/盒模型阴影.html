@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>盒模型阴影</title>
+    <style type="text/css">
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      #test {
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        margin: auto;
+        width: 100px;
+        height: 100px;
+        background: pink;
+        text-align: center;
+        line-height: 100px;
+
+        box-shadow: -10px -10px 10px 0px black, 20px 20px 10px -10px deeppink;
+        /* box-shadow: inset -10px -10px 10px 0px black, 20px 20px 10px -10px deeppink; */
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test">test</div>
+  </body>
+</html>
