@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>文字阴影</title>
+    <style>
+      .p1 {
+        font-size: 100px;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: gray 10px 10px 10px;
+      }
+
+      .p2 {
+        font-size: 100px;
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        text-shadow: gray 1px 1px 10px;
+      }
+
+      .p3 {
+        font-size: 100px;
+        font-weight: bold;
+        text-align: center;
+        text-shadow: gray 10px 10px 10px;
+        transition: 1s;
+      }
+
+      .p3:hover {
+        color: rgba(0, 0, 0, 0);
+        text-shadow: black 0px 0px 100px;
+      }
+    </style>
+  </head>
+  <body>
+    <p class="p1">Harry</p>
+    <p class="p2">Harry</p>
+    <p class="p3">Harry</p>
+  </body>
+</html>
