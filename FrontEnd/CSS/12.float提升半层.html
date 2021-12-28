@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>float 提升本层</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      #test1 {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+        float: left;
+      }
+
+      #test2 {
+        width: 100px;
+        height: 100px;
+        background-color: pink;
+        position: relative;
+      }
+
+      #test3 {
+        width: 100px;
+        height: 100px;
+        background-color: rgba(0, 243, 0, 0.952);
+      }
+    </style>
+  </head>
+  <body>
+    <div id="test1">div1</div>
+    <div id="test2">div2</div>
+    <div id="test3">div3</div>
+  </body>
+</html>
