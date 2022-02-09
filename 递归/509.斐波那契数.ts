@@ -25,5 +25,5 @@ export function fib(n: number): number {
 }
 
 // test
-const res = fib(4);
+const res = fib(10);
 console.log(res);
