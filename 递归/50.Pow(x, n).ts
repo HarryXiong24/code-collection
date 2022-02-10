@@ -25,7 +25,7 @@ function myPositivePow(x: number, n: number): number {
 }
 
 // 这里需要考虑正负
-function myPow(x: number, n: number): number {
+export function myPow(x: number, n: number): number {
   const power = n >= 0 ? n : -n;
   const res = myPositivePow(x, power);
   return n >= 0 ? res : 1 / res;
