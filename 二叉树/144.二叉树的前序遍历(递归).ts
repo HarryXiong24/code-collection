@@ -32,6 +32,7 @@ function preOrderTraversalNode(node: TreeNode | null, arr: number[]) {
   }
 }
 
+// 递归解法
 export function preorderTraversal(root: TreeNode | null): number[] {
   const result: number[] = [];
   if (root === null) {
