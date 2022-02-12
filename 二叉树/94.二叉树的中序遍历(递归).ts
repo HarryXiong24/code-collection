@@ -1,18 +1,24 @@
-// 144 二叉树的前序遍历
+// 94 二叉树的中序遍历
 
 /**
- * 给你二叉树的根节点 root ，返回它节点值的 前序 遍历
+ * 给定一个二叉树的根节点 root ，返回它的 中序 遍历
  * 示例 1：
  * 输入：root = [1,null,2,3]
- * 输出：[1,2,3]
+ * 输出：[1,3,2]
  * 示例 2：
  * 输入：root = []
  * 输出：[]
  * 示例 3：
  * 输入：root = [1]
+ * 输出：[1]
+ * 示例 4：
+ * 输入：root = [1,2]
+ * 输出：[2,1]
+ * 示例 5：
+ * 输入：root = [1,null,2]
+ * 输出：[1,2]
  */
 
-// Definition for a binary tree node.
 class TreeNode {
   val: number;
   left: TreeNode | null;
@@ -24,22 +30,20 @@ class TreeNode {
   }
 }
 
-function preorderTraversalNode(node: TreeNode | null, arr: number[]): void {
+function inorderTraversalNode(node: TreeNode | null, arr: number[]): void {
   if (node !== null) {
+    inorderTraversalNode(node.left, arr);
     arr.push(node.val);
-    preorderTraversalNode(node.left, arr);
-    preorderTraversalNode(node.right, arr);
+    inorderTraversalNode(node.right, arr);
   }
 }
 
-// 递归解法
-export function preorderTraversal(root: TreeNode | null): number[] {
+export function inorderTraversal(root: TreeNode | null): number[] {
   const result: number[] = [];
   if (root === null) {
     return result;
   } else {
-    preorderTraversalNode(root, result);
+    inorderTraversalNode(root, result);
   }
-
   return result;
 }
