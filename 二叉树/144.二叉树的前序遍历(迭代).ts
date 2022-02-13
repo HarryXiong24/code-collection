@@ -25,13 +25,6 @@ class TreeNode {
 }
 
 // 迭代解法
-/**
- * 解题思路
- * 定义一个栈
- * 将根元素压入栈中
- * 迭代，当栈中有元素时，就出栈,然后将该元素的两个节点压入栈中
- * 注意，因为栈是先进后出，所以先压入右节点，再压入左节点
- */
 export function preorderTraversal(root: TreeNode | null): number[] {
   // root 为 null 则直接返回
   if (root === null) {
