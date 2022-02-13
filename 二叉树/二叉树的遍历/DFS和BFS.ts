@@ -12,7 +12,7 @@ class TreeNode {
 }
 
 // DFS
-function dfs(root: TreeNode | null) {
+export function dfs(root: TreeNode | null) {
   if (root === null) {
     return;
   }
@@ -21,13 +21,13 @@ function dfs(root: TreeNode | null) {
 }
 
 // BFS
-function bfs(root: TreeNode | null) {
+export function bfs(root: TreeNode | null) {
   if (root === null) {
     return;
   }
   const q: TreeNode[] = [root];
   while (q.length !== 0) {
-    const node = q.pop() as TreeNode;
+    const node = q.shift() as TreeNode;
     if (node.left) {
       q.push(node.left);
     }
