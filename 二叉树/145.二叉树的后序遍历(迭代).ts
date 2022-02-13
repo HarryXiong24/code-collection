@@ -23,3 +23,29 @@ class TreeNode {
     this.right = right === undefined ? null : right;
   }
 }
+
+export function postorderTraversal(root: TreeNode | null): number[] {
+  if (root === null) {
+    return [];
+  }
+  const result: number[] = [];
+  const stack: TreeNode[] = [];
+  let node: TreeNode | null = root;
+  let prev: TreeNode | null = null;
+  while (node !== null || stack.length !== 0) {
+    while (node !== null) {
+      stack.push(node);
+      node = node.left!;
+    }
+    node = stack.pop()!;
+    if (node.right === null || node.right === prev) {
+      result.push(node.val);
+      prev = node;
+      node = null;
+    } else {
+      stack.push(node);
+      node = node.right!;
+    }
+  }
+  return result;
+}
