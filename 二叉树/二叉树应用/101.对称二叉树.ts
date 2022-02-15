@@ -27,12 +27,6 @@ class TreeNode {
  * 随后 p 右移时，q 左移，p 左移时，q 右移
  * 每次检查当前 p 和 q 节点的值是否相等，如果相等再判断左右子树是否对称。
  */
-export function isSymmetric(root: TreeNode | null): boolean {
-  if (root === null) {
-    return true;
-  }
-  return checkNode(root, root);
-}
 
 function checkNode(left: TreeNode | null, right: TreeNode | null): boolean {
   if (left === null && right === null) {
@@ -43,4 +37,11 @@ function checkNode(left: TreeNode | null, right: TreeNode | null): boolean {
   }
   const result = left.val === right.val && checkNode(left.left, right.right) && checkNode(left.right, right.left);
   return result;
+}
+
+export function isSymmetric(root: TreeNode | null): boolean {
+  if (root === null) {
+    return true;
+  }
+  return checkNode(root, root);
 }
