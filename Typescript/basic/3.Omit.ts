@@ -18,7 +18,7 @@ const todo: TodoPreview = {
 
 // solution
 // 如果 T 不在 K 里面，保存 K
-type MyExclude<K, T> = K extends T ? never : K;
+type MyExclude<T, K> = T extends K ? never : T;
 export type MyOmit<T, K extends keyof T> = {
   [P in MyExclude<keyof T, K>]: T[P];
 };
