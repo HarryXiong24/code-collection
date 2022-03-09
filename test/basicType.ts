@@ -21,18 +21,10 @@ export type MyReadonly<T> = {
 };
 
 // Parameters
-export type MyParameters<T extends (...args: any) => any> = T extends (
-  ...args: infer K
-) => any
-  ? K
-  : never;
+export type MyParameters<T extends (...args: any) => any> = T extends (...args: infer K) => any ? K : never;
 
 // ReturnType
-export type MyReturnType<T extends (...args: any) => any> = T extends (
-  ...args: any
-) => infer K
-  ? K
-  : never;
+export type MyReturnType<T extends (...args: any[]) => any> = T extends (...args: any[]) => infer K ? K : never;
 
 // Includes
 export type MyIncludes<T extends any[], K> = K extends T[number] ? true : false;
