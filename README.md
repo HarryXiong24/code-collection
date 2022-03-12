@@ -1,6 +1,6 @@
 # CodeBank
 
-记录我的刷题历程，包含 LeetCode，数据结构与算法，Javascript 练习题，Typescript 练习题。
+记录我的刷题历程，包含数据结构与算法，Javascript 练习题，Typescript 练习题。
 
 其中部分目录结构含义如下：
 
