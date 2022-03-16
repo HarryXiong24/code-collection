@@ -8,7 +8,7 @@
 2. test：存放一些用于复习、测试的文件
 3. Typescript: 存放一些 Typescript 类型练习题目
 4. Frontend：和前端相关的练习题目
-5. Nodejs：一些 nodejs 的练习
+5. NodeJS：一些 nodejs 的练习
 
 注：
 
