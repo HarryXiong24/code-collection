@@ -5,11 +5,7 @@
  */
 
 // solution
-export type MyReturnType<T extends (...args: any) => any> = T extends (
-  ...args: any[]
-) => infer R
-  ? R
-  : any;
+export type MyReturnType<T extends (...args: any[]) => any> = T extends (...args: any[]) => infer R ? R : never;
 
 // test
 const fn = (v: boolean) => {

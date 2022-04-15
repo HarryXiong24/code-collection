@@ -1,17 +1,17 @@
 # CodeBank
 
-记录我的刷题历程，包含 LeetCode，数据结构与算法，Javascript 练习题，Typescript 练习题。
+记录我的刷题历程，包含数据结构与算法，Javascript 练习题，Typescript 练习题。
 
 其中部分目录结构含义如下：
 
 1. docs：存放一些关于数据结构和算法的文档
-2. tests：存放一些用于复习、测试的文件
-3. Typescript: 存放一些 Typescript 的练习题目
-4. Frontend：和前端相关的编程题目
+2. test：存放一些用于复习、测试的文件
+3. Typescript: 存放一些 Typescript 类型练习题目
+4. Frontend：和前端相关的练习题目
+5. NodeJS：一些 nodejs 的练习
 
 注：
 
 1. 数据结构和算法文件夹中有序号的题目为力扣中能找到的题目
 2. 因为有些模块、题目、解法可以归纳到不同的板块，所以有些内容会在不同的地方出现重复
 3. 本仓库不只有算法题，还涵盖前端的一些知识归纳
-
