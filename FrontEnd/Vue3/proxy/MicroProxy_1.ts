@@ -1,4 +1,4 @@
-// 存储副作用的桶
+// 存储代理对象的桶
 const bucket = new WeakMap<Record<string, any>>();
 
 // 通用 effect

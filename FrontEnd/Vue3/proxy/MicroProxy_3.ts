@@ -1,11 +1,38 @@
+interface Effect {
+  (...any: any[]): any;
+  deps: Array<Set<(...any: any[]) => any>>;
+}
+
+type KeyMap = Map<string, Set<Effect>>;
+
+type TargetMap = WeakMap<Record<string, any>, KeyMap>;
+
 // 存储代理对象的桶
-const bucket = new WeakMap<Record<string, any>>();
+const bucket: TargetMap = new WeakMap();
 
 // 通用 effect
-let activeEffect: (...any: any[]) => any;
+let activeEffect: Effect;
+
 function effect(fn: (...any: any[]) => any) {
-  activeEffect = fn;
-  fn();
+  const effectFn: Effect = () => {
+    cleanup(effectFn);
+    // 当 effectFn 执行时，将其设置为当前激活的副作用函数
+    activeEffect = effectFn;
+    fn();
+  };
+  // activeEffect.deps 用来存储所有与该副作用函数想关联的依赖集合
+  effectFn.deps = [];
+  // 执行副作用函数
+  effectFn();
+}
+
+function cleanup(effectFn: Effect) {
+  // 遍历 deps 数组
+  for (let i = 0; i < effectFn.deps.length; i++) {
+    const deps = effectFn.deps[i];
+    deps.delete(effectFn);
+  }
+  effectFn.deps.length = 0;
 }
 
 // 原始数据
@@ -38,16 +65,18 @@ function track(target: Record<string, any>, key: string) {
   let depsMap = bucket.get(target);
   // 如果没有则新建（第一次时情况）
   if (!depsMap) {
-    bucket.set(target, (depsMap = new Map()));
+    bucket.set(target, (depsMap = new Map<string, Set<Effect>>()));
   }
   // 取出指定对象属性里的 effects list
   let deps = depsMap.get(key);
   // 没有则新建
   if (!deps) {
-    depsMap.set(key, (deps = new Set()));
+    depsMap.set(key, (deps = new Set<Effect>()));
   }
-  // 将当前副作用函数存入桶
+  // 将当前副作用函数存入
   deps.add(activeEffect);
+  // deps 就是一个与当前副作用函数存在练习的依赖集合
+  activeEffect.deps.push(deps);
 }
 
 // 用于 set 函数中触发变化
@@ -57,8 +86,10 @@ function trigger(target: Record<string, any>, key: string) {
     return;
   }
   const effects = depsMap.get(key);
+
   // 把收集的副作用都执行一遍
-  effects && effects.forEach((fn: (...any: any[]) => any) => fn());
+  const effectsToRun = new Set(effects);
+  effectsToRun.forEach((fn) => fn());
 }
 
 // 测试
@@ -72,6 +103,3 @@ effect(changeText);
 setTimeout(() => {
   obj.text = 'hello vue3';
 }, 1000);
-
-// 必须模块化才不会报错，测试的时候可以删除这一句
-export default obj;
