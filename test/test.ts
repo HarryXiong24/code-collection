@@ -8,13 +8,22 @@
 //   console.log(item);
 // }
 
-function* generator() {
-  console.log('111');
-  yield 123 + 789;
-}
+// function* generator() {
+//   console.log('111');
+//   yield 123 + 789;
+// }
 
-const fun = generator();
+// const fun = generator();
 
-console.log(fun.next());
-fun.next();
-fun.next();
+// console.log(fun.next());
+// fun.next();
+// fun.next();
+
+const example = new Promise((resolve) => {
+  console.log('aaa');
+  resolve('bbb');
+});
+
+example.then((str) => {
+  console.log(str);
+});
