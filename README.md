@@ -5,10 +5,10 @@
 其中部分目录结构含义如下：
 
 1. docs：存放一些关于数据结构和算法的文档
-2. test：存放一些用于复习、测试的文件
+2. test：存放一些用于测试、复习的文件
 3. Typescript: 存放一些 Typescript 类型练习题目
-4. Frontend：和前端相关的练习题目
-5. NodeJS：一些 nodejs 的练习
+4. Frontend：存放一些和前端相关的知识点
+5. NodeJS：存放一些 nodejs 的练习
 
 注：
 
