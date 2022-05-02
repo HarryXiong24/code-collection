@@ -103,3 +103,6 @@ effect(changeText);
 setTimeout(() => {
   obj.text = 'hello vue3';
 }, 1000);
+
+// 必须模块化才不会报错，测试的时候可以删除这一句
+export default obj;
