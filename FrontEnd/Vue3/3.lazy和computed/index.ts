@@ -1,5 +1,6 @@
 interface Options {
   scheduler?: (...any: any[]) => any;
+  lazy?: boolean;
 }
 
 interface Effect {
@@ -27,17 +28,26 @@ function effect(fn: (...any: any[]) => any, options: Options = {}) {
     activeEffect = effectFn;
     // 在调用副作用函数之前将当前副作用函数压入栈中
     effectStack.push(effectFn);
-    fn();
+    // 将 fn 的执行结果储存到 res 中
+    const res = fn();
     // 在当前副作用函数执行完毕之后，将当前副作用函数弹出栈，并把 activeEffect 还原为之前的值
     effectStack.pop();
     activeEffect = effectStack[effectStack.length - 1];
+    // 将 res 作用 effectFn 的返回值
+    return res;
   };
   // 将 options 挂载到 effectFn 上
   effectFn.options = options;
   // activeEffect.deps 用来存储所有与该副作用函数想关联的依赖集合
   effectFn.deps = [];
-  // 执行副作用函数
-  effectFn();
+  // 只有 lazy 为 false 的时候，才立即执行副作用函数
+  if (!options.lazy) {
+    // 执行副作用函数
+    effectFn();
+  }
+  // 否则将副作用函数作为返回值返回
+  // 作为返回值返回，则需要手动触发
+  return effectFn;
 }
 
 function cleanup(effectFn: Effect) {
@@ -53,6 +63,7 @@ function cleanup(effectFn: Effect) {
 const data: Record<string, any> = {
   text: 'hello word',
   foo: 0,
+  bar: 1,
 };
 
 // 代理
@@ -123,63 +134,46 @@ function trigger(target: Record<string, any>, key: string) {
   });
 }
 
-// 测试
+// 计算函数
+function computed(getter: (...any: any[]) => any) {
+  // 用来缓存上一次计算的值
+  let value: any;
+  // 标志，用来表示是否需要重新计算值，为 true 则表示需要重新计算
+  let dirty = true;
 
-// 无调度器时，打印 0 1 end
-// effect(() => {
-//   console.log('effect run', obj.foo);
-// });
-// obj.foo++;
-// console.log('end');
+  // 把 getter 作为一个副作用函数，创建一个 lazy 的 effect
+  const effectFn = effect(getter, {
+    lazy: true,
+    // 添加调度器，在调度器中 dirty 重置为 true
+    scheduler() {
+      if (!dirty) {
+        dirty = true;
+        // 当计算属性依赖的响应式数据变化时，手动调用 trigger 函数触发响应
+        trigger(obj, 'value');
+      }
+    },
+  });
 
-// 通过调度器，实现打印 0 end 1
-// effect(
-//   () => {
-//     console.log('effect run', obj.foo);
-//   },
-//   {
-//     scheduler(fn) {
-//       setTimeout(fn);
-//     },
-//   }
-// );
-// obj.foo++;
-// console.log('end');
+  const obj = {
+    // 当读取 value 时才执行 effectFn
+    get value() {
+      if (dirty) {
+        value = effectFn();
+        dirty = false;
+      }
+      // 当读取 value 时，收到调用 track 函数进行追踪
+      trigger(obj, 'value');
+      return value;
+    },
+  };
 
-// 实现去除中间状态，本来会打印 0 1 2 3，现在只打印 0 3
-// 类似 vue 中多次修改响应式数据但只触发一次更新
-const jobSet = new Set<(...any: any[]) => any>();
-
-let isFlushing = false;
-function flushJob() {
-  if (isFlushing) {
-    return;
-  }
-  isFlushing = true;
-  Promise.resolve()
-    .then(() => {
-      jobSet.forEach((job) => job());
-    })
-    .finally(() => {
-      isFlushing = false;
-    });
+  return obj;
 }
 
-effect(
-  () => {
-    console.log('effect run', obj.foo);
-  },
-  {
-    scheduler(fn) {
-      jobSet.add(fn);
-      flushJob();
-    },
-  }
-);
+// 测试
+const sum = computed(() => obj.foo + obj.bar);
+console.log('result', sum.value);
+console.log('result', sum.value);
+console.log('result', sum.value);
 obj.foo++;
-obj.foo++;
-obj.foo++;
-console.log('end');
-
-// 必须模块化才不会报错，测试的时候可以删除这一句
-export default obj;
+console.log('result', sum.value);
