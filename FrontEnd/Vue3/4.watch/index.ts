@@ -176,7 +176,11 @@ function computed(getter: (...any: any[]) => any) {
 
 // watch 函数
 // watch 可以接受一个响应式数据或者一个 getter 函数
-function watch(source: any, cb: (newValue: any, oldValue: any, ...any: any[]) => any, options: WatchOptions = {}) {
+function watch(
+  source: any,
+  cb: (newValue?: any, oldValue?: any, onInvalidDate?: any, ...any: any[]) => any,
+  options: WatchOptions = {}
+) {
   let getter: any;
   if (typeof source === 'function') {
     getter = source;
@@ -186,13 +190,26 @@ function watch(source: any, cb: (newValue: any, oldValue: any, ...any: any[]) =>
   // 定义新值和旧值
   let oldValue: any;
   let newValue: any;
+  // 用来存储用户注册的过期回调
+  let cleanup: any;
+  function onInvalidDate(fn: (...any: any[]) => any) {
+    // 将过期的回调存储到 cleanup 中
+    cleanup = fn;
+  }
   const job = () => {
+    console.log('1 new, old', newValue, oldValue);
     newValue = effectFn();
+    // 在调用回调函数 cb 之前，先调用过期的回调
+    if (cleanup) {
+      cleanup();
+    }
     // 当数据变化时，调用回调函数 cb
     // 同时将旧值和新值作用回调函数的参数
-    cb(newValue, oldValue);
+    console.log('2 new, old', newValue, oldValue);
+    cb(newValue, oldValue, onInvalidDate);
     // 更新旧值，不然下一次会得到错误的旧值
     oldValue = newValue;
+    console.log('3 new, old', newValue, oldValue);
   };
   const effectFn = effect(
     // 调用 traverse 函数递归读取
@@ -208,6 +225,7 @@ function watch(source: any, cb: (newValue: any, oldValue: any, ...any: any[]) =>
   } else {
     // 手动调用副作用函数，拿到的就是旧值
     oldValue = effectFn();
+    console.log('0 new, old', newValue, oldValue);
   }
 }
 
@@ -233,7 +251,7 @@ watch(
     console.log(newValue, oldValue);
   },
   {
-    immediate: true,
+    immediate: false,
   }
 );
 obj.foo++;
