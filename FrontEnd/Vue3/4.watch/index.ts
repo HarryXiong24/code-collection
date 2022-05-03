@@ -1,12 +1,16 @@
-interface Options {
+interface EffectOptions {
   scheduler?: (...any: any[]) => any;
   lazy?: boolean;
+}
+
+interface WatchOptions {
+  immediate?: boolean;
 }
 
 interface Effect {
   (...any: any[]): any;
   deps: Array<Set<(...any: any[]) => any>>;
-  options: Options;
+  options: EffectOptions;
 }
 
 type KeyMap = Map<string, Set<Effect>>;
@@ -21,7 +25,7 @@ let activeEffect: Effect;
 // effect 栈，用来保存嵌套的 effect
 const effectStack: Effect[] = [];
 
-function effect(fn: (...any: any[]) => any, options: Options = {}) {
+function effect(fn: (...any: any[]) => any, options: EffectOptions = {}) {
   const effectFn: Effect = () => {
     cleanup(effectFn);
     // 当 effectFn 执行时，将其设置为当前激活的副作用函数
@@ -170,13 +174,66 @@ function computed(getter: (...any: any[]) => any) {
   return obj;
 }
 
-// 测试
-const sum = computed(() => obj.foo + obj.bar);
-console.log('result', sum.value);
-console.log('result', sum.value);
-console.log('result', sum.value);
-obj.foo++;
-console.log('result', sum.value);
+// watch 函数
+// watch 可以接受一个响应式数据或者一个 getter 函数
+function watch(source: any, cb: (newValue: any, oldValue: any, ...any: any[]) => any, options: WatchOptions = {}) {
+  let getter: any;
+  if (typeof source === 'function') {
+    getter = source;
+  } else {
+    getter = () => traverse(source);
+  }
+  // 定义新值和旧值
+  let oldValue: any;
+  let newValue: any;
+  const job = () => {
+    newValue = effectFn();
+    // 当数据变化时，调用回调函数 cb
+    // 同时将旧值和新值作用回调函数的参数
+    cb(newValue, oldValue);
+    // 更新旧值，不然下一次会得到错误的旧值
+    oldValue = newValue;
+  };
+  const effectFn = effect(
+    // 调用 traverse 函数递归读取
+    () => getter(),
+    {
+      lazy: true,
+      scheduler: job,
+    }
+  );
+  if (options.immediate) {
+    // 立即触发回调函数
+    job();
+  } else {
+    // 手动调用副作用函数，拿到的就是旧值
+    oldValue = effectFn();
+  }
+}
 
-// 必须模块化才不会报错，测试的时候可以删除这一句
-export default obj;
+// 读取对象上的任意属性，使得任意属性发生变化的时候都能够触发回调函数的执行
+function traverse(value: Record<string, any>, seen = new Set()) {
+  // 如果要读取的数据是原始值，或者已经被读取过了，那么什么都不会做
+  if (typeof value !== 'object' || value === null || seen.has(value)) {
+    return;
+  }
+  // 将数据添加到 seen 中，代表遍历读取过了，避免循环引用引起的死循环
+  seen.add(value);
+  // 暂时不考虑数组等其他结构，假设 value 就是一个对象
+  for (const k in value) {
+    traverse(value[k], seen);
+  }
+  return value;
+}
+
+// 测试
+watch(
+  obj,
+  (newValue, oldValue) => {
+    console.log(newValue, oldValue);
+  },
+  {
+    immediate: true,
+  }
+);
+obj.foo++;
