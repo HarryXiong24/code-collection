@@ -57,7 +57,7 @@ middleware.push(async (ctx, next) => {
 middleware.push(async (ctx, next) => {
   console.log('action 002');
   ctx.data.push(2);
-  // await next();
+  await next();
   console.log('action 005');
   ctx.data.push(5);
 });
