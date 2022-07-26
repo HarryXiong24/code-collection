@@ -118,7 +118,6 @@
   // 屏蔽vetur的js格式化
   "vetur.format.defaultFormatter.js": "vscode-typescript",
   "vetur.format.options.useTabs": true,
-  "editor.renderIndentGuides": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
   // "typescript.validate.enable": false,
   // "javascript.validate.enable": false,
@@ -161,7 +160,8 @@
   // "cSpell.userWords": ["tempstats"],
   "security.workspace.trust.untrustedFiles": "newWindow",
   "git.ignoreLegacyWarning": true,
-  "git.autofetch": true
+  "git.autofetch": true,
+  "editor.guides.indentation": true
   // "devops.accessToken": "",
   // "devops.accountId": "harryxiong",
   // "devops.agentPath": "Users/brooklin/agent"
