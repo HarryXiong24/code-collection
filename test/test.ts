@@ -27,3 +27,9 @@ const example = new Promise((resolve) => {
 example.then((str) => {
   console.log(str);
 });
+
+function Test() {
+  console.log('1');
+}
+
+console.log(Test);
