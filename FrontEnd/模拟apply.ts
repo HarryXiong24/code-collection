@@ -6,6 +6,11 @@ interface Function {
 }
 
 Function.prototype.myApply = function (context: any, arr: any[]) {
+  // 用于防止 Function.prototype.myCall() 直接调用
+  if (this === Function.prototype) {
+    return undefined;
+  }
+
   context = Object(context) || window;
   context.fn = this;
   let result;

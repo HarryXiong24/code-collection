@@ -13,7 +13,12 @@ interface Function {
   myCall: Function;
 }
 
-Function.prototype.myCall = function (context: any, ...args: any) {
+Function.prototype.myCall = function (context: any, ...args: any[]) {
+  // 用于防止 Function.prototype.myCall() 直接调用
+  if (this === Function.prototype) {
+    return undefined;
+  }
+
   context = Object(context) || window;
   context.fn = this;
   const result = context.fn(...args);
@@ -27,7 +32,7 @@ let myCall = function (this: any, arg1: number, arg2: number) {
   console.log(this.m, arg1, arg2);
 };
 let myCallObj = {
-  n: 1,
+  m: 1,
 };
 
 // myCall(5, 4);
