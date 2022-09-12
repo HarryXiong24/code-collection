@@ -11,22 +11,21 @@ from typing import List
 class Solution:
 
     def removeElement(self, nums: List[int], val: int) -> int:
-        # 左指针左边的数均为 0
-        left = 0
-        right = 0
-        while right < len(nums):
-            if nums[right] != val:
-                temp = nums[right]
-                nums[right] = nums[left]
-                nums[left] = temp
-                left = left + 1
-            right = right + 1
-        return left
+        # slow 指针左边的数均为 0
+        slow = 0
+        fast = 0
+        while fast < len(nums):
+            if nums[fast] != val:
+                temp = nums[fast]
+                nums[fast] = nums[slow]
+                nums[slow] = temp
+                slow = slow + 1
+            fast = fast + 1
+        return slow
 
 
 # test
-# test
-test = [0, 1, 2, 2, 3, 0, 4, 2]
+arr = [0, 1, 2, 2, 3, 0, 4, 2]
 solution = Solution()
-res = solution.removeElement(test, 2)
-print(res, test)
+res = solution.removeElement(arr, 2)
+print(res, arr)

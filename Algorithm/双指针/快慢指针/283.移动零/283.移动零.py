@@ -26,15 +26,15 @@ class Solution:
         """
         Do not return anything, modify nums in-place instead.
         """
-        left = 0
-        right = 0
-        while right < len(nums):
-            if nums[right] != 0:
-                temp = nums[right]
-                nums[right] = nums[left]
-                nums[left] = temp
-                left = left + 1
-            right = right + 1
+        slow = 0
+        fast = 0
+        while fast < len(nums):
+            if nums[fast] != 0:
+                temp = nums[fast]
+                nums[fast] = nums[slow]
+                nums[slow] = temp
+                slow = slow + 1
+            fast = fast + 1
 
     # 法二
     def moveZeroes2(self, nums: List[int]) -> None:

@@ -18,16 +18,16 @@
  */
 
 export function moveZeroes(nums: number[]): void {
-  let left: number = 0;
-  let right: number = 0;
-  while (right < nums.length) {
-    if (nums[right] !== 0) {
-      const temp = nums[right];
-      nums[right] = nums[left];
-      nums[left] = temp;
-      left++;
+  let slow: number = 0;
+  let fast: number = 0;
+  while (fast < nums.length) {
+    if (nums[fast] !== 0) {
+      const temp = nums[fast];
+      nums[fast] = nums[slow];
+      nums[slow] = temp;
+      slow++;
     }
-    right++;
+    fast++;
   }
 }
 
