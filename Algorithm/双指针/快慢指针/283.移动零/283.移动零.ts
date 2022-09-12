@@ -8,6 +8,7 @@
  */
 
 /**
+ * 法一：
  * 使用双指针，左指针指向当前已经处理好的序列的尾部，右指针指向待处理序列的头部
  * 右指针不断向右移动，每次右指针指向非零数，则将左右指针对应的数交换，同时左指针右移
  * 注意到以下性质：
@@ -30,7 +31,30 @@ export function moveZeroes(nums: number[]): void {
   }
 }
 
+/**
+ * 法二：
+ * 将非 0 的元素移动至前面，后面补 0
+ */
+
+export function moveZeroes2(nums: number[]): void {
+  let index: number = 0;
+  const len = nums.length;
+  for (let i = 0; i < len; i++) {
+    if (nums[i] !== 0) {
+      nums[index] = nums[i];
+      index++;
+    }
+  }
+  // 补 0
+  for (let i = index; i < len; i++) {
+    nums[i] = 0;
+  }
+}
+
 // test
 const arr: number[] = [0, 1, 0, 3, 12];
+const arr2: number[] = [0, 1, 0, 3, 12];
 moveZeroes(arr);
+moveZeroes2(arr2);
 console.log(arr);
+console.log(arr2);
