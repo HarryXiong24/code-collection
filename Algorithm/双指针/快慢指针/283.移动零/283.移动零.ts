@@ -15,6 +15,7 @@
  * 2.右指针左边直到左指针处均为零
  * 因此每次交换，都是将左指针的零与右指针的非零数交换，且非零数的相对顺序并未改变。
  */
+
 export function moveZeroes(nums: number[]): void {
   let left: number = 0;
   let right: number = 0;
