@@ -22,3 +22,7 @@ class Solution:
 
 
 # test
+arr = [0, 0, 1, 1, 1, 1, 2, 3, 3]
+solution = Solution()
+res = solution.removeDuplicates(arr)
+print(res)
