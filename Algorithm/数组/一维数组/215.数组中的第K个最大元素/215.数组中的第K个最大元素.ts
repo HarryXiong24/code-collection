@@ -5,6 +5,8 @@
  * 请注意，你需要找的是数组排序后的第 k 个最大的元素，而不是第 k 个不同的元素
  */
 
+// 思路： 先排序，之后再倒数的取出数即可
+
 export function findKthLargest(nums: number[], k: number): number {
   nums = nums.sort((a, b) => {
     return a - b;

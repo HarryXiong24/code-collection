@@ -15,7 +15,7 @@
 /**
  Do not return anything, modify nums in-place instead.
  */
-function sortColors(nums: number[]): void {
+export function sortColors(nums: number[]): void {
   for (let i = 0; i < nums.length; i++) {
     for (let j = 1; j < nums.length; j++) {
       if (nums[j] < nums[j - 1]) {
