@@ -20,12 +20,12 @@ export function longestPalindrome(s: string): string {
 
   for (let i = 0; i < s.length; i++) {
     // 分别处理奇数偶数情况
-    getResult(i, i, s.length);
-    getResult(i, i + 1, s.length);
+    getResult(i, i);
+    getResult(i, i + 1);
   }
 
-  function getResult(m: number, n: number, length: number) {
-    while (m >= 0 && n < length && s[m] == s[n]) {
+  function getResult(m: number, n: number) {
+    while (m >= 0 && n < s.length && s[m] == s[n]) {
       m--;
       n++;
     }
