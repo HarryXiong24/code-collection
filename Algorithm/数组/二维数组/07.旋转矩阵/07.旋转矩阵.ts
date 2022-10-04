@@ -24,10 +24,7 @@ export function rotate(matrix: number[][]): void {
   // 水平翻转
   for (let i = 0; i < Math.floor(n / 2); i++) {
     for (let j = 0; j < n; j++) {
-      [matrix[i][j], matrix[n - i - 1][j]] = [
-        matrix[n - i - 1][j],
-        matrix[i][j],
-      ];
+      [matrix[i][j], matrix[n - i - 1][j]] = [matrix[n - i - 1][j], matrix[i][j]];
     }
   }
   // 主对角线翻转
