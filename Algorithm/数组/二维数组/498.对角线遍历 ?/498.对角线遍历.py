@@ -16,4 +16,46 @@ from typing import List
 class Solution:
 
     def findDiagonalOrder(self, mat: List[List[int]]) -> List[int]:
-        return []
+        res = []
+        row = len(mat)
+        col = len(mat[0])
+
+        # 从 0 开始计算每层
+        for l in range(row + col - 1):
+            temp = []
+            x = 0
+            y = 0
+
+            # 每第 l 层从最右边开始计算
+            if l < col:
+                x = 0
+            else:
+                x = l - col + 1
+
+            if l < col:
+                y = l
+            else:
+                y = col - 1
+
+            while x < row and y >= 0:
+                temp.append(mat[x][y])
+                x = x + 1
+                y = y - 1
+
+            if l % 2 == 0:
+                temp.reverse()
+
+            res.extend(temp)
+
+        return res
+
+
+# test
+arr = [
+    [1, 2, 3],
+    [4, 5, 6],
+    [7, 8, 9],
+]
+solution = Solution()
+res = solution.findDiagonalOrder(arr)
+print(res)
