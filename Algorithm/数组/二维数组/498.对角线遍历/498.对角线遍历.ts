@@ -16,7 +16,7 @@
 
 export function findDiagonalOrder(mat: number[][]): number[] {
   // 用于存放结果的数组
-  const res = [];
+  const res: number[] = [];
   // 矩阵 row
   const row = mat.length;
   // 矩阵 col
@@ -24,7 +24,7 @@ export function findDiagonalOrder(mat: number[][]): number[] {
 
   // 对角线遍历，画图可知共需遍历 h + w - 1 层，从 0 开始计算每层
   for (let l = 0; l < row + col - 1; l++) {
-    const tmp = [];
+    const tmp: number[] = [];
 
     // 第 l 层从右上角作为起始点
     let x = l < col ? 0 : l - col + 1; // 起始点横坐标
