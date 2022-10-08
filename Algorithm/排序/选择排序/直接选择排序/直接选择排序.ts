@@ -18,7 +18,7 @@ export function chooseSort(nums: number[]): number[] {
         minIndex = j;
       }
     }
-    let temp = nums[minIndex];
+    const temp = nums[minIndex];
     nums[minIndex] = nums[i];
     nums[i] = temp;
   }
