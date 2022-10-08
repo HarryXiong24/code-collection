@@ -12,9 +12,9 @@ export function bubblingSort(nums: number[]): number[] {
   // i 表示本次冒泡参与的轮次数
   for (let i = nums.length; i > 0; i--) {
     // j 表示交换每轮需要交换的次数
-    for (let j = 0; j < i; j++) {
+    for (let j = 0; j < i - 1; j++) {
       if (nums[j] > nums[j + 1]) {
-        let temp = nums[j];
+        const temp = nums[j];
         nums[j] = nums[j + 1];
         nums[j + 1] = temp;
       }
@@ -24,5 +24,5 @@ export function bubblingSort(nums: number[]): number[] {
 }
 
 // test
-const res = bubblingSort([10, 1, 3, 2, 9, 1, 5, 6]);
+const res = bubblingSort([3, 10, 1, 2, 9, 1, 5, 6]);
 console.log(res);
