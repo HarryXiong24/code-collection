@@ -16,6 +16,7 @@ export function quickSort(nums: number[]): number[] {
   let pivot = nums.splice(pivotIndex, 1)[0];
   let left = [];
   let right = [];
+  nums.splice(pivotIndex, 0);
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] < pivot) {
       left.push(nums[i]);
@@ -25,3 +26,7 @@ export function quickSort(nums: number[]): number[] {
   }
   return quickSort(left).concat([pivot], quickSort(right));
 }
+
+// test
+const res = quickSort([10, 1, 3, 2, 9, 1, 5, 6]);
+console.log(res);

@@ -42,3 +42,7 @@ export function quickSort(nums: number[]): number[] {
   sort(0, nums.length - 1);
   return nums;
 }
+
+// test
+const res = quickSort([10, 1, 3, 2, 9, 1, 5, 6]);
+console.log(res);
