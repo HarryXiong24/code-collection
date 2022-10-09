@@ -12,11 +12,11 @@ export function quickSort(nums: number[]): number[] {
   if (nums.length <= 1) {
     return nums;
   }
-  let pivotIndex = Math.floor(nums.length / 2);
-  let pivot = nums.splice(pivotIndex, 1)[0];
-  let left = [];
-  let right = [];
-  nums.splice(pivotIndex, 0);
+  const pivotIndex = Math.floor(nums.length / 2);
+  // 注意这里已经去掉了 pivot 在数组里的值
+  const pivot = nums.splice(pivotIndex, 1)[0];
+  const left = [];
+  const right = [];
   for (let i = 0; i < nums.length; i++) {
     if (nums[i] < pivot) {
       left.push(nums[i]);

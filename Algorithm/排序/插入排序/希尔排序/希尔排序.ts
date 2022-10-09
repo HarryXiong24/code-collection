@@ -34,7 +34,7 @@ export function shellSort(nums: number[]): number[] {
 }
 
 function swap(nums: number[], i: number, j: number) {
-  let temp: number = nums[i];
+  const temp: number = nums[i];
   nums[i] = nums[j];
   nums[j] = temp;
 }
