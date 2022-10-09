@@ -9,7 +9,8 @@
  */
 
 function merge(left: number[], right: number[]): number[] {
-  var result: number[] = [];
+  let result: number[] = [];
+  // 合并有序列表
   while (left.length > 0 && right.length > 0) {
     if (left[0] < right[0]) {
       result.push(left.shift()!);
@@ -24,13 +25,17 @@ function merge(left: number[], right: number[]): number[] {
 // 对数组进行拆分
 export function mergeSort(nums: number[]): number[] {
   // 当数组只有一个元素的时候就返回该数组
-  if (nums.length == 1) {
+  if (nums.length === 1) {
     return nums;
   }
   // 否则把数组分成左右两部分
-  let middle: number = Math.floor(nums.length / 2);
-  let left: number[] = nums.slice(0, middle);
-  let right: number[] = nums.slice(middle);
+  const middle: number = Math.floor(nums.length / 2);
+  const left: number[] = nums.slice(0, middle);
+  const right: number[] = nums.slice(middle);
   // 对左右两边进行拆分后进行归并排序
   return merge(mergeSort(left), mergeSort(right));
 }
+
+// test
+const res = mergeSort([10, 1, 3, 2, 9, 1, 5, 6]);
+console.log(res);
