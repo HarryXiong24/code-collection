@@ -13,15 +13,23 @@
  */
 
 export function fib(n: number): number {
-  if (n === 0) {
-    return 0;
+  let res = 0;
+  // 使用集合来存放记忆出现过的值
+  const cache: Map<number, number> = new Map();
+
+  if (cache.has(n)) {
+    return res;
   }
 
-  if (n === 1) {
-    return 1;
+  if (n < 2) {
+    return n;
+  } else {
+    res = fib(n - 1) + fib(n - 2);
   }
 
-  return fib(n - 1) + fib(n - 2);
+  cache.set(n, res);
+
+  return res;
 }
 
 // test
