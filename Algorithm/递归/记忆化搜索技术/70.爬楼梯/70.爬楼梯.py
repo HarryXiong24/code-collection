@@ -10,11 +10,10 @@
 # 2. 2 阶
 
 
-# 数大了会溢出
 class Solution:
+    cache = {}
 
     def climbStairs(self, n: int) -> int:
-        cache = {}
         if n == 0:
             return 0
         if n == 1:
@@ -22,11 +21,11 @@ class Solution:
         if n == 2:
             return 2
 
-        if n in cache:
-            return cache[n]
+        if n in self.cache:
+            return self.cache[n]
         else:
-            cache[n] = self.climbStairs(n - 1) + self.climbStairs(n - 2)
-        return cache[n]
+            self.cache[n] = self.climbStairs(n - 1) + self.climbStairs(n - 2)
+        return self.cache[n]
 
 
 # test

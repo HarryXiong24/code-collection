@@ -12,11 +12,11 @@
  * 解释：F(2) = F(1) + F(0) = 1 + 0 = 1
  */
 
-// 数大了会溢出
+// 使用集合来存放记忆
+const cache: Map<number, number> = new Map();
+
 export function fib(n: number): number {
   let res = 0;
-  // 使用集合来存放记忆
-  const cache: Map<number, number> = new Map();
 
   if (cache.has(n)) {
     return cache.get(n)!;
@@ -34,5 +34,5 @@ export function fib(n: number): number {
 }
 
 // test
-const res = fib(10);
+const res = fib(44);
 console.log(res);

@@ -10,23 +10,21 @@
 # 输出：1
 # 解释：F(2) = F(1) + F(0) = 1 + 0 = 1
 
-
-# 数大了会溢出
 class Solution:
+    cache = {}
 
     def fib(self, n: int) -> int:
         res = 0
-        cache = {}
 
-        if n in cache:
-            return cache[n]
+        if n in self.cache:
+            return self.cache[n]
 
         if n < 2:
             return n
         else:
             res = self.fib(n - 1) + self.fib(n - 2)
 
-        cache[n] = res
+        self.cache[n] = res
         return res
 
 

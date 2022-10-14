@@ -10,9 +10,9 @@
  * 2. 2 阶
  */
 
-// 数大了会溢出
+const cache: number[] = [];
+
 export function climbStairs(n: number): number {
-  const cache: number[] = new Array(n + 1);
   cache[0] = 1;
   cache[1] = 1;
 
@@ -30,5 +30,5 @@ export function climbStairs(n: number): number {
 }
 
 // test
-const res = climbStairs(10);
+const res = climbStairs(44);
 console.log(res);
