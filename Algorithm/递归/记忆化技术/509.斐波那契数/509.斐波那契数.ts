@@ -12,13 +12,14 @@
  * 解释：F(2) = F(1) + F(0) = 1 + 0 = 1
  */
 
+// 数大了会溢出
 export function fib(n: number): number {
   let res = 0;
-  // 使用集合来存放记忆出现过的值
+  // 使用集合来存放记忆
   const cache: Map<number, number> = new Map();
 
   if (cache.has(n)) {
-    return res;
+    return cache.get(n)!;
   }
 
   if (n < 2) {

@@ -11,6 +11,7 @@
 # 解释：F(2) = F(1) + F(0) = 1 + 0 = 1
 
 
+# 数大了会溢出
 class Solution:
 
     def fib(self, n: int) -> int:
@@ -31,5 +32,5 @@ class Solution:
 
 # test
 solution = Solution()
-res = solution.fib(10)
+res = solution.fib(44)
 print(res)

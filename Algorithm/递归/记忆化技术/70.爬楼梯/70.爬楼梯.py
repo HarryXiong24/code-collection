@@ -10,18 +10,26 @@
 # 2. 2 阶
 
 
+# 数大了会溢出
 class Solution:
 
     def climbStairs(self, n: int) -> int:
-        dp = [None] * (n + 1)
-        dp[0] = 1
-        dp[1] = 1
-        for i in range(2, n + 1):
-            dp[i] = dp[i - 2] + dp[i - 1]
-        return dp[n]
+        cache = {}
+        if n == 0:
+            return 0
+        if n == 1:
+            return 1
+        if n == 2:
+            return 2
+
+        if n in cache:
+            return cache[n]
+        else:
+            cache[n] = self.climbStairs(n - 1) + self.climbStairs(n - 2)
+        return cache[n]
 
 
 # test
 solution = Solution()
-res = solution.climbStairs(10)
+res = solution.climbStairs(44)
 print(res)

@@ -10,14 +10,21 @@
  * 2. 2 阶
  */
 
+// 数大了会溢出
 export function climbStairs(n: number): number {
-  const dp = [];
-  dp[0] = 1;
-  dp[1] = 1;
-  for (let i = 2; i <= n; i++) {
-    dp[i] = dp[i - 2] + dp[i - 1];
+  const cache: Map<number, number> = new Map();
+
+  if (n === 0 || n === 1) {
+    return 1;
   }
-  return dp[n];
+
+  if (cache.has(n)) {
+    return cache.get(n)!;
+  } else {
+    cache.set(n, climbStairs(n - 2) + climbStairs(n - 1));
+  }
+
+  return cache.get(n)!;
 }
 
 // test
