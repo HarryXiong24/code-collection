@@ -12,19 +12,21 @@
 
 // 数大了会溢出
 export function climbStairs(n: number): number {
-  const cache: Map<number, number> = new Map();
+  const cache: number[] = new Array(n + 1);
+  cache[0] = 1;
+  cache[1] = 1;
 
   if (n === 0 || n === 1) {
     return 1;
   }
 
-  if (cache.has(n)) {
-    return cache.get(n)!;
+  if (cache[n]) {
+    return cache[n];
   } else {
-    cache.set(n, climbStairs(n - 2) + climbStairs(n - 1));
+    cache[n] = climbStairs(n - 2) + climbStairs(n - 1);
   }
 
-  return cache.get(n)!;
+  return cache[n];
 }
 
 // test

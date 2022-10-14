@@ -21,5 +21,5 @@ export function climbStairs(n: number): number {
 }
 
 // test
-const res = climbStairs(10);
+const res = climbStairs(44);
 console.log(res);
