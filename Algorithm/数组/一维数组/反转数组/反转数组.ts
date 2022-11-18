@@ -1,6 +1,6 @@
 // 反转数组
 
-function reverse(numbers: number[]): number[] {
+export function reverse(numbers: number[]): number[] {
   let left: number = 0;
   let right: number = numbers.length - 1;
   while (left <= right) {
