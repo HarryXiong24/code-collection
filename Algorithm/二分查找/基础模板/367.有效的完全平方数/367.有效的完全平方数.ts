@@ -13,7 +13,7 @@
  * 输出：false
  */
 
-function isPerfectSquare(num: number): boolean {
+export function isPerfectSquare(num: number): boolean {
   let left = 0;
   let right = num;
   while (left <= right) {
