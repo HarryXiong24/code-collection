@@ -8,7 +8,7 @@
  * 输出: [[1],[1,1],[1,2,1],[1,3,3,1],[1,4,6,4,1]]
  */
 
-export function generate(numRows: number): number[][] {
+function generate(numRows: number): number[][] {
   let result: number[][] = [];
   add(result, numRows, 0);
   return result;
