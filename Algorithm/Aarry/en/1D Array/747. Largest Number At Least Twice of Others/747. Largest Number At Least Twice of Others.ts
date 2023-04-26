@@ -15,7 +15,7 @@
 // Output: -1
 // Explanation: 4 is less than twice the value of 3, so we return -1.
 
-function dominantIndex(nums: number[]): number {
+export function dominantIndex(nums: number[]): number {
   let max = 0;
   let maxIndex = -1;
   for (let i = 0; i < nums.length; i++) {
@@ -25,11 +25,21 @@ function dominantIndex(nums: number[]): number {
     }
   }
   for (let i = 0; i < nums.length; i++) {
-    if (nums[i] * 2 > max) {
+    if (nums[i] * 2 > max && i !== maxIndex) {
       return -1;
     }
   }
   return maxIndex;
+}
+
+// better
+// 排序之后只需要比较第二个元素和第一个元素的大小
+export function dominantIndex2(nums: number[]): number {
+  const [x, y]: number[] = [...nums].sort((a, b) => b - a);
+  if (x >= y * 2) {
+    return nums.indexOf(x);
+  }
+  return -1;
 }
 
 // test
