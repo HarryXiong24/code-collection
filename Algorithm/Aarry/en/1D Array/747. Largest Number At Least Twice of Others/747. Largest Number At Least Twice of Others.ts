@@ -33,7 +33,7 @@ export function dominantIndex(nums: number[]): number {
 }
 
 // better
-// 排序之后只需要比较第二个元素和第一个元素的大小
+// After descending sorting，we just need to compare with the size of the first and second elements
 export function dominantIndex2(nums: number[]): number {
   const [x, y]: number[] = [...nums].sort((a, b) => b - a);
   if (x >= y * 2) {

@@ -24,7 +24,7 @@
 // Incrementing by one gives 9 + 1 = 10.
 // Thus, the result should be [1,0].
 
-function plusOne(digits: number[]): number[] {
+export function plusOne(digits: number[]): number[] {
   for (let i = digits.length - 1; i >= 0; i++) {
     // 最后一位小于 9
     if (digits[i] < 9) {
