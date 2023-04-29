@@ -10,3 +10,26 @@
 # Example 2:
 # Input: numRows = 1
 # Output: [[1]]
+
+from typing import List
+
+
+class Solution:
+
+    def generate(self, numRows: int) -> List[List[int]]:
+        res = []
+        for i in range(numRows):
+            temp = []
+            for fill in range(i + 1):
+                temp.append(1)
+            for j in range(1, len(temp) - 1):
+                temp[j] = res[i - 1][j - 1] + res[i - 1][j]
+            res.append(temp)
+        return res
+
+
+# test
+numRows = 5
+solution = Solution()
+res = solution.generate(numRows)
+print(res)

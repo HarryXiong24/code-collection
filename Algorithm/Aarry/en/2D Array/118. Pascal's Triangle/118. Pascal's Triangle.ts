@@ -18,20 +18,14 @@ export function generate(numRows: number): number[][] {
   }
 
   for (let i = 0; i < numRows; i++) {
-    if (i === 0) {
-      res.push([1]);
-    } else if (i === 1) {
-      res.push([1, 1]);
-    } else {
-      // for every line, we create a new array, and fill in 1 at first.
-      const temp = new Array(i + 1).fill(1);
-      // except first and last elements, other elements value follow this formula:
-      // temp[j] = res[i - 1][j - 1] + res[i - 1][j];
-      for (let j = 1; j < i; j++) {
-        temp[j] = res[i - 1][j - 1] + res[i - 1][j];
-      }
-      res.push(temp);
+    // for every line, we create a new array, and fill in 1 at first.
+    const temp = new Array(i + 1).fill(1);
+    // except first and last elements, other elements value follow this formula:
+    // temp[j] = res[i - 1][j - 1] + res[i - 1][j];
+    for (let j = 1; j < i; j++) {
+      temp[j] = res[i - 1][j - 1] + res[i - 1][j];
     }
+    res.push(temp);
   }
 
   return res;
