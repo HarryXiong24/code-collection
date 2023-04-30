@@ -21,7 +21,7 @@
 
 // Finding patterns can reveal
 
-// Every round starts from 0,0, 1,1, 2,2... At the beginning, assuming each round is a turn, the maximum value x of x-axios(x_max) and the maximum value y of y-axios(y_max) for each round are row - turn - 1，col - turn - 1 respectively.
+// Every round starts from 0,0, 1,1, 2,2... At the beginning, assuming each round is a turn, the maximum value x of x-axis(x_max) and the maximum value y of y-axis(y_max) for each round are row - turn - 1，col - turn - 1 respectively.
 // Every round of traversal
 // Traverse from left to right (x remains unchanged), y increments, stop until y <= y_max.
 // At this point, it will be traversed from top to bottom (y remains unchanged), and x, y start from x+1, x_max stop until x <= x_max.
@@ -35,6 +35,7 @@ export function spiralOrder(matrix: number[][]): number[] {
   const res_length = row * col;
 
   let turn = 0;
+  // termination condition
   while (res.length < res_length) {
     const x_max = row - turn - 1;
     const y_max = col - turn - 1;

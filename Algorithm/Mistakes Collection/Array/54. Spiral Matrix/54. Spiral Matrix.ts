@@ -35,6 +35,7 @@ export function spiralOrder(matrix: number[][]): number[] {
   const res_length = row * col;
 
   let turn = 0;
+  // termination condition
   while (res.length < res_length) {
     const x_max = row - turn - 1;
     const y_max = col - turn - 1;
