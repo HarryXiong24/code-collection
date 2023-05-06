@@ -67,8 +67,8 @@ export function search2(nums: number[], target: number): number {
     }
   }
 
-  if (left < nums.length && nums[left] === target) {
-    return left;
+  if (right < nums.length - 1 && nums[right + 1] === target) {
+    return right + 1;
   } else {
     return -1;
   }
