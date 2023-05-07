@@ -14,7 +14,7 @@
 // Output: 2
 // Explanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.
 
-function mySqrt(x: number): number {
+export function mySqrt(x: number): number {
   // accordding to the exponent rule, we know that the square root of n must less than n/2
   let min = 0;
   let max = Math.floor(x / 2) + 1;
