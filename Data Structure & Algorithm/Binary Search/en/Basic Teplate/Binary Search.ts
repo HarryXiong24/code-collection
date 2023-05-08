@@ -59,6 +59,31 @@ export function search2(nums: number[], target: number): number {
   }
 }
 
+// find a range
+export function binarySearch(nums: number[], target: number) {
+  let left = 0;
+  let right = nums.length - 1;
+  while (left + 1 <= right) {
+    const mid = left + (right - left) / 2;
+    if (nums[mid] === target) {
+      return mid;
+    } else if (nums[mid] < target) {
+      left = mid + 1;
+    } else {
+      right = mid - 1;
+    }
+  }
+
+  // End Condition: left + 1 == right
+  if (nums[left] === target) {
+    return left;
+  }
+  if (nums[right] == target) {
+    return right;
+  }
+  return -1;
+}
+
 // test
 const res = search([5], 9);
 const res1 = search1([5], 9);
