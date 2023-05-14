@@ -36,3 +36,13 @@ Which way was easier?
 Which way is better?
 
 After many failed attempts and lots of hair-pulling, we found 3 main templates for Binary Search.
+
+## Skills
+
+二分查找有几种规律可以用于解题：
+
+1. 查找一个精确的值
+2. 查找一个下边界 or 查找一个上边界
+3. 查找一个区间 [x, y]
+
+二分查找中比较难的题型是在一个没有绝对顺序的数组里使用二分查找，这种情况，需要找到规律，把无序变成有序。
