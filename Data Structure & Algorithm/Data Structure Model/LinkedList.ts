@@ -4,7 +4,7 @@
  * 功能
  * 1.根据索引获取对应值
  * 2.头部添加
- * 3.尾部添加 
+ * 3.尾部添加
  * 4.根据索引位置添加
  * 5.根据索引删除
  * 6.打印链表
@@ -38,7 +38,7 @@ export class LinkedList<T> {
   // 初始化值
   public initHeadValue: T;
 
-  // 给链表初始化一个头指针    
+  // 给链表初始化一个头指针
   constructor(initHeadValue: T) {
     this.head = new Node<T>(initHeadValue, null);
     // length属性做边界判断
@@ -51,7 +51,7 @@ export class LinkedList<T> {
     // 链表为空
     if (this.head!.next === null) {
       return null;
-    } 
+    }
 
     let count = 0;
     let temp = this.head!.next;
@@ -61,7 +61,11 @@ export class LinkedList<T> {
       temp = temp.next;
     }
 
-    return temp.element;
+    if (index >= this.length) {
+      return null;
+    } else {
+      return temp.element;
+    }
   }
 
   // 头部添加
@@ -98,7 +102,7 @@ export class LinkedList<T> {
     }
 
     // 等于则插入尾部
-    if ((index = this.length)) {
+    if (index === this.length) {
       this.addAtTail(val);
       return;
     }
