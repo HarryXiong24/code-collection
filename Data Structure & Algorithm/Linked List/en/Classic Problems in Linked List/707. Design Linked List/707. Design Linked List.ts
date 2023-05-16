@@ -46,7 +46,7 @@ interface ILinkedNode {
   next: ILinkedNode | null;
 }
 
-class LinkedNode implements ILinkedNode {
+export class LinkedNode implements ILinkedNode {
   public element: number;
   public next: ILinkedNode | null;
 
@@ -56,7 +56,7 @@ class LinkedNode implements ILinkedNode {
   }
 }
 
-class MyLinkedList {
+export class MyLinkedList {
   head: ILinkedNode | null;
   length: number;
 
