@@ -31,12 +31,11 @@ class ListNode {
 }
 
 export function hasCycle(head: ListNode | null): boolean {
-  let fast: ListNode | null;
-  let slow: ListNode | null;
   // initially, fast and slow both point at head
-  fast = slow = head;
-  while (fast !== null && fast!.next !== null) {
-    fast = fast!.next!.next;
+  let fast = head;
+  let slow = head;
+  while (fast !== null && fast.next !== null) {
+    fast = fast.next.next;
     slow = slow!.next;
     if (fast === slow) {
       return true;
