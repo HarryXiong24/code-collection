@@ -31,6 +31,7 @@ class ListNode {
   }
 }
 
+// it is a rule
 export function detectCycle(head: ListNode | null): ListNode | null {
   let fast = head;
   let slow = head;
@@ -54,6 +55,7 @@ export function detectCycle(head: ListNode | null): ListNode | null {
   return fast;
 }
 
+// the regular solution
 export function detectCycle1(head: ListNode | null): ListNode | null {
   let point = head;
   const res: ListNode[] = [];
