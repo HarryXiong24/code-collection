@@ -53,3 +53,17 @@ export function detectCycle(head: ListNode | null): ListNode | null {
   }
   return fast;
 }
+
+export function detectCycle1(head: ListNode | null): ListNode | null {
+  let point = head;
+  const res: ListNode[] = [];
+  while (point !== null) {
+    if (res.includes(point)) {
+      return point;
+    } else {
+      res.push(point);
+    }
+    point = point.next;
+  }
+  return null;
+}
