@@ -38,7 +38,7 @@
 export class MyCircularQueue {
   size: number;
   head: number = 0;
-  tail: number = 0;
+  tail: number = -1;
   queue = new Map<number, number>();
 
   constructor(k: number) {
