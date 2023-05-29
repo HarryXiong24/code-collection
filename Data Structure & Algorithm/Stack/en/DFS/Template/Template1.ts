@@ -8,7 +8,7 @@ interface Node {
 }
 
 // Return true if there is a path from cur to target.
-function DFS(cur: Node, target: Node, visited: Set<Node>): boolean {
+export function DFS(cur: Node, target: Node, visited: Set<Node>): boolean {
   if (cur === target) {
     return true;
   }
