@@ -23,6 +23,7 @@ function numSquares(n: number): number {
   // BFS
   const queue: number[] = [0];
   let layer = 0;
+
   while (queue.length) {
     const size = queue.length;
     for (let i = 0; i < size; i++) {
@@ -38,7 +39,7 @@ function numSquares(n: number): number {
     layer++;
   }
 
-  return layer - 1;
+  return -1;
 }
 
 function numSquares1(n: number): number {
@@ -72,5 +73,5 @@ function numSquares1(n: number): number {
 }
 
 // test
-const res = numSquares(12);
+const res = numSquares(496);
 console.log(res);
