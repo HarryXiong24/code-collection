@@ -13,7 +13,11 @@
 // Input: n = 13
 // Output: 2
 // Explanation: 13 = 4 + 9.
-function numSquares(n: number): number {
+
+// BFS
+// hint: if just find a answer that just meet a equation instead of finding a least answer, it can also use DFS.
+// So remember that BFS can find a optimal solution, but DFS can't
+export function numSquares(n: number): number {
   // generate all possible squares
   const squares: number[] = [];
   for (let i = 1; i <= n && i * i <= n; i++) {
@@ -23,6 +27,7 @@ function numSquares(n: number): number {
   // BFS
   const queue: number[] = [0];
   let layer = 0;
+  const set = new Set();
 
   while (queue.length) {
     const size = queue.length;
@@ -31,8 +36,13 @@ function numSquares(n: number): number {
       if (current === n) {
         return layer;
       }
+      // if there is no some limit conditions, it will exceed time expectancy.// @algorithm
+      // so it need to create a new set to improve performance
       for (const item of squares) {
-        queue.push(current + item);
+        if (current + item <= n && !set.has(current + item)) {
+          set.add(current + item);
+          queue.push(current + item);
+        }
       }
       queue.shift();
     }
@@ -42,7 +52,12 @@ function numSquares(n: number): number {
   return -1;
 }
 
-function numSquares1(n: number): number {
+// test
+const res = numSquares(13);
+console.log(res);
+
+// DFS
+export function numSquares1(n: number): number {
   // generate all possible squares
   let squares: number[] = [];
   for (let i = 1; i <= n && i * i <= n; i++) {
@@ -71,7 +86,3 @@ function numSquares1(n: number): number {
 
   return stack.length;
 }
-
-// test
-const res = numSquares(496);
-console.log(res);
