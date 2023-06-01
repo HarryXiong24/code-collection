@@ -8,15 +8,34 @@ interface Node {
 }
 
 // Return true if there is a path from cur to target.
-export function DFS(cur: Node, target: Node, visited: Set<Node>): boolean {
+export function DFS_Recursion(cur: Node, target: Node, visited: Set<Node>): boolean {
   if (cur === target) {
     return true;
   }
   for (const next of cur.neighbors) {
     if (!visited.has(next)) {
       visited.add(next);
-      if (DFS(next, target, visited)) {
+      if (DFS_Recursion(next, target, visited)) {
         return true;
+      }
+    }
+  }
+  return false;
+}
+
+export function DFS_Stack(root: Node, target: Node): boolean {
+  const visited: Set<Node> = new Set();
+  const stack: Node[] = [root];
+  while (stack.length > 0) {
+    const cur: Node = stack.pop()!;
+    if (cur === target) {
+      return true;
+    }
+    visited.add(cur);
+    for (const next of cur.neighbors) {
+      if (!visited.has(next)) {
+        visited.add(next);
+        stack.push(next);
       }
     }
   }
