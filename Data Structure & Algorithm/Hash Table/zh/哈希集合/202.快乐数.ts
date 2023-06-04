@@ -19,7 +19,7 @@ export function isHappy(n: number): boolean {
   let result: number = n;
   let cache: Set<number> = new Set([]);
 
-  let cycle = (n: number): any => {
+  let cycle = (n: number): number => {
     let sum: number = 0;
     let len = String(n).length;
     for (let i = 0; i < len; i++) {
