@@ -33,10 +33,9 @@ export class MyHashSet {
     this.hashSet = {};
   }
 
+  // If the key already exists in the map, it will update the corresponding value.
   add(key: number): void {
-    if (!this.hashSet[key]) {
-      this.hashSet[key] = key;
-    }
+    this.hashSet[key] = key;
   }
 
   remove(key: number): void {
