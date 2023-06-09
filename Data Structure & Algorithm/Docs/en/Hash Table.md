@@ -73,3 +73,23 @@ Each bucket contains an array to store all the values in the same bucket initial
 If there are too many values in the same bucket, these values will be maintained in a height-balanced binary search tree instead.
 
 The average time complexity of both insertion and search is still O(1). And the time complexity in the worst case is O(logN) for both insertion and search by using height-balanced BST. It is a trade-off between insertion and search.
+
+## Design the Key
+
+Let's look at an example:
+
+Given an array of strings, group anagrams together.
+
+As we know, a hash map can perform really well in grouping information by key. But we cannot use the original string as key directly. We have to design a proper key to present the type of anagrams. For instance, there are two strings "eat" and "ate" which should be in the same group. While "eat" and "act" should not be grouped together.
+
+Actually, designing a key is to build a mapping relationship by yourself between the original information and the actual key used by hash map. When you design a key, you need to guarantee that:
+
+1. All values belong to the same group will be mapped in the same group.
+
+2. Values which needed to be separated into different groups will not be mapped into the same group.
+
+This process is similar to design a hash function, but here is an essential difference. A hash function satisfies the first rule but might not satisfy the second one. But your mapping function should satisfy both of them.
+
+In the example above, our mapping strategy can be: sort the string and use the sorted string as the key. That is to say, both "eat" and "ate" will be mapped to "aet".
+
+The mapping strategy can be really tricky sometimes. We provide some exercise for you in this chapter and will give a summary after that.
