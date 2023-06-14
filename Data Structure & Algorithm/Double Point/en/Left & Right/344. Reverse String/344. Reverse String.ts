@@ -11,6 +11,7 @@
 // Input: s = ["H","a","n","n","a","h"]
 // Output: ["h","a","n","n","a","H"]
 
+// Double Point
 /**
  Do not return anything, modify s in-place instead.
  */
@@ -25,6 +26,25 @@ export function reverseString(s: string[]): void {
     left++;
     right--;
   }
+}
+
+// Recursive
+export function reverseString1(s: string[]): void {
+  const recursive = (currentIndex: number): number => {
+    if (currentIndex >= s.length - 1) {
+      return s.length - 1;
+    }
+
+    const lastOrderIndex = recursive(currentIndex + 1);
+    const current = s[currentIndex];
+    for (let i = lastOrderIndex; i < s.length; i++) {
+      s[i - 1] = s[i];
+    }
+    s[s.length - 1] = current;
+    return lastOrderIndex - 1;
+  };
+
+  recursive(0);
 }
 
 // test
