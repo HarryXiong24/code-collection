@@ -54,5 +54,5 @@ export function getRow1(rowIndex: number): number[] {
 }
 
 // test
-const res = getRow(3);
+const res = getRow1(3);
 console.log(res);
