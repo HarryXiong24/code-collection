@@ -70,3 +70,86 @@ There are two important things that one needs to figure out before implementing 
 recurrence relation: the relationship between the result of a problem and the result of its subproblems.
 base case: the case where one can compute the answer directly without any further recursion calls. Sometimes, the base cases are also called bottom cases, since they are often the cases where the problem has been reduced to the minimal scale, i.e. the bottom, if we consider that dividing the problem into subproblems is in a top-down manner.
 Once we figure out the above two elements, to implement a recursive function we simply call the function itself according to the recurrence relation until we reach the base case.
+
+## Memoization
+
+### Duplicate Calculation in Recursion
+
+Recursion is often an intuitive and powerful way to implement an algorithm.
+
+However, it might bring some undesired penalty to the performance, e.g. duplicate calculations, if we do not use it wisely.
+
+For instance, at the end of the previous chapter, we have encountered the duplicate calculations problem in Pascal's Triangle, where some intermediate results are calculated multiple times.
+
+In this article we will look closer into the duplicate calculations problem that could happen with recursion. We will then propose a common technique called memoization that can be used to avoid this problem.
+
+To demonstrate another problem with duplicate calculations, let's look at an example that most people might be familiar with, the Fibonacci number. If we define the function F(n) to represent the Fibonacci number at the index of n, then you can derive the following recurrence relation:
+
+F(n) = F(n - 1) + F(n - 2)
+
+with the base cases:
+
+F(0) = 0, F(1) = 1
+
+Given the definition of a Fibonacci number, one can implement the function as follows:
+
+```python
+def fibonacci(n):
+    """
+    :type n: int
+    :rtype: int
+    """
+    if n < 2:
+        return n
+    else:
+        return fibonacci(n-1) + fibonacci(n-2)
+```
+
+Now, if you would like to know the number of F(4), you can apply and extend the above formulas as follows:
+
+F(4) = F(3) + F(2) = (F(2) + F(1)) + F(2)
+
+As you can see, in order to obtain the result for F(4), we would need to calculate the number F(2) twice following the above deduction: the first time in the first extension of F(4) and the second time for the intermediate result F(3).
+
+Here is the tree that shows all the duplicate calculations (grouped by colors) that occur during the calculation of F(4).
+
+### Memoization Example
+
+To eliminate the duplicate calculation in the above case, as many of you would have figured out, one of the ideas would be to store the intermediate results in the cache so that we could reuse them later without re-calculation.
+
+This idea is also known as memoization, which is a technique that is frequently used together with recursion.
+
+Memoization is an optimization technique used primarily to speed up computer programs by storing the results of expensive function calls and returning the cached result when the same inputs occur again. (Source: wikipedia)
+
+Back to our Fibonacci function F(n). We could use a hash table to keep track of the result of each F(n) with n as the key. The hash table serves as a cache that saves us from duplicate calculations. The memoization technique is a good example that demonstrates how one can reduce compute time in exchange for some additional space.
+
+For the sake of comparison, we provide the implementation of Fibonacci number solution with memoization below.
+
+As an exercise, you could try to make memoization more general and non-intrusive, i.e. applying memoization without changing the original function. (Hint: one can refer to a design pattern called decorator).
+
+```python
+def fib(self, N):
+    """
+    :type N: int
+    :rtype: int
+    """
+    cache = {}
+    def recur_fib(N):
+        if N in cache:
+            return cache[N]
+
+        if N < 2:
+            result = N
+        else:
+            result = recur_fib(N-1) + recur_fib(N-2)
+
+        # put result in cache for later reference.
+        cache[N] = result
+        return result
+
+    return recur_fib(N)
+```
+
+Following this article, we provide the Fibonacci number problem and another classic problem called climbing stairs, which could be really fun and challenging to solve.
+
+In the next chapter, we will dive a bit into the complexity analysis of recursion algorithms.
