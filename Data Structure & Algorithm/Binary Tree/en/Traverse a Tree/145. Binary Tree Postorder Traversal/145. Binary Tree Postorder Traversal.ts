@@ -1,10 +1,10 @@
-// 94. Binary Tree Inorder Traversal
+// 145. Binary Tree Postorder Traversal
 
-// Given the root of a binary tree, return the inorder traversal of its nodes' values.
+// Given the root of a binary tree, return the postorder traversal of its nodes' values.
 
 // Example 1:
 // Input: root = [1,null,2,3]
-// Output: [1,3,2]
+// Output: [3,2,1]
 
 // Example 2:
 // Input: root = []
@@ -26,7 +26,7 @@ class TreeNode {
   }
 }
 
-export function inorderTraversal_Recursive(root: TreeNode | null): number[] {
+export function postorderTraversal_Recursive(root: TreeNode | null): number[] {
   const res: number[] = [];
 
   const recursive = (node: TreeNode | null) => {
@@ -34,14 +34,16 @@ export function inorderTraversal_Recursive(root: TreeNode | null): number[] {
       return;
     }
     recursive(node.left);
-    res.push(node.val);
     recursive(node.right);
+    res.push(node.val);
   };
+
+  recursive(root);
 
   return res;
 }
 
-export function inorderTraversal_Iterative(root: TreeNode | null): number[] {
+export function postorderTraversal_Iterative(root: TreeNode | null): number[] {
   const res: number[] = [];
   const stack: TreeNode[] = [];
 
@@ -49,20 +51,23 @@ export function inorderTraversal_Iterative(root: TreeNode | null): number[] {
     return res;
   }
 
-  stack.push(root);
   let node: TreeNode | null = root;
+  let prev: TreeNode | null = null;
 
-  while (stack.length) {
-    while (node && node.left) {
-      stack.push(node.left);
-      node = node.left;
+  while (node && stack.length) {
+    while (node !== null) {
+      stack.push(node);
+      node = node.left!;
     }
-    const current = stack.pop()!;
-    res.push(current.val);
-    if (current.right) {
-      stack.push(current.right);
+    node = stack.pop()!;
+    if (node.right === null || node.right === prev) {
+      res.push(node.val);
+      prev = node;
+      node = null;
+    } else {
+      stack.push(node);
+      node = node.right!;
     }
-    node = current.right;
   }
 
   return res;
