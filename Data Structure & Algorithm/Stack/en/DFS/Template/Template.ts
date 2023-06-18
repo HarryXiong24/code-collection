@@ -9,6 +9,24 @@ interface Node {
 
 // Return true if there is a path from cur to target.
 export function DFS_Recursion(cur: Node, target: Node, visited: Set<Node>): boolean {
+  const recursive = (node: Node) => {
+    if (node === target) {
+      return true;
+    }
+
+    for (let next of node.neighbors) {
+      if (!visited.has(next)) {
+        visited.add(next);
+        recursive(next);
+      }
+    }
+  };
+
+  return recursive(cur) === true ? true : false;
+}
+
+// Return true if there is a path from cur to target.
+export function DFS_Recursion1(cur: Node, target: Node, visited: Set<Node>): boolean {
   if (cur === target) {
     return true;
   }
