@@ -51,19 +51,17 @@ export function preorderTraversal_Iterative(root: TreeNode | null): number[] {
     return res;
   }
 
-  stack.push(root);
+  let node: TreeNode | null = root;
 
-  while (stack.length) {
-    const current = stack.pop()!;
-
-    res.push(current?.val);
-
-    if (current.right) {
-      stack.push(current.right);
+  while (node || stack.length) {
+    while (node) {
+      res.push(node.val);
+      stack.push(node);
+      node = node.left;
     }
-    if (current.left) {
-      stack.push(current.left);
-    }
+
+    node = stack.pop()!;
+    node = node.right;
   }
 
   return res;

@@ -52,10 +52,11 @@ export function postorderTraversal_Iterative(root: TreeNode | null): number[] {
   }
 
   let node: TreeNode | null = root;
+  // use to record last traversal node
   let prev: TreeNode | null = null;
 
-  while (node && stack.length) {
-    while (node !== null) {
+  while (node || stack.length) {
+    while (node) {
       stack.push(node);
       node = node.left!;
     }

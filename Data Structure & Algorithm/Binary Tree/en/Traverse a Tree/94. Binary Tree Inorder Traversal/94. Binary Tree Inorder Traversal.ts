@@ -49,20 +49,16 @@ export function inorderTraversal_Iterative(root: TreeNode | null): number[] {
     return res;
   }
 
-  stack.push(root);
   let node: TreeNode | null = root;
 
-  while (stack.length) {
-    while (node && node.left) {
-      stack.push(node.left);
+  while (node || stack.length) {
+    while (node) {
+      stack.push(node);
       node = node.left;
     }
-    const current = stack.pop()!;
-    res.push(current.val);
-    if (current.right) {
-      stack.push(current.right);
-    }
-    node = current.right;
+    node = stack.pop()!;
+    res.push(node.val);
+    node = node.right;
   }
 
   return res;
