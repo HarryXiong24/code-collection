@@ -33,15 +33,14 @@ export function isSymmetric(root: TreeNode | null): boolean {
       return true;
     }
 
-    if (!node1 || !node2) {
-      return false;
-    }
-
     if (node1 && node2) {
       if (node1.val !== node2.val) {
         return false;
       }
       return recursive(node1.left, node2.right) && recursive(node1.right, node2.left);
+    } else {
+      // condition: !node1 || !node2
+      return false;
     }
   };
 
