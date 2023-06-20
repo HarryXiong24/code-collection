@@ -30,10 +30,10 @@ export function buildTree(inorder: number[], postorder: number[]): TreeNode | nu
 
     const currentVal = postorder.pop()!;
     const node = new TreeNode(currentVal);
-    const index = inorder.indexOf(currentVal);
+    const currentIndex = inorder.indexOf(currentVal);
 
-    node.right = recursive(inorder.slice(index + 1), postorder);
-    node.left = recursive(inorder.slice(0, index), postorder);
+    node.right = recursive(inorder.slice(currentIndex + 1), postorder);
+    node.left = recursive(inorder.slice(0, currentIndex), postorder);
 
     return node;
   };
