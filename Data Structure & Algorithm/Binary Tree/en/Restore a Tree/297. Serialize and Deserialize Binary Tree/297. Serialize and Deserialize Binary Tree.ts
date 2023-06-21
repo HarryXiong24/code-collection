@@ -73,3 +73,64 @@ export function deserialize_DFS(data: string): TreeNode | null {
 
   return recursive(array_data);
 }
+
+// BFS
+// use # to represent null
+export function serialize_BFS(root: TreeNode | null): string {
+  const path: Array<TreeNode | null> = [];
+  const queue: Array<TreeNode | null> = [];
+
+  if (!root) {
+    queue.push(null);
+  }
+
+  queue.push(root);
+
+  while (queue.length) {
+    const size = queue.length;
+    for (let i = 0; i < size; i++) {
+      const current = queue.shift()!;
+      path.push(current);
+      if (!current) {
+        break;
+      }
+      queue.push(current.left);
+      queue.push(current.right);
+    }
+  }
+
+  return path.map((item) => (item === null ? '#' : item.val)).join(',');
+}
+
+export function deserialize_BFS(data: string): TreeNode | null {
+  const array_data: Array<TreeNode | null> = data
+    .split(',')
+    .map((item) => (item === '#' ? null : new TreeNode(Number(item))));
+
+  const root: TreeNode = array_data.shift()!;
+  const queue: TreeNode[] = [];
+
+  if (!root) {
+    return null;
+  }
+
+  queue.push(root);
+
+  while (queue.length) {
+    const current = queue.shift()!;
+
+    if (array_data.length > 0) {
+      const next = array_data.shift()!;
+      current.left = next;
+    }
+    if (array_data.length > 0) {
+      const next = array_data.shift()!;
+      current.right = next;
+    }
+
+    current.left && queue.push(current.left);
+    current.right && queue.push(current.right);
+  }
+
+  return root;
+}
