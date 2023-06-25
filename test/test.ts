@@ -34,8 +34,24 @@
 
 // console.log(Test);
 
-const text =
-  '这是一段包含链接的文本，链接地址是：https://www.google.com 和 http://www.baidu.com ，另外还有一个链接：https://github.com/Raoul1996\n';
-const regex = /(https?:\/\/\S+)(?=\s|$)/gi;
-const links = text.match(regex);
-console.log(links); // ["https://www.google.com ", "http://www.baidu.com，", "https://github.com/Raoul1996"]
+// const text =
+//   '这是一段包含链接的文本，链接地址是：https://www.google.com 和 http://www.baidu.com ，另外还有一个链接：https://github.com/Raoul1996\n';
+// const regex = /(https?:\/\/\S+)(?=\s|$)/gi;
+// const links = text.match(regex);
+// console.log(links); // ["https://www.google.com ", "http://www.baidu.com，", "https://github.com/Raoul1996"]
+
+function fib(n: number): number {
+  const recursive = (current: number): number => {
+    if (current === 0) {
+      return 0;
+    }
+    if (current === 1) {
+      return 1;
+    }
+    return recursive(current - 1) + recursive(current - 2);
+  };
+
+  return recursive(n);
+}
+
+console.log(fib(4));
