@@ -1,4 +1,4 @@
-// Selection Sort
+// Direct Selection Sort
 
 /**
  * Suppose we had a collection of elements where every element is an integer.
