@@ -43,12 +43,15 @@ export function reverseList(head: ListNode | null): ListNode | null {
 
 // recursively
 export function reverseList1(head: ListNode | null): ListNode | null {
-  if (head === null || head.next === null) {
-    return head;
-  }
-  const newLink = reverseList1(head.next);
-  const temp = head.next;
-  temp.next = head;
-  head.next = null;
-  return newLink;
+  const recursive = (node: ListNode | null): ListNode | null => {
+    if (!node || !node.next) {
+      return node;
+    }
+    const newLink = recursive(node.next);
+    const temp = node.next;
+    temp.next = node;
+    node.next = null;
+    return newLink;
+  };
+  return recursive(head);
 }
