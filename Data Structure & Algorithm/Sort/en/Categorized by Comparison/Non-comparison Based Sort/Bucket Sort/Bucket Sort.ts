@@ -10,6 +10,9 @@
  * Time Complexity: O(n^2) - O(N + K), based on the sort algorithm using in each bucket
  * Space Complexity: O(N + K)
  * It is a stable sorting algorithm.
+ *
+ * Hint: If the array includes negative number, it is not a good choice to use Counting Sort.
+ * A key assumption in the above version of counting sort is that the minimum possible value in the array is 0 (no negative numbers) and the maximum value is some positive integer K.
  */
 
 export function bucketSort(nums: number[], K: number): number[] {
