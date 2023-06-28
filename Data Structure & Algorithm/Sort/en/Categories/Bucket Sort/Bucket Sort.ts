@@ -11,25 +11,36 @@
  * Space Complexity: O(N + K)
  * It is a stable sorting algorithm.
  *
- * Hint: If the array includes negative number, it is not a good choice to use Counting Sort.
+ * Hint: If the array includes negative number, you should use it carefully.
  * A key assumption in the above version of counting sort is that the minimum possible value in the array is 0 (no negative numbers) and the maximum value is some positive integer K.
  */
 
 export function bucketSort(nums: number[], K: number): number[] {
+  // handle negative numbers
+  const originalMin = Math.min(...nums);
+
+  let reflect = 0;
+  if (originalMin < 0) {
+    reflect = Math.abs(0 - originalMin);
+  }
+
+  for (let i = 0; i < nums.length; i++) {
+    nums[i] = nums[i] + reflect;
+  }
+
   const buckets: number[][] = Array(K)
     .fill(null)
     .map(() => []);
-
   const min = Math.min(...nums);
-  const max = Math.max(...nums) - min;
-  const bucketSize = Math.max(1, Math.floor(max / K));
+  const gap = Math.max(...nums) - min;
+  const bucketSize = Math.max(1, Math.floor(gap / K));
 
   for (const item of nums) {
     // same as K * nums[i] / max(nums)
     const index = Math.floor((item - min) / bucketSize);
 
     // edge case for max value
-    if (index === K) {
+    if (index >= K) {
       // put the max value in the last bucket
       buckets[K - 1].push(item);
     } else {
@@ -43,7 +54,14 @@ export function bucketSort(nums: number[], K: number): number[] {
   }
 
   // convert sorted buckets into final output
-  return buckets.flat(2);
+  const sortArray = buckets.flat(2);
+
+  // restore reflection
+  for (let i = 0; i < sortArray.length; i++) {
+    sortArray[i] = sortArray[i] - reflect;
+  }
+
+  return sortArray;
 }
 
 // test

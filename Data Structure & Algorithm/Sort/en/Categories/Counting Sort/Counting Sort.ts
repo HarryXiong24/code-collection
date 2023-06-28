@@ -5,20 +5,26 @@
  * Space Complexity: O(N + K), since we have to initialize a new array of size N and a counts array of size K+1.
  * It is a stable sorting algorithm.
  *
- * Hint: If the array includes negative number, it is not a good choice to use Counting Sort.
+ * Hint: If the array includes negative number, you should use it carefully.
  * A key assumption in the above version of counting sort is that the minimum possible value in the array is 0 (no negative numbers) and the maximum value is some positive integer K.
  * If this is not the case, it's possible to perform a mapping step at the beginning and then remap the values to the original array at the end.
  * For example, an array with values between -5 and 10 can be mapped to values between 0 and 15, perform counting sort, and then remap to the original -5 to 10 range.
  */
 
 export function countingSort(nums: number[]): number[] {
-  // Find the max value
-  let max = nums[0];
-  for (const item of nums) {
-    if (item > max) {
-      max = item;
-    }
+  const min = Math.min(...nums);
+  let reflect = 0;
+  if (min < 0) {
+    reflect = Math.abs(0 - min);
   }
+
+  // Do a reflection to transform all negative numbers to positive numbers
+  for (let i = 0; i < nums.length; i++) {
+    nums[i] = nums[i] + reflect;
+  }
+
+  // Find the max value
+  const max = Math.max(...nums);
 
   // Structure a counting array and record the number of each element in the array
   const countArray = new Array(max + 1).fill(0);
@@ -45,10 +51,15 @@ export function countingSort(nums: number[]): number[] {
     countArray[nums[i]]++;
   }
 
+  // Restore the reflection
+  for (let i = 0; i < sortedArray.length; i++) {
+    sortedArray[i] = sortedArray[i] - reflect;
+  }
+
   return sortedArray;
 }
 
 // test
-const array = [2, 0, 2, 1, 1, 0];
+const array = [2, 0, 2, 1, 1, 0, -3, -4];
 const res = countingSort(array);
 console.log(res);
