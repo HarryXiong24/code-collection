@@ -12,27 +12,24 @@
  */
 
 export function countingSort(nums: number[]): number[] {
+  // find out the min value, and do a map to keep all numbers are positive
   const min = Math.min(...nums);
-  let reflect = 0;
-  if (min < 0) {
-    reflect = Math.abs(0 - min);
-  }
+  let mapper = min < 0 ? Math.abs(0 - min) : 0;
 
-  // Do a reflection to transform all negative numbers to positive numbers
   for (let i = 0; i < nums.length; i++) {
-    nums[i] = nums[i] + reflect;
+    nums[i] = nums[i] + mapper;
   }
 
-  // Find the max value
+  // counting sort beginning
   const max = Math.max(...nums);
-
-  // Structure a counting array and record the number of each element in the array
   const countArray = new Array(max + 1).fill(0);
-  for (let i = 0; i < nums.length; i++) {
-    countArray[nums[i]] = countArray[nums[i]] + 1;
+
+  // counting
+  for (const item of nums) {
+    countArray[item]++;
   }
 
-  // We now overwrite our original counts with the starting index of each element in the final sorted array
+  // calculate the deviate of sorted array's index
   let sum = 0;
   let temp = 0;
   for (let i = 0; i < countArray.length; i++) {
@@ -41,22 +38,21 @@ export function countingSort(nums: number[]): number[] {
     countArray[i] = sum;
   }
 
-  // Since we have placed an item in index counts[elem], we need to increment counts[elem] index by 1
-  // So the next duplicate element is placed in appropriate index
-  const sortedArray = new Array(nums.length).fill(0);
+  // get sorted array
+  const sortArray = new Array(nums.length).fill(0);
   for (let i = 0; i < nums.length; i++) {
     const index = countArray[nums[i]];
     const value = nums[i];
-    sortedArray[index] = value;
+    sortArray[index] = value;
     countArray[nums[i]]++;
   }
 
-  // Restore the reflection
-  for (let i = 0; i < sortedArray.length; i++) {
-    sortedArray[i] = sortedArray[i] - reflect;
+  // remapping;
+  for (let i = 0; i < sortArray.length; i++) {
+    sortArray[i] = sortArray[i] - mapper;
   }
 
-  return sortedArray;
+  return sortArray;
 }
 
 // test
