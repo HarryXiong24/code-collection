@@ -21,55 +21,59 @@
  * A key assumption in the above version of counting sort is that the minimum possible value in the array is 0 (no negative numbers) and the maximum value is some positive integer K.
  */
 
-function customizedCountingSort(nums: number[], placeVal: number, k = 10) {
-  const counts = new Array(k).fill(0);
+function customizedCountingSort(nums: number[], digit: number, count_volume = 10): void {
+  // we just need 0-9 space in counter volume
+  const countArray = new Array(count_volume).fill(0);
 
   for (const item of nums) {
-    const digit = Math.floor(item / placeVal) % 10;
-    counts[digit]++;
+    const current_digit = Math.floor(item / digit) % 10;
+    countArray[current_digit]++;
   }
 
+  // calculate the deviation of index in sorted array
   let sum = 0;
   let temp = 0;
-  for (let i = 0; i < counts.length; i++) {
+  for (let i = 0; i < countArray.length; i++) {
     sum = sum + temp;
-    temp = counts[i];
-    counts[i] = sum;
+    temp = countArray[i];
+    countArray[i] = sum;
   }
 
-  const sortArray = new Array(nums.length).fill(0);
+  const sortedArray = new Array(nums.length).fill(0);
   for (let i = 0; i < nums.length; i++) {
-    const digit = Math.floor(nums[i] / placeVal) % 10;
-    const index = counts[digit];
+    // here is important and notice the mapping relationship between current_digit and nums[i]
+    const current_digit = Math.floor(nums[i] / digit) % 10;
+    const index = countArray[current_digit];
     const value = nums[i];
-    sortArray[index] = value;
-    counts[digit]++;
+    sortedArray[index] = value;
+    countArray[current_digit]++;
   }
 
   for (let i = 0; i < nums.length; i++) {
-    nums[i] = sortArray[i];
+    nums[i] = sortedArray[i];
   }
 }
 
 export function radixSort(nums: number[]) {
+  // mapping
   const min = Math.min(...nums);
-  let reflect = 0;
-  if (min < 0) {
-    reflect = Math.abs(0 - min);
-  }
+  const mapper = min < 0 ? Math.abs(0 - min) : 0;
+
   for (let i = 0; i < nums.length; i++) {
-    nums[i] = nums[i] + reflect;
+    nums[i] = nums[i] + mapper;
   }
 
+  let digit = 1;
   const max = Math.max(...nums);
-  let placeVal = 1;
-  while (placeVal <= max) {
-    customizedCountingSort(nums, placeVal);
-    placeVal *= 10;
+  // represents use Counting Sort in every digital number round
+  while (digit <= max) {
+    customizedCountingSort(nums, digit, 10);
+    digit = digit * 10;
   }
 
+  // remapping
   for (let i = 0; i < nums.length; i++) {
-    nums[i] = nums[i] - reflect;
+    nums[i] = nums[i] - mapper;
   }
 }
 

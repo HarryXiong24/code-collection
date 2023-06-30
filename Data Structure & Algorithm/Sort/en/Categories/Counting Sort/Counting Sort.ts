@@ -14,7 +14,7 @@
 export function countingSort(nums: number[]): number[] {
   // find out the min value, and do a map to keep all numbers are positive
   const min = Math.min(...nums);
-  let mapper = min < 0 ? Math.abs(0 - min) : 0;
+  const mapper = min < 0 ? Math.abs(0 - min) : 0;
 
   for (let i = 0; i < nums.length; i++) {
     nums[i] = nums[i] + mapper;
@@ -29,7 +29,7 @@ export function countingSort(nums: number[]): number[] {
     countArray[item]++;
   }
 
-  // calculate the deviate of sorted array's index
+  // calculate the deviation of sorted array's index
   let sum = 0;
   let temp = 0;
   for (let i = 0; i < countArray.length; i++) {
@@ -39,20 +39,20 @@ export function countingSort(nums: number[]): number[] {
   }
 
   // get sorted array
-  const sortArray = new Array(nums.length).fill(0);
+  const sortedArray = new Array(nums.length).fill(0);
   for (let i = 0; i < nums.length; i++) {
     const index = countArray[nums[i]];
     const value = nums[i];
-    sortArray[index] = value;
+    sortedArray[index] = value;
     countArray[nums[i]]++;
   }
 
   // remapping;
-  for (let i = 0; i < sortArray.length; i++) {
-    sortArray[i] = sortArray[i] - mapper;
+  for (let i = 0; i < sortedArray.length; i++) {
+    sortedArray[i] = sortedArray[i] - mapper;
   }
 
-  return sortArray;
+  return sortedArray;
 }
 
 // test
