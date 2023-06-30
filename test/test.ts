@@ -56,40 +56,7 @@
 
 // console.log(fib(4));
 
-function customizedCountingSort(nums: number[], digit: number, count_volume = 10): void {
-  // we just need 0-9 space in counter volume
-  const countArray = new Array(count_volume).fill(0);
-
-  for (const item of nums) {
-    const current_digit = Math.floor(item / digit) % 10;
-    countArray[current_digit]++;
-  }
-
-  // calculate the deviation of index in sorted array
-  let sum = 0;
-  let temp = 0;
-  for (let i = 0; i < countArray.length; i++) {
-    sum = sum + temp;
-    temp = countArray[i];
-    countArray[i] = sum;
-  }
-
-  const sortedArray = new Array(nums.length).fill(0);
-  for (let i = 0; i < nums.length; i++) {
-    // here is important and notice the mapping relationship between current_digit and nums[i]
-    const current_digit = Math.floor(nums[i] / digit) % 10;
-    const index = countArray[current_digit];
-    const value = nums[i];
-    sortedArray[index] = value;
-    countArray[current_digit]++;
-  }
-
-  for (let i = 0; i < nums.length; i++) {
-    nums[i] = sortedArray[i];
-  }
-}
-
-function radixSort(nums: number[]) {
+function bucketSort(nums: number[], bucket_number: number): void {
   // mapping
   const min = Math.min(...nums);
   const mapper = min < 0 ? Math.abs(0 - min) : 0;
@@ -98,21 +65,39 @@ function radixSort(nums: number[]) {
     nums[i] = nums[i] + mapper;
   }
 
-  let digit = 1;
+  // create bucket
   const max = Math.max(...nums);
-  // represents use Counting Sort in every digital number round
-  while (digit <= max) {
-    customizedCountingSort(nums, digit, 10);
-    digit = digit * 10;
+  const buckets: number[][] = new Array(bucket_number).fill(null).map(() => []);
+  const bucketSize = Math.floor((max - min) / bucket_number);
+
+  // put elements into buckets
+  for (const item of nums) {
+    const index = Math.floor((item - min) / bucketSize);
+
+    if (index >= bucket_number) {
+      // handle boundary condition
+      buckets[bucket_number - 1].push(item);
+    } else {
+      buckets[index].push(item);
+    }
   }
+
+  // sort for elements in every bucket
+  // and you can use any of the sorting methods
+  for (const bucket of buckets) {
+    bucket.sort((a, b) => a - b);
+  }
+
+  // Concatenate the sorted buckets in order to create the sorted list.
+  const sortedArray = buckets.flat();
 
   // remapping
   for (let i = 0; i < nums.length; i++) {
-    nums[i] = nums[i] - mapper;
+    nums[i] = sortedArray[i] - mapper;
   }
 }
 
 // test
 const array = [831, 443, 256, 336, 736, 907, 3, 21323, 54];
-radixSort(array);
+bucketSort(array, 5);
 console.log(array);

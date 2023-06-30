@@ -15,56 +15,48 @@
  * A key assumption in the above version of counting sort is that the minimum possible value in the array is 0 (no negative numbers) and the maximum value is some positive integer K.
  */
 
-export function bucketSort(nums: number[], K: number): number[] {
-  // handle negative numbers
-  const originalMin = Math.min(...nums);
-
-  let reflect = 0;
-  if (originalMin < 0) {
-    reflect = Math.abs(0 - originalMin);
-  }
+export function bucketSort(nums: number[], bucket_number: number): void {
+  // mapping
+  const min = Math.min(...nums);
+  const mapper = min < 0 ? Math.abs(0 - min) : 0;
 
   for (let i = 0; i < nums.length; i++) {
-    nums[i] = nums[i] + reflect;
+    nums[i] = nums[i] + mapper;
   }
 
-  const buckets: number[][] = Array(K)
-    .fill(null)
-    .map(() => []);
-  const min = Math.min(...nums);
-  const gap = Math.max(...nums) - min;
-  const bucketSize = Math.max(1, Math.floor(gap / K));
+  // create bucket
+  const max = Math.max(...nums);
+  const buckets: number[][] = new Array(bucket_number).fill(null).map(() => []);
+  const bucketSize = Math.floor((max - min) / bucket_number);
 
+  // put elements into buckets
   for (const item of nums) {
-    // same as K * nums[i] / max(nums)
     const index = Math.floor((item - min) / bucketSize);
 
-    // edge case for max value
-    if (index >= K) {
-      // put the max value in the last bucket
-      buckets[K - 1].push(item);
+    if (index >= bucket_number) {
+      // handle boundary condition
+      buckets[bucket_number - 1].push(item);
     } else {
       buckets[index].push(item);
     }
   }
 
-  // sort individual buckets, use insertion sort or some other sorting algorithm
+  // sort for elements in every bucket
+  // and you can use any of the sorting methods
   for (const bucket of buckets) {
     bucket.sort((a, b) => a - b);
   }
 
-  // convert sorted buckets into final output
-  const sortArray = buckets.flat(2);
+  // Concatenate the sorted buckets in order to create the sorted list.
+  const sortedArray = buckets.flat();
 
-  // restore reflection
-  for (let i = 0; i < sortArray.length; i++) {
-    sortArray[i] = sortArray[i] - reflect;
+  // remapping
+  for (let i = 0; i < nums.length; i++) {
+    nums[i] = sortedArray[i] - mapper;
   }
-
-  return sortArray;
 }
 
 // test
 const array = [23, 25, 21, 12, 19, 17, 5, 7];
-const res = bucketSort(array, 5);
-console.log(res);
+bucketSort(array, 5);
+console.log(array);
