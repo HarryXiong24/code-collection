@@ -11,24 +11,24 @@
  * It is not a stable sorting algorithm.
  */
 
-export function quickSort(arr: number[]): number[] {
-  if (arr.length <= 1) {
-    return arr;
+export function quickSort(nums: number[]): number[] {
+  if (nums.length <= 1) {
+    return nums;
   }
 
-  const pivotIndex = Math.floor(arr.length / 2);
-  const pivot = arr[pivotIndex];
+  const pivotIndex = Math.floor(nums.length / 2);
+  const pivot = nums[pivotIndex];
   const smallerArr = [];
   const largerArr = [];
 
-  for (let i = 0; i < arr.length; i++) {
+  for (let i = 0; i < nums.length; i++) {
     if (i === pivotIndex) {
       continue;
     }
-    if (arr[i] < pivot) {
-      smallerArr.push(arr[i]);
+    if (nums[i] < pivot) {
+      smallerArr.push(nums[i]);
     } else {
-      largerArr.push(arr[i]);
+      largerArr.push(nums[i]);
     }
   }
 

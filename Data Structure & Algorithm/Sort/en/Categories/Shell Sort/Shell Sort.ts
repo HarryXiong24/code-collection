@@ -1,13 +1,12 @@
 // Shell Sort
 
 /**
- *
- * First divide the entire record sequence to be sorted into several subsequences for direct insertion sorting respectively.
+ * Firstly, we divide the entire record sequence to be sorted into several subsequences for direct insertion sorting respectively.
  * The specific algorithm description:
- * Choose an incremental sequence t1, t2, ..., tk, where ti>tj, tk=1;
- * According to the incremental sequence number k, sort the sequence k times;
- * For each sorting, according to the corresponding increment ti, the column to be sorted is divided into several subsequences of length m, and direct insertion sorting is performed on each sublist respectively.
- * Only when the increment factor is 1, the entire sequence is treated as a table, and the length of the table is the length of the entire sequence.
+ * 1. Choose an incremental sequence t1, t2, ..., tk, where ti>tj, tk=1;
+ * 2. According to the incremental sequence number k, sort the sequence k times;
+ * 3. For each sorting, according to the corresponding increment ti, the column to be sorted is divided into several subsequences of length m, and direct insertion sorting is performed on each sub-list respectively.
+ * 4. Only when the increment factor is 1, the entire sequence is treated as a table, and the length of the table is the length of the entire sequence.
  *
  * Time Complexity: O(n * log n)
  * Space Complexity: O(1)

@@ -1,10 +1,9 @@
 // Merge Sort
 
 /**
- * Quick sort uses the recursive method.
- * It selects an element in the array as the "pivot" element
- * And put the elements smaller than the pivot into one array and the elements larger than the pivot into the other array.
- * Then, recursively sort the two arrays and combine them with the pivot to get the final sorted array
+ * 1. Divide a sequence of length n array into two subsequences of length n/2
+ * 2. Use merge sort for the two subsequences respectively
+ * 3. Merges two sorted subsequences into a final sorted sequence.
  *
  * Time Complexity: O(n * log n)
  * Space Complexity: O(n)
@@ -24,7 +23,6 @@ function merge(left: number[], right: number[]): number[] {
   return result.concat(left, right);
 }
 
-// 对数组进行拆分
 export function mergeSort(nums: number[]): number[] {
   // boundary condition
   if (nums.length <= 1) {

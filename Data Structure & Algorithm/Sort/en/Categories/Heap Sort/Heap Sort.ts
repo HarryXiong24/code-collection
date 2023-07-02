@@ -36,9 +36,8 @@ export function heapSort(nums: number[]) {
     heapify(nums, nums.length, i);
   }
 
-  let temp = 0;
   for (let i = nums.length - 1; i >= 0; i--) {
-    temp = nums[i];
+    const temp = nums[i];
     nums[i] = nums[0];
     nums[0] = temp;
     heapify(nums, i, 0);
