@@ -20,6 +20,8 @@
 // Input: s = "(]"
 // Output: false
 
+// Time Complexity: O(n)
+// Space Complexity: O(n)
 export function isValid(s: string): boolean {
   const map: Map<string, string> = new Map([
     [')', '('],

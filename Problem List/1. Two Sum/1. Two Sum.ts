@@ -19,7 +19,7 @@
 // Input: nums = [3,3], target = 6
 // Output: [0,1]
 
-// fast and slow double point
+// Fast and slow double point
 // Time Complexity: O(n^2)
 // Space Complexity: O(1)
 export function twoSum_doublePoint(nums: number[], target: number): number[] {
@@ -41,7 +41,7 @@ export function twoSum_doublePoint(nums: number[], target: number): number[] {
   return [];
 }
 
-// map
+// Map
 // Time Complexity: O(n)
 // Space Complexity: O(n)
 export function twoSum_map(nums: number[], target: number): number[] {

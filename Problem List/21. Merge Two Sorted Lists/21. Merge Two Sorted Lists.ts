@@ -29,6 +29,8 @@ class ListNode {
 }
 
 // Non-recursive
+// Time Complexity: O(n)
+// Space Complexity: O(n)
 export function mergeTwoLists_non_recursive(list1: ListNode | null, list2: ListNode | null): ListNode | null {
   const newList = new ListNode(0, null);
   let newHead = newList;
@@ -60,6 +62,8 @@ export function mergeTwoLists_non_recursive(list1: ListNode | null, list2: ListN
 }
 
 // Recursive
+// Time Complexity: O(n)
+// Space Complexity: O(n)
 export function mergeTwoLists_recursive(list1: ListNode | null, list2: ListNode | null): ListNode | null {
   const newList = new ListNode(0, null);
   let newHead = newList;

@@ -17,7 +17,9 @@
 // Output: 0
 // Explanation: In this case, no transactions are done and the max profit = 0.
 
-// slow and fast double point
+// Slow and fast double point
+// Time Complexity: O(n)
+// Space Complexity: O(1)
 export function maxProfit1(prices: number[]): number {
   let buy_index = 0;
   let sell_index = 1;
@@ -36,7 +38,9 @@ export function maxProfit1(prices: number[]): number {
   return max_profit;
 }
 
-// easy write
+// Easy write
+// Time Complexity: O(n)
+// Space Complexity: O(1)
 export function maxProfit2(prices: number[]): number {
   let min: number = prices[0];
   let max_profit: number = 0;

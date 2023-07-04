@@ -26,6 +26,9 @@ class TreeNode {
   }
 }
 
+// Recursion
+// Time Complexity: O(n)
+// Space Complexity: O(n)
 export function invertTree(root: TreeNode | null): TreeNode | null {
   const recursive = (node: TreeNode | null) => {
     if (!node) {
