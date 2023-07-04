@@ -48,6 +48,7 @@ export class MyQueue {
     }
   }
 
+  // Returns the element at the front of the queue.
   peek(): number {
     if (this.outStack.length > 0) {
       return this.outStack[this.outStack.length - 1];

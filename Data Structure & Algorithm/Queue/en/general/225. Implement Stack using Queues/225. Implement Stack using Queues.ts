@@ -28,34 +28,34 @@
 // myStack.empty(); // return False
 
 export class MyStack {
-  true_queue: number[] = [];
+  queue: number[] = [];
   transit_queue: number[] = [];
 
   constructor() {
-    this.true_queue = [];
+    this.queue = [];
     this.transit_queue = [];
   }
 
   push(x: number): void {
     this.transit_queue.push(x);
-    while (this.true_queue.length) {
-      const temp = this.true_queue.shift()!;
+    while (this.queue.length) {
+      const temp = this.queue.shift()!;
       this.transit_queue.push(temp);
     }
-    this.true_queue = this.transit_queue;
+    this.queue = this.transit_queue;
     this.transit_queue = [];
   }
 
   pop(): number {
-    return this.true_queue.shift()!;
+    return this.queue.shift()!;
   }
 
   top(): number {
-    return this.true_queue[0];
+    return this.queue[0];
   }
 
   empty(): boolean {
-    return this.true_queue.length === 0;
+    return this.queue.length === 0;
   }
 }
 

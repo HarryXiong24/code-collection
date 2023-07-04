@@ -48,8 +48,9 @@ export class MyCircularQueue {
     this.tail = -1;
   }
 
+  // Inserts an element into the circular queue. Return true if the operation is successful.
   enQueue(value: number): boolean {
-    if (this.queue.has((this.tail + 1) % this.size)) {
+    if ((this.tail + 1) % this.size === this.head && this.queue.has(this.head)) {
       return false;
     }
     this.tail = (this.tail + 1) % this.size;
@@ -57,41 +58,50 @@ export class MyCircularQueue {
     return true;
   }
 
+  // Deletes an element from the circular queue. Return true if the operation is successful.
   deQueue(): boolean {
-    if (this.queue.has(this.head)) {
-      this.queue.delete(this.head);
-      this.head = (this.head + 1) % this.size;
-      return true;
-    }
-    return false;
-  }
-
-  Front(): number {
-    if (this.queue.has(this.head)) {
-      return this.queue.get(this.head)!;
-    }
-    return -1;
-  }
-
-  Rear(): number {
-    if (this.queue.has(this.tail)) {
-      return this.queue.get(this.tail)!;
-    }
-    return -1;
-  }
-
-  isEmpty(): boolean {
-    if (this.queue.has(this.head)) {
+    if (!this.queue.has(this.head)) {
       return false;
     }
+    this.queue.delete(this.head);
+    this.head = (this.head + 1) % this.size;
     return true;
   }
 
-  isFull(): boolean {
-    if (this.queue.has((this.tail + 1) % this.size)) {
-      return true;
+  // Gets the front item from the queue. If the queue is empty, return -1.
+  Front(): number {
+    if (this.queue.has(this.head)) {
+      return this.queue.get(this.head)!;
+    } else {
+      return -1;
     }
-    return false;
+  }
+
+  // Gets the last item from the queue. If the queue is empty, return -1.
+  Rear(): number {
+    if (this.queue.has(this.tail)) {
+      return this.queue.get(this.tail)!;
+    } else {
+      return -1;
+    }
+  }
+
+  // Checks whether the circular queue is empty or not.
+  isEmpty(): boolean {
+    if (!this.queue.has(this.head)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // Checks whether the circular queue is full or not.
+  isFull(): boolean {
+    if ((this.tail + 1) % this.size === this.head && this.queue.has(this.head)) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }
 
