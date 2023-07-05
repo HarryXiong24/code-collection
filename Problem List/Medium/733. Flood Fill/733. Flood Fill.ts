@@ -34,7 +34,6 @@ export function floodFill_DFS(image: number[][], sr: number, sc: number, color: 
       return;
     } else {
       image[x][y] = color;
-
       dfs(x + 1, y);
       dfs(x - 1, y);
       dfs(x, y + 1);
