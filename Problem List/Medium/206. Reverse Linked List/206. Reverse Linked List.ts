@@ -14,8 +14,6 @@
 // Input: head = []
 // Output: []
 
-// Follow up: A linked list can be reversed either iteratively or recursively. Could you implement both?
-
 // Definition for singly-linked list.
 class ListNode {
   val: number;
@@ -26,23 +24,10 @@ class ListNode {
   }
 }
 
-// iteratively
+// Recursion
+// Time Complexity: O(n)
+// Space Complexity: O(1)
 export function reverseList(head: ListNode | null): ListNode | null {
-  let pre: ListNode | null = null;
-  let current: ListNode | null = head;
-
-  while (current !== null) {
-    const next = current.next;
-    current.next = pre;
-    pre = current;
-    current = next;
-  }
-
-  return pre;
-}
-
-// recursively
-export function reverseList1(head: ListNode | null): ListNode | null {
   const recursive = (node: ListNode | null): ListNode | null => {
     if (!node || !node.next) {
       return node;
@@ -54,4 +39,25 @@ export function reverseList1(head: ListNode | null): ListNode | null {
     return newHead;
   };
   return recursive(head);
+}
+
+// Iteration
+// Time Complexity: O(n)
+// Space Complexity: O(1)
+export function reverseList1(head: ListNode | null): ListNode | null {
+  if (!head || !head.next) {
+    return head;
+  }
+
+  let pre: ListNode | null = null;
+  let current: ListNode | null = head;
+
+  while (current !== null) {
+    const next: ListNode | null = current.next;
+    current.next = pre;
+    pre = current;
+    current = next;
+  }
+
+  return pre;
 }
