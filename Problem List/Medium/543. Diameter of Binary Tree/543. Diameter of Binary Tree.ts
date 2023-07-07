@@ -40,6 +40,8 @@ export function diameterOfBinaryTree(root: TreeNode | null): number {
     const left = recursive(node.left);
     const right = recursive(node.right);
 
+    // If there is no this code, this recursive is used to find out the depth of the tree.
+    // And the function of this code is to compare the relationship between the sum of the depth of the current left and right nodes and the current max value
     max = Math.max(left + right, max);
 
     return Math.max(left, right) + 1;
