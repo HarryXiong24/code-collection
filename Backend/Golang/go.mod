@@ -1,3 +1,3 @@
-module go_basic_study
+module GoBasicStudy
 
 go 1.18
