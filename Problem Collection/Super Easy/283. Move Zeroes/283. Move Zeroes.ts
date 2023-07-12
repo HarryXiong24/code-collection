@@ -15,7 +15,7 @@
 // Using the Selection Sort concept
 // Time Complexity: O(n)
 // Space Complexity: O(1)
-function moveZeroes(nums: number[]): void {
+export function moveZeroes(nums: number[]): void {
   let slow: number = 0;
   let fast: number = 0;
   while (fast < nums.length) {
