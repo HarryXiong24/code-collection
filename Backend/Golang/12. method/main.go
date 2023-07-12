@@ -26,7 +26,7 @@ func main() {
 	bPtr := &lesson
 	bPtr.PrintInfo()
 
-	// PrintInfo(bPtr) //err  无法将 'bPtr' (类型 *Lesson) 用作类型 Lesson
+	// PrintInfo(bPtr) // err  无法将 'bPtr' (类型 *Lesson) 用作类型 Lesson
 
 	fmt.Println("------------------")
 	var x myInt = 50
