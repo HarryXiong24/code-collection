@@ -16,18 +16,31 @@
 // Input: nums = [1]
 // Output: 1
 
-export function singleNumber(nums: number[]): number {
-  const set = new Set<number>();
-  for (const item of nums) {
-    if (set.has(item)) {
-      set.delete(item);
-    } else {
-      set.add(item);
-    }
-  }
-  return [...set][0];
+package main
+
+import "fmt"
+
+func singleNumber(nums []int) int {
+	set := make(map[int]int)
+
+	for _, item := range nums {
+		current, ok := set[item]
+		if ok == true {
+			delete(set, item)
+		} else {
+			set[item] = current + 1
+		}
+	}
+
+	for item := range set {
+		return item
+	}
+	return -1
 }
 
 // test
-const res = singleNumber([1, 2, 1, 2, 4]);
-console.log(res);
+func main() {
+	arr := []int{4, 1, 2, 1, 2}
+	res := singleNumber(arr)
+	fmt.Println(res)
+}
