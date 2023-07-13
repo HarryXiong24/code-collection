@@ -2,14 +2,15 @@ package main
 
 import "fmt"
 
-func test() string {
-	fmt.Println("1")
-	defer fmt.Println("2")
-	fmt.Println("3")
-	return "4"
+func modifySlice(s []int) {
+	s[0] = 100
+	s = append(s, 200)
 }
 
 func main() {
-	res := test()
-	fmt.Println(res)
+	slice := []int{1, 2, 3, 4, 5}
+	fmt.Println("Before modification:", slice)
+
+	modifySlice(slice)
+	fmt.Println("After modification:", slice)
 }

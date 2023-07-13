@@ -26,6 +26,9 @@ class TreeNode {
   }
 }
 
+// Recursive
+// Time Complexity: O(N)
+// Space Complexity: O(N)
 export function sortedArrayToBST(nums: number[]): TreeNode | null {
   if (!nums.length) {
     return null;
