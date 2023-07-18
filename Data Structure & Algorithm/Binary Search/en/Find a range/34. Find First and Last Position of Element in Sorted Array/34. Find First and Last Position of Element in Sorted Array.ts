@@ -42,7 +42,7 @@ export function searchRange(nums: number[], target: number): number[] {
   }
 
   // to handle [1], 1 condition
-  if (target == nums[left]) {
+  if (target === nums[left]) {
     return [left, left];
   }
 
