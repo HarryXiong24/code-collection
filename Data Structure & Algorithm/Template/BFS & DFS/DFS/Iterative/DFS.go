@@ -7,26 +7,19 @@ type TestNode struct {
 	neighbors []*TestNode
 }
 
-func BFS(root *TestNode) int {
-	queue := []*TestNode{root}
-	layer := 0
+func DFS_Stack(root *TestNode) {
+	stack := []*TestNode{root}
 
-	for len(queue) > 0 {
-		size := len(queue)
-		for i := 0; i < size; i++ {
-			current := queue[0]
-			if current != nil {
-				fmt.Println(current.value)
-			}
-			for _, next := range current.neighbors {
-				queue = append(queue, next)
-			}
-			queue = queue[1:]
+	for len(stack) > 0 {
+		current := stack[len(stack)-1]
+		stack = stack[:len(stack)-1]
+		if current != nil {
+			fmt.Println(current.value)
 		}
-		layer = layer + 1
+		for _, next := range current.neighbors {
+			stack = append(stack, next)
+		}
 	}
-
-	return layer
 }
 
 // test
@@ -68,7 +61,6 @@ func main() {
 	node3.neighbors = append(node3.neighbors, &node6)
 	node6.neighbors = append(node6.neighbors, &node7)
 
-	res := BFS(&node1)
+	DFS_Stack(&node1)
 
-	fmt.Printf("layer: %d\n", res)
 }
