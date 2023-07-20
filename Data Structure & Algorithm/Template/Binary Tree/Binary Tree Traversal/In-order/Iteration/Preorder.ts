@@ -9,19 +9,26 @@ class TreeNode {
   }
 }
 
-export function preorderTraversalRecursive(root: TreeNode | null): number[] {
+export function inorderTraversalIterative(root: TreeNode | null): number[] {
   const res: number[] = [];
+  const stack: TreeNode[] = [];
 
-  const recursive = (node: TreeNode | null) => {
-    if (!node) {
-      return;
+  if (!root) {
+    return res;
+  }
+
+  let node: TreeNode | null = root;
+
+  while (node || stack.length) {
+    while (node) {
+      stack.push(node);
+      node = node.left;
     }
-    res.push(node.val);
-    recursive(node?.left);
-    recursive(node?.right);
-  };
 
-  recursive(root);
+    node = stack.pop()!;
+    res.push(node.val);
+    node = node.right;
+  }
 
   return res;
 }
@@ -56,5 +63,5 @@ const root: TreeNode = {
     right: null,
   },
 };
-const res = preorderTraversalRecursive(root);
+const res = inorderTraversalIterative(root);
 console.log(res);

@@ -8,7 +8,7 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-func preorderTraversalIterative(root *TreeNode) []int {
+func inorderTraversalIterative(root *TreeNode) []int {
 	res := []int{}
 	stack := []*TreeNode{}
 
@@ -20,13 +20,13 @@ func preorderTraversalIterative(root *TreeNode) []int {
 
 	for len(stack) > 0 || node != nil {
 		for node != nil {
-			res = append(res, node.Val)
 			stack = append(stack, node)
 			node = node.Left
 		}
 
 		node = stack[len(stack)-1]
 		stack = stack[0 : len(stack)-1]
+		res = append(res, node.Val)
 		node = node.Right
 	}
 
@@ -57,6 +57,6 @@ func main() {
 		},
 	}
 
-	res := preorderTraversalIterative(root)
+	res := inorderTraversalIterative(root)
 	fmt.Println(res)
 }

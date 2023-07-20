@@ -9,15 +9,16 @@ class TreeNode {
   }
 }
 
-export function preorderTraversalRecursive(root: TreeNode | null): number[] {
+export function inorderTraversalRecursive(root: TreeNode | null): number[] {
   const res: number[] = [];
 
   const recursive = (node: TreeNode | null) => {
     if (!node) {
       return;
     }
-    res.push(node.val);
+
     recursive(node?.left);
+    res.push(node.val);
     recursive(node?.right);
   };
 
@@ -56,5 +57,5 @@ const root: TreeNode = {
     right: null,
   },
 };
-const res = preorderTraversalRecursive(root);
+const res = inorderTraversalRecursive(root);
 console.log(res);

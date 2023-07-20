@@ -44,7 +44,7 @@ func main() {
 			Val: 3,
 			Left: &TreeNode{
 				Val: 6,
-				Right: &TreeNode{
+				Left: &TreeNode{
 					Val: 7,
 				},
 			},
