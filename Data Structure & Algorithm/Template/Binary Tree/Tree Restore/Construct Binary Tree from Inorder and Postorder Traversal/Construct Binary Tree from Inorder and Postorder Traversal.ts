@@ -2,7 +2,6 @@
 
 // Given two integer arrays inorder and postorder where inorder is the inorder traversal of a binary tree and postorder is the postorder traversal of the same tree, construct and return the binary tree.
 
-// Definition for a binary tree node.
 class TreeNode {
   val: number;
   left: TreeNode | null;
@@ -35,8 +34,8 @@ export function buildTree(inorder: number[], postorder: number[]): TreeNode | nu
 }
 
 // test
-const levelOrder = (root: TreeNode | null): Array<number | null> => {
-  const res: Array<number | null> = [];
+const levelOrder = (root: TreeNode | null): number[] => {
+  const res: number[] = [];
   const queue: TreeNode[] = [];
 
   if (!root) {

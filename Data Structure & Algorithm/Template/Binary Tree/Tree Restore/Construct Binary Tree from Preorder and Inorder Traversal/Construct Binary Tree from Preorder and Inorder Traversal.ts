@@ -1,8 +1,7 @@
-// 105. Construct Binary Tree from Preorder and Inorder Traversal
+// Construct Binary Tree from Preorder and Inorder Traversal
 
 // Given two integer arrays preorder and inorder where preorder is the preorder traversal of a binary tree and inorder is the inorder traversal of the same tree, construct and return the binary tree.
 
-// Definition for a binary tree node.
 class TreeNode {
   val: number;
   left: TreeNode | null;
@@ -34,8 +33,8 @@ export function buildTree(preorder: number[], inorder: number[]): TreeNode | nul
 }
 
 // test
-const levelOrder = (root: TreeNode | null): Array<number | null> => {
-  const res: Array<number | null> = [];
+const levelOrder = (root: TreeNode | null): number[] => {
+  const res: number[] = [];
   const queue: TreeNode[] = [];
 
   if (!root) {
