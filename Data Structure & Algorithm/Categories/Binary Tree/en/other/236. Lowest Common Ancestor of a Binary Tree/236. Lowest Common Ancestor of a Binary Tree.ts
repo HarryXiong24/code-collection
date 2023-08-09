@@ -50,7 +50,7 @@ export function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, 
     } else if (leftLCA && !rightLCA) {
       return leftLCA;
     } else {
-      // leftLCA && rightLCA
+      // !leftLCA && rightLCA
       return rightLCA;
     }
   };
