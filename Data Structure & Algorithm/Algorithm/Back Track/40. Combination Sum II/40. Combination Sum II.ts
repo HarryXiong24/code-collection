@@ -24,38 +24,33 @@
 // [5]
 // ]
 
-function combinationSum2(candidates: number[], target: number): number[][] {
+export function combinationSum2(candidates: number[], target: number): number[][] {
   const results: number[][] = [];
-  const visited: boolean[] = new Array(candidates.length).fill(false);
   const result: number[] = [];
-  const isRepeat = new Set<string>();
 
   candidates = candidates.sort((a, b) => a - b);
 
-  const backTrack = (currentSum: number, currentIndex: number, visited: boolean[], result: number[]) => {
-    if (currentSum > target || currentIndex > candidates.length) {
+  const backTrack = (currentSum: number, currentIndex: number, result: number[]) => {
+    if (currentSum === target) {
+      results.push([...result]);
       return;
     }
-    if (currentSum === target) {
-      const temp = [...result];
-      if (!isRepeat.has(JSON.stringify(temp))) {
-        isRepeat.add(JSON.stringify(temp));
-        results.push([...result]);
-      }
+
+    if (currentSum > target || currentIndex >= candidates.length) {
       return;
     }
 
     result.push(candidates[currentIndex]);
-    backTrack(currentSum + candidates[currentIndex], currentIndex + 1, visited, result);
+    backTrack(currentSum + candidates[currentIndex], currentIndex + 1, result);
     result.pop();
 
     while (currentIndex + 1 < candidates.length && candidates[currentIndex] === candidates[currentIndex + 1]) {
       currentIndex++;
     }
-    backTrack(currentSum, currentIndex + 1, visited, result);
+    backTrack(currentSum, currentIndex + 1, result);
   };
 
-  backTrack(0, 0, visited, result);
+  backTrack(0, 0, result);
 
   return results;
 }
