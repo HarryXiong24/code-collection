@@ -35,8 +35,29 @@ class Solution:
         backtrack([], 0, 0)
         return res
 
+    def generateParenthesis_recursion(self, n: int) -> List[str]:
+        result: List[str] = []
+
+        def recursion(current_str: str, left: int, right: int):
+            if right < left:
+                return
+
+            if left == 0 and right == 0:
+                result.append(current_str)
+
+            if left != 0:
+                recursion(current_str + "(", left - 1, right)
+
+            if right != 0:
+                recursion(current_str + ")", left, right-1)
+
+        recursion('', n, n)
+        return result
+
 
 # test
 solution = Solution()
 res = solution.generateParenthesis(3)
+res1 = solution.generateParenthesis_recursion(3)
 print(res)
+print(res1)
