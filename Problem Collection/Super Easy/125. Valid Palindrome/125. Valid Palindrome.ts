@@ -20,7 +20,7 @@
 // Explanation: s is an empty string "" after removing non-alphanumeric characters.
 // Since an empty string reads the same forward and backward, it is a palindrome.
 
-// Left and right double point
+// Left and right two point
 // Time Complexity: O(n)
 // Space Complexity: O(1)
 export function isPalindrome(s: string): boolean {

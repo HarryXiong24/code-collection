@@ -20,7 +20,7 @@
 // Output: [1,2]
 // Explanation: The sum of -1 and 0 is -1. Therefore index1 = 1, index2 = 2. We return [1, 2].
 
-// fast & slow double point
+// fast & slow two point
 export function twoSum(numbers: number[], target: number): number[] {
   let slow = 0;
   let fast = slow + 1;
@@ -38,7 +38,7 @@ export function twoSum(numbers: number[], target: number): number[] {
   return [-1, -1];
 }
 
-// left and right double point
+// left and right two point
 export function twoSum1(numbers: number[], target: number): number[] {
   let left = 0;
   let right = numbers.length - 1;

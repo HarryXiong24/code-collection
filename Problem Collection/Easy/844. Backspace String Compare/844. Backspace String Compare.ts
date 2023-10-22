@@ -55,7 +55,7 @@ export function backspaceCompare(s: string, t: string): boolean {
   return true;
 }
 
-// Double point, Optimize
+// two point, Optimize
 // Iterate through the string in reverse. If we see a backspace character, the next non-backspace character is skipped. If a character isn't skipped, it is part of the final answer.
 // Time Complexity: O(⁡n)
 // Space Complexity: O(1)

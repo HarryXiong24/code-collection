@@ -57,7 +57,7 @@ export function removeNthFromEnd(head: ListNode | null, n: number): ListNode | n
 }
 
 // there is a specific rule, when need to remove the n th node from the end of the list, you can let one pointer move n steps from the beginning of the list, and when X continue move until the end, the distance traveled is the node from the beginning distance when counting.
-// achieve this rule can use double pointer.
+// achieve this rule can use two pointer.
 export function removeNthFromEnd1(head: ListNode | null, n: number): ListNode | null {
   let fast: ListNode | null;
   let slow: ListNode | null;

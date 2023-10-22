@@ -13,7 +13,7 @@
 // Output: -1
 // Explanation: "leeto" did not occur in "leetcode", so we return -1.
 
-// sliding window or double point concept
+// sliding window or two point concept
 export function strStr(haystack: string, needle: string): number {
   const res = -1;
   let slow = 0;

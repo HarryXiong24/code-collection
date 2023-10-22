@@ -17,7 +17,7 @@
 // Output: 0
 // Explanation: In this case, no transactions are done and the max profit = 0.
 
-// Slow and fast double point
+// Slow and fast two point
 // Time Complexity: O(n)
 // Space Complexity: O(1)
 export function maxProfit1(prices: number[]): number {

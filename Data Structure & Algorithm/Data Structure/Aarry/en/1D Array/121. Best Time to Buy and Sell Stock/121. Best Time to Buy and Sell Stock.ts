@@ -17,7 +17,7 @@
 // Output: 0
 // Explanation: In this case, no transactions are done and the max profit = 0.
 
-// slow and fast double point
+// slow and fast two point
 export function maxProfit1(prices: number[]): number {
   let buy_index = 0;
   let sell_index = 1;

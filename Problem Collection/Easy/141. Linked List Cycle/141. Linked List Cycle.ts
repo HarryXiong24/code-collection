@@ -31,7 +31,7 @@ class ListNode {
   }
 }
 
-// Fast and Slow double point, and there is a rule that if linked list has a cycle, fast and slow point must meet each other.
+// Fast and Slow two point, and there is a rule that if linked list has a cycle, fast and slow point must meet each other.
 // Time Complexity: O(n)
 // Space Complexity: O(1)
 export function hasCycle(head: ListNode | null): boolean {

@@ -17,7 +17,7 @@
 // Output: false
 // Explanation: Reads 01 from right to left. Therefore it is not a palindrome.
 
-// Double Point
+// Two Point
 // Time Complexity: O(N)
 // Space Complexity: O(1)
 export function isPalindrome(x: number): boolean {

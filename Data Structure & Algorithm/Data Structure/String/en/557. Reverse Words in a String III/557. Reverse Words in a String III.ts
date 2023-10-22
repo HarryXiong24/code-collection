@@ -10,7 +10,7 @@
 // Input: s = "God Ding"
 // Output: "doG gniD"
 
-// use double point to switch elements, and reverse() can do it too.
+// use two point to switch elements, and reverse() can do it too.
 export function reverseWords(s: string): string {
   let arr: string[] = s.split(' ');
   arr = arr.map((value) => {

@@ -11,7 +11,7 @@
 // Input: s = ["H","a","n","n","a","h"]
 // Output: ["h","a","n","n","a","H"]
 
-// Double Point
+// Two Point
 /**
  Do not return anything, modify s in-place instead.
  */
