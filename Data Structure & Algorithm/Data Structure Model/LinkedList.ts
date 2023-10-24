@@ -144,6 +144,24 @@ export class LinkedList<T> {
     this.length--;
   }
 
+  // 删除第一个出现 target
+  // deleteValue(target: number): void {
+  //   if (this.head!.next === null) {
+  //     return;
+  //   }
+
+  //   let cur = this.head!.next;
+  //   let prev = this.head!;
+
+  //   while (cur.next !== null) {
+  //     if (cur.element === target) {
+  //       prev.next = cur.next;
+  //     }
+  //     cur = cur.next;
+  //     prev = prev.next!;
+  //   }
+  // }
+
   // 打印链表
   printLinkList(): Array<T> {
     let temp = new Node<T>(this.initHeadValue, null);

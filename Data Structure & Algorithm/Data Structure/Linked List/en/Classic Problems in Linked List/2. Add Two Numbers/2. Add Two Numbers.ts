@@ -34,13 +34,10 @@ export function addTwoNumbers(l1: ListNode | null, l2: ListNode | null): ListNod
   while (l1 || l2) {
     const num1 = l1 ? l1.val : 0;
     const num2 = l2 ? l2.val : 0;
-    const nowSum = (num1 + num2 + carry) % 10;
-    if (num1 + num2 + carry > 9) {
-      carry = 1;
-    } else {
-      carry = 0;
-    }
-    const node = new ListNode(nowSum, null);
+    const nowSum = num1 + num2 + carry;
+    carry = Math.floor(nowSum / 10);
+    const currentNum = nowSum % 10;
+    const node = new ListNode(currentNum, null);
     current.next = node;
     current = current.next;
     if (l1) {
