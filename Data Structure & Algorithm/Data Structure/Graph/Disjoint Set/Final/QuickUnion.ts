@@ -1,29 +1,44 @@
-export class UnionFind {
-  root: number[];
+// Time Complexity	O(α(N))
 
-  // O(n)
+// Note:
+// N is the number of vertices in the graph.
+// α refers to the Inverse Ackermann function.
+// In practice, we assume it's a constant. In other words, O(α(N)) is regarded as O(1) on average.
+
+// Space Complexity O(N)
+
+class UnionFind {
+  root: number[];
+  rank: number[];
+
   constructor(n: number) {
     this.root = new Array(n).fill(0).map((_, i) => i);
+    this.rank = new Array(n).fill(1);
   }
 
-  // O(n)
   find(x: number): number {
     if (this.root[x] === x) {
       return x;
     }
-    return this.find(this.root[x]);
+    this.root[x] = this.find(this.root[x]);
+    return this.root[x];
   }
 
-  // O(n)
   union(x: number, y: number) {
     const rootX = this.find(x);
     const rootY = this.find(y);
     if (rootX !== rootY) {
-      this.root[rootY] = rootX;
+      if (this.rank[rootX] > this.rank[rootY]) {
+        this.root[rootY] = rootX;
+      } else if (this.rank[rootX] < this.rank[rootY]) {
+        this.root[rootX] = rootY;
+      } else {
+        this.root[rootY] = rootX;
+        this.rank[rootX]++;
+      }
     }
   }
 
-  // O(n)
   connected(x: number, y: number) {
     return this.find(x) === this.find(y);
   }

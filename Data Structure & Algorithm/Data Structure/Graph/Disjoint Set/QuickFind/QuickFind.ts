@@ -1,14 +1,14 @@
 export class UnionFind {
-  array: number[];
+  root: number[];
 
   // O(n)
   constructor(n: number) {
-    this.array = new Array(n).fill(0).map((_, i) => i);
+    this.root = new Array(n).fill(0).map((_, i) => i);
   }
 
   // O(1)
   find(i: number) {
-    return this.array[i];
+    return this.root[i];
   }
 
   // O(n)
@@ -20,9 +20,9 @@ export class UnionFind {
       return;
     }
 
-    for (let i = 0; i < this.array.length; i++) {
-      if (this.array[i] === rootY) {
-        this.array[i] = rootX;
+    for (let i = 0; i < this.root.length; i++) {
+      if (this.root[i] === rootY) {
+        this.root[i] = rootX;
       }
     }
   }
