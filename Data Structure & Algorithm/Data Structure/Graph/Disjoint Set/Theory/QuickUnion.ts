@@ -10,10 +10,12 @@
 class UnionFind {
   root: number[];
   rank: number[];
+  count: number;
 
   constructor(n: number) {
     this.root = new Array(n).fill(0).map((_, i) => i);
     this.rank = new Array(n).fill(1);
+    this.count = n;
   }
 
   find(x: number): number {
@@ -36,11 +38,16 @@ class UnionFind {
         this.root[rootY] = rootX;
         this.rank[rootX]++;
       }
+      this.count--;
     }
   }
 
   connected(x: number, y: number) {
     return this.find(x) === this.find(y);
+  }
+
+  getCount() {
+    return this.count;
   }
 }
 
