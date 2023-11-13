@@ -227,6 +227,15 @@ export class BinarySearchTree<T> {
       }
     }
   }
+
+  // 删除节点
+  remove(key: T) {
+    if (this.root === null) {
+      return;
+    }
+    const deleteNode = this.removeNode(this.root, key);
+    return deleteNode;
+  }
 }
 
 // test
