@@ -72,7 +72,7 @@ class Solution:
                 cost = abs(x1 - x2) + abs(y1 - y2)
                 edge = Edge(i, j, cost)
                 pq.append(edge)
-        
+                        
         heapq.heapify(pq)
 
         result = 0
