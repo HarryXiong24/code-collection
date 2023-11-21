@@ -32,11 +32,7 @@ export function leadsToDestination(n: number, edges: number[][], source: number,
   for (let i = 0; i < n; i++) {
     graph.set(i, []);
   }
-
   for (const [from, to] of edges) {
-    if (!graph.has(from)) {
-      graph.set(from, []);
-    }
     graph.get(from)!.push(to);
   }
 
