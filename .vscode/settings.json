@@ -16,25 +16,14 @@
   "emmet.includeLanguages": {
     "wxml": "html"
   },
-  // "minapp-vscode.disableAutoConfig": true,
   "search.followSymlinks": false,
   "prettier.semi": true,
   "prettier.singleQuote": true,
-  // "beautify.language": {
-  //   "js": {
-  //     "type": ["javascript", "json", "jsonc"],
-  //     "filename": [".eslintrc", ".jsbeautify"]
-  //   },
-  //   "css": ["css", "scss", "less"],
-  //   "html": ["htm", "html", "vue"]
-  // },
   "projectManager.groupList": true,
   "editor.minimap.enabled": true,
   "editor.wordWrap": "on",
-  // "colorize.ignore_search_variables_info": true,
   "workbench.sideBar.location": "left",
   "eslint.alwaysShowStatus": true,
-  // "eslint._legacyModuleResolve": true,
   "vetur.format.scriptInitialIndent": true,
   "vetur.format.styleInitialIndent": true,
   "vetur.format.defaultFormatterOptions": {
@@ -84,28 +73,6 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
-  // "[html]": {
-  //   "editor.defaultFormatter": "HookyQR.beautify"
-  // },
-  // "[less]": {
-  //   "editor.defaultFormatter": "michelemelluso.code-beautifier"
-  // },
-  // "[css]": {
-  //   "editor.defaultFormatter": "michelemelluso.code-beautifier"
-  // },
-  // "[json]": {
-  //   "editor.defaultFormatter": "HookyQR.beautify"
-  // },
-  // "[jsonc]": {
-  //   "editor.defaultFormatter": "HookyQR.beautify"
-  // },
-  // "[sql]": {
-  //   "editor.defaultFormatter": "ms-mssql.mssql"
-  // },
-  // "[xml]": {
-  //   "editor.defaultFormatter": "redhat.vscode-xml"
-  // },
-  "wxmlConfig.onSaveFormat": true,
   "workbench.iconTheme": "material-icon-theme",
   "prettier.requireConfig": true,
   "editor.wordWrapColumn": 240,
@@ -121,17 +88,13 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   // "typescript.validate.enable": false,
   // "javascript.validate.enable": false,
-  "scf.python3.path": "",
-  "scf.python2.path": "",
   "editor.codeActionsOnSave": {
     "source.fixAll": true,
     "source.fixAll.eslint": true,
     "source.fixAll.stylelint": true
   },
-  "vsicons.dontShowNewVersionMessage": true,
   "editor.suggestSelection": "first",
   "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
-  "java.semanticHighlighting.enabled": true,
   "workbench.editorAssociations": {
     "*.html": "default"
   },
@@ -144,29 +107,10 @@
     "~": "${workspaceRoot}"
   },
   "go.useLanguageServer": true,
-  "iceworks.materialSources": [],
-  "mssql.connections": [
-    {
-      "server": "{{put-server-name-here}}",
-      "database": "{{put-database-name-here}}",
-      "user": "{{put-username-here}}",
-      "password": "{{put-password-here}}"
-    }
-  ],
-  "go.toolsManagement.autoUpdate": true,
-  "appworks.materialSources": [],
-  // "window.zoomLevel": 1,
-  "redhat.telemetry.enabled": true,
-  // "cSpell.userWords": ["tempstats"],
-  "security.workspace.trust.untrustedFiles": "newWindow",
   "git.ignoreLegacyWarning": true,
   "git.autofetch": true,
   "editor.guides.indentation": true,
   "[python]": {
-    "editor.defaultFormatter": "ms-python.autopep8"
-  },
-  "python.formatting.provider": "none"
-  // "devops.accessToken": "",
-  // "devops.accountId": "harryxiong",
-  // "devops.agentPath": "Users/brooklin/agent"
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  }
 }
