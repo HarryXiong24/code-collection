@@ -1,6 +1,6 @@
 type Graph = Record<string, string[]>;
 
-export function traverseVertices(graph: Graph, start: string): string[] {
+export function traverseVertices_DFS(graph: Graph, start: string): string[] {
   const stack: string[] = [start];
   const isVisited: Set<string> = new Set(start);
   const results: string[] = [];
@@ -49,7 +49,7 @@ const graph = {
   E: ['B', 'D', 'F'],
   F: ['B', 'E'],
 };
-const res1 = traverseVertices(graph, 'A');
+const res1 = traverseVertices_DFS(graph, 'A');
 const res2 = traverseVertices_recursive(graph, 'A');
 console.log(res1);
 console.log(res2);
