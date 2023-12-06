@@ -9,7 +9,7 @@
 # Example 1:
 # Input: points = [[0,0],[2,2],[3,10],[5,2],[7,0]]
 # Output: 20
-# Explanation: 
+# Explanation:
 # We can connect the points as shown above to get the minimum cost of 20.
 # Notice that there is a unique path between every pair of points.
 
@@ -19,6 +19,7 @@
 
 import heapq
 from typing import List
+
 
 class UnionFind:
     def __init__(self, size):
@@ -45,7 +46,8 @@ class UnionFind:
 
     def connected(self, x, y):
         return self.find(x) == self.find(y)
-      
+
+
 class Edge:
     def __init__(self, point1, point2, cost):
         self.point1 = point1
@@ -72,7 +74,7 @@ class Solution:
                 cost = abs(x1 - x2) + abs(y1 - y2)
                 edge = Edge(i, j, cost)
                 pq.append(edge)
-                        
+
         heapq.heapify(pq)
 
         result = 0
@@ -85,8 +87,9 @@ class Solution:
                 count -= 1
         return result
 
+
 # test
-points = [[0,0],[2,2],[3,10],[5,2],[7,0]]
+points = [[0, 0], [2, 2], [3, 10], [5, 2], [7, 0]]
 solution = Solution()
 res = solution.minCostConnectPoints(points)
 print(res)
