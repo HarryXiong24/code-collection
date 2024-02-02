@@ -12,7 +12,7 @@
 
 export function addBinary(a: string, b: string): string {
   // first, convert string to number array is easier to think
-  const res = [];
+  const res: number[] = [];
   // notice that the result should be reversed too
   const a_arr = a.split('').reverse();
   const b_arr = b.split('').reverse();
