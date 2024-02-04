@@ -38,6 +38,8 @@ export function gcdOfStrings(str1: string, str2: string): string {
   return '';
 }
 
+// T: O(n)
+// S: O(1)
 export function gcdOfStrings1(str1: string, str2: string): string {
   const gcd = (x: number, y: number): number => {
     if (y === 0) {

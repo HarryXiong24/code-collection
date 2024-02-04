@@ -17,6 +17,8 @@
 # Output: ""
 
 
+# T: O(n)
+# S: O(1)
 class Solution:
     def gcdOfStrings(self, str1: str, str2: str) -> str:
         len1, len2 = len(str1), len(str2)

@@ -29,6 +29,8 @@
 from typing import List
 
 
+# T: O(m+n)
+# S: O(1)
 class Solution:
     def merge(self, nums1: List[int], m: int, nums2: List[int], n: int) -> None:
         """

@@ -28,7 +28,8 @@
 /**
  Do not return anything, modify nums1 in-place instead.
  */
-// O(m+n)
+// T: O(m+n)
+// S: O(1)
 export function merge(nums1: number[], m: number, nums2: number[], n: number): void {
   let p1 = m - 1;
   let p2 = n - 1;
