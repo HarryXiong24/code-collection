@@ -17,6 +17,8 @@
 // Output: 0
 // Explanation: In this case, no transactions are done and the max profit = 0.
 
+// T: O(n)
+// S: O(1)
 export function maxProfit(prices: number[]): number {
   let min_price = Number.MAX_VALUE;
   let max_profit = 0;
