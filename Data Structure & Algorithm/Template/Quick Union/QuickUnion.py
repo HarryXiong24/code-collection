@@ -8,6 +8,7 @@
 
 # Space Complexity O(N)
 
+
 class UnionFind:
     def __init__(self, size):
         self.root = [i for i in range(size)]
@@ -15,7 +16,6 @@ class UnionFind:
         # The initial "rank" of each vertex is 1, because each of them is
         # a standalone vertex with no connection to other vertices.
         self.rank = [1] * size
-        self.root_count = size
 
     # The find function here is the same as that in the disjoint set with path compression.
     def find(self, x):
@@ -36,13 +36,9 @@ class UnionFind:
             else:
                 self.root[rootY] = rootX
                 self.rank[rootX] += 1
-            self.root_count = self.root_count - 1
 
     def connected(self, x, y):
         return self.find(x) == self.find(y)
-    
-    def getRootCount(self):
-        return self.root_count
 
 
 # Test Case

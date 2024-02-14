@@ -2,8 +2,8 @@ export class UnionFind {
   root: number[];
 
   // O(n)
-  constructor(n: number) {
-    this.root = new Array(n).fill(0).map((_, i) => i);
+  constructor(size: number) {
+    this.root = new Array(size).fill(0).map((_, i) => i);
   }
 
   // O(n)
