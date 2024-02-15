@@ -44,7 +44,7 @@ export function Prim(edges: number[][], points: number): [number, number[][]] {
       visited[newPoint] = true;
 
       // 更新候选边集合
-      for (let edge of edges) {
+      for (const edge of edges) {
         if ((edge[0] === newPoint && !visited[edge[1]]) || (edge[1] === newPoint && !visited[edge[0]])) {
           arr.push(edge);
         }
