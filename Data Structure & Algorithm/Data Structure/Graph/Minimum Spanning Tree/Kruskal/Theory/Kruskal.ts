@@ -38,23 +38,23 @@ class QuickUnion {
 
 export function kruskal(edges: number[][], points: number): [number, number[][]] {
   const quickUnion = new QuickUnion(points);
+  let count = points - 1;
+  let res = 0;
+  const mst: number[][] = [];
 
   edges.sort((a, b) => a[2] - b[2]);
 
-  let count = points - 1;
-  let res = 0;
-  const path: number[][] = [];
   while (edges.length && count > 0) {
     const current = edges.shift()!;
     if (!quickUnion.isConnected(current[0], current[1])) {
       res = res + current[2];
       quickUnion.union(current[0], current[1]);
-      path.push([current[0], current[1]]);
+      mst.push([current[0], current[1]]);
       count--;
     }
   }
 
-  return [res, path];
+  return [res, mst];
 }
 
 // test
