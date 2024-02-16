@@ -1,42 +1,62 @@
 type EdgeMap = Record<string, number>;
 type Graph = Record<string, EdgeMap>;
 
-export function dijkstra(graph: Graph, start: string) {
-  const distances = Object.keys(graph).reduce((acc, node) => {
-    acc[node] = Infinity;
-    return acc;
+export function dijkstra(graph: Graph, start: string, end: string): [string[], number] {
+  const dijkstra_table = Object.keys(graph).reduce((obj, node) => {
+    obj[node] = Infinity;
+    return obj;
   }, {} as EdgeMap);
-  distances[start] = 0;
-  const queue: [number, string][] = [[0, start]];
+  const record_path = Object.keys(graph).reduce((obj, node) => {
+    obj[node] = null;
+    return obj;
+  }, {} as Record<string, string | null>);
+
+  // init
+  dijkstra_table[start] = 0;
+  const queue: [string, number][] = [[start, 0]];
+  const visited = new Set();
 
   while (queue.length) {
-    queue.sort((a, b) => a[0] - b[0]);
-    const [current_distance, current_node] = queue.shift()!;
+    queue.sort((a, b) => a[1] - b[1]);
+    const [current_node, current_cost] = queue.shift()!;
 
-    if (current_distance > distances[current_node]) {
+    if (visited.has(current_node)) {
       continue;
     }
+    visited.add(current_node);
 
-    const edge = graph[current_node];
-    for (const neighbor of Object.keys(edge)) {
-      const weight = edge[neighbor];
-
-      if (weight + current_distance < distances[neighbor]) {
-        distances[neighbor] = weight + current_distance;
-        queue.push([weight + current_distance, neighbor]);
+    for (const neighbor in graph[current_node]) {
+      const weight = graph[current_node][neighbor];
+      if (current_cost + weight < dijkstra_table[neighbor]) {
+        dijkstra_table[neighbor] = current_cost + weight;
+        record_path[neighbor] = current_node;
+        queue.push([neighbor, current_cost + weight]);
       }
     }
   }
 
-  return distances;
+  const getShortestPath = (node: string | null, result: string[]) => {
+    if (!node) {
+      return;
+    }
+    result.unshift(node);
+    getShortestPath(record_path[node], result);
+  };
+
+  const cost = dijkstra_table[end];
+  const shortest_path: string[] = [];
+  getShortestPath(end, shortest_path);
+
+  return [shortest_path, cost];
 }
 
 // test
 const graph = {
-  A: { B: 1, C: 4 },
-  B: { A: 1, C: 2, D: 5 },
-  C: { A: 4, B: 2, D: 1 },
-  D: { B: 5, C: 1 },
+  A: { B: 1, C: 1, D: 3 },
+  B: { A: 1, D: 2, E: 1 },
+  C: { A: 1, D: 1 },
+  D: { A: 2, B: 3, C: 1, E: 2 },
+  E: { B: 1, D: 2 },
 };
-const res = dijkstra(graph, 'A');
+const res = dijkstra(graph, 'A', 'E');
 console.log(res);
