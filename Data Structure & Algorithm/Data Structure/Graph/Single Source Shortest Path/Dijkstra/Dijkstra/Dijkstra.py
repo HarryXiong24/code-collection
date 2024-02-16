@@ -1,10 +1,13 @@
 from typing import List
 
 
-def dijkstra(graph, start, end):
+def dijkstra(
+    graph: dict[str, dict[str, float]], start: int, end: int
+) -> tuple[dict[str, float], int]:
     dijkstra_table = {node: float("infinity") for node in graph}
-    record_path = {node: None for node in graph}
+    record_path: dict[str, str] = {node: None for node in graph}
 
+    # init
     dijkstra_table[start] = 0
     queue = [(start, 0)]
     visited = set({})
