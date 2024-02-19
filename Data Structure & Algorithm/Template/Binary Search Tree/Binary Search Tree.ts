@@ -11,7 +11,7 @@ class TreeNode {
   }
 }
 
-class BinarySearchTree {
+export class BinarySearchTree {
   root: TreeNode | null;
 
   constructor(node: TreeNode | null) {
@@ -42,57 +42,55 @@ class BinarySearchTree {
       return true;
     }
 
-    const insert = (node: TreeNode): boolean => {
+    const recursive = (node: TreeNode): boolean => {
       if (new_value < node.val) {
         if (!node.left) {
           node.left = new TreeNode(new_value);
           return true;
         }
-        return insert(node.left);
+        return recursive(node.left);
       } else if (new_value > node.val) {
         if (!node.right) {
           node.right = new TreeNode(new_value);
           return true;
         }
-        return insert(node.right);
+        return recursive(node.right);
       } else {
         return false;
       }
     };
 
-    return insert(this.root);
+    return recursive(this.root);
   }
 
   deleteNode(value: number) {
-    const findRightMin = (node: TreeNode, parent: TreeNode) => {
-      let current_node = node;
-      let current_parent = parent;
-      while (current_node.left) {
-        current_parent = current_node;
-        current_node = current_node.left;
-      }
-      return [current_node, current_parent];
-    };
-
-    const recursive = (node: TreeNode | null, parent: TreeNode | null) => {
+    const recursive = (node: TreeNode | null, parent: TreeNode | null): boolean => {
       if (!node) {
-        return;
+        return false;
       }
 
       if (value < node.val) {
-        recursive(node.left, node);
+        return recursive(node.left, node);
       } else if (value > node.val) {
-        recursive(node.right, node);
+        return recursive(node.right, node);
       } else {
-        if (!node.left && !node.right) {
-          parent!.left = null;
-          parent!.right = null;
-        } else if (!node.left || !node.right) {
-          parent!.val = node.val;
-          parent!.left = null;
-          parent!.right = null;
+        if (!node.left || !node.right) {
+          let newChild = node.left === null ? node.right : node.left;
+          if (parent === null) {
+            this.root = newChild;
+          } else if (parent.left === node) {
+            parent.left = newChild;
+          } else {
+            parent.right = newChild;
+          }
         } else {
-          const [min_node, min_node_parent] = findRightMin(node.right, node);
+          let min_node = node.right;
+          let min_node_parent = node;
+          while (min_node.left) {
+            min_node_parent = min_node;
+            min_node = min_node.left;
+          }
+
           node.val = min_node.val;
           if (min_node_parent.left === min_node) {
             min_node_parent.left = min_node.right;
@@ -100,10 +98,11 @@ class BinarySearchTree {
             min_node_parent.right = min_node.right;
           }
         }
+        return true;
       }
     };
 
-    recursive(this.root, null);
+    return recursive(this.root, null);
   }
 
   preorder() {
