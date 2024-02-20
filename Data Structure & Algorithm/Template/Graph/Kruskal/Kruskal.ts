@@ -36,6 +36,11 @@ class QuickUnion {
   }
 }
 
+// Prim's algorithm depends on the vertices of the graph, whereas Kruskal's algorithm depends on the edges.
+// For a graph with relatively fewer edges (sparse graph), Kruskal's algorithm might be a better choice
+// For a graph with many edges (dense graph), Prim's algorithm might be more efficient.
+
+// O(E log E), E is # of edges
 export function kruskal(edges: number[][], points: number): [number, number[][]] {
   const quickUnion = new QuickUnion(points);
   let count = points - 1;

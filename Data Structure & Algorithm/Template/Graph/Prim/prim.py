@@ -1,6 +1,11 @@
+# Prim's algorithm depends on the vertices of the graph, whereas Kruskal's algorithm depends on the edges.
+# For a graph with relatively fewer edges (sparse graph), Kruskal's algorithm might be a better choice
+# For a graph with many edges (dense graph), Prim's algorithm might be more efficient.
+
 from typing import List
 
 
+# O(E + V log V), E is # of edges, V is # of vertices
 def prim(edges: List[List[int]], points: int) -> tuple[int, List[List[int]]]:
     mst = []
     cost = 0

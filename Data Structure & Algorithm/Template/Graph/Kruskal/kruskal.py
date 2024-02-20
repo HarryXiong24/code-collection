@@ -20,6 +20,12 @@ class QuickUnion:
         return self.find(x) == self.find(y)
 
 
+# Prim's algorithm depends on the vertices of the graph, whereas Kruskal's algorithm depends on the edges.
+# For a graph with relatively fewer edges (sparse graph), Kruskal's algorithm might be a better choice
+# For a graph with many edges (dense graph), Prim's algorithm might be more efficient.
+
+
+# O(E log E), E is # of edges
 def kruskal(edges: List[List[int]], points: int) -> tuple[int, List[List[int]]]:
     uf = QuickUnion(points)
     mst = []
