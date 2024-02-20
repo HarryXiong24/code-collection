@@ -19,9 +19,11 @@ def heapify(nums: List[int], length: int, current_index: int):
 
 
 def heapSort(nums: List[int]):
+    # build heap
     for i in range(len(nums) // 2 - 1, -1, -1):
         heapify(nums, len(nums), i)
 
+    # heap sort
     for i in range(len(nums) - 1, -1, -1):
         temp = nums[i]
         nums[i] = nums[0]

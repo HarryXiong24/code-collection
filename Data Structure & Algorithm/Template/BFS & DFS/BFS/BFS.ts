@@ -13,14 +13,13 @@ export function BFS(root: TestNode): number {
     // iterate the nodes which are already in the queue
     const size = queue.length;
     for (let i = 0; i < size; i++) {
-      const current = queue[0];
+      const current = queue.shift()!;
       if (current) {
         console.log(current.value);
       }
       for (const next of current.neighbors) {
         queue.push(next);
       }
-      queue.shift();
     }
     layer = layer + 1;
   }

@@ -15,13 +15,12 @@ def BFS(root: TestNode) -> int:
     while len(queue) > 0:
         size = len(queue)
         for _ in range(size):
-            current = queue[0]
+            current = queue.pop(0)
             if current:
                 print(current.value)
             if len(current.neighbors) > 0:
                 for item in current.neighbors:
                     queue.append(item)
-            queue.pop(0)
         layer = layer + 1
 
     return layer

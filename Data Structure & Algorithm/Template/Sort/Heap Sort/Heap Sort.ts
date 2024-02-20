@@ -32,10 +32,12 @@ function heapify(nums: number[], length: number, current_index: number) {
 }
 
 export function heapSort(nums: number[]) {
+  // build heap
   for (let i = Math.floor(nums.length / 2) - 1; i >= 0; i--) {
     heapify(nums, nums.length, i);
   }
 
+  // heap sort
   for (let i = nums.length - 1; i >= 0; i--) {
     const temp = nums[i];
     nums[i] = nums[0];
