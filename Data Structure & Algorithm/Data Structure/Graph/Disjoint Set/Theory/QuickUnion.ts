@@ -7,7 +7,7 @@
 
 // Space Complexity O(N)
 
-class UnionFind {
+export class UnionFind {
   root: number[];
   rank: number[];
 
