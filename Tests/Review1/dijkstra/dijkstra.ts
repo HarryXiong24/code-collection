@@ -1,7 +1,7 @@
 type EdgeMap = Record<string, number>;
 type Graph = Record<string, EdgeMap>;
 
-function dijkstra(graph: Graph, start: string, end: string): [string[], number] {
+export function dijkstra(graph: Graph, start: string, end: string): [string[], number] {
   const dijkstra_table = Object.keys(graph).reduce((obj, node) => {
     obj[node] = Infinity;
     return obj;
