@@ -39,7 +39,7 @@ def dijkstra(
     return shortest_path, dijkstra_table[end]
 
 
-# Example usage
+# test
 graph = {
     "A": {"B": 1, "C": 1, "D": 3},
     "B": {"A": 1, "D": 2, "E": 1},
