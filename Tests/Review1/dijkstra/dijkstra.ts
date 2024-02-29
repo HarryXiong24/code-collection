@@ -18,6 +18,7 @@ export function dijkstra(graph: Graph, start: string, end: string): [string[], n
   const queue: [string, number][] = [[start, 0]];
 
   while (queue.length) {
+    queue.sort((a, b) => a[1] - b[1]);
     const [current_node, current_cost] = queue.shift()!;
 
     if (visited.has(current_node)) {
