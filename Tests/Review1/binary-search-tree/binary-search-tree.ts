@@ -44,13 +44,13 @@ export class BinarySearchTree {
 
     const recursive = (node: TreeNode): boolean => {
       if (new_value < node.val) {
-        if (!node.left) {
+        if (node.left === null) {
           node.left = new TreeNode(new_value);
           return true;
         }
         return recursive(node.left);
       } else if (new_value > node.val) {
-        if (!node.right) {
+        if (node.right === null) {
           node.right = new TreeNode(new_value);
           return true;
         }
@@ -64,6 +64,10 @@ export class BinarySearchTree {
   }
 
   deleteNode(value: number): boolean {
+    if (!this.root) {
+      return false;
+    }
+
     const recursive = (node: TreeNode | null, parent: TreeNode | null): boolean => {
       if (!node) {
         return false;
@@ -75,27 +79,28 @@ export class BinarySearchTree {
         return recursive(node.right, node);
       } else {
         if (!node.left || !node.right) {
-          let newChild = node.left === null ? node.right : node.left;
+          let new_child = node.left ? node.left : node.right;
           if (parent === null) {
-            this.root = newChild;
+            this.root = new_child;
           } else if (parent.left === node) {
-            parent.left = newChild;
+            parent.left = new_child;
           } else {
-            parent.right = newChild;
+            parent.right = new_child;
           }
         } else {
           let min_node = node.right;
-          let min_node_parent = node;
+          let parent_node = node;
+
           while (min_node.left) {
-            min_node_parent = min_node;
+            parent_node = min_node;
             min_node = min_node.left;
           }
 
           node.val = min_node.val;
-          if (min_node_parent.left === min_node) {
-            min_node_parent.left = min_node.right;
+          if (parent_node.left === min_node) {
+            parent_node.left = min_node.right;
           } else {
-            min_node_parent.right = min_node.right;
+            parent_node.right = min_node.right;
           }
         }
         return true;
