@@ -42,7 +42,8 @@ def DFS_Recursive(node: TestNode):
         if not n:
             return
         print(n.value)
-        for item in n.neighbors:
-            recursive(item)
+        if len(n.neighbors) > 0:
+            for item in n.neighbors:
+                recursive(item)
 
     recursive(node)
