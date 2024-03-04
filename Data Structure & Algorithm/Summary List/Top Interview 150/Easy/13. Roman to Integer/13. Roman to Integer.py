@@ -36,6 +36,8 @@
 # Explanation: M = 1000, CM = 900, XC = 90 and IV = 4.
 
 
+# T: O(n)
+# S: O(1)
 class Solution:
 
     def romanToInt(self, s: str) -> int:
