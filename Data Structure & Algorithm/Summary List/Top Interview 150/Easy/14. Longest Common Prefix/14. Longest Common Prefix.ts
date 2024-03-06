@@ -1,16 +1,28 @@
-// Trie
+// 14. Longest Common Prefix
+
+// Write a function to find the longest common prefix string amongst an array of strings.
+
+// If there is no common prefix, return an empty string "".
+
+// Example 1:
+// Input: strs = ["flower","flow","flight"]
+// Output: "fl"
+
+// Example 2:
+// Input: strs = ["dog","racecar","car"]
+// Output: ""
+// Explanation: There is no common prefix among the input strings.
 
 class TrieNode {
   children: Map<string, TrieNode>;
   is_end_of_word: boolean;
-
   constructor() {
     this.children = new Map();
     this.is_end_of_word = false;
   }
 }
 
-export class Trie {
+class Trie {
   root: TrieNode;
 
   constructor() {
@@ -70,37 +82,26 @@ export class Trie {
   }
 }
 
+export function longestCommonPrefix(strs: string[]): string {
+  if (strs.includes('')) {
+    return '';
+  }
+
+  if (strs.length === 1) {
+    return strs[0];
+  }
+
+  const trie = new Trie();
+
+  for (const item of strs) {
+    trie.insert(item);
+  }
+
+  const prefix = trie.findLongestCommonPrefix();
+
+  return prefix;
+}
+
 // test
-const trie = new Trie(); // init
-
-// insert words
-const words_to_insert = ['apple', 'app', 'apricot', 'banana', 'bat', 'bath', 'cat', 'cut'];
-for (const word of words_to_insert) {
-  trie.insert(word);
-}
-
-// search particular word
-const search_words = ['apple', 'app', 'apex', 'bat', 'bath', 'cut', 'cute'];
-for (const word of search_words) {
-  console.log(trie.search(word));
-}
-
-// Word 'apple' found in Trie: True
-// Word 'app' found in Trie: True
-// Word 'apex' found in Trie: False
-// Word 'bat' found in Trie: True
-// Word 'bath' found in Trie: True
-// Word 'cut' found in Trie: True
-// Word 'cute' found in Trie: False
-
-// check prefix
-const prefixes_to_check = ['app', 'ba', 'bat', 'cu', 'cy'];
-for (const prefix of prefixes_to_check) {
-  console.log(trie.startsWith(prefix));
-}
-
-// Prefix 'app' found in Trie: True
-// Prefix 'ba' found in Trie: True
-// Prefix 'bat' found in Trie: True
-// Prefix 'cu' found in Trie: True
-// Prefix 'cy' found in Trie: False
+const res = longestCommonPrefix(['flower', 'flow', 'flight']);
+console.log(res);

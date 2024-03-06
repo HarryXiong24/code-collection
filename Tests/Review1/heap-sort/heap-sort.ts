@@ -19,7 +19,7 @@ function heapify(nums: number[], length: number, current_index: number) {
 }
 
 function heapSort(nums: number[]) {
-  for (let i = Math.floor(nums.length / 2) + 1; i >= 0; i--) {
+  for (let i = Math.floor(nums.length / 2) - 1; i >= 0; i--) {
     heapify(nums, nums.length, i);
   }
 

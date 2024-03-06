@@ -10,7 +10,7 @@ class TrieNode {
   }
 }
 
-class Trie {
+export class Trie {
   root: TrieNode;
 
   constructor() {
@@ -54,6 +54,19 @@ class Trie {
       node = node.children.get(char)!;
     }
     return true;
+  }
+
+  findLongestCommonPrefix() {
+    let node = this.root;
+    let prefix = '';
+
+    while (!node.is_end_of_word && node.children.size === 1) {
+      const [char, nextNode] = [...node.children.entries()][0];
+      prefix += char;
+      node = nextNode;
+    }
+
+    return prefix;
   }
 }
 
