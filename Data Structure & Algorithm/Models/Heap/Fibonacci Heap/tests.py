@@ -1,5 +1,5 @@
-import requirements
 import random as rand
+from fib import FibHeap
 
 # Instructions
 # Some test cases for the FibHeap class can be found below.
@@ -18,7 +18,7 @@ def is_delete_min_correct(roots):
 
 
 def fib_heap_tests():
-    fib = requirements.FibHeap()
+    fib = FibHeap()
     # uncomment the following line to test FibHeapLazy. The outputs should stay the same.
     # fib = requirements.FibHeapLazy()
     fib.insert(5)
