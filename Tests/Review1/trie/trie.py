@@ -36,7 +36,6 @@ class Trie:
         prefix = ""
         node = self.root
         while not node.is_end_of_word and len(node.children) == 1:
-            print(node.children.items())
             char, nextNode = next(iter(node.children.items()))
             prefix += char
             node = nextNode
