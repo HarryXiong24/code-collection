@@ -1,24 +1,24 @@
 function heapify(nums: number[], length: number, current_index: number) {
   let max_index = current_index;
-  const left_index = 2 * current_index + 1;
-  const right_index = 2 * current_index + 2;
+  let left_index = 2 * current_index + 1;
+  let right_index = 2 * current_index + 2;
 
-  if (left_index < length && nums[max_index] < nums[left_index]) {
+  if (left_index < length && nums[left_index] > nums[max_index]) {
     max_index = left_index;
   }
-  if (right_index < length && nums[max_index] < nums[right_index]) {
+  if (right_index < length && nums[right_index] > nums[max_index]) {
     max_index = right_index;
   }
 
-  if (current_index !== max_index) {
-    const temp = nums[current_index];
-    nums[current_index] = nums[max_index];
-    nums[max_index] = temp;
+  if (max_index !== current_index) {
+    const temp = nums[max_index];
+    nums[max_index] = nums[current_index];
+    nums[current_index] = temp;
     heapify(nums, length, max_index);
   }
 }
 
-export function heapSort(nums: number[]) {
+function heapSort(nums: number[]) {
   for (let i = Math.floor(nums.length / 2) - 1; i >= 0; i--) {
     heapify(nums, nums.length, i);
   }
