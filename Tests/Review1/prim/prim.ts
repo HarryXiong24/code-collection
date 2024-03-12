@@ -1,4 +1,4 @@
-function prim(graph: number[][], vertices: number): [number, number[][]] {
+export function prim(graph: number[][], vertices: number): [number, number[][]] {
   let cost = 0;
   const path: number[][] = [];
   let count = vertices - 1;
