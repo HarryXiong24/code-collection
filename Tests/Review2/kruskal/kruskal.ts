@@ -25,22 +25,20 @@ class UnionFind {
   }
 }
 
-function kruskal(graph: number[][], vertices: number): [number, number[][]] {
+export function kruskal(graph: number[][], vertices: number): [number, number[][]] {
   let cost = 0;
   const path: number[][] = [];
-
-  const uf = new UnionFind(vertices);
   let count = vertices - 1;
+  const union = new UnionFind(vertices);
 
   graph.sort((a, b) => a[2] - b[2]);
 
-  while (graph.length > 0 && count > 0) {
+  while (count > 0) {
     const [v, w, weight] = graph.shift()!;
-
-    if (!uf.connected(v, w)) {
-      cost += weight;
+    if (!union.connected(v, w)) {
+      cost = cost + weight;
       path.push([v, w]);
-      uf.union(v, w);
+      union.union(v, w);
       count--;
     }
   }
