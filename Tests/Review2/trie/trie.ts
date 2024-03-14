@@ -17,47 +17,45 @@ export class Trie {
 
   insert(word: string) {
     let node = this.root;
-    for (const char of word) {
-      if (!node.children.has(char)) {
-        node.children.set(char, new TrieNode());
+    for (const item of word) {
+      if (!node.children.has(item)) {
+        node.children.set(item, new TrieNode());
       }
-      node = node.children.get(char)!;
+      node = node.children.get(item)!;
     }
     node.is_end_of_word = true;
   }
 
   search(word: string) {
     let node = this.root;
-    for (const char of word) {
-      if (!node.children.has(char)) {
+    for (const item of word) {
+      if (!node.children.has(item)) {
         return false;
       }
-      node = node.children.get(char)!;
+      node = node.children.get(item)!;
     }
     return node.is_end_of_word;
   }
 
   startsWith(prefix: string) {
     let node = this.root;
-    for (const char of prefix) {
-      if (!node.children.has(char)) {
+    for (const item of prefix) {
+      if (!node.children.has(item)) {
         return false;
       }
-      node = node.children.get(char)!;
+      node = node.children.get(item)!;
     }
     return true;
   }
 
-  findLongestPrefix() {
+  findCommonPrefix() {
     let prefix = '';
     let node = this.root;
-
     while (!node.is_end_of_word && node.children.size === 1) {
-      const [current_char, current_child] = [...node.children.entries()][0];
-      prefix += current_char;
-      node = current_child;
+      const [char, next] = [...node.children][0];
+      prefix += char;
+      node = next;
     }
-
     return prefix;
   }
 }
