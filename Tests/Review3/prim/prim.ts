@@ -2,23 +2,21 @@ export function prim(graph: number[][], vertices: number): [number, number[][]] 
   let cost = 0;
   const path: number[][] = [];
 
-  const record: number[][] = [];
   const visited: boolean[] = new Array(vertices).fill(false);
   let count = vertices - 1;
+  const queue: number[][] = [];
 
   // init
   visited[0] = true;
   for (const item of graph) {
     if (item[0] === 0 || item[1] === 0) {
-      record.push(item);
+      queue.push(item);
     }
   }
 
-  while (count > 0) {
-    record.sort((a, b) => a[2] - b[2]);
-
-    const [v, w, weight] = record.shift()!;
-
+  while (count > 0 && queue.length) {
+    queue.sort((a, b) => a[2] - b[2]);
+    const [v, w, weight] = queue.shift()!;
     if (!visited[v] || !visited[w]) {
       const new_node = !visited[v] ? v : w;
       cost += weight;
@@ -28,7 +26,7 @@ export function prim(graph: number[][], vertices: number): [number, number[][]] 
 
       for (const item of graph) {
         if ((item[0] === new_node && !visited[item[1]]) || (item[1] === new_node && !visited[item[0]])) {
-          record.push(item);
+          queue.push(item);
         }
       }
     }
