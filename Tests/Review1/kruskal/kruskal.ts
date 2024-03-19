@@ -25,7 +25,7 @@ class UnionFind {
   }
 }
 
-function kruskal(graph: number[][], vertices: number): [number, number[][]] {
+export function kruskal(graph: number[][], vertices: number): [number, number[][]] {
   let cost = 0;
   const path: number[][] = [];
 
