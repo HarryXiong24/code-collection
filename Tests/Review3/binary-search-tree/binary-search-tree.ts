@@ -11,7 +11,7 @@ class TreeNode {
   }
 }
 
-export class BinarySearchTree {
+class BinarySearchTree {
   root: TreeNode | null;
 
   constructor(node: TreeNode | null) {
@@ -42,25 +42,25 @@ export class BinarySearchTree {
       return true;
     }
 
-    const recursive = (node: TreeNode): boolean => {
+    const recursion = (node: TreeNode): boolean => {
       if (new_value < node.val) {
         if (!node.left) {
           node.left = new TreeNode(new_value);
           return true;
         }
-        return recursive(node.left);
+        return recursion(node.left);
       } else if (new_value > node.val) {
         if (!node.right) {
           node.right = new TreeNode(new_value);
           return true;
         }
-        return recursive(node.right);
+        return recursion(node.right);
       } else {
         return false;
       }
     };
 
-    return recursive(this.root);
+    return recursion(this.root);
   }
 
   deleteNode(value: number): boolean {
@@ -68,24 +68,24 @@ export class BinarySearchTree {
       return false;
     }
 
-    const recursive = (node: TreeNode | null, parent: TreeNode | null): boolean => {
+    const recursion = (node: TreeNode | null, parent: TreeNode | null): boolean => {
       if (!node) {
         return false;
       }
 
       if (value < node.val) {
-        return recursive(node.left, node);
+        return recursion(node.left, node);
       } else if (value > node.val) {
-        return recursive(node.right, node);
+        return recursion(node.right, node);
       } else {
         if (!node.left || !node.right) {
-          const new_child = node.left ? node.left : node.right;
+          const child = node.left ? node.left : node.right;
           if (parent === null) {
-            this.root = new_child;
+            this.root = child;
           } else if (parent.left === node) {
-            parent.left = new_child;
+            parent.left = child;
           } else {
-            parent.right = new_child;
+            parent.right = child;
           }
         } else {
           let min_node = node.right;
@@ -106,7 +106,7 @@ export class BinarySearchTree {
       }
     };
 
-    return recursive(this.root, null);
+    return recursion(this.root, null);
   }
 
   preorder() {
