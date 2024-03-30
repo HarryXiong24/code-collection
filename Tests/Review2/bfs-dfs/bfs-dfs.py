@@ -22,7 +22,9 @@ def BFS(node: TestNode):
             print(current.value)
             for neighbor in current.neighbors:
                 queue.append(neighbor)
-            layer += 1
+        layer += 1
+
+    return layer
 
 
 def DFS_Stack(node: TestNode):
