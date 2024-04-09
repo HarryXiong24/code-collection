@@ -6,34 +6,33 @@ def prim(edges: List[List[int]], points: int) -> tuple[int, List[List[int]]]:
     cost = 0
 
     count = points - 1
-    visited: List[bool] = [False] * points
-    queue: List[List[int]] = []
+    visited = [False] * points
+    record: List[List[int]] = []
 
     # init
     visited[0] = True
     for item in edges:
         if item[0] == 0 or item[1] == 0:
-            queue.append(item)
+            record.append(item)
 
     while count > 0:
-        queue.sort(key=lambda x: x[2])
-        v, w, weight = queue.pop(0)
+        record.sort(key=lambda x: x[2])
+        v, w, weight = record.pop(0)
 
         if not visited[v] or not visited[w]:
             cost += weight
             path.append([v, w])
             count -= 1
-
-            next_point = v if not visited[v] else w
-            visited[next_point] = True
+            next_node = v if not visited[v] else w
+            visited[next_node] = True
 
             for item in edges:
-                if (item[0] == next_point and not visited[item[1]]) or (
-                    item[1] == next_point and not visited[item[0]]
+                if (item[0] == next_node and not visited[item[1]]) or (
+                    item[1] == next_node and not visited[item[0]]
                 ):
-                    queue.append(item)
+                    record.append(item)
 
-    return cost, path
+    return [cost, path]
 
 
 # test
