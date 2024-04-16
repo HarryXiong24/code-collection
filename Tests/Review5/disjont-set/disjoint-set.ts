@@ -1,8 +1,8 @@
-export class UnionFind {
+class UnionFind {
   root: number[] = [];
 
   constructor(size: number) {
-    this.root = new Array(size).fill(0).map((i, index) => (i = index));
+    this.root = new Array(size).fill(0).map((i, index) => index);
   }
 
   find(x: number): number {
@@ -16,7 +16,7 @@ export class UnionFind {
     const root_x = this.find(x);
     const root_y = this.find(y);
 
-    if (root_x != root_y) {
+    if (root_x !== root_y) {
       this.root[root_y] = root_x;
     }
   }
