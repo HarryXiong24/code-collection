@@ -21,7 +21,7 @@ export class UnionFind {
     }
   }
 
-  connected(x: number, y: number) {
+  connected(x: number, y: number): boolean {
     return this.find(x) === this.find(y);
   }
 }
