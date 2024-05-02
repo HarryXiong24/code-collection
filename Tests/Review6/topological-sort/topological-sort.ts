@@ -4,7 +4,7 @@ enum Color {
   Black = 2, // both itself and its adjacent nodes were accessed
 }
 
-export class Graph {
+class Graph {
   vertices: number;
   adjacentList: Map<number, number[]>;
 
