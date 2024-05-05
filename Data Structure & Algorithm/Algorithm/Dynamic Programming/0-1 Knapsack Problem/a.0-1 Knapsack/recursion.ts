@@ -20,40 +20,30 @@
 // Item of weight 5, with a value of 8.
 // Though all of the combinations described above are valid, we need to select the one with the maximum value. Hence, we will select items with weights 1 and 2, as they give us the maximum value of 15.
 
-// memoization
+// Native
 export function findKnapsack(capacity: number, weights: number[], values: number[], n: number): number {
-  // because index is begin at 0
-  const dp: number[][] = [...Array(n + 1)].map(() => Array(capacity + 1).fill(-1));
+  const recursion = (capacity: number, weights: number[], values: number[], n: number): number => {
+    if (n === 0 || capacity === 0) {
+      return 0;
+    }
 
-  return recursion(capacity, weights, values, n, dp);
-}
+    if (weights[n - 1] <= capacity) {
+      // check if the weight of the nth item is less than capacity then
+      // either
+      // We include the item and reduce the weigth of item from the total weight
+      // or
+      // We don't include the item
+      return Math.max(
+        values[n - 1] + recursion(capacity - weights[n - 1], weights, values, n - 1),
+        recursion(capacity, weights, values, n - 1)
+      );
+    } else {
+      // if its weight is greater than the capacity, item can't be added in our knapsack
+      return recursion(capacity, weights, values, n - 1);
+    }
+  };
 
-function recursion(capacity: number, weights: number[], values: number[], n: number, dp: number[][]): number {
-  if (n === 0 || capacity === 0) {
-    return 0;
-  }
-
-  // If we have solved it earlier, then return the result from memory
-  if (dp[n][capacity] != -1) {
-    return dp[n][capacity];
-  }
-
-  if (weights[n - 1] <= capacity) {
-    // check if the weight of the nth item is less than capacity then
-    // either
-    // We include the item and reduce the weigth of item from the total weight
-    // or
-    // We don't include the item
-    dp[n][capacity] = Math.max(
-      values[n - 1] + findKnapsack(capacity - weights[n - 1], weights, values, n - 1),
-      findKnapsack(capacity, weights, values, n - 1)
-    );
-    return dp[n][capacity];
-  } else {
-    // if its weight is greater than the capacity, item can't be added in our knapsack
-    dp[n][capacity] = findKnapsack(capacity, weights, values, n - 1);
-    return dp[n][capacity];
-  }
+  return recursion(capacity, weights, values, n);
 }
 
 const capacity = 30;
