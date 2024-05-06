@@ -2,7 +2,7 @@
 
 // Let’s say you are given a set = {1, 2, 3, 7} and a total = 6. The output will be TRUE as the subset = {1, 2, 3} adds up to make the desired total (1+2+3) = 6.
 
-function subsetSum(arr: number[], total: number) {
+export function subsetSum(arr: number[], total: number) {
   const dp: (boolean | null)[][] = new Array(arr.length + 1).fill(false).map(() => new Array(total + 1).fill(false));
 
   // base cases
