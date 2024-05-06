@@ -26,12 +26,16 @@ export function findTargetSumWays(arr: number[], T: number) {
 
   const dp: number[][] = [...Array(arr.length)].map(() => new Array(2 * total + 1).fill(0));
 
+  if (total < Math.abs(T)) {
+    return 0;
+  }
+
   dp[0][total - arr[0]] = 1;
   dp[0][total + arr[0]] = 1;
 
   for (let i = 1; i < dp.length; i++) {
     // For every possible target sum
-    for (var t = -total; t < total + 1; t++) {
+    for (let t = -total; t < total + 1; t++) {
       // If at least one expression (during previous iterations) evaluated to this target sum
       if (dp[i - 1][total + t] > 0) {
         dp[i][total + t + arr[i]] += dp[i - 1][total + t];
