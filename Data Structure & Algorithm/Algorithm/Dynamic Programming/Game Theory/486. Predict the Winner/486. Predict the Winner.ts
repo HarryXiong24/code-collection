@@ -19,10 +19,37 @@
 // Finally, player 1 has more score (234) than player 2 (12), so you need to return True representing player1 can win.
 
 export function predictTheWinner(nums: number[]): boolean {
-  const;
+  const sum = nums.reduce((prev, cur) => prev + cur);
+
+  if (nums.length === 0) {
+    return true;
+  }
+
+  if (nums.length === 1) {
+    return true;
+  }
+
+  const round = Math.floor(nums.length / 2) + 1;
+
+  const dp: number[] = new Array(round).fill(0);
+
+  dp[0] = 0;
+
+  for (let i = 1; i <= round; i++) {
+    dp[i] = Math.max(dp[i - 1] + nums[0], dp[i - 1] + nums[nums.length - 1] || 0);
+    nums.pop();
+    nums.shift();
+  }
+
+  console.log(dp);
+
+  return dp[round] > sum - dp[round] ? true : false;
 }
 
 // test
-const nums = [1, 5, 233, 7];
-const res = predictTheWinner(nums);
-console.log(res);
+const nums1 = [1, 5, 2];
+const nums2 = [1, 5, 233, 7];
+const res1 = predictTheWinner(nums1);
+const res2 = predictTheWinner(nums2);
+console.log(res1);
+console.log(res2);
