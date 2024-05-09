@@ -43,8 +43,61 @@ export function findKnapsack(capacity: number, weights: number[], values: number
   return dp[n][capacity];
 }
 
-const capacity = 30;
-const weights = [10, 20, 30];
-const values = [22, 33, 44];
+export function findKnapsack2(capacity: number, weights: number[], values: number[]): number {
+  const length = weights.length;
+  const dp: number[][] = [...Array(length)].map(() => Array(capacity + 1).fill(0));
+
+  // init
+  for (let i = 0; i < dp.length; i++) {
+    for (let j = 0; j < dp[i].length; j++) {
+      if (i === 0) {
+        dp[i][j] = values[0];
+      }
+      if (j === 0) {
+        dp[i][j] = 0;
+      }
+    }
+  }
+
+  for (let i = 1; i < dp.length; i++) {
+    for (let j = 1; j < dp[i].length; j++) {
+      if (j < weights[i]) {
+        dp[i][j] = dp[i - 1][j];
+      } else {
+        dp[i][j] = Math.max(dp[i - 1][j - weights[i]] + values[i], dp[i - 1][j]);
+      }
+    }
+  }
+
+  return dp[length - 1][capacity];
+}
+
+export function findKnapsack3(capacity: number, weights: number[], values: number[]): number {
+  const length = weights.length;
+  const dp: number[] = [...Array(capacity + 1)].fill(0);
+
+  // init
+  dp[0] = 0;
+
+  for (let i = 0; i < length; i++) {
+    for (let j = 0; j < dp.length; j++) {
+      if (j < weights[i]) {
+        dp[j] = dp[j];
+      } else {
+        dp[j] = Math.max(dp[j], dp[j - i] + values[i]);
+      }
+    }
+  }
+
+  return dp[capacity];
+}
+
+const capacity = 5;
+const weights = [1, 2, 3, 5];
+const values = [10, 5, 4, 8];
 const res = findKnapsack(capacity, weights, values, weights.length);
+const res2 = findKnapsack2(capacity, weights, values);
+const res3 = findKnapsack2(capacity, weights, values);
 console.log(res);
+console.log(res2);
+console.log(res3);
