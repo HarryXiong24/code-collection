@@ -104,25 +104,29 @@ export function lastStoneWeightII_memoization(stones: number[]): number {
 
 // bottom-up
 export function lastStoneWeightII_bottom_up(stones: number[]): number {
-  const totalSum = stones.reduce((acc, val) => acc + val, 0);
+  const totalSum = stones.reduce((acc, val) => acc + val);
   const target = Math.floor(totalSum / 2);
 
-  let dp = new Array(target + 1).fill(false);
-  dp[0] = true;
+  const dp: number[][] = [...new Array(stones.length)].map(() => new Array(target + 1).fill(0));
 
-  for (let stone of stones) {
-    for (let j = target; j >= stone; j--) {
-      dp[j] = dp[j] || dp[j - stone];
+  // init
+  for (let i = stones[0]; i <= target; i++) {
+    dp[0][i] = stones[0];
+  }
+
+  for (let i = 1; i < dp.length; i++) {
+    for (let j = 1; j < dp[i].length; j++) {
+      if (j < stones[i]) {
+        dp[i][j] = dp[i - 1][j];
+      } else {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - stones[i]] + stones[i]);
+      }
     }
   }
 
-  for (let j = target; j >= 0; j--) {
-    if (dp[j]) {
-      return totalSum - 2 * j;
-    }
-  }
+  console.log(dp);
 
-  return 0;
+  return totalSum - dp[stones.length - 1][target] - dp[stones.length - 1][target];
 }
 
 // test
