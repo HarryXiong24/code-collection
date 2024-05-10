@@ -69,7 +69,7 @@ export function combinationSum3_pruning(k: number, n: number): number[][] {
       return;
     }
 
-    for (let i = start_index; i <= 9; i++) {
+    for (let i = start_index; i <= 9 - (k - path.length) + 1; i++) {
       sum += i;
       path.push(i);
       backtrack(i + 1, sum);
