@@ -48,15 +48,12 @@ export function findKnapsack2(capacity: number, weights: number[], values: numbe
   const dp: number[][] = [...Array(length)].map(() => Array(capacity + 1).fill(0));
 
   // init
-  for (let i = 0; i < dp.length; i++) {
-    for (let j = 0; j < dp[i].length; j++) {
-      if (i === 0) {
-        dp[i][j] = values[0];
-      }
-      if (j === 0) {
-        dp[i][j] = 0;
-      }
-    }
+  for (let j = weights[0]; j <= capacity; j++) {
+    dp[0][j] = values[0];
+  }
+
+  for (let i = 0; i < length; i++) {
+    dp[i][0] = 0;
   }
 
   for (let i = 1; i < dp.length; i++) {
