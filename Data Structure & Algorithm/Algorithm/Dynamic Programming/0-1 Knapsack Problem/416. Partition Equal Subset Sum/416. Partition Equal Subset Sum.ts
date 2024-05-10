@@ -84,38 +84,31 @@ export function canPartition_bottom_up(nums: number[]): boolean {
     return false;
   }
 
-  const dp: boolean[][] = [...Array(nums.length + 1)].map(() => new Array(Math.floor(total / 2) + 1).fill(false));
+  const dp: number[][] = [...Array(nums.length)].map(() => new Array(Math.floor(total / 2) + 1).fill(0));
 
-  for (let i = 0; i < dp.length; i++) {
-    for (let j = 0; j < dp[i].length; j++) {
-      if (i === 0) {
-        dp[i][j] = false;
-      }
-      if (j === 0) {
-        dp[i][j] = true;
-      }
-    }
+  // init
+  for (let i = nums[0]; i <= total / 2; i++) {
+    dp[0][i] = nums[0];
   }
 
   for (let i = 1; i < dp.length; i++) {
     for (let j = 1; j < dp[i].length; j++) {
-      if (nums[i] > j) {
+      if (j < nums[i]) {
         dp[i][j] = dp[i - 1][j];
+      } else {
+        dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - nums[i]] + nums[i]);
       }
-
-      dp[i][j] = dp[i - 1][j - nums[i]] || dp[i - 1][j];
     }
   }
 
-  return dp[nums.length][total / 2];
+  return dp[nums.length - 1][Math.floor(total / 2)] === Math.floor(total / 2);
 }
 
-// test
 const res = canPartition([1, 5, 11, 5]);
 console.log(res);
 
 const res1 = canPartition_memoization([1, 5, 11, 5]);
 console.log(res1);
 
-const res2 = canPartition_bottom_up([1, 5, 11, 5]);
+const res2 = canPartition_bottom_up([3, 3, 3, 4, 5]);
 console.log(res2);
