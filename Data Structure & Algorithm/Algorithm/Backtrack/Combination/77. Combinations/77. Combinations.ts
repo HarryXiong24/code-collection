@@ -37,7 +37,7 @@ export function combine(n: number, k: number): number[][] {
   return result;
 }
 
-export function combine_optimize(n: number, k: number): number[][] {
+export function combine_pruning(n: number, k: number): number[][] {
   const result: number[][] = [];
   const path: number[] = [];
 
@@ -61,6 +61,6 @@ export function combine_optimize(n: number, k: number): number[][] {
 
 // test
 const res = combine(4, 2);
-const res1 = combine_optimize(4, 2);
+const res1 = combine_pruning(4, 2);
 console.log(res);
 console.log(res1);
