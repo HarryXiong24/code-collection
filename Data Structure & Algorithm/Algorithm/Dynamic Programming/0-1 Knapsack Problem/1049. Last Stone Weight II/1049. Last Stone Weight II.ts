@@ -124,8 +124,6 @@ export function lastStoneWeightII_bottom_up(stones: number[]): number {
     }
   }
 
-  console.log(dp);
-
   return totalSum - dp[stones.length - 1][target] - dp[stones.length - 1][target];
 }
 
