@@ -26,31 +26,33 @@
 
 export function combinationSum2(candidates: number[], target: number): number[][] {
   const results: number[][] = [];
-  const result: number[] = [];
+  const path: number[] = [];
 
-  candidates = candidates.sort((a, b) => a - b);
+  candidates.sort((a, b) => a - b);
 
-  const backTrack = (currentSum: number, currentIndex: number, result: number[]) => {
-    if (currentSum === target) {
-      results.push([...result]);
+  const backtrack = (start_index: number, path: number[]) => {
+    const current_sum = path.reduce((prev, cur) => prev + cur, 0);
+
+    if (current_sum > target) {
       return;
     }
 
-    if (currentSum > target || currentIndex >= candidates.length) {
+    if (current_sum === target) {
+      results.push([...path]);
       return;
     }
 
-    result.push(candidates[currentIndex]);
-    backTrack(currentSum + candidates[currentIndex], currentIndex + 1, result);
-    result.pop();
-
-    while (currentIndex + 1 < candidates.length && candidates[currentIndex] === candidates[currentIndex + 1]) {
-      currentIndex++;
+    for (let i = start_index; i < candidates.length; i++) {
+      if (i > start_index && candidates[i] === candidates[i - 1]) {
+        continue;
+      }
+      path.push(candidates[i]);
+      backtrack(i + 1, path);
+      path.pop();
     }
-    backTrack(currentSum, currentIndex + 1, result);
   };
 
-  backTrack(0, 0, result);
+  backtrack(0, path);
 
   return results;
 }

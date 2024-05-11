@@ -26,7 +26,7 @@ export function combinationSum(candidates: number[], target: number): number[][]
   const results: number[][] = [];
   const path: number[] = [];
 
-  const backtrack = (start_index: number, path: number[], results: number[][]) => {
+  const backtrack = (start_index: number, path: number[]) => {
     const current_sum = path.reduce((prev, cur) => prev + cur, 0);
 
     if (current_sum > target) {
@@ -40,12 +40,12 @@ export function combinationSum(candidates: number[], target: number): number[][]
 
     for (let i = start_index; i < candidates.length; i++) {
       path.push(candidates[i]);
-      backtrack(i, path, results);
+      backtrack(i, path);
       path.pop();
     }
   };
 
-  backtrack(0, path, results);
+  backtrack(0, path);
 
   return results;
 }
