@@ -2,7 +2,7 @@
 
 // Given an array of distinct integers candidates and a target integer target, return a list of all unique combinations of candidates where the chosen numbers sum to target. You may return the combinations in any order.
 
-// The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequencycof at least one of the chosen numbers is different.
+// The same number may be chosen from candidates an unlimited number of times. Two combinations are unique if the frequency of at least one of the chosen numbers is different.
 
 // The test cases are generated such that the number of unique combinations that sum up to target is less than 150 combinations for the given input.
 
@@ -24,26 +24,28 @@
 
 export function combinationSum(candidates: number[], target: number): number[][] {
   const results: number[][] = [];
-  const result: number[] = [];
+  const path: number[] = [];
 
-  const backTrack = (currentSum: number, currentIndex: number, result: number[]) => {
-    if (currentSum === target) {
-      results.push([...result]);
+  const backtrack = (start_index: number, path: number[], results: number[][]) => {
+    const current_sum = path.reduce((prev, cur) => prev + cur, 0);
+
+    if (current_sum > target) {
       return;
     }
 
-    if (currentSum > target || currentIndex >= candidates.length) {
+    if (current_sum === target) {
+      results.push([...path]);
       return;
     }
 
-    for (let i = currentIndex; i < candidates.length; i++) {
-      result.push(candidates[i]);
-      backTrack(currentSum + candidates[i], i, result);
-      result.pop();
+    for (let i = start_index; i < candidates.length; i++) {
+      path.push(candidates[i]);
+      backtrack(i, path, results);
+      path.pop();
     }
   };
 
-  backTrack(0, 0, result);
+  backtrack(0, path, results);
 
   return results;
 }
