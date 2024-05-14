@@ -14,12 +14,18 @@ export function partition(s: string): string[][] {
   const results: string[][] = [];
   const path: string[] = [];
 
-  const isPalindrome = (str: string, startIndex: number, endIndex: number): boolean => {
-    for (; startIndex < endIndex; startIndex++, endIndex--) {
-      if (str[startIndex] !== str[endIndex]) {
+  const isPalindrome = (str: string): boolean => {
+    let left = 0;
+    let right = str.length - 1;
+
+    while (left < right) {
+      if (str[left] !== str[right]) {
         return false;
       }
+      left++;
+      right--;
     }
+
     return true;
   };
 
@@ -30,7 +36,7 @@ export function partition(s: string): string[][] {
     }
 
     for (let i = start_index; i < s.length; i++) {
-      if (!isPalindrome(s, start_index, i)) {
+      if (!isPalindrome(s.substring(start_index, i + 1))) {
         continue;
       }
       path.push(s.substring(start_index, i + 1));
