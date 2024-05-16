@@ -14,25 +14,24 @@
 
 export function subsetsWithDup(nums: number[]): number[][] {
   const results: number[][] = [];
-  const result: number[] = [];
-  const used = new Set<string>();
+  const path: number[] = [];
 
   nums = nums.sort((a, b) => a - b);
 
-  const backTrack = (currentIndex: number, result: number[]) => {
-    const record = [...result];
-    if (!used.has(JSON.stringify(record))) {
-      used.add(JSON.stringify(record));
-      results.push(record);
-    }
-    for (let i = currentIndex; i < nums.length; i++) {
-      result.push(nums[i]);
-      backTrack(i + 1, result);
-      result.pop();
+  const backTrack = (start_index: number) => {
+    results.push([...path]);
+
+    for (let i = start_index; i < nums.length; i++) {
+      if (i > start_index && nums[i] === nums[i - 1]) {
+        continue;
+      }
+      path.push(nums[i]);
+      backTrack(i + 1);
+      path.pop();
     }
   };
 
-  backTrack(0, result);
+  backTrack(0);
 
   return results;
 }

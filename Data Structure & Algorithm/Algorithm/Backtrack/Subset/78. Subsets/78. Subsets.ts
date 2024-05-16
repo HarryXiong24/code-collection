@@ -14,20 +14,25 @@
 
 export function subsets(nums: number[]): number[][] {
   const results: number[][] = [];
-  const result: number[] = [];
+  const path: number[] = [];
 
-  nums = nums.sort((a, b) => a - b);
+  nums.sort((a, b) => a - b);
 
-  const backTrack = (currentIndex: number, result: number[]) => {
-    results.push([...result]);
-    for (let i = currentIndex; i < nums.length; i++) {
-      result.push(nums[i]);
-      backTrack(i + 1, result);
-      result.pop();
+  const backTrack = (start_index: number) => {
+    if (path.length > nums.length) {
+      return;
+    }
+
+    results.push([...path]);
+
+    for (let i = start_index; i < nums.length; i++) {
+      path.push(nums[i]);
+      backTrack(i + 1);
+      path.pop();
     }
   };
 
-  backTrack(0, result);
+  backTrack(0);
 
   return results;
 }
