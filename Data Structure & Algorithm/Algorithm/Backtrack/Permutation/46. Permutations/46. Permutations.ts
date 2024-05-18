@@ -16,27 +16,28 @@
 
 export function permute(nums: number[]): number[][] {
   const results: number[][] = [];
+  const path: number[] = [];
   const used: boolean[] = [];
-  const result: number[] = [];
 
-  const backTrack = (depth: number, used: boolean[], result: number[]) => {
-    if (depth === nums.length) {
-      results.push([...result]);
+  const backTrack = (used: boolean[]) => {
+    if (path.length === nums.length) {
+      results.push([...path]);
       return;
     }
+
     for (let i = 0; i < nums.length; i++) {
       if (used[i] === true) {
         continue;
       }
-      result.push(nums[i]);
+      path.push(nums[i]);
       used[i] = true;
-      backTrack(depth + 1, used, result);
-      result.pop();
+      backTrack(used);
+      path.pop();
       used[i] = false;
     }
   };
 
-  backTrack(0, used, result);
+  backTrack(used);
 
   return results;
 }
