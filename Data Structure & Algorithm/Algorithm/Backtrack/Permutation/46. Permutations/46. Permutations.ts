@@ -19,7 +19,7 @@ export function permute(nums: number[]): number[][] {
   const path: number[] = [];
   const used: boolean[] = [];
 
-  const backTrack = (used: boolean[]) => {
+  const backtrack = (used: boolean[]) => {
     if (path.length === nums.length) {
       results.push([...path]);
       return;
@@ -31,13 +31,13 @@ export function permute(nums: number[]): number[][] {
       }
       path.push(nums[i]);
       used[i] = true;
-      backTrack(used);
+      backtrack(used);
       path.pop();
       used[i] = false;
     }
   };
 
-  backTrack(used);
+  backtrack(used);
 
   return results;
 }

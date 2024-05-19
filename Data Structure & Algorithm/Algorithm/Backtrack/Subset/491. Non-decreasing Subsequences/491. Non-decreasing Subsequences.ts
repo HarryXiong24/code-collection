@@ -27,8 +27,9 @@ export function findSubsequences(nums: number[]): number[][] {
       if (used.has(nums[i])) {
         continue;
       }
-      path.push(nums[i]);
       used.add(nums[i]);
+
+      path.push(nums[i]);
       backtrack(i + 1);
       path.pop();
     }
