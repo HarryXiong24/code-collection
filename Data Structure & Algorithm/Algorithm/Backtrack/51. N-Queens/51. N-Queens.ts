@@ -15,48 +15,66 @@
 // Input: n = 1
 // Output: [["Q"]]
 
-export function solveNQueens(n: number): string[][] {
-  const solutions: string[][] = [];
-  const columns = new Set();
-  const diagonal1 = new Set();
-  const diagonal2 = new Set();
-  const queens = new Array(n).fill(-1);
+const transformBoard = (board: string[][]): string[] => {
+  const resArr = [];
+  for (let row of board) {
+    resArr.push(row.join(''));
+  }
+  return resArr;
+};
 
-  const generateBoard = (): string[] => {
-    const board: string[] = [];
-    for (let i = 0; i < n; i++) {
-      const result_row: string[] = new Array(n).fill('.');
-      result_row[queens[i]] = 'Q';
-      board.push(result_row.join(''));
+const isValid = (col: number, row: number, board: string[][]): boolean => {
+  const n: number = board.length;
+  if (col < 0 || col >= n || row < 0 || row >= n) {
+    return false;
+  }
+
+  for (let row of board) {
+    if (row[col] === 'Q') {
+      return false;
     }
-    return board;
-  };
+  }
 
-  const backTrack = (row: number) => {
-    if (row === n) {
-      const board = generateBoard();
-      solutions.push(board);
+  let x: number = col;
+  let y: number = row;
+  while (y >= 0 && x < n) {
+    if (board[y--][x++] === 'Q') {
+      return false;
+    }
+  }
+
+  x = col;
+  y = row;
+
+  while (x >= 0 && y >= 0) {
+    if (board[y--][x--] === 'Q') {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+export function solveNQueens(n: number): string[][] {
+  const board: string[][] = new Array(n).fill(0).map((_) => new Array(n).fill('.'));
+  const results: string[][] = [];
+
+  const backtrack = (rowNum: number, board: string[][]) => {
+    if (rowNum === n) {
+      results.push(transformBoard(board));
       return;
     }
-
-    for (let col = 0; col < n; col++) {
-      if (columns.has(col) || diagonal1.has(row - col) || diagonal2.has(row + col)) {
-        continue;
+    for (let i = 0; i < n; i++) {
+      if (isValid(i, rowNum, board) === true) {
+        board[rowNum][i] = 'Q';
+        backtrack(rowNum + 1, board);
+        board[rowNum][i] = '.';
       }
-      queens[row] = col;
-      columns.add(col);
-      diagonal1.add(row - col);
-      diagonal2.add(row + col);
-      backTrack(row + 1);
-      columns.delete(col);
-      diagonal1.delete(row - col);
-      diagonal2.delete(row + col);
     }
   };
 
-  backTrack(0);
-
-  return solutions;
+  backtrack(0, board);
+  return results;
 }
 
 // test
