@@ -23,31 +23,30 @@
 
 export function maxUniqueSplit(s: string): number {
   let ans = 0;
-  const set = new Set<string>();
+  const path = new Set<string>();
 
-  const backTrack = (i: number, cnt: number, visited: Set<string>): void => {
-    if (i === s.length) {
-      ans = Math.max(ans, cnt);
-      // stop condition
+  const backtrack = (start_index: number, cur_count: number) => {
+    if (start_index === s.length) {
+      ans = Math.max(ans, cur_count);
       return;
     }
 
-    for (let j = i + 1; j <= s.length; j++) {
-      const substring = s.substring(i, j);
-      if (visited.has(substring)) {
-        // avoid re-visit/duplicates
+    for (let i = start_index; i < s.length; i++) {
+      const substring = s.substring(start_index, i + 1);
+      if (path.has(substring)) {
         continue;
       }
-      visited.add(substring); // update visited set
-      backTrack(j, cnt + 1, visited); // backtracking
-      visited.delete(substring); // recover visited set for the next possibility
+      path.add(substring);
+      backtrack(i + 1, cur_count + 1);
+      path.delete(substring);
     }
   };
 
-  backTrack(0, 0, set); // function call
+  backtrack(0, 0);
+
   return ans;
 }
 
 // test
-const res = maxUniqueSplit('aba');
+const res = maxUniqueSplit('ababccc');
 console.log(res);
