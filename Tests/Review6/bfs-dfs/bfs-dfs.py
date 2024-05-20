@@ -24,26 +24,28 @@ def BFS(node: TestNode):
         layer += 1
 
 
-def DFS_Stack(node: TestNode):
-    stack = [node]
+def DFS_Stack(root: TestNode):
+    if not root:
+        return
 
-    while len(stack):
+    stack: List[TestNode] = [root]
+
+    while len(stack) > 0:
         current = stack.pop()
-        if current:
-            pass
-        if len(current.neighbors) > 0:
-            for item in current.neighbors:
-                stack.append(item)
+        print(current.value)
+        for neighbor in current.neighbors:
+            stack.append(neighbor)
 
 
-def DFS_Recursive(node: TestNode):
+def DFS_Recursive(root: TestNode):
+    if not root:
+        return
 
-    def recursive(n: TestNode):
-        if not n:
+    def recursion(node: TestNode):
+        if not node:
             return
-        print(n.value)
-        if len(n.neighbors) > 0:
-            for item in n.neighbors:
-                recursive(item)
+        print(node.value)
+        for neighbor in node.neighbors:
+            recursion(neighbor)
 
-    recursive(node)
+    recursion(root)

@@ -20,9 +20,10 @@ def BFS(root: TestNode):
         for _ in range(size):
             current = queue.pop(0)
             print(current.value)
+
             for neighbor in current.neighbors:
                 queue.append(neighbor)
-        depth += 1
+        depth = depth + 1
 
     return depth
 
@@ -52,3 +53,25 @@ def DFS_Recursive(root: TestNode):
             recursion(neighbor)
 
     recursion(root)
+
+
+# test
+root = TestNode(1, [])
+node2 = TestNode(2, [])
+node3 = TestNode(3, [])
+node4 = TestNode(4, [])
+node5 = TestNode(5, [])
+node6 = TestNode(6, [])
+node7 = TestNode(7, [])
+
+root.neighbors.append(node2)
+root.neighbors.append(node3)
+node2.neighbors.append(node4)
+node2.neighbors.append(node5)
+node3.neighbors.append(node6)
+node6.neighbors.append(node7)
+
+res = BFS(root)
+print(f"layer: {res}")
+DFS_Stack(root)
+DFS_Recursive(root)

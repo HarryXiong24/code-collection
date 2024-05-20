@@ -9,7 +9,7 @@ class TestNode:
 
 
 def BFS(root: TestNode):
-    if root:
+    if not root:
         return
 
     queue: List[TestNode] = [root]
@@ -28,7 +28,7 @@ def BFS(root: TestNode):
 
 
 def DFS_Stack(root: TestNode):
-    if root:
+    if not root:
         return
 
     stack: List[TestNode] = [root]
@@ -41,11 +41,11 @@ def DFS_Stack(root: TestNode):
 
 
 def DFS_Recursive(root: TestNode):
-    if root:
+    if not root:
         return
 
     def recursion(node: TestNode):
-        if node:
+        if not node:
             return
         print(node.value)
         for neighbor in node.neighbors:
