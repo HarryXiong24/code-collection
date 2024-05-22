@@ -22,6 +22,7 @@
 export function findMaxConsecutiveOnes(nums: number[]): number {
   let slow = 0;
   let fast = slow;
+
   let zero_nums = 0;
   let max = 0;
 
