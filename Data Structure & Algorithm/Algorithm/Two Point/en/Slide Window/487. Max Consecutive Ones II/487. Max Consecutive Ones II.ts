@@ -21,7 +21,7 @@
 // slide window
 export function findMaxConsecutiveOnes(nums: number[]): number {
   let slow = 0;
-  let fast = slow;
+  let fast = 0;
 
   let zero_nums = 0;
   let max = 0;

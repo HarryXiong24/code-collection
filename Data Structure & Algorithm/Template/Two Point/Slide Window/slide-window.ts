@@ -19,22 +19,27 @@ export function minSubArrayLen(target: number, nums: number[]): number {
   let slow: number = 0;
   let fast: number = 0;
 
-  let res: number = nums.length + 1;
+  // customize
   let sum: number = 0;
+  let res: number = nums.length + 1;
 
   while (fast < nums.length) {
     sum += nums[fast];
 
     if (sum >= target) {
+      // customize
       while (sum - nums[slow] >= target) {
         sum -= nums[slow];
         slow++;
       }
+      // customize
       res = Math.min(res, fast - slow + 1);
     }
 
     fast++;
   }
+
+  // customize
   return res === nums.length + 1 ? 0 : res;
 }
 
