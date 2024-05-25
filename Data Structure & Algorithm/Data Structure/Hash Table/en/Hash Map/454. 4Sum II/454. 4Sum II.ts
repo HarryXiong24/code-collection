@@ -21,6 +21,7 @@
 // Space Complexity: O(n)
 export function fourSumCount(nums1: number[], nums2: number[], nums3: number[], nums4: number[]): number {
   const map12 = new Map<number, number>();
+
   for (let i = 0; i < nums1.length; i++) {
     for (let j = 0; j < nums2.length; j++) {
       const sum = nums1[i] + nums2[j];
