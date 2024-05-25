@@ -28,7 +28,7 @@ export function threeSum(nums: number[]): number[][] {
   nums.sort((a, b) => a - b);
 
   for (let i = 0; i < nums.length; i++) {
-    if (i > 0 && nums[i] == nums[i - 1]) {
+    if (i > 0 && nums[i] === nums[i - 1]) {
       continue;
     }
 
@@ -42,10 +42,10 @@ export function threeSum(nums: number[]): number[][] {
         right--;
       } else {
         results.push([nums[i], nums[left], nums[right]]);
-        while (right > left && nums[right] == nums[right - 1]) {
+        while (right > left && nums[right] === nums[right - 1]) {
           right--;
         }
-        while (right > left && nums[left] == nums[left + 1]) {
+        while (right > left && nums[left] === nums[left + 1]) {
           left++;
         }
 
