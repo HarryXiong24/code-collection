@@ -19,7 +19,61 @@
 // Output: "example good a"
 // Explanation: You need to reduce multiple spaces between two words to a single space in the reversed string.
 
+// space complexity is O(1)
 export function reverseWords(s: string): string {
+  let strArr: string[] = s.trim().split('');
+
+  const removeExtraSpace = (s: string[]) => {
+    let fast = 0;
+    let slow = 0;
+
+    while (fast < s.length) {
+      if (s[fast] === ' ' && s[fast - 1] === ' ') {
+        fast++;
+        continue;
+      }
+      s[slow] = s[fast];
+      slow++;
+      fast++;
+    }
+
+    s.length = slow;
+  };
+
+  const swap = (s: string[], start: number, end: number) => {
+    let left = start;
+    let right = end;
+
+    while (left < right) {
+      const temp = s[left];
+      s[left] = s[right];
+      s[right] = temp;
+      left++;
+      right--;
+    }
+  };
+
+  removeExtraSpace(strArr);
+  strArr.reverse();
+
+  let right = 0;
+  let left = 0;
+
+  while (right < strArr.length) {
+    right = left;
+    while (strArr[right] !== ' ' && right < strArr.length) {
+      right++;
+      continue;
+    }
+
+    swap(strArr, left, right - 1);
+    left = right + 1;
+  }
+
+  return strArr.join('');
+}
+
+export function reverseWords1(s: string): string {
   let arr = s.split(' ');
 
   // need to filter empty string
