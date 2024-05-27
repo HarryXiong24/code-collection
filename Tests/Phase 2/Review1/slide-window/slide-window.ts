@@ -19,28 +19,24 @@ export function minSubArrayLen(target: number, nums: number[]): number {
   let slow: number = 0;
   let fast: number = 0;
 
-  // customize
   let sum: number = 0;
   let res: number = Infinity;
 
   while (fast < nums.length) {
     sum += nums[fast];
 
-    // shrink slide window
     if (sum >= target) {
-      // customize
       while (sum - nums[slow] >= target) {
         sum -= nums[slow];
         slow++;
       }
-      // customize
-      res = Math.min(res, fast - slow + 1);
+      if (sum === target) {
+        res = Math.min(res, fast - slow + 1);
+      }
     }
-
     fast++;
   }
 
-  // customize
   return res === Infinity ? 0 : res;
 }
 
