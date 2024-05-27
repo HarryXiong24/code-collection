@@ -1,45 +1,40 @@
 export function KMPSearch(text: string, pattern: string) {
-  /* find Long String Prefix */
+  if (pattern.length === 0) {
+    return 0;
+  }
+
+  // find Long String Prefix
   const findLSP = (pattern: string): number[] => {
     const lsp = new Array(pattern.length).fill(0);
-    let length = 0;
-    let i = 1;
+    let j = 0; // j is the tail of prefix
+    lsp[0] = 0;
 
-    while (i < pattern.length) {
-      if (pattern[i] === pattern[length]) {
-        length++;
-        lsp[i] = length;
-        i++;
-      } else {
-        if (length != 0) {
-          length = lsp[length - 1];
-        } else {
-          length = 0;
-          i++;
-        }
+    // i is the tail of suffix
+    for (let i = 1; i < pattern.length; i++) {
+      while (j > 0 && pattern[i] !== pattern[j]) {
+        j = lsp[j - 1];
       }
+      if (pattern[i] === pattern[j]) {
+        j++;
+      }
+      lsp[i] = j;
     }
 
     return lsp;
   };
 
   const lsp = findLSP(pattern);
-  let i = 0;
   let j = 0;
 
-  /* applying the Long String Prefix to find the pattern one */
-  while (i < text.length) {
-    if (text[i] === pattern[j]) {
-      i++;
-      j++;
-    } else if (j > 0) {
+  for (let i = 0; i < text.length; i++) {
+    while (j > 0 && text[i] !== pattern[j]) {
       j = lsp[j - 1];
-    } else {
-      i++;
     }
-
-    if (j === pattern.length) {
-      return i - j;
+    if (text[i] === pattern[j]) {
+      if (j === pattern.length - 1) {
+        return i - j;
+      }
+      j++;
     }
   }
 
