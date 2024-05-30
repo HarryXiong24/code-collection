@@ -71,7 +71,6 @@ export function evalRPN(tokens: string[]): number {
       const temp = calculate(before, after, tokens[i] as operators);
       stack.push(String(temp));
     }
-    console.log(stack);
   }
 
   return Number(stack.pop());
