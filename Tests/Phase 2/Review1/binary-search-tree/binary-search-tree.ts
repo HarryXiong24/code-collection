@@ -42,25 +42,25 @@ export class BinarySearchTree {
       return true;
     }
 
-    const recursion = (node: TreeNode): boolean => {
+    const recursive = (node: TreeNode): boolean => {
       if (new_value < node.val) {
         if (!node.left) {
           node.left = new TreeNode(new_value);
           return true;
         }
-        return recursion(node.left);
+        return recursive(node.left);
       } else if (new_value > node.val) {
         if (!node.right) {
           node.right = new TreeNode(new_value);
           return true;
         }
-        return recursion(node.right);
+        return recursive(node.right);
       } else {
         return false;
       }
     };
 
-    return recursion(this.root);
+    return recursive(this.root);
   }
 
   deleteNode(value: number): boolean {
@@ -68,15 +68,15 @@ export class BinarySearchTree {
       return false;
     }
 
-    const recursion = (node: TreeNode | null, parent: TreeNode | null): boolean => {
+    const recursive = (node: TreeNode | null, parent: TreeNode | null): boolean => {
       if (!node) {
         return false;
       }
 
       if (value < node.val) {
-        return recursion(node.left, node);
+        return recursive(node.left, node);
       } else if (value > node.val) {
-        return recursion(node.right, node);
+        return recursive(node.right, node);
       } else {
         if (!node.left || !node.right) {
           const child = node.left ? node.left : node.right;
@@ -88,25 +88,27 @@ export class BinarySearchTree {
             parent.right = child;
           }
         } else {
-          let min_node = node.right;
+          let min_cur_node = node.right;
           let parent_node = node;
-          while (min_node.left) {
-            parent_node = min_node;
-            min_node = min_node.left;
+
+          while (min_cur_node.left) {
+            parent_node = min_cur_node;
+            min_cur_node = min_cur_node.left;
           }
 
-          node.val = min_node.val;
-          if (parent_node.left === min_node) {
-            parent_node.left = min_node.right;
+          node.val = min_cur_node.val;
+          if (parent_node.left === min_cur_node) {
+            parent_node.left = min_cur_node.right;
           } else {
-            parent_node.right = min_node.right;
+            parent_node.right = min_cur_node.right;
           }
         }
+
         return true;
       }
     };
 
-    return recursion(this.root, null);
+    return recursive(this.root, null);
   }
 
   preorder() {
