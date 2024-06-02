@@ -34,10 +34,6 @@ class MonotonicQueue {
     }
   }
 
-  peek(): number {
-    return this.queue[0];
-  }
-
   push(value: number) {
     while (this.queue.length && this.queue[this.queue.length - 1] < value) {
       this.queue.pop();
@@ -46,7 +42,7 @@ class MonotonicQueue {
   }
 
   getMaxValue(): number {
-    return this.peek();
+    return this.queue.length ? this.queue[0] : -1;
   }
 }
 
