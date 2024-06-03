@@ -19,7 +19,7 @@
 // But now we use monotonic stack, and the time complexity is O(n)
 export function dailyTemperatures(temperatures: number[]): number[] {
   // Monotonically increasing stack
-  const stack: number[] = [0];
+  const stack: number[] = [];
   const result: number[] = new Array(temperatures.length).fill(0);
 
   for (let i = 1; i < temperatures.length; i++) {

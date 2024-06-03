@@ -23,7 +23,7 @@
 // - 2 is underlined in nums2 = [1,2,3,4]. The next greater element is 3.
 // - 4 is underlined in nums2 = [1,2,3,4]. There is no next greater element, so the answer is -1.
 
-// O(n)
+// O(n), monotonic stack
 export function nextGreaterElement(nums1: number[], nums2: number[]): number[] {
   const stack: number[] = [];
   const offset: number[] = new Array(nums2.length).fill(0);
@@ -52,28 +52,6 @@ export function nextGreaterElement(nums1: number[], nums2: number[]): number[] {
   return result;
 }
 
-// O(n^2)
-export function nextGreaterElement1(nums1: number[], nums2: number[]): number[] {
-  const res: number[] = [];
-
-  for (let i = 0; i < nums1.length; i++) {
-    const start = nums2.indexOf(nums1[i]);
-    let isExist = false;
-    for (let j = start + 1; j < nums2.length; j++) {
-      if (nums2[j] > nums2[start]) {
-        res.push(nums2[j]);
-        isExist = true;
-        break;
-      }
-    }
-    !isExist && res.push(-1);
-  }
-
-  return res;
-}
-
 // test
-const res = nextGreaterElement1([4, 1, 2], [1, 3, 4, 2]);
-const res1 = nextGreaterElement1([4, 1, 2], [1, 3, 4, 2]);
+const res = nextGreaterElement([4, 1, 2], [1, 3, 4, 2]);
 console.log(res);
-console.log(res1);
