@@ -16,21 +16,21 @@
 // Output: [1,1,0]
 
 // This question has a simple solution which is brute force
-// But now we use stack, and the time complexity is O(n)
+// But now we use monotonic stack, and the time complexity is O(n)
 export function dailyTemperatures(temperatures: number[]): number[] {
-  // this stack is used to store the number of day gap
-  const stack: number[] = [];
-  const res: number[] = new Array(temperatures.length).fill(0);
+  // Monotonically increasing stack
+  const stack: number[] = [0];
+  const result: number[] = new Array(temperatures.length).fill(0);
 
-  for (let dayGap = 0; dayGap < temperatures.length; dayGap++) {
-    while (stack.length > 0 && temperatures[dayGap] > temperatures[stack[stack.length - 1]]) {
-      const num = stack.pop()!;
-      res[num] = dayGap - num;
+  for (let i = 1; i < temperatures.length; i++) {
+    while (stack.length && temperatures[i] > temperatures[stack[stack.length - 1]]) {
+      const top = stack.pop()!;
+      result[top] = i - top;
     }
-    stack.push(dayGap);
+    stack.push(i);
   }
 
-  return res;
+  return result;
 }
 
 // test
