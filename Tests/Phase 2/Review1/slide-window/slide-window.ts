@@ -30,9 +30,7 @@ export function minSubArrayLen(target: number, nums: number[]): number {
         sum -= nums[slow];
         slow++;
       }
-      if (sum === target) {
-        res = Math.min(res, fast - slow + 1);
-      }
+      res = Math.min(res, fast - slow + 1);
     }
     fast++;
   }
