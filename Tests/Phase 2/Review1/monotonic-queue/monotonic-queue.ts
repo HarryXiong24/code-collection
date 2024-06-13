@@ -1,4 +1,4 @@
-class MonotonicQueue {
+export class MonotonicQueue {
   queue: number[];
 
   constructor() {
