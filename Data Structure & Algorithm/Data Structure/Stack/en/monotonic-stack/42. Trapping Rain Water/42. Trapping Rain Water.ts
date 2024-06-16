@@ -11,7 +11,35 @@
 // Input: height = [4,2,0,3,2,5]
 // Output: 9
 
-export function trap(height: number[]): number {}
+export function trap(height: number[]): number {
+  const stack: number[] = [];
+  stack.push(0);
+  let result: number = 0;
+
+  for (let i = 1; i < height.length; i++) {
+    let top = stack[stack.length - 1];
+    if (height[top] > height[i]) {
+      stack.push(i);
+    } else if (height[top] === height[i]) {
+      stack.pop();
+      stack.push(i);
+    } else {
+      while (stack.length > 0 && height[top] < height[i]) {
+        let mid = stack.pop()!;
+        if (stack.length > 0) {
+          let left = stack[stack.length - 1];
+          let h = Math.min(height[left], height[i]) - height[mid];
+          let w = i - left - 1;
+          result += h * w;
+          top = stack[stack.length - 1];
+        }
+      }
+      stack.push(i);
+    }
+  }
+
+  return result;
+}
 
 // test
 const res = trap([0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1]);
