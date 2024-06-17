@@ -16,12 +16,12 @@ export function generateMatrix(n: number): number[][] {
   let offset = 1;
   let loop = Math.floor(n / 2);
 
-  const result: number[][] = new Array(n).fill(0).map(() => new Array(n).fill(0));
+  const result: number[][] = [...new Array(n)].map(() => new Array(n).fill(0));
   let count = 1;
 
   while (loop) {
     for (let j = start_y; j < n - offset; j++) {
-      result[start_x][j] = count;
+      result[start_y][j] = count;
       count++;
     }
 
