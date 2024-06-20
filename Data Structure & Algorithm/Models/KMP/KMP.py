@@ -2,45 +2,38 @@ from typing import List
 
 
 def KMPSearch(text: str, pattern: str) -> int:
+    if len(pattern) == 0:
+        return 0
+
     def findLSP(pattern: str) -> List[int]:
         lsp = [0] * len(pattern)
-        length = 0
-        i = 1
+        j = 0
+        lsp[0] = 0
 
-        while i < len(pattern):
-            if pattern[i] == pattern[length]:
-                length = length + 1
-                lsp[i] = length
-                i = i + 1
-            else:
-                if length != 0:
-                    length = lsp[length-1]
-                else:
-                    lsp[i] = 0
-                    i = i + 1
+        for i in range(1, len(pattern)):
+            while j > 0 and pattern[i] != pattern[j]:
+                j = lsp[j - 1]
+            if pattern[i] == pattern[j]:
+                j += 1
+            lsp[i] = j
 
         return lsp
 
-    i = 0
-    j = 0
     lsp = findLSP(pattern)
+    j = 0
 
-    while i < len(text):
+    for i in range(0, len(text)):
+        while j > 0 and text[i] != pattern[j]:
+            j = lsp[j - 1]
+
         if text[i] == pattern[j]:
-            i = i + 1
-            j = j + 1
-        elif j > 0:
-            j = lsp[j-1]
-        else:
-            i = i + 1
+            if j == len(pattern) - 1:
+                return i - j
+            j += 1
 
-        if j == len(pattern):
-            return i - j
     return -1
 
 
 # test
-text = "AABABABABC"
-pattern = "ABABC"
-res = KMPSearch(text, pattern)
+res = KMPSearch("AABABABABC", "ABABC")
 print(res)
