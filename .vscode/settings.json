@@ -1,9 +1,11 @@
 {
-  // "editor.fontSize": 16,
-  // 配置 ESLint 检查的文件类型
   "eslint.options": {
-    //指定vscode的eslint所处理的文件的后缀
-    "extensions": [".js", ".vue", ".ts", ".tsx"]
+    "extensions": [
+      ".js",
+      ".vue",
+      ".ts",
+      ".tsx"
+    ]
   },
   "files.associations": {
     "*.cjson": "jsonc",
@@ -28,13 +30,12 @@
   "vetur.format.styleInitialIndent": true,
   "vetur.format.defaultFormatterOptions": {
     "prettyhtml": {
-      "printWidth": 100, // No line exceeds 100 characters
-      "singleQuote": false, // Prefer double quotes over single quotes
+      "printWidth": 100,
+      "singleQuote": false,
       "wrapAttributes": false,
       "sortAttributes": true
     },
     "prettier": {
-      // Prettier option here
       "semi": true,
       "singleQuote": true
     }
@@ -72,22 +73,22 @@
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
   "workbench.iconTheme": "material-icon-theme",
   "prettier.requireConfig": true,
   "editor.wordWrapColumn": 240,
   "javascript.updateImportsOnFileMove.enabled": "always",
   "editor.formatOnPaste": true,
-  // 保存自动化
   "editor.formatOnSave": true,
-  // 使用插件格式化 html
   "vetur.format.defaultFormatter.html": "js-beautify-html",
-  // 屏蔽vetur的js格式化
   "vetur.format.defaultFormatter.js": "vscode-typescript",
   "vetur.format.options.useTabs": true,
   "typescript.updateImportsOnFileMove.enabled": "always",
-  // "typescript.validate.enable": false,
-  // "javascript.validate.enable": false,
   "editor.codeActionsOnSave": {
     "source.fixAll": "explicit",
     "source.fixAll.eslint": "explicit",
@@ -112,5 +113,62 @@
   "editor.guides.indentation": true,
   "[python]": {
     "editor.defaultFormatter": "ms-python.black-formatter"
-  }
+  },
+  "C_Cpp_Runner.cCompilerPath": "clang",
+  "C_Cpp_Runner.cppCompilerPath": "clang++",
+  "C_Cpp_Runner.debuggerPath": "lldb",
+  "C_Cpp_Runner.cStandard": "",
+  "C_Cpp_Runner.cppStandard": "",
+  "C_Cpp_Runner.msvcBatchPath": "",
+  "C_Cpp_Runner.useMsvc": false,
+  "C_Cpp_Runner.warnings": [
+    "-Wall",
+    "-Wextra",
+    "-Wpedantic",
+    "-Wshadow",
+    "-Wformat=2",
+    "-Wcast-align",
+    "-Wconversion",
+    "-Wsign-conversion",
+    "-Wnull-dereference"
+  ],
+  "C_Cpp_Runner.msvcWarnings": [
+    "/W4",
+    "/permissive-",
+    "/w14242",
+    "/w14287",
+    "/w14296",
+    "/w14311",
+    "/w14826",
+    "/w44062",
+    "/w44242",
+    "/w14905",
+    "/w14906",
+    "/w14263",
+    "/w44265",
+    "/w14928"
+  ],
+  "C_Cpp_Runner.enableWarnings": true,
+  "C_Cpp_Runner.warningsAsError": false,
+  "C_Cpp_Runner.compilerArgs": [],
+  "C_Cpp_Runner.linkerArgs": [],
+  "C_Cpp_Runner.includePaths": [],
+  "C_Cpp_Runner.includeSearch": [
+    "*",
+    "**/*"
+  ],
+  "C_Cpp_Runner.excludeSearch": [
+    "**/build",
+    "**/build/**",
+    "**/.*",
+    "**/.*/**",
+    "**/.vscode",
+    "**/.vscode/**"
+  ],
+  "C_Cpp_Runner.useAddressSanitizer": false,
+  "C_Cpp_Runner.useUndefinedSanitizer": false,
+  "C_Cpp_Runner.useLeakSanitizer": false,
+  "C_Cpp_Runner.showCompilationTime": false,
+  "C_Cpp_Runner.useLinkTimeOptimization": false,
+  "C_Cpp_Runner.msvcSecureNoWarnings": false
 }
