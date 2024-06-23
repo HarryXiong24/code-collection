@@ -12,7 +12,7 @@ void testBasic(void)
 
     int a = 0;
     
-    // 三目运算符
+    // ternary operator
     a = a > 10 ? 5 : 8;
     
     // switch

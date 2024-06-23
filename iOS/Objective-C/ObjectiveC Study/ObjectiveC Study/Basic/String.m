@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 
 void testString(void) {
-    // 最简单的创建字符串的方式
+    // create string using NSString
     NSString *str = @"itcast";
     
     char *name = "itcast";
@@ -18,7 +18,7 @@ void testString(void) {
     
     
     NSString *name1 = @"jack";
-    // length 方法算的是字数
+    // length is used to get string length
     unsigned long size = [name1 length];
     
     NSLog(@"%lu", size);
