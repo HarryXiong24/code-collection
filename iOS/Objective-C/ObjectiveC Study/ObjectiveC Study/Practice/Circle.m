@@ -28,16 +28,16 @@
     double delta_x = p1.x - p2.x;
     
     // (x1-x2)的平方
-    double squra_delta_x = pow(delta_x, 2);
+    double square_delta_x = pow(delta_x, 2);
     
     // y1-y2
     double delta_y = p1.x - p2.y;
     
     // (y1-y2) 的平方
-    double squra_delta_y = pow(delta_y, 2);
+    double square_delta_y = pow(delta_y, 2);
     
     // 返回距离
-    return sqrt(squra_delta_x + squra_delta_y);
+    return sqrt(square_delta_x + square_delta_y);
 }
 
 @end
@@ -96,5 +96,5 @@ void testCircle(void) {
     
     BOOL b1 = [Circle isInteractBetweenCircle1:c1 andCircle2:c2];
     
-    NSLog(@"%d", b1);
+    NSLog(@"Result: %d", b1);
 }

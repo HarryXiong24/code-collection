@@ -31,6 +31,7 @@
 #import "Protocol/Protocol.h"
 #import "Protocol/DelegatePattern.h"
 #import "Practice/BuyTickets.h"
+#import "Basic/Exception.h"
 
 int main(int argc, const char * argv[]) {
     @autoreleasepool {
@@ -46,19 +47,20 @@ int main(int argc, const char * argv[]) {
         testPolymorphism();
         testString();
         testCircle();
-        testProperties();
-        testSEL();
-        testArray();
-        testLiteralSyntax();
-        testIDPointer();
-        testConstructMethod();
-        testNSLog();
-        testCategory();
-        testClassExecuteWay();
-        testDesciption();
-        testBlock();
-        testDelegate();
-        testBuyTick();
+//        testProperties();
+//        testSEL();
+//        testArray();
+//        testLiteralSyntax();
+//        testIDPointer();
+//        testConstructMethod();
+//        testNSLog();
+//        testCategory();
+//        testClassExecuteWay();
+//        testDesciption();
+//        testBlock();
+//        testDelegate();
+//        testBuyTick();
+//        testException();
         
         return 0;
     }

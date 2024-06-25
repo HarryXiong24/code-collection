@@ -1,22 +1,5 @@
 #  README
 
-## Table of contents
-
-### Basic
-
-1. Basic
-
-### Class
-
-1. Class
-2. Method
-3. Encapsulate
-4. ClassMethod
-5. Self
-6. Inheritance
-7. Super
-8. Polymorphism
-
 ## Note
 
 随着自动引用计数（ARC, Automatic Reference Counting）的引入和新版 Objective-C 的发展，一些旧的内存管理语法和技术已经逐渐被淘汰或不再推荐使用。以下是一些已经不怎么使用的语法和技术：
