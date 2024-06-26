@@ -12,7 +12,16 @@
 // Input: s = "abcd", k = 2
 // Output: "bacd"
 
-function reverseStr(s: string, k: number): string {}
+export function reverseStr(s: string, k: number): string {
+  const arr: string[] = s.split('');
+
+  for (let i = 0; i < arr.length; i += 2 * k) {
+    const subArray = arr.slice(i, i + k).reverse();
+    arr.splice(i, k, ...subArray);
+  }
+
+  return arr.join('');
+}
 
 // test
 const res = reverseStr('abcdefg', 2);
