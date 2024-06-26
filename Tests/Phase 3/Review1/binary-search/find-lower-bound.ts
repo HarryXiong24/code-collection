@@ -5,6 +5,7 @@ export function binarySearch(nums: number[], target: number): number {
 
   while (left <= right) {
     const mid = left + Math.floor((right - left) / 2);
+
     if (nums[mid] <= target) {
       left = mid + 1;
     } else {
@@ -14,9 +15,9 @@ export function binarySearch(nums: number[], target: number): number {
 
   if (left > 0 && nums[left - 1] === target) {
     return left - 1;
-  } else {
-    return -1;
   }
+
+  return -1;
 }
 
 // test

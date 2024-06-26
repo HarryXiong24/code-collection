@@ -10,13 +10,13 @@ class Solution:
 
         while left <= right:
             mid = left + (right - left) // 2
-            if nums[mid] <= target:
-                left = mid + 1
-            else:
+            if nums[mid] >= target:
                 right = mid - 1
+            else:
+                left = mid + 1
 
-        if left - 1 >= 0 and nums[left - 1] == target:
-            return left - 1
+        if right + 1 < len(nums) and nums[right + 1] == target:
+            return right + 1
 
         return -1
 

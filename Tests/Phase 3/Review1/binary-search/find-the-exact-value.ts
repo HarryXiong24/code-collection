@@ -1,22 +1,20 @@
-// Find Lower bound
+// Find the Exact Value
 export function binarySearch(nums: number[], target: number): number {
   let left = 0;
   let right = nums.length - 1;
 
   while (left <= right) {
     const mid = left + Math.floor((right - left) / 2);
-    if (nums[mid] <= target) {
+    if (nums[mid] < target) {
       left = mid + 1;
-    } else {
+    } else if (nums[mid] > target) {
       right = mid - 1;
+    } else {
+      return mid;
     }
   }
 
-  if (left > 0 && nums[left - 1] === target) {
-    return left - 1;
-  } else {
-    return -1;
-  }
+  return -1;
 }
 
 // test
