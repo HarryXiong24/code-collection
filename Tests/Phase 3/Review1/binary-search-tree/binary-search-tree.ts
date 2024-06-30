@@ -98,12 +98,14 @@ export class BinarySearchTree {
           }
 
           node.val = current_min_node.val;
+
           if (parent_node.left === current_min_node) {
             parent_node.left = current_min_node.right;
           } else {
             parent_node.right = current_min_node.right;
           }
         }
+
         return true;
       }
     };
