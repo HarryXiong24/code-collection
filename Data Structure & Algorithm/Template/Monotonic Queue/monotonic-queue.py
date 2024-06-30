@@ -1,3 +1,4 @@
+# Monotonically decreasing [4, 2, 1]
 class MonotonicQueue:
     def __init__(self):
         self.queue = []

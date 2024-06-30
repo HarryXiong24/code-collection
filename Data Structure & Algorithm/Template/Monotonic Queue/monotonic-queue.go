@@ -4,6 +4,8 @@ import (
 	"fmt"
 )
 
+// Monotonically decreasing [4, 2, 1]
+
 // MonotonicQueue represents a queue that maintains its elements in a monotonically decreasing order.
 type MonotonicQueue struct {
 	queue []int

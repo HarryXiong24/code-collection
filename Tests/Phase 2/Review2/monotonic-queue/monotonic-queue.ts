@@ -1,4 +1,3 @@
-// Monotonically decreasing [4, 2, 1]
 export class MonotonicQueue {
   queue: number[];
 
@@ -38,8 +37,6 @@ mq.push(3);
 mq.push(1);
 mq.push(4);
 mq.push(2);
+mq.push(1);
 
-console.log(mq.getMax()); // 输出: 4
-mq.pop();
-console.log(mq.getMax()); // 输出: 2
-mq.pop();
+console.log(mq.queue);
