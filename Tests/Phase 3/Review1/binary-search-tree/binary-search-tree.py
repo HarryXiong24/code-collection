@@ -54,14 +54,14 @@ class BinarySearchTree:
         if not self.root:
             return False
 
-        def recursion(node: TreeNode | None, parent: TreeNode | None):
+        def recursion(node: TreeNode | None, parent: TreeNode | None) -> bool:
             if not node:
                 return False
 
             if value < node.val:
                 return recursion(node.left, node)
             elif value > node.val:
-                return recursion(node.val, node)
+                return recursion(node.right, node)
             else:
                 if not node.left or not node.right:
                     child = node.left if node.left else node.right
@@ -72,22 +72,22 @@ class BinarySearchTree:
                     else:
                         parent.right = child
                 else:
-                    current = node.right
-                    parent = node
+                    current_min_node = node.right
+                    parent_node = node
 
-                    while current.left:
-                        parent = current
-                        current = current.left
+                    while current_min_node.left:
+                        parent_node = current_min_node
+                        current_min_node = current_min_node.left
 
-                    node.val = current.val
-                    if parent.left == current:
-                        parent.left = current.right
+                    node.val = current_min_node.val
+                    if parent_node.left == current_min_node:
+                        parent_node.left = current_min_node.right
                     else:
-                        parent.right = current.right
+                        parent_node = current_min_node.right
 
                 return True
 
-        recursion(self.root, None)
+        return recursion(self.root, None)
 
     def preorder(self):
         res: List[float] = []
