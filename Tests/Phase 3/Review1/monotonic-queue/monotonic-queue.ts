@@ -1,5 +1,5 @@
 // Monotonically decreasing [4, 2, 1]
-class MonotonicQueue {
+export class MonotonicQueue {
   queue: number[];
 
   constructor() {
