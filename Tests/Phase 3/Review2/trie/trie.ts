@@ -8,7 +8,7 @@ class TrieNode {
   }
 }
 
-export class Trie {
+class Trie {
   root: TrieNode;
 
   constructor() {
