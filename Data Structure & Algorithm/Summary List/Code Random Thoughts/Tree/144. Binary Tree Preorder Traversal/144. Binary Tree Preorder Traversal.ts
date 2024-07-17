@@ -43,3 +43,26 @@ export function preorderTraversal(root: TreeNode | null): number[] {
 
   return result;
 }
+
+export function preorderTraversalIteration(root: TreeNode | null): number[] {
+  const stack: TreeNode[] = [];
+  const result: number[] = [];
+
+  if (!root) {
+    return result;
+  }
+  stack.push(root);
+
+  while (stack.length) {
+    const current = stack.pop()!;
+    result.push(current.val);
+    if (current.right) {
+      stack.push(current.right);
+    }
+    if (current.left) {
+      stack.push(current.left);
+    }
+  }
+
+  return result;
+}

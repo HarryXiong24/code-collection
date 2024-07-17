@@ -43,3 +43,27 @@ export function postorderTraversal(root: TreeNode | null): number[] {
 
   return result;
 }
+
+// preorder: root -> left -> right => root -> right -> left => left -> right -> root
+export function postorderTraversalIteration(root: TreeNode | null): number[] {
+  const stack: TreeNode[] = [];
+  const result: number[] = [];
+
+  if (!root) {
+    return result;
+  }
+  stack.push(root);
+
+  while (stack.length) {
+    const current = stack.pop()!;
+    result.push(current.val);
+    if (current.left) {
+      stack.push(current.left);
+    }
+    if (current.right) {
+      stack.push(current.right);
+    }
+  }
+
+  return result.reverse();
+}

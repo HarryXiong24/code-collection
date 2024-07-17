@@ -43,3 +43,26 @@ export function inorderTraversal(root: TreeNode | null): number[] {
 
   return result;
 }
+
+export function inorderTraversalIterative(root: TreeNode | null): number[] {
+  const stack: TreeNode[] = [];
+  const result: number[] = [];
+
+  if (!root) {
+    return result;
+  }
+
+  let node: TreeNode | null = root;
+  while (node || stack.length) {
+    if (node) {
+      stack.push(node);
+      node = node.left;
+    } else {
+      node = stack.pop()!;
+      result.push(node.val);
+      node = node.right;
+    }
+  }
+
+  return result;
+}
