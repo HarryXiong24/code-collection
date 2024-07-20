@@ -56,3 +56,26 @@ export function minDepth(root: TreeNode | null): number {
 
   return height;
 }
+
+export function minDepth2(root: TreeNode | null): number {
+  if (!root) {
+    return 0;
+  }
+
+  const recursion = (node: TreeNode | null): number => {
+    if (!node) {
+      return 0;
+    }
+
+    if (node.left && !node.right) {
+      return 1 + recursion(node.left);
+    }
+    if (!node.left && node.right) {
+      return 1 + recursion(node.right);
+    }
+
+    return 1 + Math.min(recursion(node.left), recursion(node.right));
+  };
+
+  return recursion(root);
+}

@@ -50,3 +50,22 @@ export function maxDepth(root: TreeNode | null): number {
 
   return height;
 }
+
+export function maxDepth2(root: TreeNode | null): number {
+  if (!root) {
+    return 0;
+  }
+
+  const recursion = (node: TreeNode | null): number => {
+    if (!node) {
+      return 0;
+    }
+
+    const left_node = recursion(node.left);
+    const right_node = recursion(node.right);
+
+    return Math.max(left_node, right_node) + 1;
+  };
+
+  return recursion(root);
+}
