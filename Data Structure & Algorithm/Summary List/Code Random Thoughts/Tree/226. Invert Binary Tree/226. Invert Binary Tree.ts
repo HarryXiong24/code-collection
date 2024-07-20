@@ -33,18 +33,18 @@ export function invertTree(root: TreeNode | null): TreeNode | null {
 
   const recursion = (node: TreeNode | null) => {
     if (!node) {
-      return null;
+      return;
     }
 
     const temp = node.left;
     node.left = node.right;
     node.right = temp;
 
-    node.left = recursion(node.left);
-    node.right = recursion(node.right);
-
-    return node;
+    recursion(node.left);
+    recursion(node.right);
   };
 
-  return recursion(root);
+  recursion(root);
+
+  return root;
 }
