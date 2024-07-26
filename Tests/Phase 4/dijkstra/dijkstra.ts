@@ -1,7 +1,7 @@
 type EdgeMap = Record<string, number>;
 type Graph = Record<string, EdgeMap>;
 
-export function dijkstra(graph: Graph, start: string, end: string): [string[], number] {
+function dijkstra(graph: Graph, start: string, end: string): [string[], number] {
   const dijkstra_table = Object.keys(graph).reduce((obj, attr) => {
     obj[attr] = Infinity;
     return obj;
@@ -28,7 +28,8 @@ export function dijkstra(graph: Graph, start: string, end: string): [string[], n
 
     const neighbors = Object.keys(graph[current_node]);
     for (const neighbor of neighbors) {
-      const weight: number = graph[current_node][neighbor];
+      const weight = graph[current_node][neighbor];
+
       if (current_cost + weight < dijkstra_table[neighbor]) {
         dijkstra_table[neighbor] = current_cost + weight;
         queue.push([neighbor, current_cost + weight]);
