@@ -22,7 +22,7 @@ class TreeNode {
   }
 }
 
-function buildTree(preorder: number[], inorder: number[]): TreeNode | null {
+export function buildTree(preorder: number[], inorder: number[]): TreeNode | null {
   const recursive = (preorder: number[], inorder: number[]) => {
     if (!preorder.length || !inorder.length) {
       return null;
