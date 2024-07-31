@@ -34,17 +34,18 @@ export function trimBST(root: TreeNode | null, low: number, high: number): TreeN
       return null;
     }
 
-    if (low > node.val) {
-      return recursion(node.left);
-    }
-    if (high < node.val) {
+    if (node.val < low) {
       return recursion(node.right);
     }
+    if (node.val > high) {
+      return recursion(node.left);
+    }
 
     node.left = recursion(node.left);
-    node.left = recursion(node.left);
-    return root;
+    node.right = recursion(node.right);
+
+    return node;
   };
 
-  return root;
+  return recursion(root);
 }
