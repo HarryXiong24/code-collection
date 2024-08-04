@@ -31,29 +31,32 @@ class TreeNode {
 }
 
 export function lowestCommonAncestor(root: TreeNode | null, p: TreeNode | null, q: TreeNode | null): TreeNode | null {
-  const recursive = (node: TreeNode | null) => {
+  if (!root) {
+    return null;
+  }
+
+  const recursion = (node: TreeNode | null): TreeNode | null => {
     if (!node) {
       return null;
     }
 
-    if (node.val === p?.val || node.val === q?.val) {
+    if (node === p || node === q) {
       return node;
     }
 
-    const leftLCA = lowestCommonAncestor(node.left, p, q);
-    const rightLCA = lowestCommonAncestor(node.right, p, q);
+    const left = recursion(node.left);
+    const right = recursion(node.right);
 
-    if (!leftLCA && !rightLCA) {
-      return null;
-    } else if (leftLCA && rightLCA) {
+    if (left && right) {
       return node;
-    } else if (leftLCA && !rightLCA) {
-      return leftLCA;
+    } else if (!left && right) {
+      return right;
+    } else if (left && !right) {
+      return left;
     } else {
-      // !leftLCA && rightLCA
-      return rightLCA;
+      return null;
     }
   };
 
-  return recursive(root);
+  return recursion(root);
 }
