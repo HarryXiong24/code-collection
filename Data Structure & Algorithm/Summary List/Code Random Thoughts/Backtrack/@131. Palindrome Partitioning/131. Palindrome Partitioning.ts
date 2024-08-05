@@ -12,7 +12,6 @@
 
 export function partition(s: string): string[][] {
   const results: string[][] = [];
-  const path: string[] = [];
 
   const isPalindrome = (str: string): boolean => {
     let left = 0;
