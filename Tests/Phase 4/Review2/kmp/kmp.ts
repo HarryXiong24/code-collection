@@ -21,7 +21,7 @@ export function KMPSearch(text: string, pattern: string): number {
     return lsp;
   };
 
-  const lsp: number[] = findLSP(pattern);
+  const lsp = findLSP(pattern);
   let j = 0;
 
   for (let i = 0; i < text.length; i++) {
