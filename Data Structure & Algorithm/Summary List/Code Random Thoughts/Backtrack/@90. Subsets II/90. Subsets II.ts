@@ -40,6 +40,39 @@ export function subsetsWithDup(nums: number[]): number[][] {
   return results;
 }
 
+export function subsetsWithDup2(nums: number[]): number[][] {
+  const results: number[][] = [];
+
+  nums = nums.sort((a, b) => a - b);
+
+  const backtrack = (start_index: number, path: number[]) => {
+    results.push([...path]);
+
+    if (start_index >= nums.length) {
+      return;
+    }
+
+    const used = new Set();
+    for (let i = start_index; i < nums.length; i++) {
+      if (used.has(nums[i])) {
+        continue;
+      }
+      used.add(nums[i]);
+
+      path.push(nums[i]);
+      backtrack(i + 1, path);
+      path.pop();
+    }
+  };
+
+  backtrack(0, []);
+
+  return results;
+}
+
 // test
 const res = subsetsWithDup([1, 2, 2]);
 console.log(res);
+
+const res1 = subsetsWithDup([1, 2, 2]);
+console.log(res1);
