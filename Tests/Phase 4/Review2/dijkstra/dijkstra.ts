@@ -13,8 +13,8 @@ export function dijkstra(graph: Graph, start: string, end: string): [string[], n
 
   // init
   dijkstra_table[start] = 0;
-  const visited = new Set();
   const queue: [string, number][] = [[start, 0]];
+  const visited = new Set();
 
   while (queue.length) {
     queue.sort((a, b) => a[1] - b[1]);
@@ -29,7 +29,6 @@ export function dijkstra(graph: Graph, start: string, end: string): [string[], n
     const neighbors = Object.keys(graph[current_node]);
     for (const neighbor of neighbors) {
       const weight = graph[current_node][neighbor];
-
       if (current_cost + weight < dijkstra_table[neighbor]) {
         dijkstra_table[neighbor] = current_cost + weight;
         queue.push([neighbor, current_cost + weight]);
