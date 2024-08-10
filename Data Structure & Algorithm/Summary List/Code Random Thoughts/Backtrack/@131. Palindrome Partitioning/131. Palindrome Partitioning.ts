@@ -29,7 +29,7 @@ export function partition(s: string): string[][] {
   };
 
   const backtrack = (start_index: number, path: string[]) => {
-    if (start_index >= s.length) {
+    if (start_index === s.length) {
       results.push([...path]);
       return;
     }
