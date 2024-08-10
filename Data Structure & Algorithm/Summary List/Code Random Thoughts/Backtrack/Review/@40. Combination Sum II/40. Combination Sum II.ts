@@ -24,7 +24,7 @@
 // [5]
 // ]
 
-function combinationSum(candidates: number[], target: number): number[][] {
+export function combinationSum(candidates: number[], target: number): number[][] {
   const results: number[][] = [];
   candidates.sort((a, b) => a - b);
 
@@ -55,4 +55,41 @@ function combinationSum(candidates: number[], target: number): number[][] {
   return results;
 }
 
+export function combinationSum2(candidates: number[], target: number): number[][] {
+  const results: number[][] = [];
+  candidates.sort((a, b) => a - b);
+
+  const backtrack = (start_index: number, path: number[]) => {
+    const sum = path.reduce((pre, cur) => pre + cur, 0);
+    if (sum === target) {
+      results.push([...path]);
+      return;
+    }
+
+    if (sum > target) {
+      return;
+    }
+
+    const used = new Set();
+    for (let i = start_index; i < candidates.length; i++) {
+      if (used.has(candidates[i])) {
+        continue;
+      }
+      used.add(candidates[i]);
+
+      path.push(candidates[i]);
+      backtrack(i + 1, path);
+      path.pop();
+    }
+  };
+
+  backtrack(0, []);
+
+  return results;
+}
+
+// res
+const res = combinationSum([10, 1, 2, 7, 6, 1, 5], 8);
 console.log(res);
+const res2 = combinationSum2([10, 1, 2, 7, 6, 1, 5], 8);
+console.log(res2);
