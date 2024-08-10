@@ -33,7 +33,7 @@ export function combinationSum3(k: number, n: number): number[][] {
 
   const backtrack = (start_index: number, path: number[]) => {
     if (path.length === k) {
-      const sum = path.reduce((pre, cur) => pre + cur);
+      const sum = path.reduce((pre, cur) => pre + cur, 0);
       if (sum === n) {
         results.push([...path]);
       }
