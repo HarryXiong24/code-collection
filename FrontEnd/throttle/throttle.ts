@@ -1,7 +1,7 @@
 // 如果你持续触发事件，每隔一段时间，只执行一次事件。
 
 export function throttle(callback: (...args: any[]) => any, delay: number, immediate: boolean = false) {
-  let timeout: number | null = null;
+  let timeout: number | undefined = undefined;
 
   return function (this: unknown, ...args: any[]) {
     if (immediate) {
@@ -12,7 +12,8 @@ export function throttle(callback: (...args: any[]) => any, delay: number, immed
     if (!timeout) {
       timeout = setTimeout(() => {
         callback.apply(this, args);
-        timeout = null;
+        clearTimeout(timeout);
+        timeout = undefined;
       }, delay);
     }
   };
