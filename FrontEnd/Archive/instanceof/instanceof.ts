@@ -7,7 +7,7 @@
  * @param origin
  * @returns
  */
-function myInstanceof(target: Record<string, any>, origin: Function) {
+export function myInstanceof(target: Record<string, any>, origin: Function) {
   const proto = target.__proto__;
   if (proto) {
     if (origin.prototype === proto) {
