@@ -15,4 +15,13 @@ export function deepClone<T>(obj: T): T {
   return cloneTarget;
 }
 
+// test
+const res = deepClone({
+  field1: 1,
+  field2: undefined,
+  field3: {
+    child: ['child', { grandson: 'grandson' }],
+  },
+  field4: [2, 4, 8],
+});
 console.log(res);
