@@ -2,7 +2,7 @@
  * 假设有一个库，我们需要暴露一个通用的错误处理接口
  */
 
-class Demo {
+export class Demo {
   // 用户自定义的对此库的异常处理函数
   private handleError: (...any: any[]) => any;
 

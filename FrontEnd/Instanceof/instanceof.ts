@@ -1,13 +1,7 @@
-// a instanceof Object
-// 判断 Object 构造函数的 prototype 是否在 a 的原型链上。
+// determine if the prototype of Object's constructor in is a' prototype chain
 
-/**
- * 实现
- * @param target
- * @param origin
- * @returns
- */
 export function myInstanceof(target: Record<string, any>, origin: Function) {
+  // target.__proto__ point to its prototype
   const proto = target.__proto__;
   if (proto) {
     if (origin.prototype === proto) {

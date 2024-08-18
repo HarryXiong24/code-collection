@@ -1,5 +1,5 @@
 import utils from './utils';
-import utils_class from './utils_class';
+import utils_class from './utils-class';
 
 // 注册错误处理程序
 utils.registerErrorHandler((e) => {
