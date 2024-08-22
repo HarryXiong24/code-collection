@@ -20,7 +20,7 @@ export class MyPromise<T> {
       throw TypeError('executor must be Function!');
     }
 
-    const resolved = (value: T) => {
+    const handleResolved = (value: T) => {
       if (this.status === 'pending') {
         // use setTimeout to alter the Micro Task Queue, so the task will be input in Macro Task Queue
         setTimeout(() => {
@@ -32,7 +32,7 @@ export class MyPromise<T> {
       }
     };
 
-    const rejected = (reason: any) => {
+    const handleRejected = (reason: any) => {
       if (this.status === 'pending') {
         // use setTimeout to alter the Micro Task Queue, so the task will be input in Macro Task Queue
         setTimeout(() => {
@@ -46,9 +46,9 @@ export class MyPromise<T> {
 
     try {
       // 考虑到执行 executor 的过程中有可能出错，所以我们用 try/catch 块给包起来，并且在出错后以 catch 到的值reject 掉这个 Promise
-      executor.call(this, resolved, rejected); // 执行executor
+      executor.call(this, handleResolved, handleRejected); // 执行executor
     } catch (e) {
-      rejected(e);
+      handleRejected(e);
     }
   }
 
@@ -64,7 +64,7 @@ export class MyPromise<T> {
           };
 
     return new MyPromise<T>((resolve, reject) => {
-      const resolved = () => {
+      const handleResolved = () => {
         setTimeout(() => {
           try {
             const result = onResolved && onResolved(this.data!); // 调用 onResolved，并确保类型安全
@@ -75,7 +75,7 @@ export class MyPromise<T> {
         }, 0);
       };
 
-      const rejected = () => {
+      const handleRejected = () => {
         setTimeout(() => {
           try {
             const result = onRejected && onRejected(this.reason); // 调用 onRejected，并确保类型安全
@@ -88,10 +88,10 @@ export class MyPromise<T> {
 
       switch (this.status) {
         case 'resolved':
-          resolved();
+          handleResolved();
           break;
         case 'rejected':
-          rejected();
+          handleRejected();
           break;
         default:
           // demo case
@@ -114,8 +114,8 @@ export class MyPromise<T> {
           //   .catch((reason) => {
           //     console.log('This will not be called either, because the promise is pending:', reason);
           //   });
-          this.onResolvedCallback.push(resolved);
-          this.onRejectedCallback.push(rejected);
+          this.onResolvedCallback.push(handleResolved);
+          this.onRejectedCallback.push(handleRejected);
           break;
       }
     });
