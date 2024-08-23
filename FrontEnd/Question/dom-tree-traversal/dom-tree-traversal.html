@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      h4 {
+        font-weight: normal;
+        font-size: 22px;
+      }
+
+      code {
+        font-size: 20px;
+        background-color: lightGrey;
+      }
+
+      .privacy {
+        background-color: yellow;
+        border: 2px black solid;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>DOM Tree Traversal</h1>
+    <h4>
+      <b>Problem:</b> <br />1. Traverse the DOM tree and find any text node with the word <b>Privacy</b> and add a
+      className <code>privacy</code> to the element. The className should turn the background color yellow, have a
+      <code>2px</code> black border around it
+      <br />
+      2. In the <code>ul</code> with id <b>colors</b>, change the background colors to their id's color when you click
+      on the list <code>li</code>
+    </h4>
+
+    <h4>
+      <b>Helpful references:</b>
+      <ul>
+        <li><code>node.childNodes</code></li>
+        <li><code>node.textContent</code></li>
+        <li><code>node.nodeType</code></li>
+        <li><code>node.parentNode</code></li>
+        <li><code>document.getElementById</code></li>
+      </ul>
+    </h4>
+    <div>
+      <p>
+        Donec in elit at eros venenatis malesuada vitae eget justo. Aliquam erat volutpat. Nulla et est tortor.
+        Vestibulum gravida mauris ut convallis malesuada. Nunc fringilla bibendum congue. Phasellus aliquet felis
+        molestie dui posuere, eget fringilla sapien eleifend. Praesent vestibulum cursus suscipit. Integer eget tempus
+        nisi. Duis vel consequat arcu. Praesent finibus interdum tellus sed dictum. Nulla ut eros finibus, auctor ligula
+        vel, maximus enim. Etiam malesuada nulla lobortis, lobortis ante eu, maximus leo. Cras lectus est, mollis ac
+        fringilla sed, placerat quis quam. Vivamus tellus ante, posuere ac mauris a, dignissim rutrum eros. Aenean
+        aliquet ex non augue venenatis, nec sagittis est vestibulum. Nam vulputate tellus sit amet Privacy vulputate, id
+        efficitur odio pellentesque.
+      </p>
+      <ul id="colors">
+        <li id="green">
+          Duis ullamcorper libero nisi, nec placerat enim aliquam in. Fusce odio orci, tempor eget felis vel, fermentum
+          finibus mauris. Maecenas lacinia dolor quis tortor gravida rhoncus. Integer ullamcorper ante lorem, eu
+          tincidunt velit iaculis at. Ut sit amet semper lacus. Vivamus et faucibus erat, id facilisis nisi.
+          Pellentesque ex orci, commodo at ultrices vel, placerat eleifend mauris. Vestibulum id enim pharetra nunc
+          congue sollicitudin at ac arcu. Nulla nec risus aliquet, dictum justo sed, interdum leo. Phasellus venenatis
+          commodo mauris, et sollicitudin neque egestas a. Curabitur vel sodales mauris, non commodo lectus. Donec eget
+          turpis finibus, hendrerit massa eget, consequat elit.
+        </li>
+        <li id="blue">
+          Quisque euismod ac arcu sed pharetra. Mauris vitae dolor vitae ligula tempus consectetur. Aenean ullamcorper
+          ante aliquam mi fermentum tempus. Duis sodales a eros at hendrerit. Morbi at vulputate lorem. Suspendisse
+          pharetra ac justo nec iaculis. Phasellus sed nunc eu arcu efficitur hendrerit id et ligula. Duis vulputate
+          nisl eu quam finibus, ac pharetra dui gravida. In nec placerat est, nec volutpat ipsum. Phasellus facilisis
+          rhoncus justo non faucibus. Mauris et ipsum quis dolor sollicitudin aliquet. Nunc suscipit lectus non mollis
+          rutrum. Nulla elementum mauris ut consequat rutrum. Proin ligula massa, auctor sed elementum quis, pretium non
+          diam. Vivamus quis dui ut arcu mollis ornare. Etiam nec imperdiet sem. Cras lectus lectus, vehicula sit amet
+          ligula et, ullamcorper aliquam tellus. Proin dictum aliquam purus, non blandit tellus dictum eget. Privacy
+        </li>
+        <li id="orange">
+          Phasellus aliquet felis molestie dui posuere, eget fringilla sapien eleifend. Praesent vestibulum cursus
+          suscipit. Integer eget tempus nisi. Duis vel consequat arcu. Praesent finibus interdum tellus sed dictum.
+          Nulla ut eros finibus, auctor ligula vel, maximus enim. Etiam malesuada nulla lobortis, lobortis ante eu,
+          maximus leo. Cras lectus est, mollis ac fringilla sed, placerat quis quam. Vivamus tellus ante, posuere ac
+          mauris a, dignissim rutrum eros.
+        </li>
+      </ul>
+
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc felis mauris, tempus sed nunc sed, auctor tempor
+        massa. Quisque nisl nisi, sollicitudin non tellus non, feugiat volutpat nibh. Ut interdum risus et tortor
+        volutpat, cursus mollis nisl interdum. Duis id lorem eu sapien molestie porttitor. Cras porttitor, sapien vitae
+        eleifend fermentum, turpis turpis porta augue, id aliquam ex risus id justo. Vivamus sit amet odio in nunc
+        imperdiet euismod et ac urna. Aliquam semper id orci sit amet placerat. Donec at nulla elit. Privacy
+        Pellentesque lobortis nisi nec nibh fringilla rutrum.
+      </p>
+    </div>
+  </body>
+  <script src="./dom-tree-traversal.js"></script>
+</html>
