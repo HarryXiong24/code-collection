@@ -9,18 +9,24 @@
 // node.parentNode
 // document.getElementById
 
-const isPrivacy = (node) => {
-  if ((node.nodeType === 3 && node.textContent.includes('Privacy')) || node.textContent.includes('privacy')) {
-    console.log(node);
+const findAndMarkPrivacyNodes = (node) => {
+  if (!node) {
+    return;
+  }
 
-    node.parentNode.setAttribute('class', 'privacy');
+  if ((node.nodeType === 3 && node.textContent.includes('Privacy')) || node.textContent.includes('privacy')) {
+    node.parentNode.classList.add('privacy');
+  }
+
+  for (const item of node.childNodes) {
+    findAndMarkPrivacyNodes(item);
   }
 };
 
 const isColor = () => {
-  const ul = document.getElementById('colors');
+  const color = document.getElementById('colors');
 
-  if (ul) {
+  if (color) {
     const lis = document.getElementsByTagName('li');
 
     for (const li of lis) {
@@ -31,18 +37,6 @@ const isColor = () => {
   }
 };
 
-const traverse = (node) => {
-  if (!node) {
-    return;
-  }
-
-  isPrivacy(node);
-
-  for (const item of node.childNodes) {
-    traverse(item);
-  }
-};
-
 const div = document.getElementsByTagName('div');
-traverse(div[0]);
+findAndMarkPrivacyNodes(div[0]);
 isColor();
