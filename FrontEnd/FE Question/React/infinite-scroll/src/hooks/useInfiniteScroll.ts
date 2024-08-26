@@ -11,11 +11,6 @@ interface UseInfiniteScrollProps<T> {
   // dataSource 和 fetchData 必须传入一个，当获取数据的接口为非分页接口时，可以一次性请求所有数据，传入dataSource
 }
 
-/**
- * 无限滚动 Hook
- * @param param
- * @returns
- */
 const useInfiniteScroll = <T = any>({
   dataSource,
   delay = 100,

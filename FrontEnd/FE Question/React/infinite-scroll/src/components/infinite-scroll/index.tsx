@@ -12,7 +12,7 @@ export interface InfiniteScrollProps {
 
 const InfiniteScroll = (props: InfiniteScrollProps) => {
   const { renderItem, fetchData } = props;
-  const [targetRef, inView] = useIsInView();
+  const [targetRef, isInView] = useIsInView();
 
   const { data, hasMore, loadMore } = useInfiniteScroll({
     pageSize: 10, // 一次性加载10条
@@ -20,15 +20,17 @@ const InfiniteScroll = (props: InfiniteScrollProps) => {
   });
 
   useEffect(() => {
-    if (inView && hasMore) {
+    if (isInView && hasMore) {
       loadMore();
     }
-  }, [hasMore, inView, loadMore]);
+  }, [hasMore, isInView, loadMore]);
 
   return (
     <div>
       {data?.map(renderItem)}
-      <div ref={targetRef as any}>{hasMore ? 'Loading...' : 'No More'}</div>
+      <div ref={targetRef as any} style={{ padding: '4px 0', marginBottom: '10px' }}>
+        {hasMore ? 'Loading...' : 'No More'}
+      </div>
     </div>
   );
 };
