@@ -1,5 +1,6 @@
 import InfiniteScroll from '../components/infinite-scroll';
 
+const total = 100; // 假设一共有 100 组数据
 const getData = async (data: { pageNum: number; pageSize: number }) => {
   const url = `https://picsum.photos/v2/list?page=${data.pageNum}&limit=${data.pageSize}`;
 
@@ -13,7 +14,7 @@ const getData = async (data: { pageNum: number; pageSize: number }) => {
     .then((data) => {
       return {
         list: data,
-        total: 100, // 假设一共有 100 组数据
+        total: total, // 假设一共有 100 组数据
       };
     });
 
@@ -25,6 +26,7 @@ const DemoInfiniteScroll = () => {
     <div style={{ padding: 8 }}>
       <h2>Demo Infinite Scroll</h2>
       <InfiniteScroll
+        loadingItemCount={10}
         renderItem={(item: any, index) => {
           return (
             <div key={index} style={{ border: '1px solid black', padding: 8 }}>

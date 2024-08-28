@@ -3,6 +3,7 @@ import useIsInView from '../../hooks/useIsInView';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 
 export interface InfiniteScrollProps {
+  loadingItemCount: number;
   renderItem: <T>(item: T, index: number) => ReactNode;
   fetchData: <T>(params: { pageSize: number; pageNum: number }) => Promise<{
     total?: number; // 总数据数
@@ -11,11 +12,11 @@ export interface InfiniteScrollProps {
 }
 
 const InfiniteScroll = (props: InfiniteScrollProps) => {
-  const { renderItem, fetchData } = props;
+  const { loadingItemCount = 10, renderItem, fetchData } = props;
   const [targetRef, isInView] = useIsInView();
 
   const { data, hasMore, loadMore } = useInfiniteScroll({
-    pageSize: 10, // 一次性加载10条
+    pageSize: loadingItemCount, // 一次性加载10条
     fetchData: fetchData,
   });
 

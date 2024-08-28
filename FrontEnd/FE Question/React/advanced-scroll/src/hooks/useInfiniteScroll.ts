@@ -65,7 +65,7 @@ const useInfiniteScroll = <T = any>({
 
   return {
     data, // 当前已加载的数据
-    setData, // 操作data
+    setData, // 操作 data
     loading, // 加载状态
     hasMore, // 是否还有更多数据
     loadMore, // 加载更多数据的函数
