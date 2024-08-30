@@ -5,7 +5,8 @@ const keys = [...Array(10)].map((_, index) => (index + 1) % 10);
 
 const Countdown = () => {
   const [countdown, setCountdown] = useState(0);
-  const [isPause, setIsPause] = useState(0);
+  const [isPause, setIsPause] = useState(false);
+  const [isRunning, setIsRunning] = useState(false);
   const intervalIdRef = useRef<number | null>(null);
 
   const handleKeyPress = (key: number) => {
@@ -15,7 +16,8 @@ const Countdown = () => {
   };
 
   const beginCountdown = () => {
-    if (intervalIdRef.current) {
+    setIsRunning(true);
+    if (isRunning || intervalIdRef.current) {
       return;
     }
     intervalIdRef.current = setInterval(() => {
@@ -23,6 +25,8 @@ const Countdown = () => {
         if (countdown === 0) {
           clearInterval(intervalIdRef.current!);
           intervalIdRef.current = null;
+          setIsRunning(false);
+          setIsPause(false);
           return 0;
         }
         return countdown - 1;
@@ -32,6 +36,8 @@ const Countdown = () => {
 
   const handleClearCountdown = () => {
     setCountdown(0);
+    setIsRunning(false);
+    setIsPause(false);
     intervalIdRef.current && clearInterval(intervalIdRef.current!);
     intervalIdRef.current = null;
   };
@@ -60,6 +66,7 @@ const Countdown = () => {
         <div className='operation'>
           <button
             style={{ marginRight: 8 }}
+            disabled={isRunning}
             onClick={() => {
               beginCountdown();
             }}
@@ -71,11 +78,11 @@ const Countdown = () => {
             onClick={() => {
               if (isPause) {
                 beginCountdown();
-                setIsPause(0);
+                setIsPause(false);
               } else {
                 intervalIdRef.current && clearInterval(intervalIdRef.current!);
                 intervalIdRef.current = null;
-                setIsPause(1);
+                setIsPause(true);
               }
             }}
           >
