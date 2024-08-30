@@ -1,10 +1,10 @@
-import useIsInView from '../hooks/useIsInView';
+import useIsInView from '../../hooks/useIsInView';
 
 const DemoIsInView = () => {
   const [targetRef, inView] = useIsInView();
 
   return (
-    <div style={{ padding: 8 }}>
+    <div>
       <h2>Demo is in view</h2>
       <p>If all the div in view, background color is green. Otherwise, it is red.</p>
       <div

@@ -1,5 +1,6 @@
 import { CSSProperties, ReactNode, useEffect, useState } from 'react';
 import useIsInView from '../../hooks/useIsInView';
+import useInfiniteScroll from '../../hooks/useInfiniteScroll';
 
 export interface VirtualScrollProps<T = any> {
   total: number;
@@ -16,51 +17,30 @@ export interface VirtualScrollProps<T = any> {
 }
 
 const VirtualScroll = <T,>(props: VirtualScrollProps<T>) => {
-  const {
-    rowHeight,
-    total,
-    visibleItemsCount,
-    containerHeight,
-    renderItem,
-    dataSource: initialDataSource,
-    style,
-    fetchData,
-  } = props;
+  const { rowHeight, total, visibleItemsCount, containerHeight, renderItem, dataSource, style, fetchData } = props;
   const [targetRef, isInView] = useIsInView();
   const [scrollTop, setScrollTop] = useState(0); // Current scroll position of the container
-  const [dataSource, setDataSource] = useState<T[]>(initialDataSource || []); // 动态数据源
-  const [pageNum, setPageNum] = useState(1); // 当前页码
-  const [loading, setLoading] = useState(false); // 加载状态
-  const [hasMore, setHasMore] = useState<boolean>(true); // 是否还有更多数据
 
-  const totalHeight = rowHeight * total; // Calculate the total height of the container
-  const startNodeElem = Math.ceil(scrollTop / rowHeight); // Get the first element to be displayed
-  const offsetY = startNodeElem * rowHeight; // Add padding to the empty space
-
-  // 获取当前可见的数据项
-  const visibleData = dataSource.slice(startNodeElem, startNodeElem + visibleItemsCount);
-  const enableInfiniteScroll = !initialDataSource && fetchData !== undefined;
+  const { data, hasMore, loadMore } = useInfiniteScroll({
+    dataSource: dataSource,
+    pageSize: visibleItemsCount,
+    fetchData: fetchData,
+  });
 
   // 处理滚动事件，更新 scrollTop
   const handleScroll = (e: any) => {
     setScrollTop(e?.currentTarget?.scrollTop);
   };
 
-  // 请求新数据的函数
-  const loadMore = async () => {
-    if (!fetchData || loading) return; // 如果没有提供 fetchData 或者正在加载中，退出
-    setLoading(true);
-    const res = await fetchData({ pageSize: visibleItemsCount, pageNum });
-    if (res?.list?.length) {
-      setDataSource((prevData) => [...prevData, ...res.list!]); // 追加新数据到现有数据中
-      setHasMore(dataSource?.length + res.list.length < total && res.list.length > 0);
-      setPageNum((prevPageNum) => prevPageNum + 1); // 增加页码
-    }
-    setLoading(false);
-  };
+  const totalHeight = rowHeight * total; // Calculate the total height of the container
+  const startNodeElem = Math.ceil(scrollTop / rowHeight); // Get the first element to be displayed
+  const offsetY = startNodeElem * rowHeight; // Add padding to the empty space
+
+  // 获取当前可见的数据项
+  const visibleData = data.slice(startNodeElem, startNodeElem + visibleItemsCount);
 
   useEffect(() => {
-    if (enableInfiniteScroll && isInView && hasMore) {
+    if (isInView && hasMore) {
       loadMore();
     }
   }, [hasMore, isInView, loadMore]);
@@ -79,11 +59,9 @@ const VirtualScroll = <T,>(props: VirtualScrollProps<T>) => {
       <div style={{ height: totalHeight }}>
         <div style={{ transform: `translateY(${offsetY}px)` }}>
           {visibleData?.map(renderItem)}
-          {enableInfiniteScroll && (
-            <div ref={targetRef as any} style={{ padding: '4px 8px' }}>
-              {hasMore ? 'Loading...' : 'No More'}
-            </div>
-          )}
+          <div ref={targetRef as any} style={{ padding: '4px 8px' }}>
+            {hasMore ? 'Loading...' : 'No More'}
+          </div>
         </div>
       </div>
       {/* <div style={{ height: totalHeight, position: 'relative' }}>

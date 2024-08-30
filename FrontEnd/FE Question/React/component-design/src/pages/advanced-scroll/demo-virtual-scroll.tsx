@@ -1,4 +1,4 @@
-import VirtualScroll from '../components/virtual-scroll';
+import VirtualScroll from '../../components/virtual-scroll';
 
 // Mock Data
 const total = 200;
@@ -26,7 +26,7 @@ const getData = async (data: { pageNum: number; pageSize: number }) => {
 
 const DemoVirtualScroll = () => {
   return (
-    <div style={{ padding: 8 }}>
+    <div>
       <h2>Demo Virtual Scroll</h2>
       <VirtualScroll
         total={total}
@@ -37,7 +37,7 @@ const DemoVirtualScroll = () => {
         style={{ border: '1px solid black' }}
         renderItem={(item: any, index) => {
           return (
-            <div key={index} style={{ padding: '0 8px' }}>
+            <div key={index} style={{ padding: '0 8px', height: 60 }}>
               <p>
                 {item.id}: {item.author}
               </p>

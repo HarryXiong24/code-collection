@@ -1,4 +1,4 @@
-import InfiniteScroll from '../components/infinite-scroll';
+import InfiniteScroll from '../../components/infinite-scroll';
 
 const total = 100; // 假设一共有 100 组数据
 const getData = async (data: { pageNum: number; pageSize: number }) => {
@@ -23,7 +23,7 @@ const getData = async (data: { pageNum: number; pageSize: number }) => {
 
 const DemoInfiniteScroll = () => {
   return (
-    <div style={{ padding: 8 }}>
+    <div>
       <h2>Demo Infinite Scroll</h2>
       <InfiniteScroll
         loadingItemCount={10}

@@ -1,18 +1,29 @@
-import InfiniteScroll from './demo/demo-infinite-scroll';
-import DemoIsInView from './demo/demo-is-in-view';
-import DemoVirtualScroll from './demo/demo-virtual-scroll';
+import { Link, Outlet, useRoutes } from 'react-router-dom';
+import router from './router';
 
 const App = () => {
+  const element = useRoutes(router);
+
   return (
     <div>
-      <div>
-        <DemoIsInView />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: 16,
+          padding: 16,
+          borderBottom: '1px solid black',
+        }}
+      >
+        <Link to='/'>Home</Link>
+        <Link to='/advanced-scroll'>Advanced Scroll</Link>
+        <Link to='/countdown'>Countdown</Link>
       </div>
-      <div>
-        <DemoVirtualScroll />
-      </div>
-      <div>
-        <InfiniteScroll />
+
+      <div style={{ padding: 16 }}>
+        {element}
+        <Outlet />
       </div>
     </div>
   );
