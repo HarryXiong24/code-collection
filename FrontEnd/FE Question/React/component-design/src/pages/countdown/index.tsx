@@ -45,7 +45,7 @@ const Countdown = () => {
   return (
     <div style={{ padding: 8 }}>
       <h2>Countdown</h2>
-      <div className='countdown' style={{ padding: 8, border: '1px solid black' }}>
+      <div className='countdown'>
         <div className='keyboard'>
           {keys.map((key, index) => (
             <div

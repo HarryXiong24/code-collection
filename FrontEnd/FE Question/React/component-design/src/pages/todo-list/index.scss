@@ -1,0 +1,20 @@
+.todo-list {
+  padding: 8px;
+  border: 1px solid black;
+
+  .input-wrap {
+    .input-item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+    }
+  }
+
+  .display {
+    .display-item {
+      padding: 8px;
+      border: 1px solid black;
+      margin: 4px 0;
+    }
+  }
+}

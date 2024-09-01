@@ -19,6 +19,7 @@ const App = () => {
         <Link to='/'>Home</Link>
         <Link to='/advanced-scroll'>Advanced Scroll</Link>
         <Link to='/countdown'>Countdown</Link>
+        <Link to='/todo-list'>Todo List</Link>
       </div>
 
       <div style={{ padding: 16 }}>
