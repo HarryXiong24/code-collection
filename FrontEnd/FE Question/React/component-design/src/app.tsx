@@ -20,6 +20,7 @@ const App = () => {
         <Link to='/advanced-scroll'>Advanced Scroll</Link>
         <Link to='/countdown'>Countdown</Link>
         <Link to='/todo-list'>Todo List</Link>
+        <Link to='/country-autocompletion'>Country Autocompletion</Link>
       </div>
 
       <div style={{ padding: 16 }}>

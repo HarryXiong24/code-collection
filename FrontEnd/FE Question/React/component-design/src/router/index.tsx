@@ -3,6 +3,7 @@ import Home from '../pages/home';
 import AdvancedScroll from '../pages/advanced-scroll';
 import Countdown from '../pages/countdown';
 import TodoList from '../pages/todo-list';
+import CountryAutocompletion from '../pages/country-autocompletion';
 
 const router: RouteObject[] = [
   {
@@ -20,6 +21,10 @@ const router: RouteObject[] = [
   {
     path: '/todo-list',
     element: <TodoList />,
+  },
+  {
+    path: '/country-autocompletion',
+    element: <CountryAutocompletion />,
   },
 ];
 
