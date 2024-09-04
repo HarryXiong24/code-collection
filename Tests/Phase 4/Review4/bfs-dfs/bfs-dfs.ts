@@ -8,8 +8,8 @@ export function BFS(root: TestNode): number {
     return -1;
   }
 
-  let depth = 0;
   const queue: TestNode[] = [root];
+  let height: number = 0;
 
   while (queue.length) {
     const size = queue.length;
@@ -20,9 +20,10 @@ export function BFS(root: TestNode): number {
         queue.push(neighbor);
       }
     }
-    depth++;
+    height++;
   }
-  return depth;
+
+  return height;
 }
 
 export function DFS_Iteration(root: TestNode) {
@@ -35,7 +36,6 @@ export function DFS_Iteration(root: TestNode) {
   while (stack.length) {
     const current = stack.pop()!;
     console.log(current.value);
-
     for (const neighbor of current.neighbors) {
       stack.push(neighbor);
     }
