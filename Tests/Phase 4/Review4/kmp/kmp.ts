@@ -1,4 +1,4 @@
-function KMPSearch(text: string, pattern: string): number {
+export function KMPSearch(text: string, pattern: string): number {
   if (pattern.length === 0) {
     return 0;
   }
