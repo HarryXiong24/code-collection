@@ -26,8 +26,35 @@
 // Explanation: We can pick from trees [2,3,2,2].
 // If we had started at the first tree, we would only pick from trees [1,2].
 
-export function totalFruit(fruits: number[]): number {}
+function totalFruit(fruits: number[]): number {
+  const baskets = new Map();
+  let slow = 0;
+  let fast = 0;
+
+  let maxValue = 0;
+
+  while (fast < fruits.length) {
+    baskets.set(fruits[fast], (baskets.get(fruits[fast]) || 0) + 1);
+
+    if (baskets.size > 2) {
+      baskets.set(fruits[slow], (baskets.get(fruits[slow]) || 0) - 1);
+      if (baskets.get(fruits[slow]) <= 0) {
+        baskets.delete(fruits[slow]);
+      }
+      slow++;
+    }
+
+    maxValue = Math.max(
+      maxValue,
+      [...baskets.values()].reduce((pre, cur) => pre + cur)
+    );
+
+    fast++;
+  }
+
+  return maxValue;
+}
 
 // test
-const res = totalFruit([1, 0, 1, 4, 1, 4, 1, 2, 3]);
+const res = totalFruit([1, 2, 3, 2, 2]);
 console.log(res);
