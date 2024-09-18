@@ -10,7 +10,7 @@
 // Input: n = 1
 // Output: [[1]]
 
-function generateMatrix(n: number): number[][] {
+export function generateMatrix(n: number): number[][] {
   let start_x = 0;
   let start_y = 0;
   let offset = 1;
