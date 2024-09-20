@@ -2,8 +2,14 @@ package main
 
 import (
 	"fmt"
+
+	"demo.com/basic"
 )
 
 func main() {
-	fmt.Print("Hello World")
+	fmt.Println("Hello World")
+
+	fmt.Println("InflationRate:", basic.InflationRate)
+	basic.Calculator()
+	basic.ProfitCalculator()
 }
