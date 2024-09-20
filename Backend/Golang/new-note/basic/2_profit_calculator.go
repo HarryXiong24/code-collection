@@ -32,9 +32,9 @@ func ProfitCalculator() {
 
 	ebt, profit, ratio := calculate(revenue, expenses, taxRate)
 
-	fmt.Printf("%.1f\n", ebt)
-	fmt.Printf("%.1f\n", profit)
-	fmt.Printf("%.3f\n", ratio)
+	fmt.Printf("ebt: %.1f\n", ebt)
+	fmt.Printf("profit: %.1f\n", profit)
+	fmt.Printf("ratio: %.3f\n", ratio)
 }
 
 func calculate(revenue float64, expenses float64, taxRate float64) (float64, float64, float64) {

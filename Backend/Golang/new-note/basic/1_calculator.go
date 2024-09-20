@@ -51,7 +51,7 @@ func Calculator() {
 
 	fmt.Println("futureValue:", futureValue)
 	fmt.Println("futureRealValue:", futureRealValue)
-	fmt.Printf("Future Value: %.1f\nFuture Value (adjusted for Inflation): %.1f", futureValue, futureRealValue)
+	fmt.Printf("Future Value: %.1f\nFuture Value (adjusted for Inflation): %.1f\n", futureValue, futureRealValue)
 	// multiple lines print
 	// fmt.Printf(`Future Value: %.1f\n
 	// Future Value (adjusted for Inflation): %.1f`, futureValue, futureRealValue)
