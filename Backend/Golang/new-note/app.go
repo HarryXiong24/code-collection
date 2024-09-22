@@ -9,7 +9,9 @@ import (
 func main() {
 	fmt.Println("Hello World")
 
-	fmt.Println("InflationRate:", basic.InflationRate)
-	basic.Calculator()
-	basic.ProfitCalculator()
+	// fmt.Println("InflationRate:", basic.InflationRate)
+	// basic.Calculator()
+	// basic.ProfitCalculator()
+
+	basic.StructDemo()
 }

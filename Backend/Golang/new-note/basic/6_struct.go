@@ -2,15 +2,9 @@ package basic
 
 import (
 	"fmt"
-	"time"
-)
 
-type user struct {
-	firstName string
-	lastName  string
-	birthDate string
-	createAt  time.Time
-}
+	"demo.com/user"
+)
 
 func StructDemo() {
 	firstName := getUserData("Please enter your first name: ")
@@ -19,19 +13,23 @@ func StructDemo() {
 
 	// ... do something awesome with that gathered data!
 
-	var appUser user = user{
-		firstName: firstName,
-		lastName:  lastName,
-		birthDate: birthDate,
-		createAt:  time.Now(),
+	// var appUser *user
+	appUser, err := user.New(firstName, lastName, birthDate)
+
+	if err != nil {
+		fmt.Println(err)
+		return
 	}
 
-	outputUserDetails(&appUser)
-}
+	appUser.OutputUserDetails()
+	appUser.ClearUserName()
+	appUser.OutputUserDetails()
 
-func outputUserDetails(appUser *user) {
-	// ...
-	fmt.Println(appUser.firstName, appUser.lastName, appUser.birthDate)
+	admin := user.NewAdmin("test@example.com", "test123", appUser)
+
+	admin.User.OutputUserDetails()
+	admin.User.ClearUserName()
+	admin.User.OutputUserDetails()
 }
 
 func getUserData(promptText string) string {
