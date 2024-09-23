@@ -3,7 +3,7 @@ package main
 import (
 	"fmt"
 
-	"demo.com/basic"
+	"demo.com/struct_demo"
 )
 
 func main() {
@@ -13,5 +13,6 @@ func main() {
 	// basic.Calculator()
 	// basic.ProfitCalculator()
 
-	basic.StructDemo()
+	// basic.StructDemo()
+	struct_demo.StructDemo()
 }
