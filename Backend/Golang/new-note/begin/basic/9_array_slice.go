@@ -10,6 +10,10 @@ func DemoSlice() {
 	prices = append(prices, 5.99)
 	prices = prices[1:]
 	fmt.Println(prices)
+
+	discountPrices := []float64{101.99, 80.99, 20.59}
+	prices = append(prices, discountPrices...)
+	fmt.Println(prices)
 }
 
 func DemoSlice1() {
