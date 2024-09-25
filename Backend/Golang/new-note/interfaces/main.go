@@ -29,6 +29,11 @@ type outputtable interface {
 // }
 
 func main() {
+	printSomething(1)
+	printSomething(1.5)
+	printSomething("Hello")
+	printSomething1(2)
+
 	title, content := getNoteData()
 	todoText := getUserInput("Todo text: ")
 
@@ -70,6 +75,40 @@ func saveData(data saver) error {
 
 	fmt.Println("Saving the note succeeded!")
 	return nil
+}
+
+func printSomething(value interface{}) {
+	switch value.(type) {
+	case int:
+		fmt.Println("Integer:", value)
+	case float64:
+		fmt.Println("Float:", value)
+	case string:
+		fmt.Println(value)
+	}
+}
+
+func printSomething1(value interface{}) {
+	intVal, ok := value.(int)
+
+	if ok {
+		fmt.Println("Integer:", intVal)
+		return
+	}
+
+	floatVal, ok := value.(float64)
+
+	if ok {
+		fmt.Println("Float:", floatVal)
+		return
+	}
+
+	stringVal, ok := value.(string)
+
+	if ok {
+		fmt.Println("String:", stringVal)
+		return
+	}
 }
 
 func getNoteData() (string, string) {
