@@ -10,6 +10,7 @@
 // Input: words = ["cool","lock","cook"]
 // Output: ["c","o"]
 
+// like a map filter
 export function commonChars(words: string[]): string[] {
   if (!words.length) {
     return [];

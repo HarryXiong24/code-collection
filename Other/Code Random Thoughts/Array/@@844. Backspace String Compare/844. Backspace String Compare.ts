@@ -39,7 +39,7 @@ export function backspaceCompare(s: string, t: string): boolean {
   return processString(s) === processString(t);
 }
 
-// O(n) time and O(1) space?
+// O(n) time and O(1) space
 export function backspaceCompare1(s: string, t: string): boolean {
   let i = s.length - 1;
   let j = t.length - 1;

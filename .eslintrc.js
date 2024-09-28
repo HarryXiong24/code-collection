@@ -10,7 +10,6 @@ module.exports = {
     ecmaVersion: 2017,
     sourceType: 'module',
     ecmaFeatures: {
-      // @TODO Deprecated https://eslint.org/docs/user-guide/configuring#deprecated
       experimentalObjectRestSpread: true,
       jsx: true,
       modules: true,

@@ -1,3 +1,3 @@
-module example.com/price-calculator
+module example.com
 
-go 1.21.2
+go 1.23.1
