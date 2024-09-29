@@ -17,7 +17,6 @@ func main() {
 
 	// 声明为只读:
 	var intChan3 <-chan int
-
 	if intChan3 != nil {
 		num1 := <-intChan3
 		fmt.Println(num1)
