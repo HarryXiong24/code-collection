@@ -19,55 +19,34 @@
 // Output: false
 // Explanation: s becomes "c" while t becomes "b".
 
-export function backspaceCompare(s: string, t: string): boolean {
-  const processString = (str: string): string => {
-    const result: string[] = [];
-
-    for (let char of str) {
-      if (char === '#') {
-        if (result.length > 0) {
-          result.pop();
-        }
-      } else {
-        result.push(char);
-      }
-    }
-
-    return result.join('');
-  };
-
-  return processString(s) === processString(t);
-}
-
 // O(n) time and O(1) space
-export function backspaceCompare1(s: string, t: string): boolean {
+export function backspaceCompare(s: string, t: string): boolean {
   let i = s.length - 1;
   let j = t.length - 1;
 
   while (i >= 0 || j >= 0) {
-    // Find the next valid character in string s
-    let backspaceCount = 0;
+    let backspace = 0;
+
     while (i >= 0) {
       if (s[i] === '#') {
-        backspaceCount++;
+        backspace++;
         i--;
-      } else if (backspaceCount > 0) {
-        backspaceCount--;
+      } else if (backspace > 0) {
         i--;
+        backspace--;
       } else {
         break;
       }
     }
 
-    // Find the next valid character in string t
-    backspaceCount = 0;
+    backspace = 0;
     while (j >= 0) {
       if (t[j] === '#') {
-        backspaceCount++;
+        backspace++;
         j--;
-      } else if (backspaceCount > 0) {
-        backspaceCount--;
+      } else if (backspace > 0) {
         j--;
+        backspace--;
       } else {
         break;
       }
@@ -77,7 +56,7 @@ export function backspaceCompare1(s: string, t: string): boolean {
       return false;
     }
 
-    if ((i >= 0 && j < 0) || (i < 0 && j >= 0)) {
+    if ((i >= 0 && j < 0) || (j >= 0 && i < 0)) {
       return false;
     }
 
@@ -90,6 +69,4 @@ export function backspaceCompare1(s: string, t: string): boolean {
 
 // test
 const res = backspaceCompare('ab#c', 'ad#c');
-const res1 = backspaceCompare('ab#c', 'ad#c');
 console.log(res);
-console.log(res1);
