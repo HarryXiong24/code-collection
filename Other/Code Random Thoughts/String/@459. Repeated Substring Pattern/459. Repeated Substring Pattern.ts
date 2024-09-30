@@ -36,6 +36,7 @@ export function repeatedSubstringPattern(s: string): boolean {
     lsp[i] = j;
   }
 
+  // Rules: the value that is the rest of the max prefix and the max suffix is the substring
   const substring = s.substring(0, s.length - lsp[lsp.length - 1]);
 
   return s !== substring && s.length % substring.length === 0 ? true : false;
