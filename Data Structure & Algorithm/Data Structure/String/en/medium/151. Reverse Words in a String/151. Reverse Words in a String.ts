@@ -21,7 +21,7 @@
 
 // space complexity is O(1)
 export function reverseWords(s: string): string {
-  let strArr: string[] = s.trim().split('');
+  const strArr: string[] = s.trim().split('');
 
   const removeExtraSpace = (s: string[]) => {
     let fast = 0;
@@ -56,33 +56,21 @@ export function reverseWords(s: string): string {
   removeExtraSpace(strArr);
   strArr.reverse();
 
-  let right = 0;
-  let left = 0;
+  let slow = 0;
+  let fast = 0;
 
-  while (right < strArr.length) {
-    right = left;
-    while (strArr[right] !== ' ' && right < strArr.length) {
-      right++;
-      continue;
+  while (fast < strArr.length) {
+    fast = slow;
+
+    while (strArr[fast] !== ' ' && fast < strArr.length) {
+      fast++;
     }
 
-    swap(strArr, left, right - 1);
-    left = right + 1;
+    swap(strArr, slow, fast - 1);
+    slow = fast + 1;
   }
 
   return strArr.join('');
-}
-
-export function reverseWords1(s: string): string {
-  let arr = s.split(' ');
-
-  // need to filter empty string
-  arr = arr.filter((value) => {
-    return value !== '';
-  });
-
-  // or use swap method to swap the elements
-  return arr.reverse().join(' ');
 }
 
 // test
