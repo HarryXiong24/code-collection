@@ -36,22 +36,23 @@ func BFS(root *TestNode) int {
 	return depth
 }
 
-func recursion(node *TestNode) {
-	if node == nil {
-		return
-	}
-
-	fmt.Println(node.value)
-
-	for _, val := range node.neighbors {
-		recursion(val)
-	}
-}
-
 func DFS_Recursion(root *TestNode) {
 
 	if root == nil {
 		return
+	}
+
+	var recursion func(node *TestNode)
+	recursion = func(node *TestNode) {
+		if node == nil {
+			return
+		}
+
+		fmt.Println(node.value)
+
+		for _, val := range node.neighbors {
+			recursion(val)
+		}
 	}
 
 	recursion(root)
