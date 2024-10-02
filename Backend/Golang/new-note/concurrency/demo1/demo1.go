@@ -1,5 +1,5 @@
-// 1. 在主线程中，开启一个goroutine，该goroutine每隔1秒输出 "hello golang"
-// 2. 在主线程中也每隔一秒输出"hello msb"，输出10次后，退出程序
+// 1. 在主线程中，开启一个 goroutine，该 goroutine 每隔1秒输出 "hello golang"
+// 2. 在主线程中也每隔一秒输出 "hello msb"，输出10次后，退出程序
 // 3. 要求主线程和 goroutine 同时执行
 
 package main
