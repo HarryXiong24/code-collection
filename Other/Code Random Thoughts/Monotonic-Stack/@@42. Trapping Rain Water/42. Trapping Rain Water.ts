@@ -13,24 +13,22 @@
 
 export function trap(height: number[]): number {
   const stack: number[] = [];
-  stack.push(0);
   let result: number = 0;
+
+  stack.push(0);
 
   for (let i = 1; i < height.length; i++) {
     let top = stack[stack.length - 1];
-    if (height[top] > height[i]) {
-      stack.push(i);
-    } else if (height[top] === height[i]) {
-      stack.pop();
+    if (height[i] <= height[top]) {
       stack.push(i);
     } else {
       while (stack.length && height[top] < height[i]) {
         const mid = stack.pop()!;
-        if (stack.length > 0) {
+        if (stack.length) {
           const left = stack[stack.length - 1];
-          const h = Math.min(height[left], height[i]) - height[mid];
-          const w = i - left - 1;
-          result += h * w;
+          const depth = Math.min(height[left], height[i]) - height[mid];
+          const width = i - left - 1;
+          result += depth * width;
           top = stack[stack.length - 1];
         }
       }
