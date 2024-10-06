@@ -23,17 +23,18 @@ export function largestRectangleArea(heights: number[]): number {
     if (heights[top] <= heights[i]) {
       stack.push(i);
     } else {
-      while (stack.length > 0 && heights[top] > heights[i]) {
+      while (stack.length && heights[top] > heights[i]) {
         const mid = stack.pop()!;
-        const left = stack.length > 0 ? stack[stack.length - 1] : -1;
-        const w = i - left - 1;
+        const left = stack.length ? stack[stack.length - 1] : -1;
         const h = heights[mid];
-        result = Math.max(result, w * h);
+        const w = i - left - 1;
+        result = Math.max(result, h * w);
         top = stack[stack.length - 1];
       }
       stack.push(i);
     }
   }
+
   return result;
 }
 
