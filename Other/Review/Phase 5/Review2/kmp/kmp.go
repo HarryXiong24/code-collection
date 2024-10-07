@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func KMPSearch(text string, pattern string) int {
 	if len(pattern) == 0 {
