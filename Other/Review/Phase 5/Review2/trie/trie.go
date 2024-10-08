@@ -30,10 +30,10 @@ func (t *Trie) Insert(word string) {
 	for _, char := range word {
 		if _, exists := node.children[char]; !exists {
 			node.children[char] = NewTrieNode()
+
 		}
 		node = node.children[char]
 	}
-
 	node.isEndOfWord = true
 }
 
@@ -46,7 +46,6 @@ func (t *Trie) Search(word string) bool {
 		}
 		node = node.children[char]
 	}
-
 	return node.isEndOfWord
 }
 
@@ -59,7 +58,6 @@ func (t *Trie) StartsWith(prefix string) bool {
 		}
 		node = node.children[char]
 	}
-
 	return true
 }
 
