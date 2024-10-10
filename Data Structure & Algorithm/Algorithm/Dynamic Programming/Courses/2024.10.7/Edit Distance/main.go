@@ -23,25 +23,25 @@ func min(a int, b int) int {
 	return b
 }
 
-func EditDistance(str1 string, str2 string) int {
-	edit := make([][]int, len(str1)+1)
+func EditDistance(word1 string, word2 string) int {
+	edit := make([][]int, len(word1)+1)
 	for index := range edit {
-		edit[index] = make([]int, len(str2)+1)
+		edit[index] = make([]int, len(word2)+1)
 	}
 
-	for i := 0; i <= len(str1); i++ {
+	for i := 0; i <= len(word1); i++ {
 		edit[i][0] = i
 	}
-	for j := 0; j <= len(str2); j++ {
+	for j := 0; j <= len(word2); j++ {
 		edit[0][j] = j
 	}
 
-	for i := 1; i <= len(str1); i++ {
-		for j := 1; j <= len(str2); j++ {
+	for i := 1; i <= len(word1); i++ {
+		for j := 1; j <= len(word2); j++ {
 			insertion := edit[i][j-1] + 1
 			deletion := edit[i-1][j] + 1
 			var substitution int
-			if str1[i-1] != str2[j-1] {
+			if word1[i-1] != word2[j-1] {
 				substitution = edit[i-1][j-1] + 1
 			} else {
 				substitution = edit[i-1][j-1]
@@ -51,7 +51,7 @@ func EditDistance(str1 string, str2 string) int {
 		}
 	}
 
-	return edit[len(str1)][len(str2)]
+	return edit[len(word1)][len(word2)]
 }
 
 // test
