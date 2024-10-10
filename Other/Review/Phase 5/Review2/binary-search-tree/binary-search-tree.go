@@ -100,22 +100,20 @@ func (bst *BinarySearchTree) DeleteNode(value int) bool {
 				}
 			} else {
 				currentMinNode := node.Right
-				parentNode := node
+				parentMinNode := node
 
 				for currentMinNode.Left != nil {
-					parentNode = currentMinNode
+					parentMinNode = currentMinNode
 					currentMinNode = currentMinNode.Left
 				}
 
 				node.Val = currentMinNode.Val
-
-				if parentNode.Left == currentMinNode {
-					parentNode.Left = currentMinNode.Right
+				if parentMinNode.Left == currentMinNode {
+					parentMinNode.Left = currentMinNode.Right
 				} else {
-					parentNode.Right = currentMinNode.Right
+					parentMinNode.Right = currentMinNode.Right
 				}
 			}
-
 			return true
 		}
 	}
