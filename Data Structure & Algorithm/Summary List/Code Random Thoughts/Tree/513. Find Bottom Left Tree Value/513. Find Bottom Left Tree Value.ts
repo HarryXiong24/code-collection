@@ -55,16 +55,16 @@ export function findBottomLeftValue_recursion(root: TreeNode | null): number {
     return res;
   }
 
-  const recursion = (root: TreeNode, depth: number): void => {
-    if (root.left === null && root.right === null) {
+  const recursion = (node: TreeNode, depth: number): void => {
+    if (node.left === null && node.right === null) {
       if (depth > maxDepth) {
         maxDepth = depth;
-        res = root.val;
+        res = node.val;
       }
       return;
     }
-    root.left && recursion(root.left, depth + 1);
-    root.right && recursion(root.right, depth + 1);
+    node.left && recursion(node.left, depth + 1);
+    node.right && recursion(node.right, depth + 1);
   };
 
   recursion(root, 1);
