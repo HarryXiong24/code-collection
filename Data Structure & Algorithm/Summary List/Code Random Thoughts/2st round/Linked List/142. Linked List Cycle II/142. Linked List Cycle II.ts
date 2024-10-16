@@ -1,4 +1,3 @@
-import { flatten } from '../../../../Data Structure & Algorithm/Data Structure/Linked List/en/Classic Problems in Linked List/430. Flatten a Multilevel Doubly Linked List/430. Flatten a Multilevel Doubly Linked List';
 // 142. Linked List Cycle II
 
 // Given the head of a linked list, return the node where the cycle begins. If there is no cycle, return null.
