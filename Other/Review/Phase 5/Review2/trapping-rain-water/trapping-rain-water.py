@@ -25,12 +25,17 @@ def trap(height):
         else:
             while len(stack) > 0 and height[top] < height[i]:
                 mid = stack.pop()
+
                 if len(stack) > 0:
                     left = stack[len(stack) - 1]
-                    depth = min(height[left], height[i]) - height[mid]
-                    width = i - left - 1
-                    result += depth * width
-                    top = stack[-1]
+                    right = i
+
+                    h = min(height[left], height[right]) - height[mid]
+                    w = right - left - 1
+                    result += h * w
+
+                    top = stack[len(stack) - 1]
+
             stack.append(i)
 
     return result
