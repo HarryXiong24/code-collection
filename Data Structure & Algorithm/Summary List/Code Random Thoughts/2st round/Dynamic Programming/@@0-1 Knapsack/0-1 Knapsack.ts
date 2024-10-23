@@ -38,7 +38,7 @@ export function findKnapsack(capacity: number, item: number, weights: number[], 
   // iterative
   for (let i = 1; i < item; i++) {
     for (let j = 1; j <= capacity; j++) {
-      if (j - weights[i] <= 0) {
+      if (j - weights[i] < 0) {
         dp[i][j] = dp[i - 1][j];
       } else {
         dp[i][j] = Math.max(dp[i - 1][j], dp[i - 1][j - weights[i]] + values[i]);
