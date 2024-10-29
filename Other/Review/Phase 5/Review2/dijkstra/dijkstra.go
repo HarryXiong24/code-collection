@@ -31,7 +31,7 @@ func dijkstra(graph Graph, start string, end string) ([]string, int) {
 	// init
 	dijkstraTable[start] = 0
 	visited := make(map[string]bool)
-	queue := []Item{{node: start, cost: 0}}
+	queue := []*Item{{node: start, cost: 0}}
 
 	for len(queue) > 0 {
 		sort.Slice(queue, func(i, j int) bool {
@@ -50,7 +50,7 @@ func dijkstra(graph Graph, start string, end string) ([]string, int) {
 			if current.cost+weight < dijkstraTable[neighbor] {
 				dijkstraTable[neighbor] = current.cost + weight
 				recordPath[neighbor] = current.node
-				queue = append(queue, Item{neighbor, current.cost + weight})
+				queue = append(queue, &Item{neighbor, current.cost + weight})
 			}
 		}
 	}
