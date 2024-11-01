@@ -201,3 +201,13 @@ if (sum + target) % 2 != 0, no result
 因此 dp 定义：
 
 dp[i][j]：使用下标为[0, i] 的 nums[i] 能够凑满 j（包括 j）这么大容量的包，有 dp[i][j]种方法。
+
+递推公式
+
+```ts
+for (let i: number = 0; i < nums.length; i++) {
+  for (let j: number = left; j >= nums[i]; j--) {
+    dp[j] += dp[j - nums[i]];
+  }
+}
+```
