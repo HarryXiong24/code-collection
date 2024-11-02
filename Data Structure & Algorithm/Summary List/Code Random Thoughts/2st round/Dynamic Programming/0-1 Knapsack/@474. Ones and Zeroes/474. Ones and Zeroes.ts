@@ -53,7 +53,7 @@ export function findMaxForm(strs: string[], m: number, n: number): number {
     const { numOfZero, numOfOne } = countBinary(strs[i]);
     for (let j = 0; j < dp[i].length; j++) {
       for (let k = 0; k < dp[i][j].length; k++) {
-        if (j < numOfZero || k < numOfOne) {
+        if (j - numOfZero < 0 || k - numOfOne < 0) {
           dp[i][j][k] = dp[i - 1][j][k];
         } else {
           dp[i][j][k] = Math.max(dp[i - 1][j][k], dp[i - 1][j - numOfZero][k - numOfOne] + 1);
