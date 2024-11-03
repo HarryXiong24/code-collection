@@ -40,6 +40,7 @@ export function findTargetSumWays(nums: number[], target: number): number {
   dp[0] = 1;
 
   for (let i: number = 0; i < nums.length; i++) {
+    // this loop updates in reverse order, because we need to make sure each element used only once
     for (let j: number = left; j >= nums[i]; j--) {
       dp[j] += dp[j - nums[i]];
     }
