@@ -68,7 +68,7 @@ dp[j] = Math.max(dp[j], dp[j - weights[i]] + values[i]);
 ```ts
 for(int i = 0; i < weight.length; i++) { // 遍历物品
   for(int j = bagWeight; j >= weight[i]; j--) { // 遍历背包容量
-    dp[j] = max(dp[j], dp[j - weight[i]] + value[i]);
+    dp[j] = Math.max(dp[j], dp[j - weight[i]] + value[i]);
   }
 }
 ```
@@ -262,3 +262,9 @@ for (let i = 1; i < dp.length; i++) {
   }
 }
 ```
+
+# 完全背包
+
+如果求组合数就是外层 for 循环遍历物品，内层 for 遍历背包。
+
+如果求排列数就是外层 for 遍历背包，内层 for 循环遍历物品。
