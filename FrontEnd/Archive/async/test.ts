@@ -1,4 +1,4 @@
-function* generate() {
+export function* generate() {
   let a = 1;
   console.log(a);
   yield (a = 2);

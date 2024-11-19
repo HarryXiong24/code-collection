@@ -12,7 +12,7 @@
 // Input: s = "rat", t = "car"
 // Output: false
 
-function isAnagram(s: string, t: string): boolean {
+export function isAnagram(s: string, t: string): boolean {
   const map = new Map<string, number>();
 
   for (const item of s) {
