@@ -17,7 +17,7 @@
 // Output: 0
 // Explanation: In this case, no transactions are done and the max profit = 0.
 
-function maxProfit(prices: number[]): number {
+export function maxProfit(prices: number[]): number {
   // dp[i][0] 持有股票 i 最大金额, dp[i][1] 不持有股票 i 最大金额
   const dp: number[][] = new Array(prices.length).fill(0).map(() => new Array(2).fill(0));
 
