@@ -33,3 +33,22 @@
 -- 输出：
 -- avg_ret
 -- 0.3000
+select
+  count(date2) / count(date1) as avg_ret
+from
+  (
+    select distinct
+      qpd.device_id,
+      qpd.date as date1,
+      uniq_id_date.date as date2
+    from
+      question_practice_detail as qpd
+      left join (
+        select distinct
+          device_id,
+          date
+        from
+          question_practice_detail
+      ) as uniq_id_date on qpd.device_id = uniq_id_date.device_id
+      and date_add (qpd.date, interval 1 day) = uniq_id_date.date
+  ) as id_last_next_date
