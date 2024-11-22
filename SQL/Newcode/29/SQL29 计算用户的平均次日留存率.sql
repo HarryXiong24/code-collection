@@ -1,13 +1,8 @@
--- SQL28 计算用户8月每天的练题数量
--- 题目：现在运营想要计算出2021年8月每天用户练习题目的数量，请取出相应数据。
+-- SQL29 计算用户的平均次日留存率
+-- 描述
+-- 题目：现在运营想要查看用户在某天刷题后第二天还会再来刷题的留存率。请你取出相应数据。
 -- 示例：question_practice_detail
 -- 根据示例，你的查询应返回以下结果：
--- day	question_cnt
--- 13	5
--- 14	2
--- 15	3
--- 16	1
--- 18	1
 -- 示例1
 -- 输入：
 -- drop table if  exists `question_practice_detail`;
@@ -36,19 +31,5 @@
 -- INSERT INTO question_practice_detail VALUES(16,6543,111,'right','2021-08-13');
 -- 复制
 -- 输出：
--- day|question_cnt
--- 13|5
--- 14|2
--- 15|3
--- 16|1
--- 18|1
-select
-  day (date) as day,
-  count(question_id) as question_cnt
-from
-  question_practice_detail
-where
-  month (date) = 8
-  and year (date) = 2021
-group by
-  date
+-- avg_ret
+-- 0.3000
