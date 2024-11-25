@@ -14,22 +14,32 @@
 //            # new grants is indeed 190
 
 export function findGrantsCap1(grantsArray, newBudget) {
-  // your code goes here
-
+  // firstly I think we need to sort this array to handle the budget better.
+  // Start by sorting the array, so we can deal with smaller grants first.
   grantsArray.sort((a, b) => a - b);
 
+  // variable remaining means the first round we have the budget that we can use
+  // 'remaining' keeps track of how much budget we have left to allocate.
   let remaining = newBudget;
+
+  // and variable avg means for per element, the cap it can be allocated
+  // 'avg' is the current average cap that we can allocate per grant.
   let avg = remaining / grantsArray.length;
 
   for (let i = 0; i < grantsArray.length; i++) {
+    // this is used to avoid dividing by 0, and we can return avg directly
+    // If this is the last grant left to process, we can directly return the current average cap.
     if (grantsArray.length - i - 1 === 0) {
       return avg;
     }
 
     if (grantsArray[i] < avg) {
+      // if grantsArray[i] < avg, means this element value is less than avg, so we can update the next round remaining and avg
       remaining = remaining - grantsArray[i];
       avg = remaining / (grantsArray.length - i - 1);
     } else {
+      // if grantsArray[i] >= avg, because the remaining elements are more than this element, we know that now is the best cap, so return it.
+      // this cap works for all remaining grants, so return it as the final cap.
       return avg;
     }
   }
