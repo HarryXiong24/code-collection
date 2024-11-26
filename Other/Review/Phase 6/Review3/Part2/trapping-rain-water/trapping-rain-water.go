@@ -37,15 +37,19 @@ func trap(height []int) int {
 		} else {
 			for len(monotonicStack) > 0 && height[top] < height[i] {
 				mid := monotonicStack[len(monotonicStack)-1]
-				monotonicStack = monotonicStack[0 : len(monotonicStack)-1]
+				monotonicStack = monotonicStack[:len(monotonicStack)-1]
 
 				if len(monotonicStack) > 0 {
 					left := monotonicStack[len(monotonicStack)-1]
 					right := i
+
 					h := min(height[left], height[right]) - height[mid]
-					sum += h * (right - left - 1)
+					w := right - left - 1
+					sum += h * w
+
 					top = monotonicStack[len(monotonicStack)-1]
 				}
+
 			}
 			monotonicStack = append(monotonicStack, i)
 		}
