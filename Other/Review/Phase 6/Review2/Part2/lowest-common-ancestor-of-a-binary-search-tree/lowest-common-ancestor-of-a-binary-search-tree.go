@@ -36,7 +36,7 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	var recursion func(node *TreeNode) *TreeNode
 	recursion = func(node *TreeNode) *TreeNode {
 		if node == nil {
-			return node
+			return nil
 		}
 
 		if node.Val > p.Val && node.Val > q.Val {
