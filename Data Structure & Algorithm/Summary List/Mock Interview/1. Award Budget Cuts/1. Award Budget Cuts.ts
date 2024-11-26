@@ -14,7 +14,7 @@
 //            # [2, 47, 47, 47, 47]. Notice that the sum of the
 //            # new grants is indeed 190
 
-export function findGrantsCap1(grantsArray, newBudget) {
+export function findGrantsCap1(grantsArray: number[], newBudget: number) {
   // firstly I think we need to sort this array to handle the budget better.
   // Start by sorting the array, so we can deal with smaller grants first.
   grantsArray.sort((a, b) => a - b);
@@ -47,7 +47,7 @@ export function findGrantsCap1(grantsArray, newBudget) {
   return avg;
 }
 
-export function findGrantsCap2(grantsArray, newBudget) {
+export function findGrantsCap2(grantsArray: number[], newBudget: number) {
   // your code goes here
 
   grantsArray.sort((a, b) => a - b);

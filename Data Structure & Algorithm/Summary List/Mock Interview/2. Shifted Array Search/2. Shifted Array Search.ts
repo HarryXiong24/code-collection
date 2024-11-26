@@ -14,12 +14,12 @@
 
 // output: 3 # since it’s the index of 2 in arr
 
-function findPivotPoint(arr) {
-  begin = 0;
-  end = arr.length - 1;
+function findPivotPoint(arr: number[]) {
+  let begin = 0;
+  let end = arr.length - 1;
 
   while (begin <= end) {
-    mid = begin + Math.floor((end - begin) / 2);
+    let mid = begin + Math.floor((end - begin) / 2);
     if (mid == 0 || arr[mid] < arr[mid - 1]) {
       return mid;
     }
@@ -33,9 +33,9 @@ function findPivotPoint(arr) {
   return 0;
 }
 
-function binarySearch(arr, begin, end, num) {
+function binarySearch(arr: number[], begin: number, end: number, num: number) {
   while (begin <= end) {
-    mid = begin + Math.floor((end - begin) / 2);
+    const mid = begin + Math.floor((end - begin) / 2);
     if (arr[mid] < num) {
       begin = mid + 1;
     } else if (arr[mid] == num) {
@@ -47,8 +47,8 @@ function binarySearch(arr, begin, end, num) {
   return -1;
 }
 
-export function shiftedArrSearch(shiftArr, num) {
-  pivot = findPivotPoint(shiftArr);
+export function shiftedArrSearch(shiftArr: number[], num: number) {
+  const pivot = findPivotPoint(shiftArr);
 
   if (pivot == 0 || num < shiftArr[0]) {
     return binarySearch(shiftArr, pivot, shiftArr.length - 1, num);
