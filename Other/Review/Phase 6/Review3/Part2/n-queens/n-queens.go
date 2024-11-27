@@ -41,6 +41,7 @@ func isValid(row int, col int, chessboard [][]string, n int) bool {
 			return false
 		}
 	}
+
 	return true
 }
 
@@ -49,12 +50,12 @@ func solveNQueens(n int) [][]string {
 
 	var backtrack func(chessboard [][]string, row int)
 	backtrack = func(chessboard [][]string, row int) {
-
 		if row == n {
 			temp := make([]string, 0)
 			for _, value := range chessboard {
 				temp = append(temp, strings.Join(value, ""))
 			}
+
 			results = append(results, temp)
 			return
 		}
@@ -63,6 +64,7 @@ func solveNQueens(n int) [][]string {
 			if isValid(row, col, chessboard, n) == false {
 				continue
 			}
+
 			chessboard[row][col] = "Q"
 			backtrack(chessboard, row+1)
 			chessboard[row][col] = "."
@@ -70,12 +72,10 @@ func solveNQueens(n int) [][]string {
 	}
 
 	chessboard := make([][]string, n)
-	for key := range chessboard {
-		chessboard[key] = make([]string, n)
-	}
-	for key := range chessboard {
-		for index := range chessboard[key] {
-			chessboard[key][index] = "."
+	for i := range chessboard {
+		chessboard[i] = make([]string, n)
+		for j := range chessboard[i] {
+			chessboard[i][j] = "."
 		}
 	}
 
