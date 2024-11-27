@@ -70,11 +70,11 @@ func solveNQueens(n int) [][]string {
 	}
 
 	chessboard := make([][]string, n)
-	for key, _ := range chessboard {
+	for key := range chessboard {
 		chessboard[key] = make([]string, n)
 	}
-	for key, _ := range chessboard {
-		for index, _ := range chessboard[key] {
+	for key := range chessboard {
+		for index := range chessboard[key] {
 			chessboard[key][index] = "."
 		}
 	}
