@@ -30,12 +30,8 @@ func (graph *Graph) AddEdge(v int, w int) {
 }
 
 func (graph *Graph) TopologicalSort() []int {
-	stack := make([]int, 0, graph.vertices)
+	stack := make([]int, 0)
 	visited := make([]Color, graph.vertices)
-
-	for i := 0; i < len(visited); i++ {
-		visited[i] = White
-	}
 
 	var recursion func(vertex int) bool
 	recursion = func(vertex int) bool {
@@ -59,60 +55,18 @@ func (graph *Graph) TopologicalSort() []int {
 
 	for i := 0; i < graph.vertices; i++ {
 		if visited[i] == White {
-			if recursion(i) {
+			if recursion(i) == true {
 				return nil
 			}
 		}
 	}
 
-	// Reverse the stack to get the topological sort order
 	for i, j := 0, len(stack)-1; i < j; i, j = i+1, j-1 {
 		stack[i], stack[j] = stack[j], stack[i]
 	}
+
 	return stack
 }
-
-// func (graph *Graph) TopologicalSort() []int {
-// 	stack := make([]int, 0, graph.vertices)
-
-// 	visited := make([]Color, graph.vertices)
-// 	for i := 0; i < len(visited); i++ {
-// 		visited[i] = White
-// 	}
-
-// 	for i := 0; i < graph.vertices; i++ {
-// 		if visited[i] == White {
-// 			if graph.recursion(i, visited, &stack) {
-// 				return nil
-// 			}
-// 		}
-// 	}
-
-// 	// Reverse the stack to get the topological sort order
-// 	for i, j := 0, len(stack)-1; i < j; i, j = i+1, j-1 {
-// 		stack[i], stack[j] = stack[j], stack[i]
-// 	}
-// 	return stack
-// }
-
-// func (graph *Graph) recursion(vertex int, visited []Color, stack *[]int) bool {
-// 	visited[vertex] = Gray
-
-// 	if _, ok := graph.adjacentList[vertex]; ok {
-// 		for _, neighbor := range graph.adjacentList[vertex] {
-// 			if visited[neighbor] == Gray {
-// 				return true
-// 			}
-// 			if visited[neighbor] == White && graph.recursion(neighbor, visited, stack) {
-// 				return true
-// 			}
-// 		}
-// 	}
-
-// 	*stack = append(*stack, vertex)
-// 	visited[vertex] = Black
-// 	return false
-// }
 
 // test
 func main() {
