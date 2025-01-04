@@ -15,13 +15,13 @@ import "fmt"
 
 // 解决的办法可以定义一种新的类型
 
-type Myint int
+type MyInt int
 
-func (i Myint) PrintInt() {
+func (i MyInt) PrintInt() {
 	fmt.Println(i)
 }
 
 func main() {
-	var i Myint = 1
+	var i MyInt = 1
 	i.PrintInt()
 }

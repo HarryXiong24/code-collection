@@ -41,7 +41,7 @@ func f1() (r int) {
 	defer func() {
 		r++
 	}()
-	return 0
+	return r
 }
 
 func f2() (r int) {
@@ -72,6 +72,6 @@ func main() {
 
 // increaseA 中的 i 是局部变量，defer 修改的是局部变量，返回值在 return 语句时已经确定，defer 的修改不会影响返回值。
 // increaseB 使用命名返回值 r，defer 可以直接修改 r 的值，影响最终的返回值。
-// defer 执行时机：
 
+// defer 执行时机：
 // defer 在函数返回之前执行，但在 return 保存返回值之后。如果返回值是命名的，defer 可以修改它；否则不能。
