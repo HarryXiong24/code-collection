@@ -12,7 +12,7 @@
 // Input: s = "axc", t = "ahbgdc"
 // Output: false
 
-function isSubsequence(s: string, t: string): boolean {
+export function isSubsequence(s: string, t: string): boolean {
   if (s.length > t.length) {
     return false;
   }
