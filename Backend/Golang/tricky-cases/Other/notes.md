@@ -206,3 +206,106 @@ D. add([]int{1, 3, 7}…)
 2. 对；
 3. 对，当多值赋值时，:= 左边的变量无论声明与否都可以；
 4. 错，y 没有声明。
+
+## 6
+
+于 switch 语句，下面说法正确的有?
+
+A. 条件表达式必须为常量或者整数；
+
+B. 单个 case 中，可以出现多个结果选项；
+
+C. 需要用 break 来明确退出一个 case；
+
+D. 只有在 case 中明确添加 fallthrough 关键字，才会继续执行紧跟的下一个 case；
+
+在 Go 语言中，关于 `switch` 语句的说法如下：
+
+1. **A. 条件表达式必须为常量或者整数；**  
+   **错误**。  
+   Go 中 `switch` 的条件表达式不局限于常量或整数，它可以是任意的值，包括字符串、布尔值等。甚至可以没有表达式，直接对每个 `case` 执行布尔条件判断。
+
+2. **B. 单个 case 中，可以出现多个结果选项；**  
+   **正确**。  
+   一个 `case` 可以列出多个匹配选项，用逗号分隔。  
+   例如：
+
+   ```go
+   switch day := "Monday"; day {
+   case "Monday", "Tuesday":
+       fmt.Println("Start of the week")
+   case "Saturday", "Sunday":
+       fmt.Println("Weekend")
+   default:
+       fmt.Println("Midweek")
+   }
+   ```
+
+3. **C. 需要用 break 来明确退出一个 case；**  
+   **错误**。  
+   在 Go 中，`case` 默认会自动退出，无需显式使用 `break`。
+
+4. **D. 只有在 case 中明确添加 fallthrough 关键字，才会继续执行紧跟的下一个 case；**  
+   **正确**。  
+   如果需要在匹配的 `case` 后继续执行下一个 `case`，需要使用 `fallthrough` 关键字。
+
+补充：`fallthrough` 示例
+
+```go
+switch num := 2; num {
+case 1:
+    fmt.Println("One")
+case 2:
+    fmt.Println("Two")
+    fallthrough
+case 3:
+    fmt.Println("Three")
+default:
+    fmt.Println("Other")
+}
+```
+
+输出：
+
+```
+Two
+Three
+```
+
+## 7
+
+关于变量的自增和自减操作，下面语句正确的是？
+
+A.
+i := 1
+i++
+
+B.
+i := 1
+j = i++
+
+C.
+i := 1
+++i
+
+D.
+i := 1
+i--
+
+AD。知识点：自增自减操作。i++ 和 i– 在 Go 语言中是语句，不是表达式，因此不能赋值给另外的变量。此外没有 ++i 和 -–i。
+
+## 8
+
+下面代码有什么问题？
+
+```go
+const i = 100
+var j = 123
+
+func main() {
+    fmt.Println(&j, j)
+    fmt.Println(&i, i)
+}
+```
+
+编译报错 cannot take the address of i。知识点：常量。常量不同于变量的在运行期分配内存，常量通常会被编译器在预处理阶段直接展开，作为指令数据使用，所以常量无法寻址。
