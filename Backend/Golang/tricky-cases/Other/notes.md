@@ -309,3 +309,25 @@ func main() {
 ```
 
 编译报错 cannot take the address of i。知识点：常量。常量不同于变量的在运行期分配内存，常量通常会被编译器在预处理阶段直接展开，作为指令数据使用，所以常量无法寻址。
+
+## 9
+
+```go
+func main()
+{
+    fmt.Println("hello world")
+}
+```
+
+编译错误。
+
+syntax error: unexpected semicolon or newline before {
+Go 语言中，大括号不能放在单独的一行。
+
+正确的代码如下：
+
+```go
+func main(){
+    fmt.Println("hello world")
+}
+```
