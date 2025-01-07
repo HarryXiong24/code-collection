@@ -42,7 +42,7 @@ func (uf *UnionFind) IsConnected(x int, y int) bool {
 }
 
 func kruskal(graph [][]int, vertices int) (int, [][]int) {
-	mst := make([][]int, 0)
+	mst := make([][]int, 0, vertices-1)
 	cost := 0
 
 	uf := New(vertices)
