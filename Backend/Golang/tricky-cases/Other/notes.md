@@ -355,3 +355,13 @@ func main() {
 ```
 
 y 没有被使用，但不会报错。常量是一个简单值的标识符，在程序运行时，不会被修改的量。不像变量，常量未使用是能编译通过的
+
+## 12
+
+```go
+func main() {
+    nil := 123
+    fmt.Println(nil)
+    var _ map[string]int = nil // 当前作用域中，预定义的 nil 被覆盖，此时 nil 是 int 类型值，不能赋值给 map 类型。
+}
+```
