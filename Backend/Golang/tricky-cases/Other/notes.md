@@ -365,3 +365,41 @@ func main() {
     var _ map[string]int = nil // 当前作用域中，预定义的 nil 被覆盖，此时 nil 是 int 类型值，不能赋值给 map 类型。
 }
 ```
+
+## 13
+
+```go
+func main() {
+  defer func() {
+      recover()
+  }()
+  panic(1)
+}
+```
+
+recover() 必须在 defer() 函数中直接调用才有效。其他几种情况调用都是无效的：直接调用 recover()、在 defer() 中直接调用 recover() 和 defer() 调用时多层嵌套。
+
+```go
+func main() {
+  recover()
+  panic(1)
+}
+```
+
+```go
+func main() {
+  defer recover()
+  panic(1)
+}
+```
+
+```go
+func main() {
+  defer func() {
+      defer func() {
+         recover()
+      }()
+  }()
+  panic(1)
+}
+```
