@@ -27,8 +27,6 @@ func NewChainingHashMap(initCapacity int) *ChainingHashMap {
 
 	if initCapacity < 1 {
 		initCapacity = 1
-	} else {
-		initCapacity = initCapacity
 	}
 
 	return &ChainingHashMap{
