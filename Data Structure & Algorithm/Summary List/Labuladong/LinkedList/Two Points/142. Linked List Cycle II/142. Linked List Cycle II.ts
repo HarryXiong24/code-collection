@@ -31,7 +31,7 @@ class ListNode {
   }
 }
 
-function detectCycle(head: ListNode | null): ListNode | null {
+export function detectCycle(head: ListNode | null): ListNode | null {
   if (!head) {
     return null;
   }
