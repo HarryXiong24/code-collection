@@ -74,7 +74,7 @@ func main() {
 	// 场合: 读多写少
 	var rwLock sync.RWMutex
 
-	wg.Add(2)
+	wg.Add(6)
 
 	for i := 1; i <= 5; i++ {
 		go read(&wg, &rwLock)
