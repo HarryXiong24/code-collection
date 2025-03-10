@@ -1,4 +1,4 @@
-function nextGreaterElement(nums: number[]): number[] {
+export function nextGreaterElement(nums: number[]): number[] {
   const result: number[] = new Array(nums.length).fill(-1);
   const monotonicStack: number[] = [];
 
