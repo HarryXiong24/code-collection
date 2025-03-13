@@ -44,7 +44,7 @@ func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 			return nil
 		}
 
-		if p.Val == node.Val && q.Val == node.Val {
+		if p.Val == node.Val || q.Val == node.Val {
 			return node
 		}
 
