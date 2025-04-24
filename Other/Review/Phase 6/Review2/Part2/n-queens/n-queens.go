@@ -55,6 +55,7 @@ func solveNQueens(n int) [][]string {
 				temp = append(temp, strings.Join(value, ""))
 			}
 			results = append(results, temp)
+			return
 		}
 
 		for col := 0; col < n; col++ {
