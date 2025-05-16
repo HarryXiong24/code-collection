@@ -33,6 +33,7 @@ func dijkstra(graph Graph, start string, end string) ([]string, int) {
 			cost: 0,
 		},
 	}
+
 	visited := make(map[string]bool)
 	dijkstraTable[start] = 0
 
