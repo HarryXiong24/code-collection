@@ -28,7 +28,7 @@ export function nextGreaterElement(nums1: number[], nums2: number[]): number[] {
   const stack: number[] = [];
 
   for (let i = 0; i < nums2.length; i++) {
-    while (nums2[stack[stack.length - 1]] < nums2[i]) {
+    while (stack.length > 0 && nums2[stack[stack.length - 1]] < nums2[i]) {
       const top = stack.pop()!;
       offset[top] = i - top;
     }
