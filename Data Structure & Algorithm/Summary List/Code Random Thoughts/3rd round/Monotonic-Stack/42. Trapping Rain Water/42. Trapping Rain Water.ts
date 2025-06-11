@@ -47,7 +47,7 @@ export function trap(height: number[]): number {
   return sum;
 }
 
-export function trap_two_points(height: number[]): number {
+export function trapTwoPoints(height: number[]): number {
   let sum = 0;
 
   for (let i = 0; i < height.length; i++) {

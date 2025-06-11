@@ -13,7 +13,7 @@
 // Input: nums = [1,2,3], k = 0
 // Output: 0
 
-function numSubarrayProductLessThanK(nums: number[], k: number): number {
+export function numSubarrayProductLessThanK(nums: number[], k: number): number {
   let slow = 0;
   let fast = 0;
 
