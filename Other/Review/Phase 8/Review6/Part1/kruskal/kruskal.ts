@@ -32,7 +32,7 @@ export function kruskal(graph: number[][], vertices: number): [number, number[][
   let count = vertices - 1;
   const uf = new UnionFind(vertices);
 
-  graph = graph.sort((a, b) => a[2] - b[2]);
+  graph.sort((a, b) => a[2] - b[2]);
 
   while (count > 0) {
     const [u, v, weight] = graph.shift()!;
