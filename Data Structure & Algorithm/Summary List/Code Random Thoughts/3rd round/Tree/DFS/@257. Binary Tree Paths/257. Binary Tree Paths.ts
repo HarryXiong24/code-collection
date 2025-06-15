@@ -14,23 +14,28 @@ class TreeNode {
 
 export function binaryTreePaths(root: TreeNode | null): string[] {
   const result: string[] = [];
+  const path: number[] = [];
 
   if (!root) {
     return result;
   }
 
-  const recursion = (node: TreeNode, res: number[]) => {
+  const recursion = (node: TreeNode | null) => {
+    if (!node) return;
+
+    path.push(node.val);
+
     if (!node.left && !node.right) {
-      result.push([...res, node.val].join('->'));
-      return;
+      result.push(path.join('->'));
     }
 
-    res.push(node.val);
-    node.left && recursion(node.left, [...res]);
-    node.right && recursion(node.right, [...res]);
+    recursion(node.left);
+    recursion(node.right);
+
+    path.pop();
   };
 
-  recursion(root, []);
+  recursion(root);
 
   return result;
 }
