@@ -13,7 +13,7 @@
 // Input: graph = [[4,3,1],[3,2,4],[3],[4],[]]
 // Output: [[0,4],[0,3,4],[0,1,3,4],[0,1,2,3,4],[0,1,4]]
 
-function allPathsSourceTarget(graph: number[][]): number[][] {
+export function allPathsSourceTarget(graph: number[][]): number[][] {
   const path: number[] = [];
   const result: number[][] = [];
 
