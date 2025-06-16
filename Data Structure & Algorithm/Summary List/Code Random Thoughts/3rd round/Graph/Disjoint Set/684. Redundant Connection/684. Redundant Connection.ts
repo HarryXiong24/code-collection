@@ -42,7 +42,7 @@ class DisjointSet {
   }
 }
 
-function findRedundantConnection(edges: number[][]): number[] {
+export function findRedundantConnection(edges: number[][]): number[] {
   const uf = new DisjointSet(edges.length);
 
   for (const item of edges) {
