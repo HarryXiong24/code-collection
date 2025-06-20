@@ -23,19 +23,25 @@ export class Graph {
   topologicalSort_dfs(): number[] | null {
     const stack: number[] = [];
     const visited: Color[] = new Array(this.vertices).fill(Color.White);
+    const inDegree: Map<number, number> = new Map();
+
+    // init
+    for (let i = 0; i < this.vertices; i++) {
+      inDegree.set(i, 0);
+      if (!this.adjacentList.has(i)) {
+        this.adjacentList.set(i, []); // 防止 undefined
+      }
+    }
 
     const recursion = (vertex: number): boolean => {
       visited[vertex] = Color.Gray;
 
-      if (this.adjacentList.has(vertex)) {
-        const neighbors = this.adjacentList.get(vertex)!;
-        for (const neighbor of neighbors) {
-          if (visited[neighbor] === Color.Gray) {
-            return true;
-          }
-          if (visited[neighbor] === Color.White && recursion(neighbor)) {
-            return true;
-          }
+      for (const neighbor of this.adjacentList.get(vertex)!) {
+        if (visited[neighbor] === Color.Gray) {
+          return true;
+        }
+        if (visited[neighbor] === Color.White && recursion(neighbor)) {
+          return true;
         }
       }
 
@@ -45,14 +51,14 @@ export class Graph {
     };
 
     for (let i = 0; i < this.vertices; i++) {
-      if (visited[i] === Color.White) {
+      if (inDegree.get(i) === 0 && visited[i] === Color.White) {
         if (recursion(i)) {
           return null;
         }
       }
     }
 
-    return stack.reverse();
+    return stack.length === this.vertices ? stack.reverse() : null;
   }
 
   topologicalSort_bfs(): number[] | null {
