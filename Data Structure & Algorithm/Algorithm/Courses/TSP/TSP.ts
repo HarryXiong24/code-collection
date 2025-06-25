@@ -5,7 +5,7 @@ type Journey = number[]; // Define a journey as an array of numbers
 // The graph is given as an adjacency matrix. No edges have a cost of '0'.
 // The value graph[i][j] tells you the cost of an edge from i to j. This graph is directed.
 // However, if graph[i][j] == 0, this means there is no edge from i to j.
-function tspDynamicProgram(graph: Graph, n: number): Journey {
+export function tspDynamicProgram(graph: Graph, n: number): Journey {
   const N = n;
   const FULL_MASK = (1 << N) - 1;
   const INF = Number.MAX_SAFE_INTEGER / 2; // Prevent overflow
