@@ -46,6 +46,8 @@ export function nSum(nums: number[], n: number, start: number, target: number): 
   return res;
 }
 
+// test
+const array = [1, 0, -1, 0, -2, 2];
 array.sort((a, b) => a - b);
 const res = nSum(array, 4, 0, 0);
 console.log(res);
