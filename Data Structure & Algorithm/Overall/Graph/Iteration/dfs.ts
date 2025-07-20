@@ -20,33 +20,28 @@ export class Graph {
     }
   }
 
-  dfs(begin: number): number[][] {
-    const result: number[][] = [];
+  dfs(begin: number): number[] {
+    const result: number[] = [];
     const visited: Set<number> = new Set();
 
-    const recursion = (node: number, path: number[], visited: Set<number>) => {
+    const recursion = (node: number) => {
+      result.push(node);
+      visited.add(node);
+
       const neighbors = this.adjacencyList.get(node);
       if (!neighbors || neighbors.length === 0) {
-        result.push([...path]);
         return;
       }
 
       for (const neighbor of neighbors) {
         if (visited.has(neighbor)) {
-          result.push([...path]);
           continue;
         }
-
-        path.push(neighbor);
-        visited.add(neighbor);
-        recursion(neighbor, path, visited);
-        visited.delete(neighbor);
-        path.pop();
+        recursion(neighbor);
       }
     };
 
-    visited.add(begin);
-    recursion(begin, [begin], visited);
+    recursion(begin);
 
     return result;
   }
