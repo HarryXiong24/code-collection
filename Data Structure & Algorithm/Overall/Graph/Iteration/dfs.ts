@@ -25,13 +25,15 @@ export class Graph {
     const visited: Set<number> = new Set();
 
     const recursion = (node: number) => {
-      result.push(node);
-      visited.add(node);
-
       const neighbors = this.adjacencyList.get(node);
       if (!neighbors || neighbors.length === 0) {
+        result.push(node);
+        visited.add(node);
         return;
       }
+
+      result.push(node);
+      visited.add(node);
 
       for (const neighbor of neighbors) {
         if (visited.has(neighbor)) {
