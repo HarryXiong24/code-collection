@@ -15,6 +15,10 @@ export class Graph {
       this.adjacencyList.set(from, []);
     }
     this.adjacencyList.get(from)!.push(to);
+
+    if (!this.adjacencyList.has(to)) {
+      this.adjacencyList.set(to, []);
+    }
   }
 
   // add edges
