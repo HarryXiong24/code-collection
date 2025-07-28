@@ -62,17 +62,20 @@ export class Graph {
     visited.add(begin);
 
     while (queue.length) {
-      const current = queue.shift()!;
+      const levelSize = queue.length;
+      for (let i = 0; i < levelSize; i++) {
+        const current = queue.shift()!;
 
-      result.push(current);
+        result.push(current);
 
-      if (this.adjacencyList.has(current)) {
-        for (const neighbor of this.adjacencyList.get(current)!) {
-          if (visited.has(neighbor)) {
-            continue;
+        if (this.adjacencyList.has(current)) {
+          for (const neighbor of this.adjacencyList.get(current)!) {
+            if (visited.has(neighbor)) {
+              continue;
+            }
+            queue.push(neighbor);
+            visited.add(neighbor);
           }
-          queue.push(neighbor);
-          visited.add(neighbor);
         }
       }
     }
