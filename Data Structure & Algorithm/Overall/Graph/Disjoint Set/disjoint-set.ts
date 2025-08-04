@@ -1,4 +1,4 @@
-class DisjointSet {
+export class DisjointSet {
   private root: number[] = [];
 
   constructor(size: number) {

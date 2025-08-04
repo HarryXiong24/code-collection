@@ -42,20 +42,33 @@ class DisjointSet {
   }
 }
 
-export function findRedundantConnection(edges: number[][]): number[] {}
+export function findRedundantConnection(edges: number[][]): number[] {
+  const disjointSet = new DisjointSet(edges.length);
+
+  for (const edge of edges) {
+    const [u, v] = edge;
+    if (!disjointSet.isConnected(u, v)) {
+      disjointSet.union(u, v);
+    } else {
+      return edge;
+    }
+  }
+
+  return [];
+}
 
 // test
 const res = findRedundantConnection([
   [1, 2],
-  [2, 3],
   [1, 3],
+  [2, 3],
 ]);
 console.log(res);
 const res1 = findRedundantConnection([
-  [1, 4],
-  [4, 2],
+  [1, 2],
   [2, 3],
-  [3, 5],
-  [2, 5],
+  [3, 4],
+  [1, 4],
+  [1, 5],
 ]);
 console.log(res1);
