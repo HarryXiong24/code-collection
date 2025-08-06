@@ -44,14 +44,73 @@ class DisjointSet {
   }
 }
 
-export function findRedundantDirectedConnection(edges: number[][]): number[] {}
+function detectCycle(edges: number[][], removedEdgeIndex: number): boolean {
+  const uf = new DisjointSet(edges.length + 1);
+
+  for (let i = 0; i < edges.length; i++) {
+    if (i === removedEdgeIndex) {
+      continue;
+    }
+
+    if (uf.isConnected(edges[i][0], edges[i][1])) {
+      // there is a cycle, it must not be a tree.
+      return true;
+    } else {
+      uf.union(edges[i][0], edges[i][1]);
+    }
+  }
+  return false;
+}
+
+export function findRedundantDirectedConnection(edges: number[][]): number[] {
+  // there are only 2 cases.
+  // one is that there is a edge whose in-degree is 2. So we just need to determine which imn-degree edge should be removed.
+  // the other is that the graph has cycle, so that we should detect cycle and then remove it.
+
+  // handle case 1
+  const inDegree: Map<number, number> = new Map();
+  let inDegreeIsTwoVertex = -1;
+  const inDegreeIsTwo: number[] = [];
+
+  for (const edge of edges) {
+    const [_, v] = edge;
+
+    inDegree.set(v, (inDegree.get(v) || 0) + 1);
+
+    if (inDegree.get(v)! === 2) {
+      inDegreeIsTwoVertex = v;
+    }
+  }
+
+  if (inDegreeIsTwoVertex !== -1) {
+    for (let i = 0; i < edges.length; i++) {
+      if (edges[i][1] === inDegreeIsTwoVertex) {
+        inDegreeIsTwo.push(i);
+      }
+    }
+
+    const [first, last] = inDegreeIsTwo;
+    if (!detectCycle(edges, last)) {
+      return edges[last];
+    } else {
+      return edges[first];
+    }
+  }
+
+  // handle case 2
+  for (let i = edges.length - 1; i >= 0; i--) {
+    if (!detectCycle(edges, i)) {
+      return edges[i];
+    }
+  }
+
+  return [];
+}
 
 // test
 const res = findRedundantDirectedConnection([
   [1, 2],
+  [1, 3],
   [2, 3],
-  [3, 4],
-  [4, 1],
-  [1, 5],
 ]);
 console.log(res);
