@@ -1,6 +1,6 @@
 // 269. Alien Dictionary
 
-function alienOrder(words: string[]): string {
+export function alienOrder(words: string[]): string {
   const graph: Map<string, Set<string>> = new Map();
   const inDegree: Map<string, number> = new Map();
 
@@ -62,6 +62,4 @@ function alienOrder(words: string[]): string {
   return result.length === graph.size ? result.join('') : '';
 }
 
-// test
-const res = alienOrder(['wrt', 'wrf', 'er', 'ett', 'rftt']);
 console.log(res);
