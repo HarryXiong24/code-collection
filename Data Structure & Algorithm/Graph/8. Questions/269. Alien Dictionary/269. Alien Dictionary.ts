@@ -62,4 +62,6 @@ export function alienOrder(words: string[]): string {
   return result.length === graph.size ? result.join('') : '';
 }
 
+// test
+const res = alienOrder(['wrt', 'wrf', 'er', 'ett', 'rftt']);
 console.log(res);
