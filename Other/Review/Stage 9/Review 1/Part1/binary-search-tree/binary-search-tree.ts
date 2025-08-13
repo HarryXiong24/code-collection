@@ -11,7 +11,7 @@ class TreeNode {
   }
 }
 
-class BinarySearchTree {
+export class BinarySearchTree {
   root: TreeNode | null;
 
   constructor(node: TreeNode | null) {
