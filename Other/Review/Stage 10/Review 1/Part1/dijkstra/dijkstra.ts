@@ -2,18 +2,20 @@ type EdgeMap = Record<string, number>;
 type Graph = Record<string, EdgeMap>;
 
 export function dijkstra(graph: Graph, start: string, end: string): [string[], number] {
-  const dijkstraMap: Map<string, number> = new Map();
-  const shortestPathRecord: Map<string, string> = new Map();
+  const nodes = Object.keys(graph);
+
+  const distanceMap: Map<string, number> = new Map();
+  const predecessorMap: Map<string, string | null> = new Map();
 
   // init
-  for (const item of Object.keys(graph)) {
-    dijkstraMap.set(item, Infinity);
-    shortestPathRecord.set(item, '');
+  for (const node of nodes) {
+    distanceMap.set(node, Infinity);
+    predecessorMap.set(node, null);
   }
 
   const queue: [string, number][] = [[start, 0]];
   const visited: Set<string> = new Set();
-  dijkstraMap.set(start, 0);
+  distanceMap.set(start, 0);
 
   while (queue.length) {
     queue.sort((a, b) => a[1] - b[1]);
@@ -24,30 +26,33 @@ export function dijkstra(graph: Graph, start: string, end: string): [string[], n
     }
     visited.add(current_node);
 
-    const neighbors = Object.keys(graph[current_node]);
+    const neighbors = Object.keys(graph[current_node] ?? {});
     for (const neighbor of neighbors) {
       const weight = graph[current_node][neighbor];
-      if (current_cost + weight < dijkstraMap.get(neighbor)!) {
-        dijkstraMap.set(neighbor, current_cost + weight);
+      if (current_cost + weight < distanceMap.get(neighbor)!) {
+        distanceMap.set(neighbor, current_cost + weight);
         queue.push([neighbor, current_cost + weight]);
-        shortestPathRecord.set(neighbor, current_node);
+        predecessorMap.set(neighbor, current_node);
       }
     }
   }
 
+  // cannot arrive at the end
+  if (distanceMap.get(end)! === Infinity) {
+    return [[], Infinity];
+  }
   const shortestPath: string[] = [];
-
   const getShortestPath = (node: string) => {
     if (!node) {
       return;
     }
     shortestPath.push(node);
-    getShortestPath(shortestPathRecord.get(node)!);
+    getShortestPath(predecessorMap.get(node)!);
   };
 
   getShortestPath(end);
 
-  return [shortestPath.reverse(), dijkstraMap.get(end)!];
+  return [shortestPath.reverse(), distanceMap.get(end)!];
 }
 
 // test

@@ -1,15 +1,16 @@
-def dijkstra(
-    graph: dict[str, dict[str, int]], start: str, end: str
-) -> tuple[list[str], int]:
-    dijkstra_map = {node: float("inf") for node in graph}
-    shortest_path_record = {node: "" for node in graph}
+from math import inf
 
-    queue = [(start, 0)]
+def dijkstra(graph: dict[str, dict[str, float]], start: str, end: str) -> tuple[list[str], float]:
+    nodes = list(graph.keys())
+
+    distance_map = {node: inf for node in nodes}
+    predecessor_map = {node: None for node in nodes}
+
+    distance_map[start] = 0
+    queue: list[tuple[str, float]] = [(start, 0)]
     visited = set()
-    dijkstra_map[start] = 0
 
     while queue:
-        # sort by cost
         queue.sort(key=lambda x: x[1])
         current_node, current_cost = queue.pop(0)
 
@@ -17,24 +18,27 @@ def dijkstra(
             continue
         visited.add(current_node)
 
-        for neighbor, weight in graph[current_node].items():
-            if current_cost + weight < dijkstra_map[neighbor]:
-                dijkstra_map[neighbor] = current_cost + weight
+        for neighbor, weight in graph.get(current_node, {}).items():
+            if current_cost + weight < distance_map[neighbor]:
+                distance_map[neighbor] = current_cost + weight
                 queue.append((neighbor, current_cost + weight))
-                shortest_path_record[neighbor] = current_node
+                predecessor_map[neighbor] = current_node
+
+
+    if distance_map[end] == inf:
+        return [], inf
 
     shortest_path = []
-
     def get_shortest_path(node: str):
         if not node:
             return
         shortest_path.append(node)
-        get_shortest_path(shortest_path_record[node])
+        get_shortest_path(predecessor_map[node])
 
     get_shortest_path(end)
     shortest_path.reverse()
 
-    return shortest_path, dijkstra_map[end]
+    return shortest_path, distance_map[end]
 
 
 # test
@@ -45,6 +49,5 @@ graph = {
     "D": {"A": 2, "B": 3, "C": 1, "E": 2},
     "E": {"B": 1, "D": 2},
 }
-
 result, cost = dijkstra(graph, "A", "E")
-print(result, cost)
+print(result, cost) 

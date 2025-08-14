@@ -6,93 +6,73 @@ import (
 	"sort"
 )
 
-// EdgeMap represents the neighbors and their corresponding weights
-type EdgeMap map[string]int
+func dijkstra(graph map[string]map[string]float64, start, end string) ([]string, float64) {
 
-// Graph represents the whole graph where each node maps to its neighbors
-type Graph map[string]EdgeMap
-
-// queue's element
-type Item struct {
-	node string
-	cost int
-}
-
-func dijkstra(graph Graph, start string, end string) ([]string, int) {
-	dijkstraTable := make(EdgeMap)
-	recordPath := make(map[string]string)
-
-	for key := range graph {
-		dijkstraTable[key] = math.MaxInt
-		recordPath[key] = ""
+	distanceMap := make(map[string]float64)
+	predecessorMap := make(map[string]string)
+	for node := range graph {
+		distanceMap[node] = math.Inf(1)
+		predecessorMap[node] = ""
 	}
-
-	queue := []*Item{
-		{
-			node: start,
-			cost: 0,
-		},
-	}
+	distanceMap[start] = 0
 
 	visited := make(map[string]bool)
-	dijkstraTable[start] = 0
+	queue := [][2]interface{}{{start, float64(0)}} // [节点, 距离]
 
 	for len(queue) > 0 {
 		sort.Slice(queue, func(i, j int) bool {
-			return queue[i].cost < queue[j].cost
+			return queue[i][1].(float64) < queue[j][1].(float64)
 		})
 
-		current := queue[0]
+		currentNode := queue[0][0].(string)
+		currentCost := queue[0][1].(float64)
 		queue = queue[1:]
 
-		currentNode, currentCost := current.node, current.cost
-
-		if _, exists := visited[currentNode]; exists && visited[currentNode] == true {
+		if visited[currentNode] {
 			continue
 		}
 		visited[currentNode] = true
 
 		for neighbor, weight := range graph[currentNode] {
-			if currentCost+weight < dijkstraTable[neighbor] {
-				dijkstraTable[neighbor] = currentCost + weight
-				recordPath[neighbor] = currentNode
-				queue = append(queue, &Item{
-					node: neighbor,
-					cost: currentCost + weight,
-				})
+			if currentCost+weight < distanceMap[neighbor] {
+				distanceMap[neighbor] = currentCost + weight
+				predecessorMap[neighbor] = currentNode
+				queue = append(queue, [2]interface{}{neighbor, distanceMap[neighbor]})
 			}
 		}
 	}
 
-	shortestPath := []string{}
-	var getShortestPath func(node string)
+	if math.IsInf(distanceMap[end], 1) {
+		return []string{}, math.Inf(1)
+	}
+
+	var shortestPath []string
+	var getShortestPath func(string)
 	getShortestPath = func(node string) {
 		if node == "" {
 			return
 		}
 		shortestPath = append(shortestPath, node)
-		getShortestPath(recordPath[node])
+		getShortestPath(predecessorMap[node])
 	}
-
 	getShortestPath(end)
 
+	// 反转路径
 	for i, j := 0, len(shortestPath)-1; i < j; i, j = i+1, j-1 {
 		shortestPath[i], shortestPath[j] = shortestPath[j], shortestPath[i]
 	}
 
-	return shortestPath, dijkstraTable[end]
+	return shortestPath, distanceMap[end]
 }
 
-// test
 func main() {
-	graph := Graph{
+	graph := map[string]map[string]float64{
 		"A": {"B": 1, "C": 1, "D": 3},
 		"B": {"A": 1, "D": 2, "E": 1},
 		"C": {"A": 1, "D": 1},
-		"D": {"A": 3, "B": 2, "C": 1, "E": 2},
+		"D": {"A": 2, "B": 3, "C": 1, "E": 2},
 		"E": {"B": 1, "D": 2},
 	}
-
-	result, cost := dijkstra(graph, "A", "E")
-	fmt.Println("Shortest path:", result, "Cost:", cost)
+	path, cost := dijkstra(graph, "A", "E")
+	fmt.Println(path, cost) // 可能输出 [A B E] 2
 }
