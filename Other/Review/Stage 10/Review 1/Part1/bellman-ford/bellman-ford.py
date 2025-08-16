@@ -1,95 +1,98 @@
+from collections import deque, defaultdict
 from math import inf
-from collections import deque
+from typing import Dict, List, Tuple, Optional
 
-def bellman_ford_spfa(graph, start, end):
+EdgeMap = Dict[str, float]
+Graph = Dict[str, EdgeMap]
+
+
+def bellman_ford(graph: Graph, start: str, end: str) -> Tuple[List[str], float]:
     """
-    SPFA (Queue-optimized Bellman–Ford) with Set-based in-queue tracking.
-    graph: dict[str, dict[str, float]]
-    start: str
-    end: str
+    Queue-based Bellman-Ford (SPFA-style).
+    Returns (shortest_path_nodes, distance). If unreachable, returns ([], inf).
+    Raises ValueError if a negative cycle is reachable from start.
     """
     nodes = list(graph.keys())
 
-    # 初始化
-    distance_map = {node: inf for node in nodes}
-    predecessor_map = {node: None for node in nodes}
-    relax_count = {node: 0 for node in nodes}
-    in_queue = set()
+    dist: Dict[str, float] = {node: inf for node in nodes}
+    prev: Dict[str, Optional[str]] = {node: None for node in nodes}
+    # count[v] = how many times v has been relaxed (used for negative cycle detection)
+    count: Dict[str, int] = defaultdict(int)
 
-    distance_map[start] = 0
-    queue = deque([start])
-    in_queue.add(start)
-    relax_count[start] = 1
+    q: deque[str] = deque()
+    in_queue: Dict[str, bool] = {node: False for node in nodes}
 
-    while queue:
-        current_node = queue.popleft()
-        in_queue.discard(current_node)
+    # init
+    if start not in graph:
+        return ([], inf)
+    dist[start] = 0.0
+    q.append(start)
+    in_queue[start] = True
 
-        for neighbor, weight in graph.get(current_node, {}).items():
-            current_cost = distance_map[current_node]
-            if current_cost != inf and current_cost + weight < distance_map[neighbor]:
-                # 松弛
-                distance_map[neighbor] = current_cost + weight
-                predecessor_map[neighbor] = current_node
-                relax_count[neighbor] += 1
+    while q:
+        u = q.popleft()
+        in_queue[u] = False
 
-                # 负环检测
-                if relax_count[neighbor] >= len(nodes):
+        for v, w in (graph.get(u) or {}).items():
+            if dist[u] != inf and dist[u] + w < dist[v]:
+                dist[v] = dist[u] + w
+                prev[v] = u
+
+                count[v] += 1
+                if count[v] > len(nodes):
                     raise ValueError("Negative cycle detected (reachable from start)")
 
-                if neighbor not in in_queue:
-                    queue.append(neighbor)
-                    in_queue.add(neighbor)
+                if not in_queue[v]:
+                    q.append(v)
+                    in_queue[v] = True
 
-    # 如果目标不可达
-    if distance_map[end] == inf:
-        return [], inf
+    if dist[end] == inf:
+        return ([], inf)
 
-    # 恢复路径
-    shortest_path = []
-    def get_path(node):
-        if not node:
-            return
-        shortest_path.append(node)
-        get_path(predecessor_map[node])
-
-    get_path(end)
-    return list(reversed(shortest_path)), distance_map[end]
+    path: List[str] = []
+    cur: Optional[str] = end
+    while cur is not None:
+        path.append(cur)
+        cur = prev[cur]
+    path.reverse()
+    return (path, dist[end])
 
 
-# ===== 测试 =====
-graph1 = {
+# tests (与原 TS 示例一致)
+graph1: Graph = {
     "A": {"B": 1, "C": 1, "D": 3},
     "B": {"A": 1, "D": 2, "E": 1},
     "C": {"A": 1, "D": 1},
     "D": {"A": 2, "B": 3, "C": 1, "E": 2},
     "E": {"B": 1, "D": 2},
 }
-print("res1:", bellman_ford_spfa(graph1, "A", "E"))
 
-graph2 = {
+# Expect
+print("res1:", bellman_ford(graph1, "A", "E"))
+
+graph2: Graph = {
     "S": {"A": 4, "B": 5},
     "A": {"C": -2},
     "B": {"C": 3},
     "C": {"T": 2},
     "T": {},
 }
-print("res2:", bellman_ford_spfa(graph2, "S", "T"))
+print("res2:", bellman_ford(graph2, "S", "T"))
 
-graph3 = {
+graph3: Graph = {
     "X": {"Y": 1},
     "Y": {},
     "Z": {},  # isolated
 }
-print("res3:", bellman_ford_spfa(graph3, "X", "Z"))
+print("res3:", bellman_ford(graph3, "X", "Z"))
 
-graph4 = {
+graph4: Graph = {
     "S": {"A": 1},
     "A": {"B": 1},
     "B": {"C": 1},
-    "C": {"A": -4},  # negative cycle
+    "C": {"A": -4},
 }
 try:
-    print("res4:", bellman_ford_spfa(graph4, "S", "C"))
-except ValueError as e:
+    print("res4:", bellman_ford(graph4, "S", "C"))
+except Exception as e:
     print("res4 throws:", str(e))

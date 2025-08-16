@@ -1,52 +1,44 @@
 type EdgeMap = Record<string, number>;
 type Graph = Record<string, EdgeMap>;
 
-/**
- * SPFA (Queue-optimized Bellman–Ford) with Set-based in-queue tracking.
- */
 export function bellmanFord(graph: Graph, start: string, end: string): [string[], number] {
   const nodes = Object.keys(graph);
 
-  const distanceMap = new Map<string, number>();
-  const predecessorMap = new Map<string, string | null>();
-  const visited = new Set<string>();
-  const relaxCount = new Map<string, number>(); // 记录节点“被改进后入队”的次数
+  const distanceMap: Map<string, number> = new Map();
+  const predecessorMap: Map<string, string | null> = new Map();
+  const relaxedCount: Map<string, number> = new Map();
 
   // init
   for (const node of nodes) {
     distanceMap.set(node, Infinity);
     predecessorMap.set(node, null);
-    relaxCount.set(node, 0);
+    relaxedCount.set(node, 0);
   }
-  distanceMap.set(start, 0);
 
   const queue: string[] = [start];
+  const visited: Set<string> = new Set();
+  distanceMap.set(start, 0);
   visited.add(start);
-  relaxCount.set(start, 1);
+  relaxedCount.set(start, 1);
 
   while (queue.length) {
     const current_node = queue.shift()!;
-    visited.delete(current_node); // 出队则从集合移除
+    visited.delete(current_node);
 
     const neighbors = Object.keys(graph[current_node] ?? {});
     for (const neighbor of neighbors) {
       const weight = graph[current_node][neighbor];
       const current_cost = distanceMap.get(current_node)!;
 
-      // 松弛：发现更短路径则更新
       if (current_cost !== Infinity && current_cost + weight < distanceMap.get(neighbor)!) {
         distanceMap.set(neighbor, current_cost + weight);
         predecessorMap.set(neighbor, current_node);
 
-        const times = (relaxCount.get(neighbor) || 0) + 1;
-        relaxCount.set(neighbor, times);
-
-        // 负环检测：若某点的入队次数 >= V，则存在可达负环
-        if (times >= nodes.length) {
+        const times = relaxedCount.get(current_node) ?? 0 + 1;
+        if (times > nodes.length) {
           throw new Error('Negative cycle detected (reachable from start)');
         }
 
-        // 若 v 不在队列中，则入队并用于负环检测
         if (!visited.has(neighbor)) {
           queue.push(neighbor);
           visited.add(neighbor);
@@ -55,19 +47,18 @@ export function bellmanFord(graph: Graph, start: string, end: string): [string[]
     }
   }
 
-  // cannot arrive at the end
   if (distanceMap.get(end)! === Infinity) {
     return [[], Infinity];
   }
+
   const shortestPath: string[] = [];
-  const getShortestPath = (node: string) => {
+  const getShortestPath = (node: string | null) => {
     if (!node) {
       return;
     }
     shortestPath.push(node);
     getShortestPath(predecessorMap.get(node)!);
   };
-
   getShortestPath(end);
 
   return [shortestPath.reverse(), distanceMap.get(end)!];
