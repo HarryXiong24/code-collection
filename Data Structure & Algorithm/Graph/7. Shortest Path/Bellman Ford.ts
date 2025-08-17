@@ -35,6 +35,7 @@ export function bellmanFord(graph: Graph, start: string, end: string): [string[]
         predecessorMap.set(neighbor, current_node);
 
         const times = relaxedCount.get(current_node) ?? 0 + 1;
+        relaxedCount.set(current_node, times);
         if (times > nodes.length) {
           throw new Error('Negative cycle detected (reachable from start)');
         }

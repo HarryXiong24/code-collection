@@ -51,7 +51,7 @@ func BellmanFord(g Graph, start, end string) ([]string, float64, error) {
 				dist[v] = dist[u] + w
 				prev[v] = u
 
-				count[v]++
+				count[v] = count[v] + 1
 				if count[v] > len(nodes) {
 					return nil, 0, errors.New("negative cycle detected (reachable from start)")
 				}

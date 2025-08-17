@@ -38,7 +38,7 @@ def bellman_ford(graph: Graph, start: str, end: str) -> Tuple[List[str], float]:
                 dist[v] = dist[u] + w
                 prev[v] = u
 
-                count[v] += 1
+                count[v] = count[v] + 1
                 if count[v] > len(nodes):
                     raise ValueError("Negative cycle detected (reachable from start)")
 
