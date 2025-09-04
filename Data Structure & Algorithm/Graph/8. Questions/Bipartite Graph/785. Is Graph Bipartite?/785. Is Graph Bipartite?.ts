@@ -54,6 +54,48 @@ export function isBipartite(graph: number[][]): boolean {
   return true;
 }
 
+export function isBipartiteBFS(graph: number[][]): boolean {
+  const visited = new Map<number, boolean>();
+
+  const BFS = (node: number): boolean => {
+    const queue: number[] = [];
+
+    queue.push(node);
+    visited.set(node, true);
+
+    while (queue.length) {
+      const size = queue.length;
+      for (let i = 0; i < size; i++) {
+        const current = queue.shift()!;
+        const current_color = visited.get(current)!;
+
+        for (const neighbor of graph[current]) {
+          if (visited.has(neighbor)) {
+            if (visited.get(neighbor)! === current_color) {
+              return false;
+            }
+            continue;
+          }
+          queue.push(neighbor);
+          visited.set(neighbor, !current_color);
+        }
+      }
+    }
+
+    return true;
+  };
+
+  for (let i = 0; i < graph.length; i++) {
+    if (!visited.has(i)) {
+      if (!BFS(i)) {
+        return false;
+      }
+    }
+  }
+
+  return true;
+}
+
 // test
 const res = isBipartite([
   [1, 2, 3],
