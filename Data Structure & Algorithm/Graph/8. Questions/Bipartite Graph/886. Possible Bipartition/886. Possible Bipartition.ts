@@ -14,7 +14,7 @@
 // Output: false
 // Explanation: We need at least 3 groups to divide them. We cannot put them in two groups.
 
-function possibleBipartition(n: number, dislikes: number[][]): boolean {
+export function possibleBipartition(n: number, dislikes: number[][]): boolean {
   const adjacentList = new Map<number, number[]>();
 
   for (let i = 1; i <= n; i++) {
