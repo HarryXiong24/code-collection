@@ -26,12 +26,37 @@ enum GraphType {
 export function hierholzer(graph: Map<number, number[]>, graphType: GraphType): number[] {
   const postOrder: number[] = [];
 
+  // 找到起点
   const start = findStartNode(graph, graphType);
   if (start === -1) {
     return postOrder;
   }
 
-  return postOrder;
+  const dfs = (node: number) => {
+    const neighbors = graph.get(node) ?? [];
+
+    while (neighbors.length) {
+      const neighbor = neighbors.pop()!;
+
+      // 无向图需要同步删除反向边（一次性删一个匹配项）
+      if (graphType === GraphType.Undirected) {
+        const rev = graph.get(neighbor) ?? [];
+        const idx = rev.lastIndexOf(node);
+        if (idx !== -1) {
+          rev.splice(idx, 1);
+        }
+        graph.set(neighbor, rev);
+      }
+
+      dfs(neighbor);
+    }
+
+    postOrder.push(node);
+  };
+
+  dfs(start);
+
+  return postOrder.reverse();
 }
 
 function findStartNode(graph: Map<number, number[]>, graphType: GraphType): number {
@@ -126,3 +151,13 @@ function findStartNode(graph: Map<number, number[]>, graphType: GraphType): numb
     return -1;
   }
 }
+
+// test
+const graph = new Map([
+  [0, [1, 2, 3]],
+  [1, [0, 2]],
+  [2, [0, 1]],
+  [3, [0]],
+]);
+const res = hierholzer(graph, GraphType.Undirected);
+console.log(res);
