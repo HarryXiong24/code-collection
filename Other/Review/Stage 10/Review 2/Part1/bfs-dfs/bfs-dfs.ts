@@ -5,14 +5,15 @@ interface TestNode {
 
 export function BFS(root: TestNode): number {
   if (!root) {
-    return -1;
+    return 0;
   }
 
+  let depth = 0;
   const queue: TestNode[] = [root];
-  let height: number = 0;
 
   while (queue.length) {
     const size = queue.length;
+
     for (let i = 0; i < size; i++) {
       const current = queue.shift()!;
       console.log(current.value);
@@ -20,10 +21,31 @@ export function BFS(root: TestNode): number {
         queue.push(neighbor);
       }
     }
-    height++;
+
+    depth++;
   }
 
-  return height;
+  return depth;
+}
+
+export function DFS_Recursion(root: TestNode) {
+  if (!root) {
+    return;
+  }
+
+  const recursion = (node: TestNode) => {
+    if (!node) {
+      return;
+    }
+
+    console.log(node.value);
+
+    for (const neighbor of node.neighbors) {
+      recursion(neighbor);
+    }
+  };
+
+  recursion(root);
 }
 
 export function DFS_Iteration(root: TestNode) {
@@ -36,28 +58,11 @@ export function DFS_Iteration(root: TestNode) {
   while (stack.length) {
     const current = stack.pop()!;
     console.log(current.value);
+
     for (const neighbor of current.neighbors) {
       stack.push(neighbor);
     }
   }
-}
-
-export function DFS_Recursion(root: TestNode) {
-  if (!root) {
-    return;
-  }
-
-  const recursion = (node: TestNode) => {
-    if (!node) {
-      return;
-    }
-    console.log(node.value);
-    for (const neighbor of node.neighbors) {
-      recursion(neighbor);
-    }
-  };
-
-  recursion(root);
 }
 
 // test
