@@ -8,8 +8,8 @@ export function BFS(root: TestNode): number {
     return 0;
   }
 
-  let depth = 0;
   const queue: TestNode[] = [root];
+  let height = 0;
 
   while (queue.length) {
     const size = queue.length;
@@ -21,11 +21,10 @@ export function BFS(root: TestNode): number {
         queue.push(neighbor);
       }
     }
-
-    depth++;
+    height++;
   }
 
-  return depth;
+  return height;
 }
 
 export function DFS_Recursion(root: TestNode) {
