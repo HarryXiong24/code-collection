@@ -13,7 +13,7 @@ type TokenBucket struct {
 	lock          sync.Mutex
 }
 
-func NewRateLimit(capacity int, ratePerSecond int) *TokenBucket {
+func NewTokenBucket(capacity int, ratePerSecond int) *TokenBucket {
 	return &TokenBucket{
 		capacity:      capacity,
 		tokens:        float64(capacity),
