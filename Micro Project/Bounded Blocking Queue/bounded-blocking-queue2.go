@@ -82,7 +82,7 @@ func (q *BoundedBlockingQueueLock) Close() {
 }
 
 // test
-func main() {
+func Test2() {
 	queue := NewBoundedBlockingQueueLock(2)
 
 	// 模拟生产者
@@ -96,3 +96,7 @@ func main() {
 	fmt.Println(queue.Dequeue())
 	// fmt.Println(queue.Dequeue())
 }
+
+// func main() {
+// 	Test2()
+// }

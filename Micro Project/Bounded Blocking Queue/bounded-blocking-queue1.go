@@ -13,9 +13,10 @@ func NewBoundedBlockingQueue(capacity int) *BoundedBlockingQueue {
 }
 
 func (q *BoundedBlockingQueue) Enqueue(value int) {
-	// 注意：如果 q.channel 已被关闭，这里会触发 Panic
-	// 按照 Go 的设计，生产者应该确保在关闭前停止发送
-	q.channel <- value
+	select {
+	case q.channel <- value:
+	default:
+	}
 }
 
 func (q *BoundedBlockingQueue) Dequeue() (int, bool) {
@@ -35,7 +36,7 @@ func Test1() {
 	go func() {
 		queue.Enqueue(100)
 		queue.Enqueue(200)
-		queue.Close() // 生产完了，主动关闭
+		queue.Close()
 	}()
 
 	// 模拟消费者
@@ -47,4 +48,8 @@ func Test1() {
 		}
 		fmt.Printf("消费数据: %d\n", val)
 	}
+}
+
+func main() {
+	Test1()
 }
