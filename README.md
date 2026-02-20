@@ -1,33 +1,75 @@
 # Code Collection
 
-Record my process of code practice, including data structure and algorithm, frontend-related and backend-related content.
+Record my process of code practice, including data structure & algorithm, frontend, backend, database, and mobile development.
 
-Some directories have the following meanings:
+---
 
-1. Data Structure & Algorithm: store some data structure and algorithm knowledge points
-2. Problem Collection: Store some data structure and algorithm problems
-3. Typescript Problem Collection: store some Typescript type-practice questions
-4. Frontend: Store some codes related to frontend knowledge points
-5. Backend: store some codes related to backend knowledge points
-6. test: store some temporary files for testing
+## English
 
-Note:
+### Folder Structure
 
-1. The titles with serial numbers in the data structure and algorithm folder are the titles that can be found in Leetcode, and the languages used in the algorithm title include Typescript, Python 3, Golang
-2. Because some modules, questions, and solutions can be summarized into different sections, some content will be repeated in different places
+```
+code-collection/
+├── Data Structure & Algorithm/
+├── FrontEnd/
+├── Backend/
+├── Database/
+├── Coding/
+├── iOS/
+├── Other/
+└── Tests/
+```
 
-记录我的刷题历程，包含数据结构与算法，前端与服务端的相关内容。
+### Directory Description
 
-其中部分目录结构含义如下：
+| Folder | Description |
+|--------|-------------|
+| **Data Structure & Algorithm** | Knowledge and practice of data structures and algorithms |
+| **FrontEnd** | Frontend knowledge and implementations |
+| **Backend** | Backend code and notes (Golang, NodeJS, Python) |
+| **Database** | Database and SQL practice |
+| **Coding** | Programming practice and micro projects |
+| **iOS** | iOS development (Swift and Objective-C) |
+| **Other** | Miscellaneous content and review notes |
+| **Tests** | Temporary or test-related files |
 
-1. Data Structure & Algorithm: 存放一些数据结构和算法的内容
-2. Problem Collection: 存放一些数据结构和算法的题目
-3. Typescript Problem Collection: 存放一些 Typescript 类型练习题目
-4. Frontend：存放一些和前端相关知识点的代码
-5. Backend：存放一些和后端相关知识点的代码
-6. test：存放一些用于测试的临时文件
+### Notes
 
-注：
+1. Some modules, problems, or solutions may appear in multiple sections.
+2. Algorithm problems use **TypeScript**, **Python 3**, and **Golang**. Numbered problems can be found on LeetCode.
 
-1. 数据结构和算法文件夹中有序号的题目为 Leetcode 中能找到的题目，其中算法题目使用的语言包含 Typescript, Python 3, Golang
-2. 因为有些模块、题目、解法可以归纳到不同的板块，所以有些内容会在不同的地方出现重复
+---
+
+## 中文
+
+### 目录结构
+
+```
+code-collection/
+├── Data Structure & Algorithm/
+├── FrontEnd/
+├── Backend/
+├── Database/
+├── Coding/
+├── iOS/
+├── Other/
+└── Tests/
+```
+
+### 目录说明
+
+| 目录 | 说明 |
+|------|------|
+| **Data Structure & Algorithm** | 数据结构与算法相关知识与实践 |
+| **FrontEnd** | 前端相关知识点与实现 |
+| **Backend** | 后端相关代码与笔记（Golang、NodeJS、Python） |
+| **Database** | 数据库与 SQL 练习 |
+| **Coding** | 编程练习与微型项目 |
+| **iOS** | iOS 开发（Swift、Objective-C） |
+| **Other** | 其他内容与复习笔记 |
+| **Tests** | 临时测试或测试相关文件 |
+
+### 说明
+
+1. 同一模块、题目或解法可能归纳在不同板块，因此部分内容会在多处出现。
+2. 数据结构与算法题目使用的语言包括 **TypeScript**、**Python 3**、**Golang**，有序号的题目可在 LeetCode 中找到。
