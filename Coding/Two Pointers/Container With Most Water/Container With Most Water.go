@@ -15,6 +15,8 @@ import "fmt"
 // heights = [1, 2, 1]
 // Output: 2  # walls at indices 0 and 2: width=2, height=min(1,1)=1, area=2
 
+// Time Complexity: O(n)
+// Space Complexity: O(1)
 func max_area(heights []int) int {
 	left := 0
 	right := len(heights) - 1
