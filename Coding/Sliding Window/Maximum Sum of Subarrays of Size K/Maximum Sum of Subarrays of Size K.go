@@ -26,13 +26,13 @@ func maxSum(nums []int, k int) int {
 		maxSum += nums[i]
 	}
 
-	curSum := maxSum
+	windowSum := maxSum
 	for i := k; i < len(nums); i++ {
 		// Adding the new element entering the window (nums[end])
 		// Subtracting the old element leaving the window (nums[start])
-		curSum = curSum - nums[i-k] + nums[i]
-		if curSum > maxSum {
-			maxSum = curSum
+		windowSum = windowSum - nums[i-k] + nums[i]
+		if windowSum > maxSum {
+			maxSum = windowSum
 		}
 	}
 
