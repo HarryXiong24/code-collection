@@ -1,11 +1,6 @@
 {
   "eslint.options": {
-    "extensions": [
-      ".js",
-      ".vue",
-      ".ts",
-      ".tsx"
-    ]
+    "extensions": [".js", ".vue", ".ts", ".tsx"]
   },
   "files.associations": {
     "*.cjson": "jsonc",
@@ -73,12 +68,7 @@
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact"
-  ],
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "workbench.iconTheme": "material-icon-theme",
   "prettier.requireConfig": true,
   "editor.wordWrapColumn": 240,
@@ -153,18 +143,8 @@
   "C_Cpp_Runner.compilerArgs": [],
   "C_Cpp_Runner.linkerArgs": [],
   "C_Cpp_Runner.includePaths": [],
-  "C_Cpp_Runner.includeSearch": [
-    "*",
-    "**/*"
-  ],
-  "C_Cpp_Runner.excludeSearch": [
-    "**/build",
-    "**/build/**",
-    "**/.*",
-    "**/.*/**",
-    "**/.vscode",
-    "**/.vscode/**"
-  ],
+  "C_Cpp_Runner.includeSearch": ["*", "**/*"],
+  "C_Cpp_Runner.excludeSearch": ["**/build", "**/build/**", "**/.*", "**/.*/**", "**/.vscode", "**/.vscode/**"],
   "C_Cpp_Runner.useAddressSanitizer": false,
   "C_Cpp_Runner.useUndefinedSanitizer": false,
   "C_Cpp_Runner.useLeakSanitizer": false,
