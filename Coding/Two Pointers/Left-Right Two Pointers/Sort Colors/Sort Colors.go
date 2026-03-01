@@ -35,7 +35,6 @@ func sortColors(nums []int) {
 				nums[right] = temp
 				left++
 				right--
-				fmt.Println(nums)
 			} else {
 				// otherwise, right--
 				right--
