@@ -16,7 +16,13 @@ import (
 // [[1,5],[6,9]]
 // Explanation: The new interval [2,5] overlaps with [1,3], so they are merged into [1,5].
 
+// Time Complexity: O(n log n), because we are sorting the intervals
+// Space Complexity: O(n), because we are creating a new array to store the merged intervals
 func insertIntervals(intervals [][]int, newInterval []int) [][]int {
+
+	if len(intervals) == 0 {
+		return [][]int{newInterval}
+	}
 
 	merged := make([][]int, 0)
 
