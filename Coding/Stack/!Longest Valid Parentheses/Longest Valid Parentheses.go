@@ -37,9 +37,10 @@ func longest_valid_parentheses(s string) int {
 	count := 0
 
 	for index, char := range s {
-		if char == '(' {
+		switch char {
+		case '(':
 			stack = append(stack, index)
-		} else if char == ')' {
+		case ')':
 			stack = stack[:len(stack)-1]
 			if len(stack) > 0 {
 				// it means that we have a possible match, so we calculate the length
