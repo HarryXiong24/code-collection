@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Lock files
+pnpm-lock.yaml
+package-lock.json
+yarn.lock
+
+# Build output
+dist/
+build/
+**/dist/
+**/build/
+
+# macOS artifacts
+.DS_Store
+**/.DS_Store
+
+# Vim swap files
+*.swp
+*.swo
+
+# Xcode project files
+*.xcodeproj/
+*.xcworkspace/
+*.xcuserdata/
+
+# Git internals
+.git/
+
+# Logs
+*.log
