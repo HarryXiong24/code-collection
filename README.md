@@ -1,75 +1,78 @@
 # Code Collection
 
-Record my process of code practice, including data structure & algorithm, frontend, backend, database, and mobile development.
+> A personal knowledge base and coding practice repository covering data structures & algorithms, frontend, backend, databases, system design, AI, and mobile development.
 
----
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-## English
-
-### Folder Structure
+## Repository Structure
 
 ```
 code-collection/
-├── Data Structure & Algorithm/
-├── FrontEnd/
-├── Backend/
-├── Database/
-├── Coding/
-├── iOS/
-├── Other/
-└── Tests/
+├── Data Structure & Algorithm/   # DSA problems and pattern-based practice
+├── FrontEnd/                     # Frontend concepts and implementations
+├── Backend/                      # Backend services and APIs
+├── Database/                     # Database and SQL practice
+├── System Design/                # System design patterns and micro projects
+├── AI Learning/                  # AI/ML learning and experiments
+├── iOS/                          # iOS development (Swift & Objective-C)
+├── Other/                        # Miscellaneous notes and review material
+└── Tests/                        # Scratch files and quick experiments
 ```
 
-### Directory Description
+## Directory Overview
 
-| Folder | Description |
-|--------|-------------|
-| **Data Structure & Algorithm** | Knowledge and practice of data structures and algorithms |
-| **FrontEnd** | Frontend knowledge and implementations |
-| **Backend** | Backend code and notes (Golang, NodeJS, Python) |
-| **Database** | Database and SQL practice |
-| **Coding** | Programming practice and micro projects |
-| **iOS** | iOS development (Swift and Objective-C) |
-| **Other** | Miscellaneous content and review notes |
-| **Tests** | Temporary or test-related files |
+| Directory | Description | Key Topics |
+|-----------|-------------|------------|
+| **Data Structure & Algorithm** | Algorithm problems and coding patterns | Sliding Window, Two Pointers, Intervals, Stack, Graph, Greedy |
+| **FrontEnd** | Frontend engineering deep-dives | Promise, Debounce, Throttle, Deep Clone, Event Emitter, `call`/`apply`/`bind` |
+| **Backend** | Backend development across multiple languages | Golang, Node.js, Python |
+| **Database** | Relational database practice | SQL |
+| **System Design** | Design patterns and hands-on micro projects | Rate Limiter, Circuit Breaker, LRU Cache, Bounded Blocking Queue, SSE |
+| **AI Learning** | AI and machine learning exploration | NanoGPT |
+| **iOS** | Native iOS development | Swift, Objective-C |
+| **Other** | Supplementary material | Review notes, miscellaneous references |
+| **Tests** | Temporary test files | Go, Python, TypeScript, JavaScript, HTML, Objective-C |
 
-### Notes
+## Tech Stack
 
-1. Some modules, problems, or solutions may appear in multiple sections.
-2. Algorithm problems use **TypeScript**, **Python 3**, and **Golang**. Numbered problems can be found on LeetCode.
+| Area | Languages & Tools |
+|------|-------------------|
+| Algorithms | TypeScript, Python 3, Golang |
+| Frontend | TypeScript, JavaScript, HTML, CSS |
+| Backend | Golang, Node.js, Python |
+| Mobile | Swift, Objective-C |
+| AI/ML | Python |
+
+## Notes
+
+- Some topics span multiple categories, so content may appear in more than one directory.
+- Numbered algorithm problems correspond to [LeetCode](https://leetcode.com/) problem IDs.
 
 ---
 
-## 中文
+## 项目介绍
 
-### 目录结构
+> 个人代码练习与知识整理仓库，涵盖数据结构与算法、前端、后端、数据库、系统设计、AI 学习及移动端开发。
 
-```
-code-collection/
-├── Data Structure & Algorithm/
-├── FrontEnd/
-├── Backend/
-├── Database/
-├── Coding/
-├── iOS/
-├── Other/
-└── Tests/
-```
+## 目录概览
 
-### 目录说明
+| 目录 | 说明 | 核心内容 |
+|------|------|----------|
+| **Data Structure & Algorithm** | 算法题目与编程模式练习 | 滑动窗口、双指针、区间、栈、图、贪心 |
+| **FrontEnd** | 前端工程深入探索 | Promise、防抖、节流、深拷贝、事件发射器、`call`/`apply`/`bind` |
+| **Backend** | 多语言后端开发 | Golang、Node.js、Python |
+| **Database** | 关系型数据库练习 | SQL |
+| **System Design** | 系统设计模式与实战微项目 | 限流器、熔断器、LRU 缓存、有界阻塞队列、SSE |
+| **AI Learning** | AI 与机器学习探索 | NanoGPT |
+| **iOS** | 原生 iOS 开发 | Swift、Objective-C |
+| **Other** | 补充资料 | 复习笔记、杂项参考 |
+| **Tests** | 临时测试文件 | Go、Python、TypeScript、JavaScript、HTML、Objective-C |
 
-| 目录 | 说明 |
-|------|------|
-| **Data Structure & Algorithm** | 数据结构与算法相关知识与实践 |
-| **FrontEnd** | 前端相关知识点与实现 |
-| **Backend** | 后端相关代码与笔记（Golang、NodeJS、Python） |
-| **Database** | 数据库与 SQL 练习 |
-| **Coding** | 编程练习与微型项目 |
-| **iOS** | iOS 开发（Swift、Objective-C） |
-| **Other** | 其他内容与复习笔记 |
-| **Tests** | 临时测试或测试相关文件 |
+## 说明
 
-### 说明
+- 同一主题可能跨多个分类，因此部分内容会在不同目录中出现。
+- 带有序号的算法题目对应 [LeetCode](https://leetcode.com/) 题号。
 
-1. 同一模块、题目或解法可能归纳在不同板块，因此部分内容会在多处出现。
-2. 数据结构与算法题目使用的语言包括 **TypeScript**、**Python 3**、**Golang**，有序号的题目可在 LeetCode 中找到。
+## License
+
+[MIT](LICENSE) © Harry Xiong
