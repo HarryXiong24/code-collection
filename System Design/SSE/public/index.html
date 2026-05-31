@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>SSE Demo (TypeScript)</title>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      body {
+        font-family: 'Segoe UI', system-ui, sans-serif;
+        background: #0f172a;
+        color: #e2e8f0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        padding: 2rem;
+      }
+      h1 { color: #38bdf8; margin-bottom: .25rem; }
+      .subtitle { color: #94a3b8; margin-bottom: 1.25rem; font-size: .9rem; }
+
+      .toolbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: .75rem 1.5rem;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: .75rem 1rem;
+        margin-bottom: 1rem;
+        width: 100%;
+        max-width: 720px;
+      }
+      .toolbar label { font-size: .85rem; color: #cbd5e1; user-select: none; }
+      .toolbar input[type=checkbox] { accent-color: #38bdf8; }
+
+      .status {
+        display: inline-flex; align-items: center; gap: .5rem;
+        padding: .35rem .9rem; border-radius: 999px;
+        font-size: .8rem; font-weight: 600;
+      }
+      .status .dot { width: 8px; height: 8px; border-radius: 50%; background: currentColor; }
+      .status.connecting    { background: #1e3a8a; color: #93c5fd; }
+      .status.connected     { background: #064e3b; color: #34d399; }
+      .status.reconnecting  { background: #78350f; color: #fcd34d; }
+
+      .stats { display: flex; gap: 1rem; font-size: .78rem; color: #94a3b8; flex-wrap: wrap; }
+      .stats b { color: #e2e8f0; font-weight: 600; }
+
+      button {
+        background: #334155; color: #e2e8f0; border: 1px solid #475569;
+        padding: .3rem .75rem; border-radius: 6px; font-size: .8rem; cursor: pointer;
+      }
+      button:hover { background: #475569; }
+
+      #log {
+        width: 100%; max-width: 720px;
+        background: #1e293b;
+        border: 1px solid #334155;
+        border-radius: 12px;
+        padding: 1rem;
+        max-height: 70vh;
+        overflow-y: auto;
+        font-family: 'Fira Code', 'Cascadia Code', monospace;
+        font-size: .82rem;
+        line-height: 1.6;
+      }
+      .entry { padding: .3rem 0; border-bottom: 1px solid #1e293b33; word-break: break-all; }
+      .entry .time  { color: #64748b; }
+      .entry .id    { color: #facc15; }
+      .entry .event { color: #a78bfa; font-weight: 600; }
+      .entry .data  { color: #38bdf8; }
+      .entry.heartbeat .event { color: #f472b6; }
+      .entry.close .event     { color: #f87171; }
+    </style>
+  </head>
+  <body>
+    <h1>⚡ SSE Demo</h1>
+    <p class="subtitle">Server-Sent Events — TypeScript backend &amp; TypeScript frontend</p>
+
+    <div class="toolbar">
+      <div id="status" class="status connecting"><span class="dot"></span><span id="statusText">Connecting…</span></div>
+      <form id="topicForm" style="display: flex; gap: 1rem;">
+        <label><input type="checkbox" value="message" checked /> message</label>
+        <label><input type="checkbox" value="heartbeat" checked /> heartbeat</label>
+      </form>
+      <button id="clearBtn" type="button">Clear log</button>
+    </div>
+
+    <div class="toolbar stats">
+      <span>client: <b id="clientId">—</b></span>
+      <span>last-event-id: <b id="lastId">—</b></span>
+      <span>reconnects: <b id="reconnects">0</b></span>
+    </div>
+
+    <div id="log"></div>
+
+    <script type="module" src="/static/client.js"></script>
+  </body>
+</html>
