@@ -1,0 +1,16 @@
+{
+  "jsonrpc": "2.0",
+  "id": 6,
+  "result": {
+    "content": [
+      {
+        "type": "text",
+        "text": "\nTonight:\nTemperature: 53°F\nWind: 1 to 9 mph WNW\nForecast: Clear, with a low around 53. West northwest wind 1 to 9 mph, with gusts as high as 20 mph.\n\n---\n\nMonday:\nTemperature: 86°F\nWind: 0 to 9 mph NNW\nForecast: Sunny. High near 86, with temperatures falling to around 83 in the afternoon. North northwest wind 0 to 9 mph.\n\n---\n\nMonday Night:\nTemperature: 56°F\nWind: 1 to 8 mph NW\nForecast: Partly cloudy, with a low around 56. Northwest wind 1 to 8 mph.\n\n---\n\nTuesday:\nTemperature: 84°F\nWind: 1 to 9 mph WNW\nForecast: Sunny, with a high near 84. West northwest wind 1 to 9 mph.\n\n---\n\nTuesday Night:\nTemperature: 55°F\nWind: 1 to 9 mph WNW\nForecast: Partly cloudy, with a low around 55. West northwest wind 1 to 9 mph.\n"
+      }
+    ],
+    "structuredContent": {
+      "result": "\nTonight:\nTemperature: 53°F\nWind: 1 to 9 mph WNW\nForecast: Clear, with a low around 53. West northwest wind 1 to 9 mph, with gusts as high as 20 mph.\n\n---\n\nMonday:\nTemperature: 86°F\nWind: 0 to 9 mph NNW\nForecast: Sunny. High near 86, with temperatures falling to around 83 in the afternoon. North northwest wind 0 to 9 mph.\n\n---\n\nMonday Night:\nTemperature: 56°F\nWind: 1 to 8 mph NW\nForecast: Partly cloudy, with a low around 56. Northwest wind 1 to 8 mph.\n\n---\n\nTuesday:\nTemperature: 84°F\nWind: 1 to 9 mph WNW\nForecast: Sunny, with a high near 84. West northwest wind 1 to 9 mph.\n\n---\n\nTuesday Night:\nTemperature: 55°F\nWind: 1 to 9 mph WNW\nForecast: Partly cloudy, with a low around 55. West northwest wind 1 to 9 mph.\n"
+    },
+    "isError": false
+  }
+}

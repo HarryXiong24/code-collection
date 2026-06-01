@@ -1,7 +1,19 @@
 {
   "permissions": {
     "allow": [
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(uvx --version)",
+      "Bash(uvx mcp-server-fetch *)",
+      "Bash(.venv/bin/python --version)",
+      "Bash(.venv/bin/python -c \"import mcp, httpx; from mcp.server.fastmcp import FastMCP; print\\('OK imports work in venv'\\)\")",
+      "Bash(uv sync *)",
+      "Bash(.venv/bin/python -c \"from mcp.server.fastmcp import FastMCP; import httpx; print\\('OK: imports work now'\\)\")",
+      "Bash(\"/Users/harryxiong24/Code/code-collection/AI Learning/MCP/weather/.venv/bin/python\" -c \"import sys; print\\('exe:', sys.executable\\); from mcp.server.fastmcp import FastMCP; import httpx; print\\('imports OK'\\)\")",
+      "Bash(/Users/harryxiong24/.local/bin/uv run *)",
+      "Bash(python3 -c ' *)",
+      "Bash(python3 parse_log.py)",
+      "Bash(python3 -m json.tool parse.json)",
+      "Bash(grep -nE '^#{1,4} |<summary>' transcript.md)"
     ]
   }
 }
