@@ -67,7 +67,7 @@ In each user message, the environment_details will specify the current mode. The
 
 ## What is PLAN MODE?
 
-- While you are usually in ACT MODE, the user may switch to PLAN MODE in order to have a back and forth with you to plan how to best accomplish the task. 
+- While you are usually in ACT MODE, the user may switch to PLAN MODE in order to have a back and forth with you to plan how to best accomplish the task.
 - When starting in PLAN MODE, depending on the user's request, you may need to do some information gathering e.g. using read_file or search_files to get more context about the task. You may also ask the user clarifying questions with ask_followup_question to get a better understanding of the task.
 - Once you've gained more context about the user's request, you should architect a detailed plan for how you will accomplish the task. Present the plan to the user using the plan_mode_respond tool.
 - Then you might ask the user if they are pleased with this plan, or if they would like to make any changes. Think of this as a brainstorming session where you can discuss the task and plan the best way to accomplish it.
@@ -150,10 +150,7 @@ Request to execute a CLI command on the system. Use this when you need to perfor
       "description": "To indicate whether this command requires explicit user approval or interaction before it should be executed. For system/file altering operations like installing/uninstalling packages, removing/overwriting files, system configuration changes, network operations, or any commands that are considered potentially dangerous must be set to true. False for safe operations like running development servers, building projects, and other non-destructive operations."
     }
   },
-  "required": [
-    "command",
-    "requires_approval"
-  ],
+  "required": ["command", "requires_approval"],
   "additionalProperties": false
 }
 ```
@@ -191,9 +188,7 @@ Request to read the contents of a file at the specified path. Use this when you 
       "description": "A checklist showing task progress after this tool use is completed. The task_progress parameter must be included as a separate parameter inside of the parent tool call, it must be separate from other parameters such as content, arguments, etc. (See 'UPDATING TASK PROGRESS' section for more details)"
     }
   },
-  "required": [
-    "path"
-  ],
+  "required": ["path"],
   "additionalProperties": false
 }
 ```
@@ -216,7 +211,7 @@ EOF
 
 Where [YOUR_PATCH] is the actual content of your patch, specified in the following V4A diff format.
 
-*** [ACTION] File: [path/to/file] -> ACTION can be one of Add, Update, or Delete. 
+*** [ACTION] File: [path/to/file] -> ACTION can be one of Add, Update, or Delete.
 
 In a Add File section, every line of the new file (including blank/empty lines) MUST start with a `+` prefix. Do not include any unprefixed lines inside an Add section
 In a Update/Delete section, repeat the following for each snippet of code that needs to be changed:
@@ -278,9 +273,7 @@ EOF
       "description": "A checklist showing task progress after this tool use is completed. The task_progress parameter must be included as a separate parameter inside of the parent tool call, it must be separate from other parameters such as content, arguments, etc. (See 'UPDATING TASK PROGRESS' section for more details)"
     }
   },
-  "required": [
-    "input"
-  ],
+  "required": ["input"],
   "additionalProperties": false
 }
 ```
@@ -318,10 +311,7 @@ Request to perform a regex search across files in a specified directory, providi
       "description": "A checklist showing task progress after this tool use is completed. The task_progress parameter must be included as a separate parameter inside of the parent tool call, it must be separate from other parameters such as content, arguments, etc. (See 'UPDATING TASK PROGRESS' section for more details)"
     }
   },
-  "required": [
-    "path",
-    "regex"
-  ],
+  "required": ["path", "regex"],
   "additionalProperties": false
 }
 ```
@@ -355,9 +345,7 @@ Request to list files and directories within the specified directory. If recursi
       "description": "A checklist showing task progress after this tool use is completed. The task_progress parameter must be included as a separate parameter inside of the parent tool call, it must be separate from other parameters such as content, arguments, etc. (See 'UPDATING TASK PROGRESS' section for more details)"
     }
   },
-  "required": [
-    "path"
-  ],
+  "required": ["path"],
   "additionalProperties": false
 }
 ```
@@ -387,9 +375,7 @@ Request to list definition names (classes, functions, methods, etc.) used in sou
       "description": "A checklist showing task progress after this tool use is completed. The task_progress parameter must be included as a separate parameter inside of the parent tool call, it must be separate from other parameters such as content, arguments, etc. (See 'UPDATING TASK PROGRESS' section for more details)"
     }
   },
-  "required": [
-    "path"
-  ],
+  "required": ["path"],
   "additionalProperties": false
 }
 ```
@@ -423,10 +409,7 @@ Request to access a resource provided by a connected MCP server. Resources repre
       "description": "A checklist showing task progress after this tool use is completed. The task_progress parameter must be included as a separate parameter inside of the parent tool call, it must be separate from other parameters such as content, arguments, etc. (See 'UPDATING TASK PROGRESS' section for more details)"
     }
   },
-  "required": [
-    "server_name",
-    "uri"
-  ],
+  "required": ["server_name", "uri"],
   "additionalProperties": false
 }
 ```
@@ -460,10 +443,7 @@ Ask user a question for clarifying or gathering information needed to complete t
       "description": "A checklist showing task progress after this tool use is completed. The task_progress parameter must be included as a separate parameter inside of the parent tool call, it must be separate from other parameters such as content, arguments, etc. (See 'UPDATING TASK PROGRESS' section for more details)"
     }
   },
-  "required": [
-    "question",
-    "options"
-  ],
+  "required": ["question", "options"],
   "additionalProperties": false
 }
 ```
@@ -497,9 +477,7 @@ Once you've completed the user's task, use this tool to present the final result
       "description": "A checklist showing task progress with the latest status of each subtasks included previously, if any. If you are calling attempt completion, and all items in this list have been completed, they must be marked as completed in this response."
     }
   },
-  "required": [
-    "result"
-  ],
+  "required": ["result"],
   "additionalProperties": false
 }
 ```
@@ -530,9 +508,7 @@ However, if while writing your response you realize you actually need to do more
       "description": "A checklist showing task progress with the latest status of each subtasks included previously if any."
     }
   },
-  "required": [
-    "response"
-  ],
+  "required": ["response"],
   "additionalProperties": false
 }
 ```
@@ -587,10 +563,7 @@ Opens a multi-file diff view and generates AI-powered inline comments explaining
       "description": "The git reference for the 'after' state. Can be a commit hash, branch name, tag, or relative reference. If not provided, compares to the current working directory (including uncommitted changes)."
     }
   },
-  "required": [
-    "title",
-    "from_ref"
-  ],
+  "required": ["title", "from_ref"],
   "additionalProperties": false
 }
 ```
@@ -642,9 +615,7 @@ Although originally you did not have internet access, and were advised to refuse
       "title": "Raw"
     }
   },
-  "required": [
-    "url"
-  ],
+  "required": ["url"],
   "additionalProperties": false
 }
 ```
@@ -674,9 +645,7 @@ weather: Get weather alerts for a US state.
       "title": "State"
     }
   },
-  "required": [
-    "state"
-  ],
+  "required": ["state"],
   "additionalProperties": false
 }
 ```
@@ -712,10 +681,7 @@ weather: Get weather forecast for a location.
       "title": "Longitude"
     }
   },
-  "required": [
-    "latitude",
-    "longitude"
-  ],
+  "required": ["latitude", "longitude"],
   "additionalProperties": false
 }
 ```
@@ -732,7 +698,7 @@ _(省略已在上方展示的 system 提示词)_
 
 #### [1] `user`
 
-```text
+````text
 <task>
 San Jose 是什么天气？
 </task>
@@ -998,7 +964,7 @@ These are some of the tools on the user's machine, and may be useful if needed t
 # Current Mode
 ACT MODE
 </environment_details>
-```
+````
 
 #### 📤 模型响应（SSE 整合）
 
@@ -1018,7 +984,6 @@ User asks: "San Jose 是什么天气？" Chinese: "What is the weather in San Jo
 }
 ```
 
-
 <br>
 
 ### ━━━ 第 2 轮 ━━━
@@ -1029,7 +994,7 @@ _(省略已在上方展示的 system 提示词)_
 
 #### [1] `user`
 
-```text
+````text
 <task>
 San Jose 是什么天气？
 </task>
@@ -1295,7 +1260,7 @@ These are some of the tools on the user's machine, and may be useful if needed t
 # Current Mode
 ACT MODE
 </environment_details>
-```
+````
 
 #### [2] `assistant`
 
@@ -1319,7 +1284,7 @@ result missing
 
 #### [4] `user`
 
-```text
+````text
 [use_mcp_tool for 'fetch'] Result:
 Content type text/plain; charset=utf-8 cannot be simplified to markdown, but here is the raw content:
 Contents of https://wttr.in/San%20Jose?format=3:
@@ -1367,7 +1332,7 @@ AI Learning/MCP/llm_logger/llm.log
 # Current Mode
 ACT MODE
 </environment_details>
-```
+````
 
 #### 📤 模型响应（SSE 整合）
 
@@ -1387,7 +1352,6 @@ We have weather info. Need to present result with attempt_completion and include
 }
 ```
 
-> ✅ **最终回答**：San Jose 当前天气是 ☀️  +61°F（约 16°C），天气晴朗。
-
+> ✅ **最终回答**：San Jose 当前天气是 ☀️ +61°F（约 16°C），天气晴朗。
 
 <br>
