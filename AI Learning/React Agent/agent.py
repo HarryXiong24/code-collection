@@ -66,6 +66,14 @@ class ReActAgent:
                 return final_answer.group(1)
 
             # 4) 检测 Action（模型要调用的工具），没有则说明输出不符合协议，报错
+            #
+            # 【关键设计】这里没有使用 OpenAI 原生的 Function Calling（即 API 的 tools
+            # 参数 + 结构化的 tool_calls 返回），而是采用「Prompt 约定格式 + 自己解析」：
+            #   - 工具说明写在系统提示词里（见 get_tool_list / render_system_prompt）；
+            #   - 模型按约定把工具调用包在纯文本的 <action>工具名(参数)</action> 里；
+            #   - 这里用正则取出文本，再交给 parse_action 手动解析成函数名和参数。
+            # 这样做的好处是模型无关（免费/小模型也能用）、过程透明、便于学习 ReAct 原理；
+            # 代价是鲁棒性较低，需要正则判空、parse_action 容错、工具执行 try/except 来兜底。
             action_match = re.search(r"<action>(.*?)</action>", content, re.DOTALL)
             if not action_match:
                 raise RuntimeError("模型未输出 <action>")
