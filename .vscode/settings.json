@@ -20,24 +20,6 @@
   "editor.minimap.enabled": true,
   "editor.wordWrap": "on",
   "workbench.sideBar.location": "left",
-  "eslint.alwaysShowStatus": true,
-  "vetur.format.scriptInitialIndent": true,
-  "vetur.format.styleInitialIndent": true,
-  "vetur.format.defaultFormatterOptions": {
-    "prettyhtml": {
-      "printWidth": 100,
-      "singleQuote": false,
-      "wrapAttributes": false,
-      "sortAttributes": true
-    },
-    "prettier": {
-      "semi": true,
-      "singleQuote": true
-    }
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "octref.vetur"
-  },
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
