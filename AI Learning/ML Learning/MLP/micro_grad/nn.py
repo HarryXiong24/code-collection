@@ -1,5 +1,5 @@
-import engine
 import random
+from . import engine
 
 
 class Neuron:
@@ -69,46 +69,7 @@ class MLP:
             params.extend(layer.parameters())
         return params
 
-
-if __name__ == "__main__":
-    x = [2.0, 3.0, -1.0]
-    neuron = Neuron(len(x))
-
-    print(f"Neuron output: {neuron(x)}")  # Print the output value
-
-    layer = Layer(3, 4)
-    print(f"Layer outputs: {layer(x)}")
-
-    mlp = MLP(3, [4, 4, 1])
-    print(f"MLP outputs: {mlp(x)}")
-
-    xs = [
-        [2.0, 3.0, -1.0],
-        [3.0, -1.0, 0.5],
-        [0.5, 1.0, 1.0],
-        [1.0, 1.0, -1.0],
-    ]
-    ys = [1.0, -1.0, -1.0, 1.0]  # Ground truth labels for the inputs
-
-    # y_pred = [
-    #     mlp(x) for x in xs
-    # ]  # Calculate the predicted outputs for each input in xs
-    # print(f"Predicted outputs: {y_pred}")
-    # loss = sum((yout - ygt) ** 2 for yout, ygt in zip(y_pred, ys))
-    # print(f"Loss: {loss}")
-    # loss.backward()
-
-    for k in range(20):
-        y_pred = [
-            mlp(x) for x in xs
-        ]  # Calculate the predicted outputs for each input in xs
-        loss = sum((yout - ygt) ** 2 for yout, ygt in zip(y_pred, ys))
-
-        for p in mlp.parameters():
-            p.grad = 0.0  # Reset gradients before backward pass
-        loss.backward()
-
-        for p in mlp.parameters():
-            p.data -= 0.01 * p.grad  # Update the parameters using gradient descent
-
-        print(f"Step {k}, Loss: {loss.data}")
+    def zero_grad(self) -> None:
+        # Reset the gradient of every parameter to zero before a backward pass
+        for p in self.parameters():
+            p.grad = 0.0
