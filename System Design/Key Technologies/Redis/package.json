@@ -1,0 +1,20 @@
+{
+  "name": "redis-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Redis 用法演示 — TypeScript + ioredis，覆盖五大数据类型、过期、发布订阅、管道/事务、Lua 分布式锁、Stream 消费组。",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "npm run build && npm run start",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "ioredis": "^5.4.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
+  }
+}

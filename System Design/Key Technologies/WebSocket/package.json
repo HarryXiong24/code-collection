@@ -1,0 +1,19 @@
+{
+  "name": "websocket-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "WebSocket demo — RFC 6455 implemented by hand, TypeScript backend + TypeScript frontend, zero runtime dependencies.",
+  "type": "module",
+  "scripts": {
+    "build:server": "tsc -p tsconfig.server.json",
+    "build:client": "tsc -p tsconfig.client.json",
+    "build": "npm run build:server && npm run build:client",
+    "start": "node dist/server/index.js",
+    "dev": "npm run build && npm run start",
+    "clean": "rm -rf dist public/static"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
+  }
+}
