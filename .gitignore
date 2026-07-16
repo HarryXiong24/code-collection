@@ -3,7 +3,6 @@ __pycache__/
 node_modules/
 .venv
 
-
 logs
 *.log
 npm-debug.log*

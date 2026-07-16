@@ -1,21 +1,5 @@
 {
-  "eslint.options": {
-    "extensions": [".js", ".vue", ".ts", ".tsx"]
-  },
-  "files.associations": {
-    "*.cjson": "jsonc",
-    "*.wxss": "css",
-    "*.wxs": "javascript",
-    "*.vue": "vue",
-    "*.mpx": "vue",
-    "*.jsx": "javascriptreact"
-  },
-  "emmet.includeLanguages": {
-    "wxml": "html"
-  },
   "search.followSymlinks": false,
-  "prettier.semi": true,
-  "prettier.singleQuote": true,
   "projectManager.groupList": true,
   "editor.minimap.enabled": true,
   "editor.wordWrap": "on",
@@ -50,16 +34,16 @@
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
-  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.black-formatter"
+  },
   "workbench.iconTheme": "material-icon-theme",
   "prettier.requireConfig": true,
   "editor.wordWrapColumn": 240,
   "editor.formatOnPaste": true,
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
-    "source.fixAll": "explicit",
-    "source.fixAll.eslint": "explicit",
-    "source.fixAll.stylelint": "explicit"
+    "source.fixAll": "explicit"
   },
   "editor.suggestSelection": "first",
   "workbench.editorAssociations": {
@@ -67,15 +51,12 @@
   },
   "workbench.startupEditor": "newUntitledFile",
   "python.languageServer": "Default",
+  "python-envs.defaultEnvManager": "ms-python.python:conda",
+  "python-envs.defaultPackageManager": "ms-python.python:conda",
   "gitlens.advanced.blame.customArguments": [],
   "go.useLanguageServer": true,
   "git.ignoreLegacyWarning": true,
   "git.autofetch": true,
   "editor.guides.indentation": true,
-  "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
-  },
-  "python-envs.defaultEnvManager": "ms-python.python:conda",
-  "python-envs.defaultPackageManager": "ms-python.python:conda",
-  "cSpell.words": ["topo", "yout"]
+  "cSpell.words": ["nums", "topo", "yout"]
 }
