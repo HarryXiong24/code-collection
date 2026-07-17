@@ -13,7 +13,12 @@
       "Bash(python3 -c ' *)",
       "Bash(python3 parse_log.py)",
       "Bash(python3 -m json.tool parse.json)",
-      "Bash(grep -nE '^#{1,4} |<summary>' transcript.md)"
+      "Bash(grep -nE '^#{1,4} |<summary>' transcript.md)",
+      "Bash(npm -v)",
+      "Bash(echo \"npm: $\\(npm -v 2>/dev/null\\)\")",
+      "Bash(npx tsc *)",
+      "Bash(echo \"tsc: $\\(npx tsc -v 2>/dev/null\\)\")",
+      "Bash(go version *)"
     ]
   }
 }

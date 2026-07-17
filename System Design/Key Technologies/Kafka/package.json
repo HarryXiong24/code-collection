@@ -1,0 +1,20 @@
+{
+  "name": "kafka-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Kafka 用法演示 — TypeScript + KafkaJS，覆盖主题管理、生产/消费、按 key 分区、消费组再均衡、offset 提交与重放、幂等生产者、事务（Exactly-Once）。",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "npm run build && npm run start",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "kafkajs": "^2.2.4"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
+  }
+}

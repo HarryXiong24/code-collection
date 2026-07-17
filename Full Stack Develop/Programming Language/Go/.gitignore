@@ -1,0 +1,5 @@
+# Go 编译产物
+/proglang
+*.exe
+*.test
+*.out

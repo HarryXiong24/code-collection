@@ -1,0 +1,20 @@
+{
+  "name": "elasticsearch-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Elasticsearch 用法演示 — TypeScript + @elastic/elasticsearch，覆盖文档 CRUD、批量写入、全文检索、bool 组合查询、聚合、分页（from/size 与 search_after）、mapping 与分词器。",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "npm run build && npm run start",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^8.14.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0",
+    "@types/node": "^20.11.0"
+  }
+}

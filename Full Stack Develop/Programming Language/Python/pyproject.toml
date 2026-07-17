@@ -1,0 +1,19 @@
+[project]
+name = "python-language-demo"
+version = "1.0.0"
+description = "Python 语言用法演示 — 类型、集合、函数、类/协议、泛型、错误处理、异步、高级类型、装饰器、引用语义、标准库、测试。"
+requires-python = ">=3.12"
+dependencies = []
+
+# 无第三方运行时依赖，用标准库即可跑：python main.py
+
+[tool.mypy]
+# 想做静态类型检查：pip install mypy && mypy .
+python_version = "3.12"
+strict = true
+warn_unused_ignores = true
+
+[tool.ruff]
+# 想做 lint / 格式化：pip install ruff && ruff check . && ruff format .
+target-version = "py312"
+line-length = 100

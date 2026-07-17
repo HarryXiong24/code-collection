@@ -1,0 +1,18 @@
+{
+  "name": "typescript-language-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "TypeScript 语言用法演示 — 类型、集合、函数、类/接口、泛型、错误处理、异步、高级类型、装饰器、引用语义、标准库、测试。",
+  "type": "module",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "start": "node dist/index.js",
+    "dev": "npm run build && npm run start",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0",
+    "@types/node": "^20.11.0"
+  }
+}
