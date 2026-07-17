@@ -21,6 +21,9 @@ from demos import (
     d10_decorators,
     d11_memory,
     d12_stdlib,
+    d13_iterators,
+    d14_modules,
+    d15_sorting_equality,
 )
 from demos.log import error, note, title
 
@@ -38,6 +41,9 @@ DEMOS: dict[str, Callable[[], None]] = {
     "decorators": d10_decorators.run,
     "memory": d11_memory.run,
     "stdlib": d12_stdlib.run,
+    "iterators": d13_iterators.run,
+    "modules": d14_modules.run,
+    "sorting": d15_sorting_equality.run,
 }
 
 

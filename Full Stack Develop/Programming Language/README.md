@@ -1,6 +1,6 @@
 # Programming Language：TypeScript · Go · Python 横向对比
 
-三个**独立可运行**的教学工程，用**同一套 12 个主题 + 1 个测试**分别演示 TypeScript、Go、Python 的用法。每个 demo 都把「表达式 → 结果」打印出来，跑一遍就能看到语言特性的真实行为。
+三个**独立可运行**的教学工程，用**同一套 15 个主题 + 1 个测试**分别演示 TypeScript、Go、Python 的用法。每个 demo 都把「表达式 → 结果」打印出来，跑一遍就能看到语言特性的真实行为。
 
 三份实现刻意保持**主题一一对应、示例逐点对齐**，把同一个概念在三种语言里的写法摆在一起看，差异一目了然。三者都是**强类型**语言，因此每个主题都不回避类型：TS/Python 是「静态类型注解 + 编译期/工具检查」，Go 是「编译期强制、无隐式转换」。
 
@@ -36,7 +36,10 @@ Programming Language/
 | 10 | 装饰器·元编程 | `10-decorators.ts` | `reflection.go` | `d10_decorators.py` |
 | 11 | 内存·引用·指针 | `11-memory-references.ts` | `memory.go` | `d11_memory.py` |
 | 12 | 标准库惯例 | `12-stdlib.ts` | `stdlib.go` | `d12_stdlib.py` |
-| 13 | 测试 | `tests/demo.test.ts` | `demos/mathx_test.go` | `tests/test_demos.py` |
+| 13 | 迭代器与生成器 | `13-iterators.ts` | `iterators.go` | `d13_iterators.py` |
+| 14 | 模块·包·可见性 | `14-modules.ts` | `modules.go` + `internal/shapes/` | `d14_modules.py` + `mathlib.py` |
+| 15 | 自定义排序与相等性 | `15-sorting-equality.ts` | `sortingequality.go` | `d15_sorting_equality.py` |
+| 16 | 测试 | `tests/demo.test.ts` | `demos/mathx_test.go` | `tests/test_demos.py` |
 
 ## 语言特性速查：同一件事，三种写法
 
@@ -110,6 +113,37 @@ Programming Language/
 | 对象/容器 | 按引用 | 结构体按值、slice/map 按引用 | 全部按引用 |
 | 显式指针 | 无 | **有** `*T` / `&`（无指针算术） | 无 |
 | 深拷贝 | `structuredClone()` | 手写 / 序列化 | `copy.deepcopy()` |
+
+### 迭代器与生成器（主题 13）
+
+| | TypeScript | Go | Python |
+| --- | --- | --- | --- |
+| 生成器 | `function*` + `yield` | `func(yield func(T) bool)` | `def` + `yield` |
+| 遍历协议 | `[Symbol.iterator]()` | **range-over-func（1.23）** | `__iter__` / `__next__` |
+| 惰性无限序列 | ✅ 惰性 | ✅ 惰性 | ✅ 惰性 |
+| 委托/拼接 | `yield*` | 手动 `for range` 转发 | `yield from` |
+| 物化成列表 | `[...gen]` | `slices.Collect(seq)` | `list(gen)` |
+
+### 模块 · 包 · 可见性（主题 14）
+
+| | TypeScript | Go | Python |
+| --- | --- | --- | --- |
+| 单元 | 一个文件 = 一个模块 | 一个目录 = 一个**包** | 一个文件 = 模块，目录 = 包 |
+| 导出 | `export` / `export default` | **首字母大写**（无关键字） | 默认全公开，`__all__` 约束 `import *` |
+| 私有 | 不 `export` 即私有 | 首字母小写 | `_name` 仅约定、非强制 |
+| 强制边界 | 无 | `internal/` 目录 | 无 |
+| 初始化钩子 | 模块顶层代码 | `init()` 函数 | 模块顶层代码 |
+
+### 自定义排序与相等性（主题 15）
+
+| | TypeScript | Go | Python |
+| --- | --- | --- | --- |
+| 排序入参 | 比较器 `(a,b)=>number` | 比较器 `cmp func → int` | **取键函数** `key=` |
+| 多键 | 串联比较器 `a() \|\| b()` | `cmp.Or(...)`（1.22+） | 元组键 `(k1, -k2)` |
+| 稳定性 | `sort` 稳定（ES2019+） | 需用 `SortStableFunc` | `sorted` 稳定 |
+| 值相等 | 无重载，`===` 看引用 | 结构体 `==` 逐字段比 | `__eq__`（`dataclass` 自动） |
+| 可作键/哈希 | 引用身份，需自造 key | 可比较结构体直接作 map 键 | `__hash__`（`frozen` 自动） |
+| 自定义大小 | 手写比较器 | 手写 `cmp` 函数 | `@total_ordering` 补全 |
 
 ## 怎么用这三个项目
 

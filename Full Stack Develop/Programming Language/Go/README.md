@@ -7,7 +7,7 @@ Go 语言用法演示。每个 demo 打印出「表达式 → 结果」，跑一
 ## 跑起来
 
 ```bash
-go run .                    # 跑全部 12 个 demo
+go run .                    # 跑全部 15 个 demo
 go run . generics memory    # 只跑指定的几个
 go test ./...               # 跑单元测试（见 demos/mathx_test.go）
 ```
@@ -30,7 +30,10 @@ go test ./...               # 跑单元测试（见 demos/mathx_test.go）
 | 10 | `demos/reflection.go` | `reflection` | struct tag + `reflect`（Go 版「注解/元编程」）、迷你校验器 |
 | 11 | `demos/memory.go` | `memory` | 指针 `*T`/`&`、传值 vs 传指针、`new`/`make`、逃逸分析 |
 | 12 | `demos/stdlib.go` | `stdlib` | `encoding/json`、`time`、`strings`、`sort` |
-| 13 | `demos/mathx_test.go` | — | 内置 `testing` 包，表驱动测试（用 `go test ./...` 跑） |
+| 13 | `demos/iterators.go` | `iterators` | **range-over-func（1.23）**、`iter.Seq`、惰性无限序列、`slices.Collect` |
+| 14 | `demos/modules.go` + `internal/shapes/` | `modules` | 包是封装单元、大小写控制导出、`init()`、`internal/` 边界 |
+| 15 | `demos/sortingequality.go` | `sorting` | `slices.SortFunc`、`cmp.Or` 多键、稳定排序、结构体 `==` 可比 / 作 map 键 |
+| 16 | `demos/mathx_test.go` | — | 内置 `testing` 包，表驱动测试（用 `go test ./...` 跑） |
 
 ## 类型系统要点（Go 的取舍）
 

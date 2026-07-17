@@ -7,7 +7,7 @@ Python 语言用法演示（Python 3.12+）。每个 demo 打印出「表达式 
 ## 跑起来
 
 ```bash
-python main.py                  # 跑全部 12 个 demo
+python main.py                  # 跑全部 15 个 demo
 python main.py generics async   # 只跑指定的几个
 python -m unittest              # 跑单元测试（见 tests/test_demos.py）
 ```
@@ -32,7 +32,10 @@ python -m unittest              # 跑单元测试（见 tests/test_demos.py）
 | 10 | `demos/d10_decorators.py` | `decorators` | 装饰器、`functools.wraps`、带参装饰器、`@lru_cache` |
 | 11 | `demos/d11_memory.py` | `memory` | 引用语义、可变/不可变、`is` vs `==`、可变默认参数坑、`deepcopy` |
 | 12 | `demos/d12_stdlib.py` | `stdlib` | `json`、`datetime`、`pathlib`、`collections`、`itertools` |
-| 13 | `tests/test_demos.py` | — | 内置 `unittest`，`subTest` 表驱动（用 `python -m unittest` 跑） |
+| 13 | `demos/d13_iterators.py` | `iterators` | 生成器 `yield`、生成器表达式、惰性无限序列、`__iter__`、`yield from` |
+| 14 | `demos/d14_modules.py` + `mathlib.py` | `modules` | `import` 各写法、`__all__`、下划线约定、`__name__` / `__main__` |
+| 15 | `demos/d15_sorting_equality.py` | `sorting` | `key=` 多键排序、稳定性、`frozen dataclass` 判等/哈希、`@total_ordering` |
+| 16 | `tests/test_demos.py` | — | 内置 `unittest`，`subTest` 表驱动（用 `python -m unittest` 跑） |
 
 ## 类型系统要点（Python 的取舍）
 

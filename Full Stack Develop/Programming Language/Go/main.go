@@ -30,6 +30,9 @@ func main() {
 		{"reflection", demos.Reflection},
 		{"memory", demos.Memory},
 		{"stdlib", demos.Stdlib},
+		{"iterators", demos.Iterators},
+		{"modules", demos.Modules},
+		{"sorting", demos.SortingEquality},
 	}
 
 	logx.Title("Go 语言用法演示")

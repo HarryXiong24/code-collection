@@ -11,6 +11,9 @@ import { advancedTypesDemo } from './demos/09-advanced-types.js';
 import { decoratorsDemo } from './demos/10-decorators.js';
 import { memoryReferencesDemo } from './demos/11-memory-references.js';
 import { stdlibDemo } from './demos/12-stdlib.js';
+import { iteratorsDemo } from './demos/13-iterators.js';
+import { modulesDemo } from './demos/14-modules.js';
+import { sortingEqualityDemo } from './demos/15-sorting-equality.js';
 
 /** demo 名 → 函数。名字用于 `npm start types generics` 只跑指定的几个。 */
 const DEMOS: Record<string, () => void | Promise<void>> = {
@@ -26,6 +29,9 @@ const DEMOS: Record<string, () => void | Promise<void>> = {
   decorators: decoratorsDemo,
   memory: memoryReferencesDemo,
   stdlib: stdlibDemo,
+  iterators: iteratorsDemo,
+  modules: modulesDemo,
+  sorting: sortingEqualityDemo,
 };
 
 function selected(): string[] {
