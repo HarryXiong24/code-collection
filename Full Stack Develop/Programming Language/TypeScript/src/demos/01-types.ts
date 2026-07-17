@@ -49,5 +49,6 @@ export function typesDemo(): void {
 
   note('typeof / instanceof 是运行期的类型判断');
   show('typeof 42', typeof 42);
+  show('typeof []', typeof []);
   show('[] instanceof Array', [] instanceof Array);
 }

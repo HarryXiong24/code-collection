@@ -29,6 +29,9 @@ def run() -> None:
     show("nums[::-1]  # 反转", nums[::-1])
     show("nums[-1]  # 最后一个", nums[-1])
 
+    show("nums reversed()", list(reversed(nums)))  # 反转 
+    show("nums sort()", sorted(nums))  # 排序
+
     note("tuple：不可变，常用于多值返回与解包")
     point: tuple[int, int] = (10, 20)
     x, y = point  # 解包
@@ -39,6 +42,7 @@ def run() -> None:
     note("dict：哈希表，保留插入顺序；.get 带默认值避免 KeyError")
     scores: dict[str, int] = {"alice": 95, "bob": 82}
     scores["carol"] = 78
+    del scores["bob"]
     show("scores.get('zoe', 0)", scores.get("zoe", 0))
     show("list(scores.items())", list(scores.items()))
 
