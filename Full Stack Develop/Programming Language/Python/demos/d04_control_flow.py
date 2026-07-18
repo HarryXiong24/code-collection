@@ -1,18 +1,18 @@
-"""04 控制流 —— if/elif、for、while、match（结构化模式匹配）。
+"""04 Control flow — if/elif, for, while, match (structural pattern matching).
 
-要点：
-  1. 用缩进而非大括号表示代码块。
-  2. for 直接遍历「可迭代对象」；enumerate 拿下标，zip 并行遍历。
-  3. for/while 可带 else：循环正常结束（没 break）才执行。
-  4. match（3.10+）是真正的结构化模式匹配，比 switch 强大得多。
-  5. 真值判断：空容器、0、""、None 都为假（falsy）。
+Key points:
+  1. Blocks are marked by indentation, not braces.
+  2. for iterates any "iterable" directly; enumerate gives the index, zip iterates in parallel.
+  3. for/while can carry an else: it runs only when the loop ends normally (no break).
+  4. match (3.10+) is true structural pattern matching, far more powerful than switch.
+  5. Truthiness: empty containers, 0, "", and None are all falsy.
 """
 
 from .log import note, show, title
 
 
 def area(shape: dict[str, float]) -> float:
-    """用 match 对「带 kind 的字典」做结构化匹配。"""
+    """Use match to structurally match a "dict with a kind"."""
     match shape:
         case {"kind": "circle", "r": r}:
             return 3.14159 * r * r
@@ -25,37 +25,37 @@ def area(shape: dict[str, float]) -> float:
 
 
 def run() -> None:
-    title("04 控制流")
+    title("04 Control flow")
 
-    note("if / elif / else 与三元表达式")
+    note("if / elif / else and the ternary expression")
     score = 82
     grade = "A" if score >= 90 else "B" if score >= 80 else "C"
     show("grade", grade)
 
-    note("enumerate：遍历时同时拿下标和值")
+    note("enumerate: get the index and value together while iterating")
     for i, fruit in enumerate(["apple", "banana", "cherry"]):
         show(f"fruits[{i}]", fruit)
 
-    note("zip：并行遍历多个序列")
+    note("zip: iterate multiple sequences in parallel")
     for name, sc in zip(["alice", "bob"], [95, 82]):
         show(f"{name}", sc)
 
-    note("for-else：循环没被 break 才走 else（这里找质数演示）")
+    note("for-else: else runs only if the loop wasn't broken (here demoing prime detection)")
     n = 13
     for d in range(2, n):
         if n % d == 0:
-            show(f"{n} 有因子", d)
+            show(f"{n} has a factor", d)
             break
     else:
-        show(f"{n} 是质数", True)
+        show(f"{n} is prime", True)
 
-    note("match：结构化模式匹配，直接解构字典/对象")
+    note("match: structural pattern matching, destructures dicts/objects directly")
     show("area(circle r=2)", round(area({"kind": "circle", "r": 2}), 2))
     show("area(rect 3x4)", area({"kind": "rect", "w": 3, "h": 4}))
 
-    note("真值陷阱：空容器与 0 都是 falsy")
+    note("truthiness trap: empty containers and 0 are both falsy")
     items: list[int] = []
     show("items or 'empty'", items or "empty")
     count = 0
-    show("count or 'N/A'  # 0 掉进兜底", count or "N/A")
-    show("'N/A' if count is None else count  # 精确判空", "N/A" if count is None else count)
+    show("count or 'N/A'  # 0 falls into the fallback", count or "N/A")
+    show("'N/A' if count is None else count  # precise None check", "N/A" if count is None else count)

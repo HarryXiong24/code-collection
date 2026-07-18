@@ -2,7 +2,7 @@ package demos
 
 import "errors"
 
-// Classify 是被测函数示例，用于配套的 mathx_test.go。
+// Classify is an example function under test, used by the accompanying mathx_test.go.
 func Classify(n int) string {
 	switch {
 	case n < 0:
@@ -14,7 +14,7 @@ func Classify(n int) string {
 	}
 }
 
-// Divide 返回商，除零时返回 error（配合测试演示错误断言）。
+// Divide returns the quotient, returning an error on division by zero (to demonstrate error assertions in tests).
 func Divide(a, b int) (int, error) {
 	if b == 0 {
 		return 0, errors.New("division by zero")

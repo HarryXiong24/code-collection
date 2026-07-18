@@ -2,13 +2,13 @@ package demos
 
 import "testing"
 
-// 13 测试 —— Go 内置 testing 包，零第三方依赖。
-// 运行：go test ./...   （详细：go test -v ./...）
-// 要点：
-//  1. 测试文件名以 _test.go 结尾，函数以 Test 开头、收 *testing.T。
-//  2. 表驱动测试是 Go 社区的标准写法：把用例列成一张表，循环跑。
-//  3. t.Run 给每个子用例命名，失败时能精确定位。
-//  4. 断言就是普通 if + t.Errorf，标准库不带断言库（也可上 testify）。
+// 13 Testing — Go's built-in testing package, zero third-party dependencies.
+// Run: go test ./...   (verbose: go test -v ./...)
+// Key points:
+//  1. Test file names end in _test.go, and functions start with Test and take *testing.T.
+//  2. Table-driven tests are the Go community's standard style: list cases in a table and loop over them.
+//  3. t.Run names each subcase, so failures can be pinpointed.
+//  4. Assertions are plain if + t.Errorf; the standard library ships no assertion library (you can add testify).
 
 func TestClassify(t *testing.T) {
 	cases := []struct {
@@ -30,16 +30,16 @@ func TestClassify(t *testing.T) {
 }
 
 func TestDivide(t *testing.T) {
-	t.Run("正常相除", func(t *testing.T) {
+	t.Run("normal division", func(t *testing.T) {
 		got, err := Divide(10, 2)
 		if err != nil || got != 5 {
 			t.Errorf("Divide(10,2) = %d, %v; want 5, nil", got, err)
 		}
 	})
 
-	t.Run("除以0返回error", func(t *testing.T) {
+	t.Run("dividing by 0 returns an error", func(t *testing.T) {
 		if _, err := Divide(1, 0); err == nil {
-			t.Error("Divide(1,0) 应返回 error，实际为 nil")
+			t.Error("Divide(1,0) should return an error, got nil")
 		}
 	})
 }

@@ -1,13 +1,13 @@
 use crate::log::{note, show, title};
 
-/// 迭代器 —— Rust 的惰性序列抽象，适配器链是日常主力（也是「生成器」的等价物）。
-/// 要点：
-///   1. Iterator trait 只需实现 next()；map/filter/take 等适配器都是惰性的。
-///   2. 惰性：链条上的计算 collect/for 时才发生，可表示无限序列。
-///   3. 自定义迭代器 = 给自己的 struct 实现 Iterator。
-///   4. 适配器零成本：编译后和手写循环一样快。
+/// Iterators — Rust's lazy sequence abstraction; adapter chains are the daily workhorse (also the equivalent of "generators").
+/// Key points:
+///   1. The Iterator trait needs only next() implemented; adapters like map/filter/take are all lazy.
+///   2. Lazy: the computation in a chain happens at collect/for, so it can represent infinite sequences.
+///   3. A custom iterator = implementing Iterator for your own struct.
+///   4. Adapters are zero-cost: after compilation they're as fast as a hand-written loop.
 
-// 自定义无限迭代器：斐波那契
+// custom infinite iterator: Fibonacci
 struct Fib {
     a: u64,
     b: u64,
@@ -18,11 +18,11 @@ impl Iterator for Fib {
         let cur = self.a;
         self.a = self.b;
         self.b = cur + self.b;
-        Some(cur) // 永不返回 None → 无限
+        Some(cur) // never returns None → infinite
     }
 }
 
-// 自定义有限迭代器：倒计时
+// custom finite iterator: countdown
 struct Countdown {
     n: u32,
 }
@@ -30,7 +30,7 @@ impl Iterator for Countdown {
     type Item = u32;
     fn next(&mut self) -> Option<u32> {
         if self.n == 0 {
-            None // 返回 None 即结束
+            None // returning None ends it
         } else {
             self.n -= 1;
             Some(self.n + 1)
@@ -39,25 +39,25 @@ impl Iterator for Countdown {
 }
 
 pub fn run() {
-    title("13 迭代器");
+    title("13 Iterators");
 
-    note("适配器链：惰性，collect 才求值");
+    note("adapter chain: lazy, evaluated only at collect");
     let doubled: Vec<i32> = (1..=5).map(|x| x * 2).collect();
     show("(1..=5).map(*2)", &doubled);
 
-    note("范围 + take：从无限里只取需要的");
+    note("range + take: take only what you need from something infinite");
     let squares: Vec<i32> = (1..).map(|x| x * x).take(5).collect();
     show("(1..).map(sq).take(5)", &squares);
 
-    note("自定义无限迭代器 Fib + take");
+    note("custom infinite iterator Fib + take");
     let fibs: Vec<u64> = Fib { a: 0, b: 1 }.take(10).collect();
     show("Fib.take(10)", &fibs);
 
-    note("自定义有限迭代器：next 返回 None 即结束");
+    note("custom finite iterator: next returning None ends it");
     let cd: Vec<u32> = Countdown { n: 5 }.collect();
     show("Countdown(5)", &cd);
 
-    note("常用适配器：filter / zip / fold / chain");
+    note("common adapters: filter / zip / fold / chain");
     let evens: Vec<i32> = (1..=10).filter(|x| x % 2 == 0).collect();
     show("filter evens", &evens);
     let zipped: Vec<(char, i32)> = ['a', 'b', 'c'].into_iter().zip(1..).collect();

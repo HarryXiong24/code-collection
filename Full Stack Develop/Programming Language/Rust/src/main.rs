@@ -1,8 +1,8 @@
-//! Rust 语言用法演示入口。
+//! Entry point for the Rust language usage demos.
 //!
-//!     cargo run                  跑全部 15 个 demo
-//!     cargo run -- generics async   只跑指定的几个
-//!     cargo test                 跑单元测试（见 src/mathx.rs）
+//!     cargo run                     run all 15 demos
+//!     cargo run -- generics async   run only the specified ones
+//!     cargo test                    run the unit tests (see src/mathx.rs)
 
 mod demos;
 mod log;
@@ -11,7 +11,7 @@ mod mathx;
 use demos::*;
 
 fn main() {
-    // demo 名 → run 函数，顺序与 TypeScript / Go / Python 项目一一对应。
+    // demo name → run function; the order corresponds one-to-one to the TypeScript / Go / Python projects.
     let registry: Vec<(&str, fn())> = vec![
         ("types", d01_types::run),
         ("collections", d02_collections::run),
@@ -35,7 +35,7 @@ fn main() {
         .filter(|a| !a.starts_with('-'))
         .collect();
 
-    log::title("Rust 语言用法演示");
+    log::title("Rust language usage demos");
     for (name, f) in &registry {
         if args.is_empty() || args.iter().any(|a| a == name) {
             f();

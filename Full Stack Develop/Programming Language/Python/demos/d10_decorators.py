@@ -1,11 +1,11 @@
-"""10 装饰器 —— Python 最有代表性的元编程特性。
+"""10 Decorators — Python's most representative metaprogramming feature.
 
-要点：
-  1. 装饰器就是「接收函数、返回新函数」的高阶函数，用 @deco 语法糖套上。
-  2. functools.wraps 保留被装饰函数的名字/文档，写装饰器几乎必带。
-  3. 带参数的装饰器 = 再套一层（返回装饰器的工厂函数）。
-  4. 标准库自带实用装饰器：@lru_cache（记忆化）、@property、@dataclass。
-  5. 对应 TS 的 @decorator、Go 的 struct tag + 反射 —— 横向对照看。
+Key points:
+  1. A decorator is a higher-order function that "takes a function and returns a new function", applied with the @deco syntax sugar.
+  2. functools.wraps preserves the decorated function's name/doc; writing a decorator almost always needs it.
+  3. A parameterized decorator = one more layer (a factory function that returns the decorator).
+  4. The standard library ships useful decorators: @lru_cache (memoization), @property, @dataclass.
+  5. Corresponds to TS's @decorator and Go's struct tag + reflection — read them side by side.
 """
 
 import functools
@@ -18,7 +18,7 @@ _call_log: list[str] = []
 
 
 def logged[**P, R](fn: Callable[P, R]) -> Callable[P, R]:
-    """方法/函数装饰器：调用前后记录（用 ParamSpec 保留原签名）。"""
+    """Method/function decorator: log before and after the call (ParamSpec preserves the original signature)."""
 
     @functools.wraps(fn)
     def wrapper(*args: P.args, **kwargs: P.kwargs) -> R:
@@ -30,7 +30,7 @@ def logged[**P, R](fn: Callable[P, R]) -> Callable[P, R]:
 
 
 def repeat(times: int) -> Callable[[Callable[..., str]], Callable[..., str]]:
-    """带参数的装饰器：把返回值重复 times 次。"""
+    """Parameterized decorator: repeat the return value times times."""
 
     def decorator(fn: Callable[..., str]) -> Callable[..., str]:
         @functools.wraps(fn)
@@ -54,25 +54,25 @@ def cheer(name: str) -> str:
 
 @functools.lru_cache(maxsize=None)
 def fib(n: int) -> int:
-    """@lru_cache 自动记忆化，递归 fib 不再重复计算。"""
+    """@lru_cache memoizes automatically, so recursive fib no longer recomputes."""
     return n if n < 2 else fib(n - 1) + fib(n - 2)
 
 
 def run() -> None:
-    title("10 装饰器")
+    title("10 Decorators")
 
-    note("@logged：调用被自动记录，业务函数里没有日志代码")
+    note("@logged: calls are recorded automatically, with no logging code in the business function")
     show("add(2, 3)", add(2, 3))
     show("add(10, 20)", add(10, 20))
-    show("被记录的调用", _call_log)
-    show("wraps 保留了函数名", add.__name__)
+    show("recorded calls", _call_log)
+    show("wraps preserved the function name", add.__name__)
 
-    note("带参数的装饰器 @repeat(3)")
+    note("parameterized decorator @repeat(3)")
     show("cheer('py')", cheer("py"))
 
-    note("@lru_cache：记忆化，第 35 项瞬间算完")
+    note("@lru_cache: memoization, the 35th term computes instantly")
     t = time.perf_counter()
     result = fib(35)
     show("fib(35)", result)
-    show("耗时(ms)", round((time.perf_counter() - t) * 1000, 3))
-    show("cache 命中信息", str(fib.cache_info()))
+    show("time (ms)", round((time.perf_counter() - t) * 1000, 3))
+    show("cache hit info", str(fib.cache_info()))

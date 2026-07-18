@@ -1,30 +1,31 @@
-// Package shapes 演示「包」是 Go 的封装单元。
-// 规则很简单：标识符首字母大写 = 导出（包外可见），小写 = 包内私有。
-// 这是被 demos/modules.go 导入的示例包。
+// Package shapes demonstrates that a "package" is Go's unit of encapsulation.
+// The rule is simple: an identifier starting with an uppercase letter = exported
+// (visible outside the package), lowercase = package-private.
+// This is the example package imported by demos/modules.go.
 package shapes
 
-// Pi 导出常量（大写开头）。
+// Pi is an exported constant (starts with an uppercase letter).
 const Pi = 3.14159
 
-// loaded 是未导出的包级变量，只有本包能读写。
+// loaded is an unexported package-level variable, readable/writable only within this package.
 var loaded []string
 
-// init 在包被首次导入时自动执行（可有多个，先于 main 运行）。
+// init runs automatically when the package is first imported (there can be several; they run before main).
 func init() {
-	loaded = append(loaded, "shapes.init 已运行")
+	loaded = append(loaded, "shapes.init has run")
 }
 
-// CircleArea 导出函数，内部用到未导出的 square。
+// CircleArea is an exported function that internally uses the unexported square.
 func CircleArea(r float64) float64 {
 	return Pi * square(r)
 }
 
-// square 未导出：包外无法调用 shapes.square。
+// square is unexported: outside the package you cannot call shapes.square.
 func square(x float64) float64 {
 	return x * x
 }
 
-// Loaded 通过导出函数，把未导出的状态暴露出去（封装的惯用法）。
+// Loaded exposes the unexported state through an exported function (the idiom for encapsulation).
 func Loaded() []string {
 	return loaded
 }

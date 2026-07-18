@@ -1,11 +1,11 @@
-"""09 高级类型 —— 联合、Literal、Enum、TypedDict、类型别名、收窄。
+"""09 Advanced types — unions, Literal, Enum, TypedDict, type aliases, narrowing.
 
-要点：
-  1. 联合类型用 `A | B`（3.10+）；Optional[T] 就是 T | None。
-  2. Literal 把取值限定为几个字面量，是轻量枚举。
-  3. Enum 是有运行时对象的枚举，可正查反查。
-  4. TypedDict 给「固定形状的字典」加类型。
-  5. type 语句（3.12+）定义类型别名；isinstance 让检查器自动收窄。
+Key points:
+  1. Union types use `A | B` (3.10+); Optional[T] is just T | None.
+  2. Literal restricts values to a few literals, a lightweight enum.
+  3. Enum is an enum with runtime objects, supporting forward and reverse lookup.
+  4. TypedDict adds types to a "dict with a fixed shape".
+  5. The type statement (3.12+) defines a type alias; isinstance lets the checker narrow automatically.
 """
 
 from enum import Enum
@@ -13,7 +13,7 @@ from typing import Literal, TypedDict
 
 from .log import note, show, title
 
-# type 语句（3.12+）：定义类型别名
+# the type statement (3.12+): defines a type alias
 type Direction = Literal["up", "down", "left", "right"]
 
 
@@ -23,7 +23,7 @@ class Status(Enum):
 
 
 class UserDict(TypedDict):
-    """固定形状的字典：键名与值类型都受检查。"""
+    """A dict with a fixed shape: both key names and value types are checked."""
 
     id: int
     name: str
@@ -31,8 +31,8 @@ class UserDict(TypedDict):
 
 
 def format_value(v: int | str | float) -> str:
-    """联合类型 + isinstance 收窄：每个分支里类型都被精确判定。"""
-    if isinstance(v, bool):  # 注意 bool 是 int 子类，需先判
+    """Union type + isinstance narrowing: the type is precisely determined in each branch."""
+    if isinstance(v, bool):  # note bool is a subclass of int, so check it first
         return f"bool:{v}"
     if isinstance(v, int):
         return f"int:{v}"
@@ -42,22 +42,22 @@ def format_value(v: int | str | float) -> str:
 
 
 def run() -> None:
-    title("09 高级类型")
+    title("09 Advanced types")
 
-    note("Literal：只能取这几个字面量，传错会被检查器拦下")
+    note("Literal: only these literals are allowed; a wrong one is blocked by the checker")
     move: Direction = "up"
     show("move", move)
 
-    note("Enum：有运行时对象，可正查反查")
+    note("Enum: has runtime objects, supports forward and reverse lookup")
     show("Status.ACTIVE", Status.ACTIVE.value)
-    show("Status('CLOSED')  # 反查", Status("CLOSED").name)
+    show("Status('CLOSED')  # reverse lookup", Status("CLOSED").name)
     show("list(Status)", [s.value for s in Status])
 
-    note("联合类型 + isinstance 收窄")
+    note("union type + isinstance narrowing")
     show("format_value(42)", format_value(42))
     show("format_value(3.14159)", format_value(3.14159))
     show("format_value('hi')", format_value("hi"))
 
-    note("TypedDict：给固定形状的字典加类型")
+    note("TypedDict: add types to a dict with a fixed shape")
     user: UserDict = {"id": 1, "name": "Harry", "active": True}
     show("TypedDict user", user)

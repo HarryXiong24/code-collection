@@ -1,18 +1,18 @@
-"""07 错误处理 —— try/except/else/finally 与异常层级。
+"""07 Error handling — try/except/else/finally and the exception hierarchy.
 
-要点：
-  1. Python 用异常表达错误；捕获用 try/except，可按异常类型分支。
-  2. else 在「没异常」时执行，finally 总会执行（常用于收尾）。
-  3. 自定义异常继承 Exception；raise ... from 保留原因链。
-  4. with 上下文管理器自动管理资源（打开/关闭、加锁/解锁）。
-  5. 惯用「请求原谅而非许可」（EAFP）：先做，出错再处理。
+Key points:
+  1. Python expresses errors with exceptions; catch them with try/except, branching by exception type.
+  2. else runs when there was "no exception", finally always runs (commonly used for cleanup).
+  3. Custom exceptions inherit from Exception; raise ... from preserves the cause chain.
+  4. The with context manager automatically manages resources (open/close, lock/unlock).
+  5. Idiomatic "easier to ask forgiveness than permission" (EAFP): try first, handle on failure.
 """
 
 from .log import note, show, title
 
 
 class ValidationError(Exception):
-    """自定义异常，带上业务字段。"""
+    """A custom exception carrying a business field."""
 
     def __init__(self, field: str, message: str) -> None:
         super().__init__(f"{field}: {message}")
@@ -23,15 +23,15 @@ def parse_age(text: str) -> int:
     try:
         n = int(text)
     except ValueError as exc:
-        # from exc 保留原始异常作为 __cause__，方便追溯
-        raise ValidationError("age", f"{text!r} 不是数字") from exc
+        # `from exc` keeps the original exception as __cause__ for traceability
+        raise ValidationError("age", f"{text!r} is not a number") from exc
     if n < 0:
-        raise ValidationError("age", "年龄不能为负")
+        raise ValidationError("age", "age cannot be negative")
     return n
 
 
 class Resource:
-    """上下文管理器：__enter__/__exit__ 保证资源被释放。"""
+    """Context manager: __enter__/__exit__ guarantee the resource is released."""
 
     def __init__(self, trace: list[str]) -> None:
         self.trace = trace
@@ -41,19 +41,19 @@ class Resource:
         return self
 
     def __exit__(self, *exc: object) -> None:
-        self.trace.append("close")  # 即使抛异常也会执行
+        self.trace.append("close")  # runs even if an exception is raised
 
 
 def run() -> None:
-    title("07 错误处理")
+    title("07 Error handling")
 
-    note("按类型捕获异常，读自定义字段")
+    note("catch exceptions by type and read a custom field")
     try:
         parse_age("abc")
     except ValidationError as e:
-        show("捕获 ValidationError", f"{e.field}: {e}")
+        show("caught ValidationError", f"{e.field}: {e}")
 
-    note("try/except/else/finally 的执行顺序")
+    note("the execution order of try/except/else/finally")
     order: list[str] = []
     try:
         order.append("try")
@@ -61,18 +61,18 @@ def run() -> None:
     except ValueError:
         order.append("except")
     else:
-        order.append("else")  # 不会执行（因为抛了异常）
+        order.append("else")  # won't run (because an exception was raised)
     finally:
         order.append("finally")
-    show("执行顺序", order)
+    show("execution order", order)
 
-    note("raise from：异常链，__cause__ 指向根因")
+    note("raise from: exception chaining, __cause__ points to the root cause")
     try:
         parse_age("xyz")
     except ValidationError as e:
-        show("__cause__ 类型", type(e.__cause__).__name__)
+        show("__cause__ type", type(e.__cause__).__name__)
 
-    note("with 上下文管理器：无论是否异常都自动 close")
+    note("with context manager: auto-close whether or not there's an exception")
     trace: list[str] = []
     try:
         with Resource(trace):
@@ -80,12 +80,12 @@ def run() -> None:
             raise RuntimeError("oops")
     except RuntimeError:
         pass
-    show("资源生命周期", trace)
+    show("resource lifecycle", trace)
 
-    note("EAFP：先取值，KeyError 再兜底")
+    note("EAFP: fetch the value first, fall back on KeyError")
     data = {"a": 1}
     try:
         value = data["missing"]
     except KeyError:
         value = -1
-    show("EAFP 结果", value)
+    show("EAFP result", value)

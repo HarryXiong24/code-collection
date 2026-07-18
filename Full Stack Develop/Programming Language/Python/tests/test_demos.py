@@ -1,14 +1,14 @@
-"""13 测试 —— 用标准库 unittest，零第三方依赖。
+"""13 Testing — uses the standard-library unittest, zero third-party dependencies.
 
-运行：
-    python -m unittest              自动发现 tests/ 下的用例
-    python -m unittest -v           显示每个用例
+Run:
+    python -m unittest              auto-discover cases under tests/
+    python -m unittest -v           show each case
 
-要点：
-  1. 测试类继承 unittest.TestCase，方法以 test_ 开头。
-  2. self.assertEqual / assertRaises 等断言方法一应俱全。
-  3. subTest 实现「表驱动」：一个循环覆盖多组输入，失败各自独立报告。
-  4. 社区也常用 pytest（更简洁的 assert 语法）——这里用内置的 unittest。
+Key points:
+  1. Test classes inherit unittest.TestCase, and methods start with test_.
+  2. Assertion methods like self.assertEqual / assertRaises are all available.
+  3. subTest implements "table-driven" tests: one loop covers multiple inputs, each failure reported independently.
+  4. The community also commonly uses pytest (more concise assert syntax) — here we use the built-in unittest.
 """
 
 import unittest
@@ -20,7 +20,7 @@ class TestClassify(unittest.TestCase):
     def test_classify(self) -> None:
         cases = [(-5, "negative"), (0, "zero"), (42, "positive")]
         for n, expected in cases:
-            with self.subTest(n=n):  # 表驱动：每组输入独立报告
+            with self.subTest(n=n):  # table-driven: each input reported independently
                 self.assertEqual(classify(n), expected)
 
 

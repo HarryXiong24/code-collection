@@ -1,62 +1,62 @@
-"""02 集合类型 —— list / tuple / dict / set，以及推导式。
+"""02 Collection types — list / tuple / dict / set, and comprehensions.
 
-要点：
-  1. list 可变、有序；tuple 不可变、有序（常用于「多值返回/记录」）。
-  2. dict 是哈希表，保留插入顺序（3.7+ 保证）；set 去重、无序。
-  3. 推导式（comprehension）是 Python 最有辨识度的语法。
-  4. 切片 s[start:stop:step] 对序列通用。
-  5. 注解用内置泛型：list[int] / dict[str, int] / tuple[int, ...]（3.9+）。
+Key points:
+  1. list is mutable and ordered; tuple is immutable and ordered (often used for "multi-value returns/records").
+  2. dict is a hash table that preserves insertion order (guaranteed 3.7+); set deduplicates and is unordered.
+  3. Comprehensions are Python's most distinctive syntax.
+  4. Slicing s[start:stop:step] works for sequences in general.
+  5. Annotate with built-in generics: list[int] / dict[str, int] / tuple[int, ...] (3.9+).
 """
 
 from .log import note, show, title
 
 
 def run() -> None:
-    title("02 集合类型")
+    title("02 Collection types")
 
-    note("list：可变、有序，注解为 list[int]")
+    note("list: mutable, ordered, annotated as list[int]")
     nums: list[int] = [3, 1, 4, 1, 5, 9]
     show("nums", nums)
     nums.append(2)
     show("append(2)", nums)
-    show("sorted(nums)  # 返回新列表", sorted(nums))
+    show("sorted(nums)  # returns a new list", sorted(nums))
 
-    note("列表推导式：一行完成 map + filter")
+    note("list comprehension: map + filter in one line")
     show("[x*x for x in nums if x > 3]", [x * x for x in nums if x > 3])
 
-    note("切片：start:stop:step，支持负索引与反转")
+    note("slicing: start:stop:step, supports negative indices and reversal")
     show("nums[1:4]", nums[1:4])
-    show("nums[::-1]  # 反转", nums[::-1])
-    show("nums[-1]  # 最后一个", nums[-1])
+    show("nums[::-1]  # reverse", nums[::-1])
+    show("nums[-1]  # last element", nums[-1])
 
-    show("nums reversed()", list(reversed(nums)))  # 反转 
-    show("nums sort()", sorted(nums))  # 排序
+    show("nums reversed()", list(reversed(nums)))  # reverse
+    show("nums sort()", sorted(nums))  # sort
 
-    note("tuple：不可变，常用于多值返回与解包")
+    note("tuple: immutable, often used for multi-value returns and unpacking")
     point: tuple[int, int] = (10, 20)
-    x, y = point  # 解包
+    x, y = point  # unpacking
     show("x, y = point", (x, y))
-    first, *rest = nums  # 星号收集其余
+    first, *rest = nums  # star collects the rest
     show("first, *rest", (first, rest))
 
-    note("dict：哈希表，保留插入顺序；.get 带默认值避免 KeyError")
+    note("dict: a hash table, preserves insertion order; .get with a default avoids KeyError")
     scores: dict[str, int] = {"alice": 95, "bob": 82}
     scores["carol"] = 78
     del scores["bob"]
     show("scores.get('zoe', 0)", scores.get("zoe", 0))
     show("list(scores.items())", list(scores.items()))
 
-    note("字典推导式：键值互转 / 批量变换")
+    note("dict comprehension: swap keys/values / transform in bulk")
     show("{k: v*2 for k,v in ...}", {k: v * 2 for k, v in scores.items()})
 
-    note("set：自动去重，天然支持交并差")
+    note("set: automatic dedup, natural support for intersection/union/difference")
     a = {1, 2, 2, 3, 3, 3}
     b = {2, 3, 4}
     show("{1,2,2,3,3,3}", a)
-    show("交集 a & b", a & b)
-    show("并集 a | b", a | b)
-    show("差集 a - b", a - b)
+    show("intersection a & b", a & b)
+    show("union a | b", a | b)
+    show("difference a - b", a - b)
 
-    note("合并字典：| 运算符（3.9+）")
+    note("merge dicts: the | operator (3.9+)")
     base = {"host": "localhost", "port": 80}
     show("base | {'port': 443}", base | {"port": 443})

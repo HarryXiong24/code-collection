@@ -1,16 +1,16 @@
-//! 16 测试 —— Rust 内置测试框架，`#[cfg(test)]` + `cargo test`，零第三方依赖。
+//! 16 Testing — Rust's built-in test framework, `#[cfg(test)]` + `cargo test`, zero third-party dependencies.
 //!
-//! 运行：
-//!     cargo test              跑全部测试
-//!     cargo test -- --nocapture   连带打印 println!
+//! Run:
+//!     cargo test                  run all tests
+//!     cargo test -- --nocapture   also print println! output
 //!
-//! 要点：
-//!   1. 测试函数标 `#[test]`，用 assert_eq! / assert! 断言。
-//!   2. 测试模块用 `#[cfg(test)]` 标注，只在 `cargo test` 时编译。
-//!   3. 表驱动：把「输入 → 期望」列成数组，循环断言。
-//!   4. `#[should_panic]` 断言某段代码会 panic。
+//! Key points:
+//!   1. Test functions are marked `#[test]` and assert with assert_eq! / assert!.
+//!   2. The test module is marked `#[cfg(test)]`, compiled only during `cargo test`.
+//!   3. Table-driven: list "input → expected" in an array and assert in a loop.
+//!   4. `#[should_panic]` asserts that a piece of code panics.
 
-#![allow(dead_code)] // 这些函数只被测试用到，非测试构建下不算死代码
+#![allow(dead_code)] // these functions are used only by tests; not dead code in non-test builds
 
 pub fn classify(n: i32) -> &'static str {
     if n < 0 {
@@ -36,7 +36,7 @@ mod tests {
 
     #[test]
     fn test_classify() {
-        // 表驱动：一张表覆盖多组输入
+        // table-driven: one table covers multiple inputs
         for (input, expected) in [(-5, "negative"), (0, "zero"), (42, "positive")] {
             assert_eq!(classify(input), expected, "classify({input})");
         }

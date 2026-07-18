@@ -1,31 +1,31 @@
 import { note, show, title } from '../log.js';
 
 /**
- * 泛型 —— 让类型「参数化」，写一次逻辑适配多种类型且不丢类型信息。
- * 要点：
- *   1. <T> 是类型参数，调用时可显式传，也可由实参推断。
- *   2. 约束 `<T extends X>` 限定 T 至少具备某些能力。
- *   3. 泛型可用于函数、类、接口、类型别名。
- *   4. keyof + 索引类型做到「类型安全地按 key 取值」。
- *   5. 默认类型参数 `<T = string>`。
+ * Generics — "parameterize" types, write logic once that fits many types without losing type info.
+ * Key points:
+ *   1. <T> is a type parameter; at the call site you can pass it explicitly or let it be inferred from arguments.
+ *   2. The constraint `<T extends X>` requires T to have at least certain capabilities.
+ *   3. Generics work for functions, classes, interfaces, and type aliases.
+ *   4. keyof + indexed types achieve "type-safe access by key".
+ *   5. Default type parameter `<T = string>`.
  */
 
-// 泛型函数：进什么类型，出什么类型
+// generic function: whatever type goes in, that type comes out
 function identity<T>(x: T): T {
   return x;
 }
 
-// 约束：T 必须有 length 属性
+// constraint: T must have a length property
 function longest<T extends { length: number }>(a: T, b: T): T {
   return a.length >= b.length ? a : b;
 }
 
-// keyof + 索引：obj[key] 的类型正好是对应字段类型
+// keyof + indexing: the type of obj[key] is exactly the corresponding field's type
 function pluck<T, K extends keyof T>(obj: T, key: K): T[K] {
   return obj[key];
 }
 
-// 泛型类：一个类型安全的栈
+// generic class: a type-safe stack
 class Stack<T> {
   private items: T[] = [];
   push(item: T): void {
@@ -40,30 +40,30 @@ class Stack<T> {
 }
 
 export function genericsDemo(): void {
-  title('06 泛型');
+  title('06 Generics');
 
-  note('泛型函数：类型随实参推断');
+  note('generic function: the type is inferred from the argument');
   show('identity<number>(42)', identity(42));
   show('identity("hi")', identity('hi'));
 
-  note('约束：只要有 length 就能比，string 和数组都行');
+  note('constraint: anything with length can be compared, both strings and arrays work');
   show('longest("abcd", "xy")', longest('abcd', 'xy'));
   show('longest([1,2], [3,4,5])', longest([1, 2], [3, 4, 5]));
 
-  note('keyof：按 key 取值且类型精确（拼错 key 编译报错）');
+  note('keyof: access by key with a precise type (a mistyped key is a compile error)');
   const user = { id: 1, name: 'Harry', active: true };
   show('pluck(user, "name")', pluck(user, 'name'));
   show('pluck(user, "active")', pluck(user, 'active'));
 
-  note('泛型类：Stack<number> 只接受 number');
+  note('generic class: Stack<number> accepts only number');
   const st = new Stack<number>();
   st.push(1);
   st.push(2);
   show('stack.pop()', st.pop());
   show('stack.size', st.size);
 
-  note('内置工具类型基于泛型：Partial / Pick / Readonly …');
+  note('built-in utility types are based on generics: Partial / Pick / Readonly …');
   type User = typeof user;
-  const patch: Partial<User> = { name: 'Alice' }; // 所有字段变可选
+  const patch: Partial<User> = { name: 'Alice' }; // all fields become optional
   show('Partial patch', patch);
 }

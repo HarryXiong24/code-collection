@@ -15,7 +15,7 @@ import { iteratorsDemo } from './demos/13-iterators.js';
 import { modulesDemo } from './demos/14-modules.js';
 import { sortingEqualityDemo } from './demos/15-sorting-equality.js';
 
-/** demo 名 → 函数。名字用于 `npm start types generics` 只跑指定的几个。 */
+/** demo name → function. The names are used by `npm start types generics` to run only the specified ones. */
 const DEMOS: Record<string, () => void | Promise<void>> = {
   types: typesDemo,
   collections: collectionsDemo,
@@ -39,15 +39,15 @@ function selected(): string[] {
   if (args.length === 0) return Object.keys(DEMOS);
   const unknown = args.filter((a) => !(a in DEMOS));
   if (unknown.length > 0) {
-    error(`未知的 demo: ${unknown.join(', ')}`);
-    note(`可选: ${Object.keys(DEMOS).join(' | ')}`);
+    error(`unknown demo: ${unknown.join(', ')}`);
+    note(`options: ${Object.keys(DEMOS).join(' | ')}`);
     process.exit(1);
   }
   return args;
 }
 
 async function main(): Promise<void> {
-  title('TypeScript 语言用法演示');
+  title('TypeScript language usage demos');
   for (const name of selected()) {
     const fn = DEMOS[name];
     if (fn) await fn();

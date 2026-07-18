@@ -1,4 +1,4 @@
-"""被测函数示例，供 tests/test_demos.py 使用。"""
+"""Example functions under test, used by tests/test_demos.py."""
 
 from typing import Literal
 

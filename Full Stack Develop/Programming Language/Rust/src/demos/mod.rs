@@ -1,5 +1,5 @@
-//! demo 模块聚合。每个子模块暴露一个 pub fn run()，由 ../main.rs 统一调度。
-//! 与 ../../TypeScript、../../Go、../../Python 的主题一一对应。
+//! Aggregates the demo modules. Each submodule exposes a pub fn run(), dispatched centrally by ../main.rs.
+//! The topics correspond one-to-one to ../../TypeScript, ../../Go, and ../../Python.
 
 pub mod d01_types;
 pub mod d02_collections;

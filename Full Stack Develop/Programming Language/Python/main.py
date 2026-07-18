@@ -1,8 +1,8 @@
-"""Python 语言用法演示入口。
+"""Entry point for the Python language usage demos.
 
-    python main.py                 跑全部 12 个 demo
-    python main.py generics async  只跑指定的几个
-    python -m unittest             跑单元测试（见 tests/test_demos.py）
+    python main.py                 run all demos
+    python main.py generics async  run only the specified ones
+    python -m unittest             run the unit tests (see tests/test_demos.py)
 """
 
 import sys
@@ -27,7 +27,7 @@ from demos import (
 )
 from demos.log import error, note, title
 
-# demo 名 → run 函数，顺序与 TypeScript / Go 项目一一对应。
+# demo name → run function; the order corresponds one-to-one to the TypeScript / Go projects.
 DEMOS: dict[str, Callable[[], None]] = {
     "types": d01_types.run,
     "collections": d02_collections.run,
@@ -51,12 +51,12 @@ def main() -> None:
     args = [a for a in sys.argv[1:] if not a.startswith("-")]
     unknown = [a for a in args if a not in DEMOS]
     if unknown:
-        error(f"未知的 demo: {', '.join(unknown)}")
-        note(f"可选: {' | '.join(DEMOS)}")
+        error(f"unknown demo: {', '.join(unknown)}")
+        note(f"options: {' | '.join(DEMOS)}")
         sys.exit(1)
 
     names = args or list(DEMOS)
-    title("Python 语言用法演示")
+    title("Python language usage demos")
     for name in names:
         DEMOS[name]()
     print()

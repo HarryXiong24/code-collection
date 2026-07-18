@@ -4,16 +4,16 @@ use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
-/// 并发 —— 线程 + 消息传递 + 共享状态，「无畏并发」由类型系统保证安全。
-/// 要点：
-///   1. thread::spawn 起系统线程，join 等待并取回返回值。
-///   2. channel（mpsc）：多生产者单消费者，用「通信」传递数据的所有权。
-///   3. Arc<Mutex<T>>：跨线程共享可变状态，Arc 计数共享、Mutex 互斥。
-///   4. 数据竞争在编译期就被所有权/借用规则挡下，不是运行时才炸。
+/// Concurrency — threads + message passing + shared state; "fearless concurrency" made safe by the type system.
+/// Key points:
+///   1. thread::spawn starts an OS thread, join waits and retrieves the return value.
+///   2. channel (mpsc): multi-producer single-consumer, transferring ownership of data via "communication".
+///   3. Arc<Mutex<T>>: share mutable state across threads, Arc counts the sharing, Mutex provides mutual exclusion.
+///   4. Data races are blocked at compile time by the ownership/borrow rules, not blown up at runtime.
 pub fn run() {
-    title("08 并发（线程 + 消息传递）");
+    title("08 Concurrency (threads + message passing)");
 
-    note("thread::spawn + join：并发跑，等全部结束");
+    note("thread::spawn + join: run concurrently, wait for all to finish");
     let start = Instant::now();
     let handles: Vec<_> = (0..3)
         .map(|i| {
@@ -24,10 +24,10 @@ pub fn run() {
         })
         .collect();
     let results: Vec<String> = handles.into_iter().map(|h| h.join().unwrap()).collect();
-    show("并发结果数", results.len());
-    show("并发耗时≈最慢那个(ms)", start.elapsed().as_millis());
+    show("number of concurrent results", results.len());
+    show("concurrent time ≈ the slowest one (ms)", start.elapsed().as_millis());
 
-    note("channel：用通信共享数据，发送即转移所有权");
+    note("channel: share data via communication, sending transfers ownership");
     let (tx, rx) = mpsc::channel();
     for i in 0..3 {
         let tx = tx.clone();
@@ -35,25 +35,25 @@ pub fn run() {
             tx.send(i * 10).unwrap();
         });
     }
-    drop(tx); // 关掉最后一个发送端，rx 迭代才会结束
+    drop(tx); // close the last sender so the rx iteration can end
     let mut got: Vec<i32> = rx.iter().collect();
     got.sort();
-    show("channel 收到", &got);
+    show("channel received", &got);
 
-    note("Arc<Mutex<T>>：安全地跨线程共享可变状态");
+    note("Arc<Mutex<T>>: safely share mutable state across threads");
     let counter = Arc::new(Mutex::new(0));
     let mut handles = vec![];
     for _ in 0..100 {
         let c = Arc::clone(&counter);
         handles.push(thread::spawn(move || {
             let mut n = c.lock().unwrap();
-            *n += 1; // 临界区
+            *n += 1; // critical section
         }));
     }
     for h in handles {
         h.join().unwrap();
     }
-    show("100 线程各 +1", *counter.lock().unwrap());
+    show("100 threads each +1", *counter.lock().unwrap());
 
-    note("无畏并发：数据竞争在编译期就被类型系统挡下");
+    note("fearless concurrency: data races are blocked by the type system at compile time");
 }

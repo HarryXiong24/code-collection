@@ -1,58 +1,58 @@
 import { note, show, title } from '../log.js';
 
 /**
- * 内存 / 引用 / 拷贝 —— JS 没有裸指针，但「引用 vs 值」的坑处处都在。
- * 要点：
- *   1. 原始值（number/string/boolean…）按值复制；对象/数组/函数按引用复制。
- *   2. 赋值和传参传的是「引用的拷贝」，改内部会互相影响。
- *   3. 浅拷贝 {...o} / [...a] 只复制一层；深层仍共享。
- *   4. 深拷贝用 structuredClone()（现代运行时内置）。
- *   5. === 比较对象是「同一个引用吗」，不是「内容一样吗」。
+ * Memory / references / copying — JS has no raw pointers, but the "reference vs value" trap is everywhere.
+ * Key points:
+ *   1. Primitive values (number/string/boolean…) are copied by value; objects/arrays/functions by reference.
+ *   2. Assignment and argument passing pass "a copy of the reference", so mutating the interior affects each other.
+ *   3. Shallow copy {...o} / [...a] copies only one level; deeper data is still shared.
+ *   4. Deep copy uses structuredClone() (built into modern runtimes).
+ *   5. === compares objects by "same reference?", not "same content?".
  */
 export function memoryReferencesDemo(): void {
-  title('11 内存 / 引用 / 拷贝');
+  title('11 Memory / references / copying');
 
-  note('原始值按值复制：改副本不影响原值');
+  note('primitive values are copied by value: changing the copy doesn\'t affect the original');
   let a = 10;
   let b = a;
   b += 5;
   show('a / b', [a, b]);
 
-  note('对象按引用复制：两个变量指向同一块内存');
+  note('objects are copied by reference: two variables point at the same memory');
   const o1 = { count: 1 };
   const o2 = o1;
   o2.count = 99;
-  show('o1.count（被 o2 改到）', o1.count);
+  show('o1.count (changed via o2)', o1.count);
   show('o1 === o2', o1 === o2);
 
-  note('=== 比较引用而非内容：内容相同但不是同一个对象 → false');
+  note('=== compares references, not content: same content but not the same object → false');
   show('{x:1} === {x:1}', ({ x: 1 } as object) === ({ x: 1 } as object));
 
-  note('浅拷贝只复制一层：嵌套对象仍共享');
+  note('shallow copy copies only one level: nested objects are still shared');
   const original = { name: 'Harry', tags: ['a', 'b'] };
   const shallow = { ...original };
-  shallow.tags.push('c'); // 改到的是共享的那个数组
-  show('original.tags（被浅拷贝改到）', original.tags);
+  shallow.tags.push('c'); // this changes the shared array
+  show('original.tags (changed via the shallow copy)', original.tags);
 
-  note('深拷贝：structuredClone 彻底断开引用');
+  note('deep copy: structuredClone fully severs the references');
   const deep = structuredClone(original);
   deep.tags.push('z');
-  show('original.tags（深拷贝不影响）', original.tags);
+  show('original.tags (unaffected by deep copy)', original.tags);
   show('deep.tags', deep.tags);
 
-  note('传参也是传引用拷贝：函数能改对象内部，但重新赋值不影响外部');
+  note('argument passing also passes a copy of the reference: a function can mutate the object interior, but reassigning doesn\'t affect the outside');
   const mutate = (obj: { count: number }): void => {
-    obj.count += 1; // 改内部 → 外部可见
+    obj.count += 1; // mutating the interior → visible outside
   };
   const reassign = (obj: { count: number }): void => {
-    obj = { count: -1 }; // 只换了本地引用 → 外部看不到
+    obj = { count: -1 }; // only swaps the local reference → invisible outside
   };
   const box = { count: 0 };
   mutate(box);
   reassign(box);
   show('box.count', box.count);
 
-  note('冻结：Object.freeze 让对象浅层只读（strict 下改会报错）');
+  note('freezing: Object.freeze makes an object shallowly read-only (changes throw under strict)');
   const frozen = Object.freeze({ pi: 3.14 });
   show('Object.isFrozen', Object.isFrozen(frozen));
 }

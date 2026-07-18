@@ -2,11 +2,11 @@
 name = "rust-language-demo"
 version = "1.0.0"
 edition = "2021"
-description = "Rust 语言用法演示 — 类型、集合、函数、控制流、结构体/trait、泛型、错误处理、并发、高级类型、宏、所有权、标准库、迭代器、模块、排序与相等性、测试。"
+description = "Rust language usage demos — types, collections, functions, control flow, structs/traits, generics, error handling, concurrency, advanced types, macros, ownership, standard library, iterators, modules, sorting & equality, testing."
 
 [[bin]]
 name = "rust-language-demo"
 path = "src/main.rs"
 
 [dependencies]
-# 无第三方依赖，纯标准库即可运行：cargo run
+# No third-party dependencies; runs with the standard library alone: cargo run

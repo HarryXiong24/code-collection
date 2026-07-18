@@ -2,7 +2,7 @@
   "name": "typescript-language-demo",
   "version": "1.0.0",
   "private": true,
-  "description": "TypeScript 语言用法演示 — 类型、集合、函数、类/接口、泛型、错误处理、异步、高级类型、装饰器、引用语义、标准库、测试。",
+  "description": "TypeScript language usage demos — types, collections, functions, classes/interfaces, generics, error handling, async, advanced types, decorators, reference semantics, standard library, testing.",
   "type": "module",
   "scripts": {
     "build": "tsc -p tsconfig.json",

@@ -7,46 +7,46 @@ import (
 	"proglang/internal/logx"
 )
 
-// Types 演示类型与变量。
-// 要点：
-//  1. var 声明可带类型也可推断；:= 是「声明并推断」的简写（仅函数内可用）。
-//  2. 基本类型：bool / string / int / int64 / float64 / rune / byte 等，界限清晰。
-//  3. Go 不做隐式数值转换 —— int 和 int64 相加也要显式转。
-//  4. 每种类型都有「零值」：数字 0、字符串 ""、bool false、指针 nil。
-//  5. const 是编译期常量；iota 生成递增枚举值。
+// Types demonstrates types and variables.
+// Key points:
+//  1. var declarations may carry a type or infer it; := is shorthand for "declare and infer" (only usable inside a function).
+//  2. Basic types: bool / string / int / int64 / float64 / rune / byte, etc., with clear boundaries.
+//  3. Go does no implicit numeric conversion — adding an int and an int64 requires an explicit conversion.
+//  4. Every type has a "zero value": 0 for numbers, "" for strings, false for bool, nil for pointers.
+//  5. const is a compile-time constant; iota generates incrementing enum values.
 func Types() {
-	logx.Title("01 类型与变量")
+	logx.Title("01 Types & variables")
 
-	logx.Note("var 显式声明；:= 声明并推断（只能在函数内）")
+	logx.Note("var declares explicitly; := declares and infers (only inside a function)")
 	var name string = "Harry"
-	age := 30     // 推断为 int
-	price := 9.99 // 推断为 float64
-	isVip := true // 推断为 bool
+	age := 30     // inferred as int
+	price := 9.99 // inferred as float64
+	isVip := true // inferred as bool
 	logx.Show("name / age / price / isVip", fmt.Sprintf("%s / %d / %.2f / %t", name, age, price, isVip))
 
-	logx.Note("零值：未初始化的变量有确定的默认值，不是垃圾值")
+	logx.Note("zero values: an uninitialized variable has a definite default, not garbage")
 	var (
 		zeroInt int
 		zeroStr string
 		zeroBl  bool
 	)
-	logx.Show("零值 int / bool", fmt.Sprintf("%d / %t", zeroInt, zeroBl))
-	logx.Show("零值 string == \"\"", zeroStr == "")
+	logx.Show("zero int / bool", fmt.Sprintf("%d / %t", zeroInt, zeroBl))
+	logx.Show("zero string == \"\"", zeroStr == "")
 
-	logx.Note("没有隐式转换：不同数值类型运算前必须显式转")
+	logx.Note("no implicit conversion: different numeric types must be converted explicitly before arithmetic")
 	var i int = 7
 	var f float64 = 2.0
 	logx.Show("float64(i) / f", float64(i)/f)
 
-	logx.Note("rune 是 int32（一个 Unicode 码点），byte 是 uint8")
+	logx.Note("a rune is an int32 (a single Unicode code point), a byte is a uint8")
 	s := "Go语言"
-	logx.Show("len(s) 字节数", len(s))            // 按字节
-	logx.Show("[]rune(s) 字符数", len([]rune(s))) // 按字符
+	logx.Show("len(s) byte count", len(s))              // by bytes
+	logx.Show("[]rune(s) character count", len([]rune(s))) // by characters
 	for i, r := range "Aあ" {
 		logx.Show(fmt.Sprintf("rune@%d", i), fmt.Sprintf("%c (U+%04X)", r, r))
 	}
 
-	logx.Note("const + iota：生成一组递增常量（枚举的基础）")
+	logx.Note("const + iota: generates a group of incrementing constants (the basis of enums)")
 	const (
 		Sunday  = iota // 0
 		Monday         // 1
@@ -54,7 +54,7 @@ func Types() {
 	)
 	logx.Show("iota Sunday/Monday/Tuesday", []int{Sunday, Monday, Tuesday})
 
-	logx.Note("字符串 ↔ 数字用 strconv，不会隐式转换")
+	logx.Note("string ↔ number uses strconv, no implicit conversion")
 	n, _ := strconv.Atoi("42")
 	logx.Show("strconv.Atoi(\"42\")", n)
 	logx.Show("strconv.Itoa(7)", strconv.Itoa(7))

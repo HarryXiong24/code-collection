@@ -8,48 +8,48 @@ import (
 	"proglang/internal/logx"
 )
 
-// Product 用 struct tag 给字段附加「元数据」。
-// tag 是反引号里的字符串，encoding/json、数据库 ORM、校验库都靠它工作。
+// Product attaches "metadata" to fields via struct tags.
+// A tag is a string inside backticks; encoding/json, database ORMs, and validation libraries all rely on it.
 type Product struct {
 	ID    int     `json:"id" validate:"required"`
 	Name  string  `json:"name" validate:"required"`
 	Price float64 `json:"price" validate:"min=0"`
-	notes string  // 未导出字段：反射看得到但读不了值
+	notes string  // unexported field: reflection can see it but can't read its value
 }
 
-// validate 用反射读取 tag，做一个迷你校验器 —— 相当于其它语言用「装饰器/注解」做的事。
+// validate reads tags via reflection to build a mini validator — the equivalent of what other languages do with "decorators/annotations".
 func validate(v any) []string {
 	var problems []string
 	rv := reflect.ValueOf(v)
 	rt := rv.Type()
 	for i := 0; i < rt.NumField(); i++ {
 		field := rt.Field(i)
-		rule := field.Tag.Get("validate") // 读 `validate:"..."` 里的规则
+		rule := field.Tag.Get("validate") // read the rule inside `validate:"..."`
 		if strings.Contains(rule, "required") && rv.Field(i).IsZero() {
-			problems = append(problems, field.Name+" 不能为空")
+			problems = append(problems, field.Name+" cannot be empty")
 		}
 	}
 	return problems
 }
 
-// Reflection 演示 struct tag + 反射（Go 版「元编程 / 注解」）。
-// 要点：
-//  1. Go 没有 TS/Python 那样的装饰器，横切逻辑靠 struct tag + reflect 实现。
-//  2. tag 是附在字段上的字符串元数据，编译期不解释，运行时用反射读取。
-//  3. json 序列化、ORM 映射、参数校验全都基于这套机制。
-//  4. 反射灵活但慢且丢失编译期检查，能不用就不用。
+// Reflection demonstrates struct tags + reflection (Go's take on "metaprogramming / annotations").
+// Key points:
+//  1. Go has no decorators like TS/Python; cross-cutting logic is done with struct tags + reflect.
+//  2. A tag is string metadata attached to a field, uninterpreted at compile time and read at runtime via reflection.
+//  3. JSON serialization, ORM mapping, and parameter validation are all built on this mechanism.
+//  4. Reflection is flexible but slow and loses compile-time checking, so avoid it when you can.
 func Reflection() {
-	logx.Title("10 struct tag + 反射（元编程）")
+	logx.Title("10 struct tags + reflection (metaprogramming)")
 
-	logx.Note("reflect 遍历字段名与类型")
+	logx.Note("reflect walks field names and types")
 	rt := reflect.TypeOf(Product{})
 	for i := 0; i < rt.NumField(); i++ {
 		f := rt.Field(i)
 		logx.Show("field "+f.Name, fmt.Sprintf("%s  json=%s", f.Type, f.Tag.Get("json")))
 	}
 
-	logx.Note("基于 validate tag 的迷你校验器（缺 required 字段会报出来）")
-	bad := Product{Price: -1} // ID、Name 空
+	logx.Note("a mini validator based on the validate tag (missing required fields get reported)")
+	bad := Product{Price: -1} // ID, Name empty
 	logx.Show("validate(bad)", validate(bad))
 
 	good := Product{ID: 1, Name: "Book", Price: 20}

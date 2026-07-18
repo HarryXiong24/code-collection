@@ -6,75 +6,75 @@ import (
 	"proglang/internal/logx"
 )
 
-// User 结构体：Go 用结构体承载数据，字段首字母大写才是导出的（public）。
+// User struct: Go uses structs to carry data; a field is exported (public) only if it starts with an uppercase letter.
 type User struct {
 	ID    int
 	Name  string
-	Email string // 小写字段仅包内可见
+	Email string // a lowercase field is visible only within the package
 }
 
-// Account 结构体 + 方法。
+// Account: struct + methods.
 type Account struct {
 	Owner   string
-	balance int // 未导出：外部改不了，只能通过方法
+	balance int // unexported: outsiders can't change it, only through methods
 }
 
-// Deposit 用指针接收者，才能改到结构体本身。
+// Deposit uses a pointer receiver so it can modify the struct itself.
 func (a *Account) Deposit(amount int) *Account {
 	a.balance += amount
-	return a // 返回指针支持链式调用
+	return a // returning a pointer supports method chaining
 }
 
-// Summary 用值接收者，只读不改。
+// Summary uses a value receiver; read-only, no mutation.
 func (a Account) Summary() string {
 	return fmt.Sprintf("%s: ¥%d", a.Owner, a.balance)
 }
 
-// Greeter 接口：只列方法签名。Go 的接口是「隐式实现」——
-// 任何类型只要有这些方法，就自动满足接口，不用写 implements。
+// Greeter interface: lists only method signatures. Go's interfaces are "implicitly implemented" —
+// any type that has these methods satisfies the interface automatically, with no implements keyword.
 type Greeter interface {
 	Greet() string
 }
 
-// Greet 让 Account 隐式满足 Greeter。
+// Greet makes Account implicitly satisfy Greeter.
 func (a Account) Greet() string { return "Hi, I'm " + a.Owner }
 
-// VipAccount 组合（嵌入）：把 Account 直接嵌进来，自动获得它的字段和方法。
-// Go 没有继承，用「嵌入 + 方法覆盖」代替。
+// VipAccount composition (embedding): embed Account directly to inherit its fields and methods automatically.
+// Go has no inheritance; it uses "embedding + method overriding" instead.
 type VipAccount struct {
-	Account // 匿名嵌入
+	Account // anonymous embedding
 	Level   string
 }
 
-// Greet 覆盖嵌入类型的同名方法。
+// Greet overrides the embedded type's method of the same name.
 func (v VipAccount) Greet() string {
 	return v.Account.Greet() + " (VIP " + v.Level + ")"
 }
 
-// Structs 演示结构体 / 方法 / 接口 / 组合。
-// 要点：
-//  1. 结构体是值类型；用指针接收者的方法才能修改它。
-//  2. 首字母大写 = 导出（public），小写 = 包内私有。
-//  3. 接口是隐式实现的（鸭子类型）：有方法即满足，无需声明。
-//  4. 用嵌入（embedding）做组合，替代继承。
+// Structs demonstrates structs / methods / interfaces / composition.
+// Key points:
+//  1. Structs are value types; only methods with pointer receivers can modify them.
+//  2. Uppercase initial = exported (public), lowercase = package-private.
+//  3. Interfaces are implicitly implemented (duck typing): having the methods satisfies it, no declaration needed.
+//  4. Use embedding for composition, replacing inheritance.
 func Structs() {
-	logx.Title("05 结构体 / 方法 / 接口")
+	logx.Title("05 Structs / methods / interfaces")
 
-	logx.Note("结构体字面量：可按字段名初始化")
+	logx.Note("struct literals: can be initialized by field name")
 	u := User{ID: 1, Name: "Harry"}
 	logx.Show("User{...}", fmt.Sprintf("%+v", u))
 
-	logx.Note("指针接收者方法可链式调用并真正修改状态")
+	logx.Note("pointer-receiver methods support chaining and genuinely modify state")
 	acc := (&Account{Owner: "Harry"}).Deposit(100).Deposit(50)
 	logx.Show("acc.Summary()", acc.Summary())
 
-	logx.Note("隐式接口：Account 没写 implements，却能当 Greeter 用")
+	logx.Note("implicit interface: Account never wrote implements, yet works as a Greeter")
 	var g Greeter = acc
 	logx.Show("g.Greet()", g.Greet())
 
-	logx.Note("组合（嵌入）：VipAccount 复用 Account 的字段和方法")
+	logx.Note("composition (embedding): VipAccount reuses Account's fields and methods")
 	vip := VipAccount{Account: Account{Owner: "Alice", balance: 1000}, Level: "Gold"}
-	logx.Show("vip.Owner（提升字段）", vip.Owner) // 直接访问嵌入类型的字段
-	logx.Show("vip.Summary()（提升方法）", vip.Summary())
-	logx.Show("vip.Greet()（覆盖）", vip.Greet())
+	logx.Show("vip.Owner (promoted field)", vip.Owner) // directly access the embedded type's field
+	logx.Show("vip.Summary() (promoted method)", vip.Summary())
+	logx.Show("vip.Greet() (overridden)", vip.Greet())
 }

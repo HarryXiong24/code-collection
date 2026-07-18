@@ -8,39 +8,39 @@ import (
 	"proglang/internal/logx"
 )
 
-// Concurrency 演示并发。
-// 要点：
-//  1. go f() 起一个 goroutine（极轻量，几 KB 栈），几千上万个都没问题。
-//  2. channel 是 goroutine 之间的类型安全管道：ch <- v 发送，<-ch 接收。
-//  3. sync.WaitGroup 等一组 goroutine 全部结束。
-//  4. select 同时等多个 channel，可配 time.After 做超时。
-//  5. 共享内存要加锁（sync.Mutex），或干脆「用通信代替共享」。
+// Concurrency demonstrates concurrency.
+// Key points:
+//  1. go f() starts a goroutine (extremely lightweight, a few KB stack); thousands or tens of thousands are fine.
+//  2. A channel is a type-safe pipe between goroutines: ch <- v sends, <-ch receives.
+//  3. sync.WaitGroup waits for a group of goroutines to all finish.
+//  4. select waits on multiple channels at once, and can pair with time.After for a timeout.
+//  5. Shared memory needs a lock (sync.Mutex), or just "communicate instead of share".
 func Concurrency() {
-	logx.Title("08 并发（goroutine + channel）")
+	logx.Title("08 Concurrency (goroutine + channel)")
 
-	logx.Note("WaitGroup + 带缓冲 channel：并发算完再收集结果")
+	logx.Note("WaitGroup + buffered channel: collect results after concurrent computation")
 	start := time.Now()
-	tasks := []int{30, 30, 30} // 每个睡 30ms
+	tasks := []int{30, 30, 30} // each sleeps 30ms
 	results := make(chan string, len(tasks))
 	var wg sync.WaitGroup
 	for i, ms := range tasks {
 		wg.Add(1)
-		go func(id, delay int) { // 每个任务一个 goroutine
+		go func(id, delay int) { // one goroutine per task
 			defer wg.Done()
 			time.Sleep(time.Duration(delay) * time.Millisecond)
 			results <- fmt.Sprintf("task%d(%dms)", id, delay)
 		}(i, ms)
 	}
-	wg.Wait()      // 等全部完成
-	close(results) // 关闭后可以 range 取干净
+	wg.Wait()      // wait for all to finish
+	close(results) // after closing you can range over it cleanly
 	got := []string{}
 	for r := range results {
 		got = append(got, r)
 	}
-	logx.Show("并发结果数", len(got))
-	logx.Show("并发耗时≈最慢那个(ms)", time.Since(start).Milliseconds()) // ≈30 而非 90
+	logx.Show("number of concurrent results", len(got))
+	logx.Show("concurrent time ≈ the slowest one (ms)", time.Since(start).Milliseconds()) // ≈30, not 90
 
-	logx.Note("select + time.After：谁先就绪走谁，实现超时")
+	logx.Note("select + time.After: whichever is ready first wins, implementing a timeout")
 	slow := make(chan string)
 	go func() {
 		time.Sleep(100 * time.Millisecond)
@@ -50,10 +50,10 @@ func Concurrency() {
 	case v := <-slow:
 		logx.Show("select", v)
 	case <-time.After(20 * time.Millisecond):
-		logx.Show("select 超时", "timeout")
+		logx.Show("select timeout", "timeout")
 	}
 
-	logx.Note("共享计数器：Mutex 保护，避免数据竞争")
+	logx.Note("shared counter: protected by a Mutex to avoid data races")
 	var mu sync.Mutex
 	counter := 0
 	var wg2 sync.WaitGroup
@@ -62,10 +62,10 @@ func Concurrency() {
 		go func() {
 			defer wg2.Done()
 			mu.Lock()
-			counter++ // 临界区
+			counter++ // critical section
 			mu.Unlock()
 		}()
 	}
 	wg2.Wait()
-	logx.Show("100 goroutine 各 +1", counter) // 稳定是 100
+	logx.Show("100 goroutines each +1", counter) // reliably 100
 }

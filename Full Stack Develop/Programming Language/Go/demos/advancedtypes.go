@@ -6,7 +6,7 @@ import (
 	"proglang/internal/logx"
 )
 
-// Status 是「defined type」：底层是 int，但和 int 是不同类型，需显式转换。
+// Status is a "defined type": the underlying type is int, but it is a distinct type from int and needs explicit conversion.
 type Status int
 
 const (
@@ -15,7 +15,7 @@ const (
 	StatusClosed               // 2
 )
 
-// String 实现 fmt.Stringer，让枚举打印出名字而非数字 —— Go 的「枚举」惯用法。
+// String implements fmt.Stringer so the enum prints its name instead of a number — Go's "enum" idiom.
 func (s Status) String() string {
 	switch s {
 	case StatusActive:
@@ -29,43 +29,43 @@ func (s Status) String() string {
 	}
 }
 
-// Celsius / Fahrenheit：defined type 让「单位」进入类型系统，防止混用。
+// Celsius / Fahrenheit: a defined type brings "units" into the type system, preventing mix-ups.
 type Celsius float64
 type Fahrenheit float64
 
 func (c Celsius) ToF() Fahrenheit { return Fahrenheit(c*9/5 + 32) }
 
-// MyID 是「type alias」：完全等同于 int，只是换个名字（注意 = 号）。
+// MyID is a "type alias": exactly the same as int, just a different name (note the = sign).
 type MyID = int
 
-// AdvancedTypes 演示高级类型。
-// 要点：
-//  1. defined type（type X int）创造新类型，配 iota + String() 就是枚举。
-//  2. type alias（type X = int）只是别名，和原类型完全互换。
-//  3. 用 defined type 给「单位/ID」加类型安全，防止参数传错。
-//  4. any（= interface{}）+ 类型断言 v, ok := x.(T) 在运行时取回具体类型。
+// AdvancedTypes demonstrates advanced types.
+// Key points:
+//  1. A defined type (type X int) creates a new type; paired with iota + String() it becomes an enum.
+//  2. A type alias (type X = int) is only an alias, fully interchangeable with the original type.
+//  3. Use a defined type to add type safety to "units/IDs", preventing wrong arguments.
+//  4. any (= interface{}) + a type assertion v, ok := x.(T) retrieves the concrete type at runtime.
 func AdvancedTypes() {
-	logx.Title("09 高级类型")
+	logx.Title("09 Advanced types")
 
-	logx.Note("iota 枚举 + Stringer：打印出名字，可正查反查")
-	logx.Show("StatusActive", StatusActive)           // 走 String()
-	logx.Show("int(StatusClosed)", int(StatusClosed)) // 底层值
-	logx.Show("所有状态", []Status{StatusActive, StatusPaused, StatusClosed})
+	logx.Note("iota enum + Stringer: prints the name, forward and reverse lookups both work")
+	logx.Show("StatusActive", StatusActive)           // goes through String()
+	logx.Show("int(StatusClosed)", int(StatusClosed)) // the underlying value
+	logx.Show("all statuses", []Status{StatusActive, StatusPaused, StatusClosed})
 
-	logx.Note("defined type 让单位进类型系统：Celsius 不会被误当普通 float64")
+	logx.Note("defined type brings units into the type system: Celsius won't be mistaken for a plain float64")
 	body := Celsius(37)
 	logx.Show("37°C → °F", body.ToF())
 
-	logx.Note("type alias：MyID 就是 int，可直接互换")
+	logx.Note("type alias: MyID is just int, directly interchangeable")
 	var id MyID = 42
 	logx.Show("MyID + int", id+8)
 
-	logx.Note("类型断言：从 any 里安全取回具体类型")
+	logx.Note("type assertion: safely retrieve the concrete type from an any")
 	var x any = "hello"
 	if s, ok := x.(string); ok {
 		logx.Show("x.(string)", s)
 	}
 	if _, ok := x.(int); !ok {
-		logx.Show("x.(int) 失败", "ok=false，不会 panic")
+		logx.Show("x.(int) fails", "ok=false, no panic")
 	}
 }

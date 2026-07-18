@@ -7,56 +7,56 @@ import (
 	"proglang/internal/logx"
 )
 
-// Iterators 演示迭代器（Go 1.23 起的 range-over-func）。
-// 要点：
-//  1. iter.Seq[T] 就是 func(yield func(T) bool)：把每个值交给 yield。
-//  2. yield 返回 false 表示下游要停了（比如 break），生产者应立即返回。
-//  3. for v := range seq 直接遍历这种「函数式迭代器」（1.23 新特性）。
-//  4. 惰性：值在被 range 取时才算，所以能表示无限序列。
-//  5. slices.Collect 把迭代器物化成切片；slices.Values 把切片变回迭代器。
+// Iterators demonstrates iterators (range-over-func, since Go 1.23).
+// Key points:
+//  1. iter.Seq[T] is just func(yield func(T) bool): hand each value to yield.
+//  2. yield returning false means the consumer wants to stop (e.g. break), so the producer should return immediately.
+//  3. for v := range seq iterates such a "functional iterator" directly (the 1.23 feature).
+//  4. Lazy: values are computed only when range pulls them, so it can represent infinite sequences.
+//  5. slices.Collect materializes an iterator into a slice; slices.Values turns a slice back into an iterator.
 func Iterators() {
-	logx.Title("13 迭代器（range-over-func, 1.23）")
+	logx.Title("13 Iterators (range-over-func, 1.23)")
 
-	logx.Note("自定义 iter.Seq：range 直接遍历")
+	logx.Note("a custom iter.Seq: range iterates it directly")
 	got := []int{}
 	for v := range count(5) {
 		got = append(got, v)
 	}
 	logx.Show("range count(5)", got)
 
-	logx.Note("slices.Collect：把迭代器物化成切片")
+	logx.Note("slices.Collect: materialize an iterator into a slice")
 	logx.Show("slices.Collect(count(5))", slices.Collect(count(5)))
 
-	logx.Note("无限序列 + take：惰性，只算需要的部分")
+	logx.Note("infinite sequence + take: lazy, computes only what's needed")
 	logx.Show("take(fibSeq, 10)", slices.Collect(take(fibSeq(), 10)))
 
-	logx.Note("惰性流水线：mapSeq 不产生中间切片")
+	logx.Note("lazy pipeline: mapSeq produces no intermediate slice")
 	squares := mapSeq(fibSeq(), func(n int) int { return n * n })
-	logx.Show("fib 平方前 5 个", slices.Collect(take(squares, 5)))
+	logx.Show("first 5 fib squares", slices.Collect(take(squares, 5)))
 
-	logx.Note("yield 返回 false 会提前结束生产（这里 range 里 break）")
+	logx.Note("yield returning false ends production early (here break inside range)")
 	first := -1
 	for v := range fibSeq() {
 		if v > 10 {
 			first = v
-			break // 触发 yield 返回 false，fibSeq 随即 return
+			break // triggers yield to return false, and fibSeq returns right after
 		}
 	}
-	logx.Show("第一个 >10 的斐波那契", first)
+	logx.Show("first Fibonacci >10", first)
 }
 
-// count 返回 0..n-1 的迭代器。
+// count returns an iterator over 0..n-1.
 func count(n int) iter.Seq[int] {
 	return func(yield func(int) bool) {
 		for i := 0; i < n; i++ {
-			if !yield(i) { // 下游不想要了就停
+			if !yield(i) { // stop as soon as the consumer no longer wants values
 				return
 			}
 		}
 	}
 }
 
-// fibSeq 是无限斐波那契迭代器。
+// fibSeq is an infinite Fibonacci iterator.
 func fibSeq() iter.Seq[int] {
 	return func(yield func(int) bool) {
 		a, b := 0, 1
@@ -69,7 +69,7 @@ func fibSeq() iter.Seq[int] {
 	}
 }
 
-// mapSeq 惰性变换：进 Seq[T]，出 Seq[R]。
+// mapSeq is a lazy transform: takes Seq[T], returns Seq[R].
 func mapSeq[T, R any](s iter.Seq[T], fn func(T) R) iter.Seq[R] {
 	return func(yield func(R) bool) {
 		for v := range s {
@@ -80,7 +80,7 @@ func mapSeq[T, R any](s iter.Seq[T], fn func(T) R) iter.Seq[R] {
 	}
 }
 
-// take 只取前 n 个。
+// take yields only the first n elements.
 func take[T any](s iter.Seq[T], n int) iter.Seq[T] {
 	return func(yield func(T) bool) {
 		i := 0

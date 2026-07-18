@@ -1,8 +1,8 @@
-//! 极简打印工具的 Rust 版：把「表达式 → 结果」对齐打印出来。
-//! 对应 TypeScript 的 src/log.ts、Go 的 internal/logx、Python 的 demos/log.py。
+//! The Rust version of the minimal printing helper: prints "expression → result" aligned.
+//! Corresponds to TypeScript's src/log.ts, Go's internal/logx, and Python's demos/log.py.
 //!
-//! show 用 `{:?}`（Debug）统一格式化任意值：字符串带引号、数字直出、
-//! 集合打印成 [..]，正好和另外三门语言的展示风格一致。
+//! show uses `{:?}` (Debug) to format any value uniformly: strings get quotes, numbers print raw,
+//! and collections print as [..], matching the display style of the other three languages exactly.
 
 use std::fmt::Debug;
 
@@ -12,19 +12,19 @@ const BOLD: &str = "\x1b[1m";
 const CYAN: &str = "\x1b[36m";
 const GREEN: &str = "\x1b[32m";
 
-/// 打印一节的标题。
+/// Print a section heading.
 pub fn title(text: &str) {
     let n = text.chars().count();
     let line = "━".repeat(if n >= 40 { 0 } else { 40 - n });
     println!("\n{BOLD}{CYAN}━━ {text} {line}{RESET}");
 }
 
-/// 打印一行讲解（灰色 # 注释）。
+/// Print an explanatory line (a dimmed # comment).
 pub fn note(text: &str) {
     println!("  {DIM}# {text}{RESET}");
 }
 
-/// 打印「表达式 → 结果」，对齐成 expr → value。
+/// Print "expression → result", aligned as expr → value.
 pub fn show<T: Debug>(expr: &str, value: T) {
     let n = expr.chars().count();
     let pad = " ".repeat(if n >= 44 { 1 } else { 44 - n });

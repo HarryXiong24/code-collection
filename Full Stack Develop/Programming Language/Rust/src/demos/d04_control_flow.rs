@@ -1,12 +1,12 @@
 use crate::log::{note, show, title};
 
-/// 控制流 —— if 是表达式、match 模式匹配、loop/while/for。
-/// 要点：
-///   1. if / loop 都是「表达式」，能直接把结果赋给变量。
-///   2. match 是穷尽的模式匹配，是 Rust 处理分支的核心。
-///   3. match 支持守卫 `if`、范围 `1..=9`、绑定。
-///   4. if let 是「只关心一个分支」的简写。
-///   5. for 遍历迭代器；loop 可用 break 返回值。
+/// Control flow — if is an expression, match pattern matching, loop/while/for.
+/// Key points:
+///   1. if / loop are both "expressions", so you can assign their result directly to a variable.
+///   2. match is exhaustive pattern matching, the core of how Rust handles branching.
+///   3. match supports guards `if`, ranges `1..=9`, and bindings.
+///   4. if let is shorthand for "only care about one branch".
+///   5. for iterates an iterator; loop can return a value with break.
 
 enum Shape {
     Circle { r: f64 },
@@ -15,7 +15,7 @@ enum Shape {
 }
 
 fn area(s: &Shape) -> f64 {
-    // match 必须覆盖所有变体，漏了编译不过
+    // match must cover all variants; miss one and it won't compile
     match s {
         Shape::Circle { r } => std::f64::consts::PI * r * r,
         Shape::Square { side } => side * side,
@@ -24,9 +24,9 @@ fn area(s: &Shape) -> f64 {
 }
 
 pub fn run() {
-    title("04 控制流");
+    title("04 Control flow");
 
-    note("if 是表达式，直接赋值");
+    note("if is an expression, assigned directly");
     let score = 82;
     let grade = if score >= 90 {
         "A"
@@ -37,17 +37,17 @@ pub fn run() {
     };
     show("grade", grade);
 
-    note("for + enumerate：遍历同时拿下标");
+    note("for + enumerate: iterate while getting the index");
     for (i, fruit) in ["apple", "banana", "cherry"].iter().enumerate() {
         show(&format!("fruits[{i}]"), *fruit);
     }
 
-    note("match：穷尽匹配枚举");
+    note("match: exhaustive matching of an enum");
     show("area(circle r=2)", format!("{:.2}", area(&Shape::Circle { r: 2.0 })));
     show("area(square side=5)", area(&Shape::Square { side: 5.0 }));
     show("area(rect 3x4)", area(&Shape::Rect { w: 3.0, h: 4.0 }));
 
-    note("match 守卫 + 范围模式");
+    note("match guard + range pattern");
     let describe = |n: i32| match n {
         0 => "zero",
         x if x < 0 => "negative",
@@ -58,13 +58,13 @@ pub fn run() {
     show("describe(7)", describe(7));
     show("describe(100)", describe(100));
 
-    note("if let：只处理一个分支的简写");
+    note("if let: shorthand for handling only one branch");
     let maybe: Option<i32> = Some(42);
     if let Some(v) = maybe {
         show("if let Some(v)", v);
     }
 
-    note("while 收集；loop 用 break 返回值");
+    note("while collects; loop returns a value with break");
     let mut n = 3;
     let mut acc = vec![];
     while n > 0 {
@@ -77,7 +77,7 @@ pub fn run() {
     let doubled = loop {
         i += 1;
         if i == 5 {
-            break i * 2; // loop 作为表达式返回
+            break i * 2; // loop returns as an expression
         }
     };
     show("loop break value", doubled);

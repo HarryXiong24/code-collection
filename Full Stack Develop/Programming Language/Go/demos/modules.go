@@ -2,27 +2,27 @@ package demos
 
 import (
 	"proglang/internal/logx"
-	"proglang/internal/shapes" // 导入路径 = 模块名/目录，包名是最后一段
+	"proglang/internal/shapes" // the import path = module name/directory; the package name is the last segment
 )
 
-// Modules 演示包 / 导入 / 可见性。
-// 要点：
-//  1. Go 的封装单元是「包」（package），不是文件；同一包可拆成多个文件。
-//  2. 导出规则只看首字母大小写：大写导出，小写包内私有 —— 没有 public/private 关键字。
-//  3. 导入用完整路径 module/dir，引用时用包名前缀：shapes.CircleArea。
-//  4. init() 在包被导入时自动运行，先于 main，用于一次性初始化。
-//  5. internal/ 目录是特殊约定：只能被其父目录子树内的代码导入。
+// Modules demonstrates packages / imports / visibility.
+// Key points:
+//  1. Go's unit of encapsulation is the "package", not the file; one package can be split across multiple files.
+//  2. Export rules look only at the initial letter's case: uppercase exports, lowercase is package-private — no public/private keyword.
+//  3. Import with the full path module/dir, and reference with the package name prefix: shapes.CircleArea.
+//  4. init() runs automatically when the package is imported, before main, for one-time initialization.
+//  5. The internal/ directory is a special convention: it can only be imported by code within its parent directory's subtree.
 func Modules() {
-	logx.Title("14 包 / 导入 / 可见性")
+	logx.Title("14 Packages / imports / visibility")
 
-	logx.Note("调用导出函数：首字母大写的才能跨包访问")
+	logx.Note("calling an exported function: only uppercase-initial names are accessible across packages")
 	logx.Show("shapes.CircleArea(2)", shapes.CircleArea(2))
-	logx.Show("shapes.Pi（导出常量）", shapes.Pi)
+	logx.Show("shapes.Pi (exported constant)", shapes.Pi)
 
-	logx.Note("shapes.square 未导出（小写），这里根本写不出来 —— 编译期就挡住")
+	logx.Note("shapes.square is unexported (lowercase); you literally can't write it here — blocked at compile time")
 
-	logx.Note("init() 在包导入时自动跑过了，状态通过导出函数暴露")
+	logx.Note("init() already ran automatically at import; the state is exposed through an exported function")
 	logx.Show("shapes.Loaded()", shapes.Loaded())
 
-	logx.Note("internal/ 目录：只有 proglang 子树内的代码能导入，是强制的封装边界")
+	logx.Note("the internal/ directory: only code within the proglang subtree can import it, an enforced encapsulation boundary")
 }

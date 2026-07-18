@@ -1,9 +1,9 @@
 /**
- * 一个「模块」= 一个文件。用 export 决定对外暴露什么，没 export 的就是模块私有。
- * 这是被 14-modules.ts 导入的示例模块。
+ * One "module" = one file. Use export to decide what's exposed; anything without export is module-private.
+ * This is the example module imported by 14-modules.ts.
  */
 
-// 具名导出：可以有多个
+// named exports: there can be several
 export const PI = 3.14159;
 
 export function add(a: number, b: number): number {
@@ -15,14 +15,14 @@ export interface Point {
   y: number;
 }
 
-// 模块私有：没有 export，外部看不到，只能通过导出的函数间接使用
+// module-private: no export, invisible outside, usable only indirectly through an exported function
 const HIDDEN = 'module-private';
 
 export function reveal(): string {
   return HIDDEN;
 }
 
-// 默认导出：一个模块最多一个，导入时名字随便起
+// default export: at most one per module, named however you like on import
 export default function greet(name: string): string {
   return `Hi, ${name}`;
 }

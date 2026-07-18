@@ -1,16 +1,16 @@
 use crate::log::{note, show, title};
 use std::collections::{HashMap, HashSet};
 
-/// 集合类型 —— 数组 / Vec / 元组 / HashMap / HashSet。
-/// 要点：
-///   1. 数组 [T; N] 定长在栈上；Vec<T> 变长在堆上。
-///   2. 切片 &[T] 是「借用的视图」，函数参数首选它，兼容数组和 Vec。
-///   3. HashMap / HashSet 是哈希表；遍历顺序随机（本 demo 排序后再展示）。
-///   4. 迭代器适配器 map/filter/collect 是惯用的「函数式」处理方式。
+/// Collection types — array / Vec / tuple / HashMap / HashSet.
+/// Key points:
+///   1. An array [T; N] is fixed-length on the stack; Vec<T> is variable-length on the heap.
+///   2. A slice &[T] is a "borrowed view", the preferred function parameter, compatible with arrays and Vec.
+///   3. HashMap / HashSet are hash tables; iteration order is random (this demo sorts before displaying).
+///   4. Iterator adapters map/filter/collect are the idiomatic "functional" way to process data.
 pub fn run() {
-    title("02 集合类型");
+    title("02 Collection types");
 
-    note("数组 [T; N] 定长；Vec<T> 变长");
+    note("array [T; N] is fixed-length; Vec<T> is variable-length");
     let arr = [1, 2, 3];
     let mut nums = vec![3, 1, 4, 1, 5, 9];
     show("array [i32; 3]", arr);
@@ -18,19 +18,19 @@ pub fn run() {
     nums.push(2);
     show("after push(2)", &nums);
 
-    note("迭代器链：map/filter/collect（惰性，collect 才求值）");
+    note("iterator chain: map/filter/collect (lazy, evaluated only at collect)");
     let doubled: Vec<i32> = nums.iter().map(|x| x * 2).collect();
     show("map *2", &doubled);
     let big: Vec<i32> = nums.iter().copied().filter(|&x| x > 3).collect();
     show("filter > 3", &big);
     show("sum", nums.iter().sum::<i32>());
 
-    note("排序要显式（sort 原地改），先 clone 保留原序");
+    note("sorting must be explicit (sort mutates in place); clone first to keep the original order");
     let mut sorted = nums.clone();
     sorted.sort();
     show("sorted", &sorted);
 
-    note("HashMap：键值表，get 返回 Option");
+    note("HashMap: a key-value table, get returns Option");
     let mut scores: HashMap<&str, i32> = HashMap::new();
     scores.insert("alice", 95);
     scores.insert("bob", 82);
@@ -38,16 +38,16 @@ pub fn run() {
     show("contains_key(\"bob\")", scores.contains_key("bob"));
     show("len", scores.len());
 
-    note("HashSet：自动去重；交集用 intersection");
+    note("HashSet: automatic dedup; use intersection for the intersection");
     let set: HashSet<i32> = [1, 2, 2, 3, 3, 3].into_iter().collect();
-    show("set len (6 个输入)", set.len());
+    show("set len (6 inputs)", set.len());
     let a: HashSet<i32> = [1, 2, 3].into_iter().collect();
     let b: HashSet<i32> = [2, 3, 4].into_iter().collect();
     let mut inter: Vec<i32> = a.intersection(&b).copied().collect();
     inter.sort();
     show("intersection a & b", &inter);
 
-    note("切片模式：split_first 取头 + 余下");
+    note("slice pattern: split_first takes the head + the rest");
     let (first, rest) = nums.split_first().unwrap();
     show("first", *first);
     show("rest", rest);

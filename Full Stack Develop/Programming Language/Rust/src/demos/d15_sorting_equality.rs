@@ -2,13 +2,13 @@ use crate::log::{note, show, title};
 use std::cmp::Ordering;
 use std::collections::HashSet;
 
-/// 自定义排序与相等性 —— sort_by_key / sort_by、derive 相等与哈希、自定义 Ord。
-/// 要点：
-///   1. sort_by_key 取排序键；sort_by 用比较器返回 Ordering。
-///   2. 多键排序用 Ordering::then 串联。
-///   3. sort 稳定；sort_unstable 更快但不保证相等元素顺序。
-///   4. #[derive(PartialEq, Eq, Hash)] → 按值判等、可作 HashSet/HashMap 键。
-///   5. 自己实现 Ord 就能用 < > 和 sort。
+/// Custom sorting & equality — sort_by_key / sort_by, derived equality and hashing, custom Ord.
+/// Key points:
+///   1. sort_by_key takes a sort key; sort_by uses a comparator returning Ordering.
+///   2. Multi-key sorting chains with Ordering::then.
+///   3. sort is stable; sort_unstable is faster but doesn't guarantee the order of equal elements.
+///   4. #[derive(PartialEq, Eq, Hash)] → value equality, usable as a HashSet/HashMap key.
+///   5. Implement Ord yourself to use < > and sort.
 
 #[derive(Debug, Clone, PartialEq, Eq, Hash)]
 struct Employee {
@@ -17,7 +17,7 @@ struct Employee {
     age: u32,
 }
 
-// 自定义 Ord：先比 major 再比 minor
+// custom Ord: compare major first, then minor
 #[derive(PartialEq, Eq)]
 struct Version {
     major: u32,
@@ -48,7 +48,7 @@ fn names(es: &[Employee]) -> Vec<&str> {
 }
 
 pub fn run() {
-    title("15 自定义排序与相等性");
+    title("15 Custom sorting & equality");
 
     let people = vec![
         emp("Alice", "eng", 30),
@@ -57,38 +57,38 @@ pub fn run() {
         emp("Dave", "sales", 40),
     ];
 
-    note("单键排序：sort_by_key 取排序依据");
+    note("single-key sort: sort_by_key gives the sort basis");
     let mut by_age = people.clone();
     by_age.sort_by_key(|e| e.age);
-    show("按 age 升序", names(&by_age));
+    show("by age ascending", names(&by_age));
 
-    note("多键排序：sort_by + Ordering::then（dept 升序, age 降序）");
+    note("multi-key sort: sort_by + Ordering::then (dept ascending, age descending)");
     let mut multi = people.clone();
     multi.sort_by(|a, b| a.dept.cmp(&b.dept).then(b.age.cmp(&a.age)));
-    show("dept↑ 再 age↓", names(&multi));
+    show("dept↑ then age↓", names(&multi));
 
-    note("sort 稳定：同 dept 保持原始相对顺序（Alice 在 Carol 前）");
+    note("sort is stable: same dept keeps its original relative order (Alice before Carol)");
     let mut stable = people.clone();
     stable.sort_by_key(|e| e.dept.clone());
-    show("稳定排序", names(&stable));
+    show("stable sort", names(&stable));
 
-    note("相等性：#[derive(PartialEq)] 按字段逐一比较");
+    note("equality: #[derive(PartialEq)] compares field by field");
     let a = emp("Alice", "eng", 30);
     let b = a.clone();
     show("a == b", a == b);
 
-    note("#[derive(Eq, Hash)] → 可作 HashSet 键，天然按值去重");
+    note("#[derive(Eq, Hash)] → usable as a HashSet key, naturally deduped by value");
     let set: HashSet<Employee> = people.iter().cloned().chain([a]).collect();
-    show("去重后数量", set.len()); // Alice 重复 → 仍是 4
+    show("count after dedup", set.len()); // Alice is a duplicate → still 4
 
-    note("自定义 Ord：实现 cmp 后即可 < > 和 sort");
+    note("custom Ord: once cmp is implemented you can use < > and sort");
     let mut versions = vec![
         Version { major: 2, minor: 0 },
         Version { major: 1, minor: 5 },
         Version { major: 1, minor: 2 },
     ];
     versions.sort();
-    show("排序版本", &versions);
+    show("sorted versions", &versions);
     show(
         "Version(1,2) < Version(1,5)",
         Version { major: 1, minor: 2 } < Version { major: 1, minor: 5 },

@@ -1,55 +1,55 @@
 # Python
 
-Python 语言用法演示（Python 3.12+）。每个 demo 打印出「表达式 → 结果」，跑一遍就能看到语言特性的真实行为，不用去背文档。
+A demonstration of Python usage (Python 3.12+). Every demo prints "expression → result", so a single run shows you the real behavior of each language feature without memorizing docs.
 
-与同目录的 [`../TypeScript`](../TypeScript)、[`../Go`](../Go)、[`../Rust`](../Rust) 是**同一套主题、逐一对应**的四份实现，方便横向对比这几种强类型语言的写法差异。
+Together with [`../TypeScript`](../TypeScript), [`../Go`](../Go), and [`../Rust`](../Rust) in the same directory, these are four implementations of **the same set of topics, one-to-one aligned**, making it easy to compare how these strongly typed languages differ.
 
-## 跑起来
+## Run it
 
 ```bash
-python main.py                  # 跑全部 15 个 demo
-python main.py generics async   # 只跑指定的几个
-python -m unittest              # 跑单元测试（见 tests/test_demos.py）
+python main.py                  # run all 15 demos
+python main.py generics async   # run only the specified ones
+python -m unittest              # run the unit tests (see tests/test_demos.py)
 ```
 
-需要 Python ≥ 3.12（用到 PEP 695 泛型语法 `def f[T]`、`type` 语句、`@override`）。无第三方依赖。
+Requires Python ≥ 3.12 (uses PEP 695 generic syntax `def f[T]`, the `type` statement, and `@override`). No third-party dependencies.
 
-> 全程是 **Python 3**。项目里所有 `print` 都是函数、除法 `/` 是真除法、字符串默认 Unicode —— 不涉及任何 Python 2 写法。
+> Everything here is **Python 3**. In this project every `print` is a function, `/` is true division, and strings are Unicode by default — no Python 2 idioms anywhere.
 
-## 内容
+## Contents
 
-| # | 文件 | 名字 | 重点 |
+| # | File | Name | Focus |
 | --- | --- | --- | --- |
-| 01 | `demos/d01_types.py` | `types` | 动态类型 + 类型注解、`int` 任意精度、`None`、转换、f-string |
-| 02 | `demos/d02_collections.py` | `collections` | `list`/`tuple`/`dict`/`set`、推导式、切片、解包 |
-| 03 | `demos/d03_functions.py` | `functions` | 默认参数、`*args`/`**kwargs`、仅关键字参数、闭包、`Callable` |
-| 04 | `demos/d04_control_flow.py` | `control-flow` | `for-else`、`enumerate`/`zip`、`match` 结构化模式匹配、真值 |
-| 05 | `demos/d05_classes.py` | `classes` | `@dataclass`、`@property`、继承、`Protocol` 结构化子类型、`@override` |
-| 06 | `demos/d06_generics.py` | `generics` | PEP 695 泛型 `def f[T]` / `class Stack[T]`、有界类型参数 |
-| 07 | `demos/d07_errors.py` | `errors` | `try/except/else/finally`、自定义异常、`raise from`、`with` |
-| 08 | `demos/d08_async.py` | `async` | `asyncio`、`gather`、`TaskGroup`、`wait_for` 超时 |
-| 09 | `demos/d09_advanced_types.py` | `advanced-types` | `Literal`、`Enum`、`TypedDict`、`type` 别名、`isinstance` 收窄 |
-| 10 | `demos/d10_decorators.py` | `decorators` | 装饰器、`functools.wraps`、带参装饰器、`@lru_cache` |
-| 11 | `demos/d11_memory.py` | `memory` | 引用语义、可变/不可变、`is` vs `==`、可变默认参数坑、`deepcopy` |
-| 12 | `demos/d12_stdlib.py` | `stdlib` | `json`、`datetime`、`pathlib`、`collections`、`itertools` |
-| 13 | `demos/d13_iterators.py` | `iterators` | 生成器 `yield`、生成器表达式、惰性无限序列、`__iter__`、`yield from` |
-| 14 | `demos/d14_modules.py` + `mathlib.py` | `modules` | `import` 各写法、`__all__`、下划线约定、`__name__` / `__main__` |
-| 15 | `demos/d15_sorting_equality.py` | `sorting` | `key=` 多键排序、稳定性、`frozen dataclass` 判等/哈希、`@total_ordering` |
-| 16 | `tests/test_demos.py` | — | 内置 `unittest`，`subTest` 表驱动（用 `python -m unittest` 跑） |
+| 01 | `demos/d01_types.py` | `types` | dynamic typing + type annotations, arbitrary-precision `int`, `None`, conversions, f-strings |
+| 02 | `demos/d02_collections.py` | `collections` | `list`/`tuple`/`dict`/`set`, comprehensions, slicing, unpacking |
+| 03 | `demos/d03_functions.py` | `functions` | default parameters, `*args`/`**kwargs`, keyword-only parameters, closures, `Callable` |
+| 04 | `demos/d04_control_flow.py` | `control-flow` | `for-else`, `enumerate`/`zip`, `match` structural pattern matching, truthiness |
+| 05 | `demos/d05_classes.py` | `classes` | `@dataclass`, `@property`, inheritance, `Protocol` structural subtyping, `@override` |
+| 06 | `demos/d06_generics.py` | `generics` | PEP 695 generics `def f[T]` / `class Stack[T]`, bounded type parameters |
+| 07 | `demos/d07_errors.py` | `errors` | `try/except/else/finally`, custom exceptions, `raise from`, `with` |
+| 08 | `demos/d08_async.py` | `async` | `asyncio`, `gather`, `TaskGroup`, `wait_for` timeout |
+| 09 | `demos/d09_advanced_types.py` | `advanced-types` | `Literal`, `Enum`, `TypedDict`, `type` aliases, `isinstance` narrowing |
+| 10 | `demos/d10_decorators.py` | `decorators` | decorators, `functools.wraps`, parameterized decorators, `@lru_cache` |
+| 11 | `demos/d11_memory.py` | `memory` | reference semantics, mutable/immutable, `is` vs `==`, the mutable-default-argument trap, `deepcopy` |
+| 12 | `demos/d12_stdlib.py` | `stdlib` | `json`, `datetime`, `pathlib`, `collections`, `itertools` |
+| 13 | `demos/d13_iterators.py` | `iterators` | generators `yield`, generator expressions, lazy infinite sequences, `__iter__`, `yield from` |
+| 14 | `demos/d14_modules.py` + `mathlib.py` | `modules` | the various `import` forms, `__all__`, the underscore convention, `__name__` / `__main__` |
+| 15 | `demos/d15_sorting_equality.py` | `sorting` | `key=` multi-key sorting, stability, `frozen dataclass` equality/hashing, `@total_ordering` |
+| 16 | `tests/test_demos.py` | — | the built-in `unittest`, `subTest` table-driven (run with `python -m unittest`) |
 
-## 类型系统要点（Python 的取舍）
+## Type-system highlights (Python's trade-offs)
 
-- **动态类型 + 渐进式类型注解**：注解在**运行时不强制**，靠 `mypy` / `pyright` 静态检查兜底。这点和 TypeScript 的「编译期擦除」很像，但 Python 连编译步骤都没有 —— 注解纯粹是给工具和读者的。
-- **`Protocol` = 结构化子类型**：有对应方法就算实现，无需显式继承（见 `05`）。对应 Go 的隐式接口、TS 的结构化 `interface`。
-- **一切皆对象、变量是引用**：理解「可变 vs 不可变」和 `is`/`==` 的区别是绕开一整类 bug 的关键（见 `11`）。
-- **PEP 695 新泛型语法（3.12+）**：`def first[T](xs: list[T]) -> T | None` 直接写类型参数，不用再 `TypeVar`（见 `06`）。
+- **Dynamic typing + gradual type annotations**: annotations are **not enforced at runtime**, backed instead by static checkers like `mypy` / `pyright`. This resembles TypeScript's "compile-time erasure", but Python doesn't even have a compile step — annotations are purely for tooling and readers.
+- **`Protocol` = structural subtyping**: having the matching methods counts as implementing it, no explicit inheritance needed (see `05`). This corresponds to Go's implicit interfaces and TS's structural `interface`.
+- **Everything is an object, variables are references**: understanding "mutable vs immutable" and the difference between `is`/`==` is the key to avoiding an entire class of bugs (see `11`).
+- **PEP 695 new generic syntax (3.12+)**: `def first[T](xs: list[T]) -> T | None` writes the type parameter inline, no more `TypeVar` (see `06`).
 
-## 工具链
+## Toolchain
 
-| 用途 | 工具 |
+| Purpose | Tool |
 | --- | --- |
-| 版本 / 虚拟环境 | `python -m venv .venv`，或 `uv` / `pyenv` |
-| 依赖管理 | `pip` + `pyproject.toml`，现代方案 `uv` / `poetry` |
-| 类型检查 | `mypy` / `pyright`（配置见 `pyproject.toml` 的 `[tool.mypy]`） |
-| 测试 | 内置 `unittest`（本项目）、或 `pytest` |
-| Lint / 格式化 | `ruff`（一个工具搞定 lint + format） |
+| Versions / virtual environments | `python -m venv .venv`, or `uv` / `pyenv` |
+| Dependency management | `pip` + `pyproject.toml`, modern alternatives `uv` / `poetry` |
+| Type checking | `mypy` / `pyright` (config in `pyproject.toml`'s `[tool.mypy]`) |
+| Testing | built-in `unittest` (this project), or `pytest` |
+| Lint / formatting | `ruff` (one tool handles lint + format) |

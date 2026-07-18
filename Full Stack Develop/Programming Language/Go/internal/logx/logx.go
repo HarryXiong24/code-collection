@@ -1,6 +1,6 @@
-// Package logx 是三个语言项目共用的极简打印工具的 Go 版：
-// 每个 demo 都用它把「表达式 → 结果」对齐打印出来。
-// 对应 TypeScript 的 src/log.ts、Python 的 demos/log.py。
+// Package logx is the Go version of the minimal printing helper shared across the
+// language projects: every demo uses it to print "expression → result" aligned.
+// It corresponds to TypeScript's src/log.ts and Python's demos/log.py.
 package logx
 
 import (
@@ -17,18 +17,18 @@ const (
 	red   = "\033[31m"
 )
 
-// Title 打印一节的标题。
+// Title prints a section heading.
 func Title(text string) {
 	line := strings.Repeat("━", max(0, 40-len([]rune(text))))
 	fmt.Printf("\n%s%s━━ %s %s%s\n", bold, cyan, text, line, reset)
 }
 
-// Note 打印一行讲解（灰色 # 注释）。
+// Note prints an explanatory line (a dimmed # comment).
 func Note(text string) {
 	fmt.Printf("  %s# %s%s\n", dim, text, reset)
 }
 
-// Show 打印「表达式 → 结果」，对齐成 expr → value。
+// Show prints "expression → result", aligned as expr → value.
 func Show(expr string, value any) {
 	pad := 44 - len([]rune(expr))
 	if pad < 1 {
@@ -37,7 +37,7 @@ func Show(expr string, value any) {
 	fmt.Printf("  %s%s%s%s%s→%s %s\n", green, expr, strings.Repeat(" ", pad), reset, dim, reset, format(value))
 }
 
-// Errorf 打印一条错误行。
+// Errorf prints an error line.
 func Errorf(text string) {
 	fmt.Printf("  %s✗ %s%s\n", red, text, reset)
 }

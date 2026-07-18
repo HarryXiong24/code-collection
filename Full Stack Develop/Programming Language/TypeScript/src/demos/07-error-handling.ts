@@ -1,16 +1,16 @@
 import { note, show, title } from '../log.js';
 
 /**
- * 错误处理 —— TS 的模型是「抛异常 + try/catch/finally」。
- * 要点：
- *   1. throw 任意值，但应 throw Error（或其子类）以带上堆栈。
- *   2. catch 到的变量类型是 unknown，用前要先收窄。
- *   3. 自定义错误类 extends Error，便于按类型分派。
- *   4. finally 总会执行，常用于释放资源。
- *   5. 想「不用异常表达失败」时，可仿 Go/Rust 返回 Result 联合类型。
+ * Error handling — TS's model is "throw exceptions + try/catch/finally".
+ * Key points:
+ *   1. You can throw any value, but you should throw Error (or a subclass) to carry a stack.
+ *   2. A caught variable has type unknown; narrow it before use.
+ *   3. Custom error classes extend Error, making it easy to dispatch by type.
+ *   4. finally always runs, commonly used to release resources.
+ *   5. When you want to "express failure without exceptions", you can mimic Go/Rust with a Result union type.
  */
 
-// 自定义错误：带上业务字段
+// custom error: carries a business field
 class ValidationError extends Error {
   constructor(
     public readonly field: string,
@@ -23,12 +23,12 @@ class ValidationError extends Error {
 
 function parseAge(input: string): number {
   const n = Number(input);
-  if (Number.isNaN(n)) throw new ValidationError('age', `"${input}" 不是数字`);
-  if (n < 0) throw new ValidationError('age', '年龄不能为负');
+  if (Number.isNaN(n)) throw new ValidationError('age', `"${input}" is not a number`);
+  if (n < 0) throw new ValidationError('age', 'age cannot be negative');
   return n;
 }
 
-// Result 风格：把失败编码进返回值，而不是抛出（调用方必须处理）
+// Result style: encode failure into the return value instead of throwing (the caller must handle it)
 type Result<T, E = string> = { ok: true; value: T } | { ok: false; error: E };
 
 function safeDivide(a: number, b: number): Result<number> {
@@ -37,17 +37,17 @@ function safeDivide(a: number, b: number): Result<number> {
 }
 
 export function errorHandlingDemo(): void {
-  title('07 错误处理');
+  title('07 Error handling');
 
-  note('try/catch：catch 变量是 unknown，先用 instanceof 收窄');
+  note('try/catch: the catch variable is unknown, narrow it with instanceof first');
   try {
     parseAge('abc');
   } catch (e) {
-    if (e instanceof ValidationError) show(`捕获 ${e.name}`, `${e.field}: ${e.message}`);
-    else throw e; // 不是我们认识的错误，继续往上抛
+    if (e instanceof ValidationError) show(`caught ${e.name}`, `${e.field}: ${e.message}`);
+    else throw e; // not an error we recognize, rethrow upward
   }
 
-  note('finally 总会执行，用于收尾');
+  note('finally always runs, used for cleanup');
   const trace: string[] = [];
   try {
     trace.push('try');
@@ -57,14 +57,14 @@ export function errorHandlingDemo(): void {
   } finally {
     trace.push('finally');
   }
-  show('执行顺序', trace);
+  show('execution order', trace);
 
-  note('Result 风格：不抛异常，用返回值表达成功/失败');
+  note('Result style: no throwing, express success/failure via the return value');
   const r1 = safeDivide(10, 2);
   const r2 = safeDivide(1, 0);
   show('safeDivide(10, 2)', r1.ok ? r1.value : `err: ${r1.error}`);
   show('safeDivide(1, 0)', r2.ok ? r2.value : `err: ${r2.error}`);
 
-  note('异步错误同样用 try/catch 包住 await');
+  note('async errors are likewise wrapped by try/catch around await');
   Promise.reject(new Error('async fail')).catch((e) => show('rejected', (e as Error).message));
 }

@@ -2,23 +2,23 @@ use crate::log::{note, show, title};
 use std::collections::HashMap;
 use std::time::Duration;
 
-/// 标准库常用惯例 —— String/&str、字符串方法、解析格式化、HashMap entry、迭代聚合。
-/// 要点：
-///   1. String 拥有且可变；&str 是借用的字符串视图，函数参数首选 &str。
-///   2. 字符串方法都返回新值（原串是不可变借用）。
-///   3. parse/format! 做解析与格式化；format! 的占位符很强大。
-///   4. HashMap 的 entry API 优雅处理「不存在才插入 / 就地更新」。
-///   5. JSON、日期等在 Rust 走生态 crate（serde / chrono），标准库不含。
+/// Common standard-library idioms — String/&str, string methods, parsing/formatting, HashMap entry, iterator aggregation.
+/// Key points:
+///   1. String is owned and mutable; &str is a borrowed string view, the preferred function parameter.
+///   2. String methods all return a new value (the original is an immutable borrow).
+///   3. parse/format! do parsing and formatting; format!'s placeholders are powerful.
+///   4. HashMap's entry API elegantly handles "insert only if absent / update in place".
+///   5. JSON, dates, etc. use ecosystem crates in Rust (serde / chrono); the standard library doesn't include them.
 pub fn run() {
-    title("12 标准库常用惯例");
+    title("12 Common standard-library idioms");
 
-    note("String vs &str：拥有 vs 借用的视图");
+    note("String vs &str: owned vs a borrowed view");
     let mut s = String::from("Hello");
     s.push_str(", Rust");
     show("push_str", &s);
-    show("切片 &s[0..5]", &s[0..5]);
+    show("slice &s[0..5]", &s[0..5]);
 
-    note("字符串方法都返回新值");
+    note("string methods all return a new value");
     let raw = "  Hello, Rust  ";
     show("trim", raw.trim());
     show("to_uppercase", "rust".to_uppercase());
@@ -26,28 +26,28 @@ pub fn run() {
     show("replace", "a-b-c".replace('-', "_"));
     show("contains", "rustlang".contains("lang"));
 
-    note("解析与格式化");
+    note("parsing and formatting");
     show("\"42\".parse::<i32>()", "42".parse::<i32>());
-    show("format! 补零 {:03}", format!("{:03}", 7));
-    show("format! 小数 {:.2}", format!("{:.2}", 3.14159));
-    show("format! 百分比", format!("{:.1}%", 81.37));
+    show("format! zero-pad {:03}", format!("{:03}", 7));
+    show("format! decimals {:.2}", format!("{:.2}", 3.14159));
+    show("format! percentage", format!("{:.1}%", 81.37));
 
-    note("HashMap entry API：不存在才插入、就地更新（词频统计）");
+    note("HashMap entry API: insert only if absent, update in place (word-frequency counting)");
     let mut freq: HashMap<&str, i32> = HashMap::new();
     for w in "the cat the dog the".split(' ') {
         *freq.entry(w).or_insert(0) += 1;
     }
-    show("词频 the", freq["the"]);
-    show("词频 cat", freq["cat"]);
+    show("freq the", freq["the"]);
+    show("freq cat", freq["cat"]);
 
-    note("迭代器聚合：sum / max / count");
+    note("iterator aggregation: sum / max / count");
     let nums = [3, 1, 4, 1, 5, 9];
     show("sum", nums.iter().sum::<i32>());
     show("max", nums.iter().max());
     show("count > 3", nums.iter().filter(|&&x| x > 3).count());
 
-    note("Duration：时间跨度");
-    show("Duration 90 分钟 = 秒", Duration::from_secs(90 * 60).as_secs());
+    note("Duration: a span of time");
+    show("Duration 90 minutes = seconds", Duration::from_secs(90 * 60).as_secs());
 
-    note("JSON / 日期走生态 crate（serde / chrono），标准库不内置");
+    note("JSON / dates use ecosystem crates (serde / chrono); not built into the standard library");
 }

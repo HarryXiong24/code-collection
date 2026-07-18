@@ -1,6 +1,6 @@
-"""极简打印工具的 Python 版：把「表达式 → 结果」对齐打印出来。
+"""The Python version of the minimal printing helper: prints "expression → result" aligned.
 
-对应 TypeScript 的 src/log.ts、Go 的 internal/logx/logx.go。
+Corresponds to TypeScript's src/log.ts and Go's internal/logx/logx.go.
 """
 
 from typing import Any
@@ -14,24 +14,24 @@ _RED = "\033[31m"
 
 
 def title(text: str) -> None:
-    """打印一节的标题。"""
+    """Print a section heading."""
     line = "━" * max(0, 40 - len(text))
     print(f"\n{_BOLD}{_CYAN}━━ {text} {line}{_RESET}")
 
 
 def note(text: str) -> None:
-    """打印一行讲解（灰色 # 注释）。"""
+    """Print an explanatory line (a dimmed # comment)."""
     print(f"  {_DIM}# {text}{_RESET}")
 
 
 def show(expr: str, value: Any) -> None:
-    """打印「表达式 → 结果」，对齐成 expr → value。"""
+    """Print "expression → result", aligned as expr → value."""
     pad = max(1, 44 - len(expr))
     print(f"  {_GREEN}{expr}{' ' * pad}{_RESET}{_DIM}→{_RESET} {_format(value)}")
 
 
 def error(text: str) -> None:
-    """打印一条错误行。"""
+    """Print an error line."""
     print(f"  {_RED}✗ {text}{_RESET}")
 
 

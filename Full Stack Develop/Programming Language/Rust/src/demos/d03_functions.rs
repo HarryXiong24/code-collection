@@ -1,15 +1,15 @@
 use crate::log::{note, show, title};
 
-/// 函数 —— 表达式返回、闭包、高阶函数、泛型。
-/// 要点：
-///   1. 函数体最后一个「表达式」（无分号）就是返回值。
-///   2. Rust 没有默认参数/重载，用 Option 或 builder 表达可选。
-///   3. 闭包 |x| ...，move 把环境变量的所有权搬进闭包。
-///   4. 用 impl Fn / 泛型接收函数，实现高阶函数。
-///   5. 多返回值用元组。
+/// Functions — expression returns, closures, higher-order functions, generics.
+/// Key points:
+///   1. The last "expression" in a function body (no semicolon) is the return value.
+///   2. Rust has no default parameters/overloading; use Option or a builder to express optionality.
+///   3. Closures |x| ...; move transfers ownership of captured environment variables into the closure.
+///   4. Use impl Fn / generics to accept functions, implementing higher-order functions.
+///   5. Use a tuple for multiple return values.
 
 fn add(a: i32, b: i32) -> i32 {
-    a + b // 表达式返回：没有分号、没有 return
+    a + b // expression return: no semicolon, no return
 }
 
 fn divmod(a: i32, b: i32) -> (i32, i32) {
@@ -20,35 +20,35 @@ fn sum(nums: &[i32]) -> i32 {
     nums.iter().sum()
 }
 
-// 返回闭包：impl Fn，move 捕获 factor
+// return a closure: impl Fn, move-capturing factor
 fn multiplier(factor: i32) -> impl Fn(i32) -> i32 {
     move |n| n * factor
 }
 
-// 高阶函数：把行为当参数传进来
+// higher-order function: pass behavior in as a parameter
 fn apply<T, R>(value: T, f: impl Fn(T) -> R) -> R {
     f(value)
 }
 
 pub fn run() {
-    title("03 函数");
+    title("03 Functions");
 
     show("add(2, 3)", add(2, 3));
 
-    note("多返回值用元组");
+    note("use a tuple for multiple return values");
     show("divmod(17, 5)", divmod(17, 5));
 
-    note("切片参数 &[i32]：零拷贝，兼容数组与 Vec");
+    note("slice parameter &[i32]: zero-copy, compatible with arrays and Vec");
     show("sum(&[1,2,3,4])", sum(&[1, 2, 3, 4]));
 
-    note("闭包 + move 捕获");
+    note("closure + move capture");
     let triple = multiplier(3);
     show("triple(10)", triple(10));
 
-    note("高阶函数：闭包作参数");
+    note("higher-order function: a closure as an argument");
     show("apply(9, |n| n*n)", apply(9, |n: i32| n * n));
 
-    note("没有默认参数：用 Option 表达可选");
+    note("no default parameters: use Option to express optionality");
     let greet = |name: &str, greeting: Option<&str>| format!("{}, {}", greeting.unwrap_or("Hi"), name);
     show("greet(None)", greet("Harry", None));
     show("greet(Some(\"Hello\"))", greet("Harry", Some("Hello")));

@@ -1,4 +1,4 @@
-# Go 编译产物
+# Go build artifacts
 /proglang
 *.exe
 *.test

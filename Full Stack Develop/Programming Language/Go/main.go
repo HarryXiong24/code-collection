@@ -1,8 +1,8 @@
-// Command proglang 跑一组演示 Go 语言用法的 demo。
+// Command proglang runs a set of demos showcasing Go language usage.
 //
-//	go run .                 跑全部
-//	go run . generics memory 只跑指定的几个
-//	go test ./...            跑单元测试（见 demos/mathx_test.go）
+//	go run .                 run everything
+//	go run . generics memory run only the specified ones
+//	go test ./...            run the unit tests (see demos/mathx_test.go)
 package main
 
 import (
@@ -13,7 +13,7 @@ import (
 )
 
 func main() {
-	// demo 名 → 函数，顺序与 TypeScript / Python 项目一一对应。
+	// demo name → function; the order corresponds one-to-one to the TypeScript / Python projects.
 	registry := []struct {
 		name string
 		fn   func()
@@ -35,7 +35,7 @@ func main() {
 		{"sorting", demos.SortingEquality},
 	}
 
-	logx.Title("Go 语言用法演示")
+	logx.Title("Go language usage demos")
 
 	args := os.Args[1:]
 	want := map[string]bool{}

@@ -1,10 +1,10 @@
-"""06 泛型 —— Python 3.12+ 的新泛型语法（PEP 695）。
+"""06 Generics — Python 3.12+'s new generic syntax (PEP 695).
 
-要点：
-  1. 新语法：函数 def f[T](...)、类 class Stack[T]、类型别名 type Alias[T] = ...。
-  2. 约束用「有界类型参数」T: SupportsX，或 Protocol 描述能力。
-  3. 泛型只影响静态检查，运行时被擦除（和 TypeScript 一样）。
-  4. 老代码里可能见到 typing.TypeVar / Generic，等价但更啰嗦。
+Key points:
+  1. New syntax: functions def f[T](...), classes class Stack[T], type aliases type Alias[T] = ...
+  2. Constrain with "bounded type parameters" T: SupportsX, or a Protocol describing a capability.
+  3. Generics affect only static checking and are erased at runtime (just like TypeScript).
+  4. Older code may show typing.TypeVar / Generic — equivalent but more verbose.
 """
 
 from collections.abc import Callable, Iterable
@@ -14,12 +14,12 @@ from .log import note, show, title
 
 
 def first[T](xs: list[T]) -> T | None:
-    """泛型函数（PEP 695）：进 list[T]，出 T 或 None。"""
+    """Generic function (PEP 695): takes list[T], returns T or None."""
     return xs[0] if xs else None
 
 
 def map_list[T, R](xs: Iterable[T], fn: Callable[[T], R]) -> list[R]:
-    """两个类型参数：把 T 序列变换成 R 列表。"""
+    """Two type parameters: transform a sequence of T into a list of R."""
     return [fn(x) for x in xs]
 
 
@@ -28,7 +28,7 @@ class Comparable(Protocol):
 
 
 def maximum[T: Comparable](xs: list[T]) -> T:
-    """有界类型参数 T: Comparable —— 只接受支持 < 的类型。"""
+    """Bounded type parameter T: Comparable — accepts only types that support <."""
     best = xs[0]
     for x in xs[1:]:
         if best < x:
@@ -37,7 +37,7 @@ def maximum[T: Comparable](xs: list[T]) -> T:
 
 
 class Stack[T]:
-    """泛型类：一个类型安全的栈。"""
+    """Generic class: a type-safe stack."""
 
     def __init__(self) -> None:
         self._items: list[T] = []
@@ -54,18 +54,18 @@ class Stack[T]:
 
 
 def run() -> None:
-    title("06 泛型")
+    title("06 Generics")
 
-    note("泛型函数：类型随实参推断")
+    note("generic function: the type is inferred from the argument")
     show("first([1, 2, 3])", first([1, 2, 3]))
     show("first([])", first([]))
     show("map_list([1,2,3], str)", map_list([1, 2, 3], str))
 
-    note("有界类型参数：数字、字符串都支持 < 比较")
+    note("bounded type parameter: numbers and strings both support < comparison")
     show("maximum([3, 9, 5])", maximum([3, 9, 5]))
     show("maximum(['abc', 'abd'])", maximum(["abc", "abd"]))
 
-    note("泛型类 Stack[int]：静态检查器保证只放 int")
+    note("generic class Stack[int]: the static checker guarantees only int goes in")
     st: Stack[int] = Stack()
     st.push(1)
     st.push(2)
