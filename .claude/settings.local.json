@@ -18,7 +18,8 @@
       "Bash(echo \"npm: $\\(npm -v 2>/dev/null\\)\")",
       "Bash(npx tsc *)",
       "Bash(echo \"tsc: $\\(npx tsc -v 2>/dev/null\\)\")",
-      "Bash(go version *)"
+      "Bash(go version *)",
+      "Bash(code --list-extensions)"
     ]
   }
 }

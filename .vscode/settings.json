@@ -35,7 +35,11 @@
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[python]": {
-    "editor.defaultFormatter": "ms-python.black-formatter"
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.ruff": "explicit",
+      "source.organizeImports.ruff": "explicit"
+    }
   },
   "workbench.iconTheme": "material-icon-theme",
   "prettier.requireConfig": true,
@@ -51,8 +55,8 @@
   },
   "workbench.startupEditor": "newUntitledFile",
   "python.languageServer": "Default",
-  "python-envs.defaultEnvManager": "ms-python.python:conda",
-  "python-envs.defaultPackageManager": "ms-python.python:conda",
+  "python-envs.defaultEnvManager": "ms-python.python:system",
+  "python-envs.defaultPackageManager": "ms-python.python:pip",
   "gitlens.advanced.blame.customArguments": [],
   "go.useLanguageServer": true,
   "git.ignoreLegacyWarning": true,
