@@ -7,7 +7,8 @@
 # Output:
 # [2,4,9,0,0]
 
-
+# Time Complexity: O(n)
+# s Space Complexity: O(1)
 class Solution:
     def moveZeroes(self, nums: list[int]) -> None:
         # Your code goes here

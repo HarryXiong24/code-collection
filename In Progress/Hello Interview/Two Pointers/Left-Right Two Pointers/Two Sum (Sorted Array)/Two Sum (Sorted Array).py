@@ -15,7 +15,8 @@
 # Output:
 # False
 
-
+# Time Complexity: O(n)
+# Space Complexity: O(1)
 class Solution:
     def twoSum(self, nums: list[int], target: int) -> bool:
         # Your code goes here

@@ -10,7 +10,8 @@
 # Since we are looking for unique triplets, we can ignore the duplicate [-1, 0, 1] triplet and return [[-1, -1, 2], [-1, 0, 1]].
 # The order of the triplets and the order of the elements within the triplets do not matter.
 
-
+# Time Complexity: O(n^2)
+# Space Complexity: O(n)
 class Solution:
     def threeSum(self, nums: list[int]) -> list[list[int]]:
         res: list[list[int]] = []
