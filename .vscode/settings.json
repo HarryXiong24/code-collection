@@ -62,5 +62,7 @@
   "git.ignoreLegacyWarning": true,
   "git.autofetch": true,
   "editor.guides.indentation": true,
-  "cSpell.words": ["logx", "nums", "proglang", "topo", "yout"]
+  "cSpell.words": ["logx", "nums", "proglang", "topo", "yout"],
+  "commentTranslate.source": "Google",
+  "commentTranslate.multiLineMerge": true
 }
