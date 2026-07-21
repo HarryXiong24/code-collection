@@ -14,7 +14,6 @@ class Solution:
     def maxSum(self, nums: list[int], k: int) -> int:
         # Your code goes here
         left = 0
-        max_sum = 0
         window_sum = 0
 
         if len(nums) < k:
