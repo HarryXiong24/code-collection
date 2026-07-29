@@ -19,7 +19,14 @@
       "Bash(npx tsc *)",
       "Bash(echo \"tsc: $\\(npx tsc -v 2>/dev/null\\)\")",
       "Bash(go version *)",
-      "Bash(code --list-extensions)"
+      "Bash(code --list-extensions)",
+      "Bash(python3 -V)",
+      "Bash(brew list *)",
+      "Bash(pyenv versions *)",
+      "Bash(uv python *)",
+      "Bash(time git status --porcelain)",
+      "Bash(time git log --oneline -n 20)",
+      "Read(//Users/harryxiong24/.vscode/extensions/**)"
     ]
   }
 }
