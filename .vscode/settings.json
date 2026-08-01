@@ -39,7 +39,9 @@
     "editor.codeActionsOnSave": {
       "source.fixAll.ruff": "explicit",
       "source.organizeImports.ruff": "explicit"
-    }
+    },
+    "editor.insertSpaces": true,
+    "editor.detectIndentation": false
   },
   "workbench.iconTheme": "material-icon-theme",
   "prettier.requireConfig": true,
