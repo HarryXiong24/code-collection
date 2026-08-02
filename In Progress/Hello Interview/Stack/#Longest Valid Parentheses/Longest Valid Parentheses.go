@@ -40,6 +40,7 @@ func longest_valid_parentheses(s string) int {
 		switch char {
 		case '(':
 			stack = append(stack, index)
+			fmt.Println(stack)
 		case ')':
 			stack = stack[:len(stack)-1]
 			if len(stack) > 0 {
@@ -49,6 +50,7 @@ func longest_valid_parentheses(s string) int {
 				// push the unmatched index into stack
 				stack = append(stack, index)
 			}
+			fmt.Println(stack, count)
 		}
 	}
 
@@ -57,9 +59,9 @@ func longest_valid_parentheses(s string) int {
 
 // test
 func main() {
-	fmt.Println(longest_valid_parentheses("())))"))
-	fmt.Println(longest_valid_parentheses("((()()())"))
-	fmt.Println(longest_valid_parentheses("()(()"))
+	// fmt.Println(longest_valid_parentheses("())))"))
+	// fmt.Println(longest_valid_parentheses("((()()())"))
+	// fmt.Println(longest_valid_parentheses("()(()"))
 	fmt.Println(longest_valid_parentheses("()()"))
-	fmt.Println(longest_valid_parentheses(""))
+	// fmt.Println(longest_valid_parentheses(""))
 }
