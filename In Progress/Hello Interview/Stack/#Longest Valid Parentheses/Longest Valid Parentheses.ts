@@ -24,8 +24,8 @@
 // Output:
 // 0
 
-// Time Complexity:
-// Space Complexity:
+// Time Complexity: O(n) - where n is the length of the input string
+// Space Complexity: O(n) - where n is the length of the input string (for the stack)
 export class Solution {
   longest_valid_parentheses(s: string): number {
     let longest_length = 0;

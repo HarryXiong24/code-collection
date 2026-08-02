@@ -30,6 +30,9 @@ import (
 // Output:
 // 0
 
+// Time Complexity: O(n) - where n is the length of the input string
+// Space Complexity: O(n) - where n is the length of the input string (for the stack)
+
 func longest_valid_parentheses(s string) int {
 
 	// the rule is that we can calculate count by using currentIndex - unmatchedIndex
