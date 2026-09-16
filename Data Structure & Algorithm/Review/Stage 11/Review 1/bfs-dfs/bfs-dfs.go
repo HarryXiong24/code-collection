@@ -14,22 +14,18 @@ func BFS(root *TestNode) int {
 	if root == nil {
 		return depth
 	}
-
 	queue = append(queue, root)
 
 	for len(queue) > 0 {
-
-		size := len(queue)
-
-		for i := 0; i < size; i++ {
+		for i := 0; i < len(queue); i++ {
 			current := queue[0]
 			queue = queue[1:]
 
 			fmt.Println(current.value)
-
 			for _, neighbor := range current.neighbors {
 				queue = append(queue, neighbor)
 			}
+
 		}
 		depth++
 	}
@@ -39,19 +35,13 @@ func BFS(root *TestNode) int {
 
 func DFS_Recursion(root *TestNode) {
 
-	if root == nil {
-		return
-	}
-
-	var recursion func(node *TestNode)
-	recursion = func(node *TestNode) {
-		if node == nil {
+	var recursion func(current *TestNode)
+	recursion = func(current *TestNode) {
+		if root == nil {
 			return
 		}
-
-		fmt.Println(node.value)
-
-		for _, neighbor := range node.neighbors {
+		fmt.Println(current.value)
+		for _, neighbor := range current.neighbors {
 			recursion(neighbor)
 		}
 	}
