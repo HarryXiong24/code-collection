@@ -75,3 +75,18 @@ func main() {
 	result2 := minHarvestRate([]int{25, 9, 23, 8, 3}, 5)
 	println("Test Case 2: Expected: 25, Got:", result2)
 }
+
+// Question 1: What's your overall strategy for solving this problem? Why did you choose this approach over a brute-force one?
+// Answer 1: Binary search reduces the time complexity compared to brute force, because instead of checking every rate one by one, it eliminates half of the remaining possibilities with each guess.
+
+// Question 2: What's the time and space complexity of your solution, and why?
+// Answer 2: The time complexity is O of N log of max apples, because for each of the O log of max apples binary search steps, we loop through all N trees to calculate the total hours. The space complexity is O of 1, because we don't use any extra data structures.
+
+// Question 3: Why did you choose binary search here, and do you actually need the sort.Slice call at the top of your code?
+// Answer 3: I don't actually need the sort. Instead, I need to calculate the maximum value in the apples array, because that maximum value is the upper bound for my binary search range.
+
+// Question 4: What would your code do if the apples array contains a tree with zero apples on it? Walk me through it.
+// Answer 4: If a tree has zero apples, we can just skip it, because it takes no time to harvest an empty tree.
+
+// Question 5: Can you describe the code logic of the for loop in your binary search?
+// Answer 5: In the binary search loop, I first calculate the middle value from left and right. Then I define a variable called actual hours to track the total hours needed at the current rate. I loop through each value in the apples array and divide it by the mid variable. If the remainder is zero, I use the quotient directly; if not, I add one, since Bobby needs a partial extra hour. Then I compare the total actual hours to h, and continue narrowing the search range based on that comparison.
