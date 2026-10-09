@@ -32,6 +32,7 @@ import (
 
 // [8, 9]
 
+// Time Complexity: O(nlogk) where n is the length of the input array nums. We iterate through each element in nums and perform heap operations (insertion and removal) that take O(logk) time for each element.
 func heapify(nums [][]int, length int, currentIndex int) {
 	maxIndex := currentIndex
 	leftIndex := 2*currentIndex + 1
@@ -54,6 +55,7 @@ func heapify(nums [][]int, length int, currentIndex int) {
 }
 
 func heapSort(nums [][]int) {
+	// time complexity: O(nlogn)
 	for i := len(nums)/2 - 1; i >= 0; i-- {
 		heapify(nums, len(nums), i)
 	}
@@ -70,11 +72,16 @@ func kClosest(nums []int, k int, target int) []int {
 	// Your code goes here
 	heap := [][]int{}
 
-	for _, num := range nums {
+	for i, num := range nums {
 		distance := int(math.Abs(float64(target - num)))
 		if len(heap) < k {
-			heap = append(heap, []int{num, distance})
-			heapify(heap, len(heap), len(heap)-1)
+			heap = append(heap, []int{num, distance}) // just collect
+			if i == k-1 {
+				// build-heap: bottom-up over all non-leaf nodes
+				for j := len(heap)/2 - 1; j >= 0; j-- {
+					heapify(heap, len(heap), j)
+				}
+			}
 		} else if distance < heap[0][1] {
 			heap[0] = []int{num, distance}
 			heapify(heap, len(heap), 0)
