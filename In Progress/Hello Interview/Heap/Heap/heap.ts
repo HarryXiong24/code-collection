@@ -1,4 +1,4 @@
-class Heap {
+export class Heap {
   private heap: number[] = [];
 
   // Move the element at `index` up while it is smaller than its parent.
